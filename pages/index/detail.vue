@@ -407,7 +407,7 @@
 			sellOut(){
 				this.$refs.sellPopup.open();
 			},
-			/**
+			/** 
 			 * 买入
 			 */
 			buyIn(){
