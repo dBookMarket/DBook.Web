@@ -414,6 +414,7 @@
 				this.$refs.buyPopup.open()
 			},
 			/**
+			 * 
 			 * 关闭
 			 */
 			close(type){
