@@ -52,8 +52,9 @@
 		},
 		mounted() {
 			let that = this;
-			if (common.getStorage('categories')) {
-				that.categories = common.getStorage('categories');
+			let categories = common.getStorage('categories');
+			if (categories && categories.length > 0 ) {
+				that.categories = categories;
 			} else {
 				that.initData();
 			}

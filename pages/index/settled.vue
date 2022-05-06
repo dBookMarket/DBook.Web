@@ -303,7 +303,7 @@
 				let that = this;
 				let data = that.book;
 				that.$refs.putPopup.open();
-				putIssuesTrade(data.id).then(async res => {
+				putIssuesTrade(data.id).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let tradeData = res.data;
@@ -311,23 +311,7 @@
 							that.dealSuccuss(); //提示上架成功
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
-							//获取判断是否连接
-							let provider = await wallet.connect();
-							if (provider) {
-								let signer = await wallet.getSigner(provider);
-								if (signer) {
-									let nftId = data.id; //the issue id
-									let amount = parseInt(data.amount); //买入的数量
-									//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
-									let metadata = common.strToHexCharCode(JSON.stringify(data));
-									let price = parseFloat(data.price); //买入的价格
-									let ratio = parseFloat(data.ratio); //出版商版税比例
-									let issue = await wallet.issue(signer, nftId, amount, metadata, price,
-										ratio);
-									console.log(issue);
-									that.postContractsFun(issue);
-								}
-							}
+							that.getContractsFun(data);
 						}
 					} else {
 						common.showModal(res);
@@ -337,6 +321,29 @@
 				}).finally(() => {
 
 				})
+			},
+			/**
+			 * @param {Object} data
+			 */
+			async getContractsFun(data){
+				//获取判断是否连接
+				let provider = await wallet.connect();
+				if (provider) {
+					let signer = await wallet.getSigner(provider);
+					if (signer) {
+						
+						let nftId = data.id; //the issue id
+						let amount = parseInt(data.amount); //买入的数量
+						//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
+						let metadata = common.strToHexCharCode(JSON.stringify(data));
+						let price = parseFloat(data.price); //买入的价格
+						let ratio = parseFloat(data.ratio); //出版商版税比例
+						let issue = await wallet.issue(signer, nftId, amount, metadata, price,
+							ratio);
+						console.log(issue);
+						that.postContractsFun(issue);
+					}
+				}
 			},
 			/**
 			 * 发布流程:
