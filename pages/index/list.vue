@@ -5,96 +5,28 @@
 			<view class="left">
 				<left></left>
 			</view>
-			<view class="right" @click="toDetail(id)">
-				<k-scroll-view ref="k-scroll-view" :refreshType="refreshType" :refreshTip="refreshTip"
-					:loadTip="loadTip" :loadingTip="loadingTip" :emptyTip="emptyTip" :touchHeight="touchHeight"
-					:height="height" :bottom="bottom" :autoPullUp="autoPullUp" :stopPullDown="stopPullDown"
-					@onPullDown="handlePullDown" @onPullUp="handleLoadMore">
+			<view class="right">
+				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper"
+					@scrolltolower="lower" @scroll="scroll">
 					<view class="booklist">
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
+						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
+							<image class="img" :src="item.cover"></image>
+							<view class="info">{{item.name}}</view>
+							<text class="author">{{item.author_name}}</text>
 						</view>
 					</view>
 					<!-- 数据列表 -->
-				</k-scroll-view>
+				</scroll-view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		getAllIssues
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
 	import navBar from '@/components/nav.vue'
 	import left from '@/components/left.vue'
 	export default {
@@ -104,23 +36,69 @@
 		},
 		data() {
 			return {
-				refreshType: 'custom',
-				refreshTip: '正在下拉',
-				loadTip: '获取更多数据',
-				loadingTip: '正在加载中...',
-				emptyTip: '--我是有底线的--',
-				touchHeight: 50,
-				height: 0,
-				bottom: 50,
-				autoPullUp: true,
-				stopPullDown: true, // 如果为 false 则不使用下拉刷新，只进行上拉加载
-				list: []
+				id: 0,
+				scrollTop: 0,
+				old: {
+					scrollTop: 0
+				},
+				name: '',
+				bookList: []
 			};
 		},
-		onLoad() {
+		onLoad(option) {
+			let that = this;
+			if (option.id) {
+				that.id = option.id;
+			}
+			if (option.name) {
+				that.name = option.name;
+			}
+			that.getBookData();
+		},
+		mounted() {
+			let that = this;
 
 		},
 		methods: {
+			/**
+			 * 获取书籍列表
+			 * 
+			 */
+			getBookData() {
+				let that = this;
+				common.showLoading();
+				let params = {};
+				if (that.id) {
+					params = {
+						category: that.id
+					}
+				} else if (that.name) {
+					params = {
+						name: that.name
+					}
+				}
+				getAllIssues(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.bookList = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
 			/**
 			 * 跳转书详情
 			 * @param {Object} id
@@ -132,42 +110,38 @@
 				})
 			},
 			/**
-			 * 下拉刷新的事件监听，事件返会一个函数参数，该函数用来在执行完下拉刷新的方法之后，关闭刷新的提示
-			 * @param {Object} stopLoad
+			 * 滚动到顶部/左边，会触发 scrolltoupper 事件
+			 * @param {Object} e
 			 */
-			handlePullDown(stopLoad) {
-				this.list = [];
-				for (var i = 0; i < 10; i++) {
-					this.list.push(i);
-				}
-				stopLoad ? stopLoad() : '';
+			upper: function(e) {
+				console.log(e)
 			},
 			/**
-			 * 上拉加载刷新的事件监听，事件返会一个函数参数，该函数用来在执行完加载的方法之后，
-			 * 关闭加载的提示，其中，config 为 {}对象，该对象传值{isEnd:true}，代表已经没有更多数据
-			 * @param {Object} stopLoad
+			 * 滚动到底部/右边，会触发 scrolltolower 事件
+			 * @param {Object} e
 			 */
-			handleLoadMore(stopLoad) {
-				const size = this.list.length;
-				if (size < 100) {
-					const list = [];
-					for (var i = 0; i < 10; i++) {
-						list.push(size + i);
-					}
-					this.list = this.list.concat(list);
-					stopLoad ? stopLoad() : '';
-				} else {
-					stopLoad ? stopLoad({
-						isEnd: true
-					}) : '';
-				}
+			lower: function(e) {
+				console.log(e)
 			},
 			/**
-			 * 组件自带回到顶部的按钮，当然您也可以手动执行
+			 * 滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}
+			 * @param {Object} e
 			 */
-			handleGoTop() {
-				this.$refs['k-scroll-view'].goTop();
-			}
+			scroll: function(e) {
+				console.log(e)
+				this.old.scrollTop = e.detail.scrollTop
+			},
+			goTop: function(e) {
+				this.scrollTop = this.old.scrollTop
+				this.$nextTick(() => {
+					this.scrollTop = 0
+				});
+				uni.showToast({
+					icon: "none",
+					title: "纵向滚动 scrollTop 值已被修改为 0"
+				})
+			},
+
 		}
 	}
 </script>

@@ -7,21 +7,21 @@
 				</view>
 				<view class="center cflex">
 					<view class="search">
-						<input class="searchinput" type="text" placeholder="搜索书籍" />
-						<image class="searchicon" src="/static/book/search.svg"></image>
+						<input class="searchinput" v-model="bookname" type="text" placeholder="搜索书籍" />
+						<image class="searchicon" @click="toSearch()" src="/static/book/search.svg"></image>
 					</view>
 				</view>
 				<view class="right cflex">
 					<view class="flex">阅读器</view>
 					<view class="flex" @click="selled()">卖出</view>
-					<view class="flex choosewallet" v-if="!account" @click="toWallet(1)">
+					<view class="flex choosewallet" v-if="!address" @click="toWallet(1)">
 						<image class="svg" src="/static/book/link1.svg"></image>
 						<text>选择钱包</text>
 						<text></text>
 					</view>
-					<view class="flex choosewallet cwbg" v-if="account" @click="toWallet(2)">
-						<image class="svg" src="/static/book/link.svg"></image>
-						<text>{{account | strAccount}}</text>
+					<view class="flex choosewallet cwbg" v-if="address">
+						<image @click="selled()" class="svg" src="/static/book/link.svg"></image>
+						<text @click="toWallet(2)">{{address | strAddress}}</text>
 						<text></text>
 					</view>
 					<view class="_wallet" v-if="isMetaMask">
@@ -35,7 +35,7 @@
 						</view>
 					</view>
 					<view class="_connect" v-if="isConnect">
-						<view class="_item" @click="toCopy()">
+						<view class="_item" @click="copyUrl()">
 							<image class="svg" src="/static/book/copy.svg"></image>
 							<text>复制地址</text>
 						</view>
@@ -56,22 +56,42 @@
 </template>
 
 <script>
+	import {
+		login,
+		postNonce,
+		logout
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
+	import wallet from '@/common/wallet.js';
 	export default {
 		name: "navBar",
 		data() {
 			return {
 				isMetaMask: false,
 				isConnect: false,
-				account: ''
+				bookname: "",
+				address: ''
 			};
 		},
 		filters: {
-			strAccount: function(val) {
-				if (!val) return false;
-				return val.substr(0, 8) + "..."; //从0下标开始的8个字符
+			strAddress:function(val){
+				return common.getAddress(val);//从0下标开始的8个字符
+			},
+		},
+		onLoad(option) {
+			let that = this;
+
+		},
+		mounted: function() {
+			let that = this;
+			if (common.getStorage("token") && common.getStorage('address')) {
+				that.address = common.getStorage('address');
+				that.isMetaMask = false;
+				that.isConnect = false;
 			}
 		},
 		methods: {
+
 			/**
 			 * 弹出框连接钱包1 已经连接2
 			 * @param {Object} type
@@ -80,17 +100,139 @@
 				let that = this;
 				if (type == 1) {
 					that.isMetaMask = true;
+					that.isConnect = false;
 				} else if (type == 2) {
 					that.isConnect = true;
+					that.isMetaMask = false;
 				}
+			},
+			/**
+			 * 
+			 */
+			toSearch() {
+				let that = this;
+				uni.navigateTo({
+					url: '/pages/index/list?name=' + that.bookname
+				})
+			},
+			/**
+			 * 获取nonce
+			 */
+			postNonceFun(address) {
+				return new Promise((resolve, reject) => {
+					//获取nonce
+					postNonce({
+						address: address
+					}).then(res => {
+						console.log(res);
+						if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+							let nonce = res.data.nonce;
+							resolve(nonce);
+						} else {
+							uni.showModal({
+								title: '提示',
+								content: '请求失败',
+								showCancel: false
+							})
+							reject('请求失败');
+						}
+					}).catch(data => {
+						reject(data);
+					}).finally(() => {
+						common.hideLoading(0);
+					})
+				});
 			},
 			/**
 			 * 连接钱包
 			 */
-			toMetamask() {
+			async toMetamask() {
 				let that = this;
-				that.account = '0xD9799A3a97A6c865faA2B0Cdb16c18a39d2fE26a';
-				that.isMetaMask = false;
+				common.showLoading();
+				let nonce = "";
+				let signature = "";
+				//获取判断是否连接
+				let provider = await wallet.connect();
+				if (provider) {
+					let signer = await wallet.getSigner(provider);
+					if (signer) {
+						let address = await wallet.getAddress(signer);
+						if (address) {
+							//获取nonce
+							that.postNonceFun(address)
+								.then(async nonce => {
+									console.log("nonce", nonce);
+									//获取签名
+									signature = await wallet.getSignature(signer, nonce);
+									//地址和签名都不为空
+									if (typeof(address) === 'string' && typeof(signature) === 'string') {
+										let params = {
+											address: address,
+											signature: signature
+										}
+										//拿到address和signature去登录
+										login(params).then(res => {
+											console.log(res);
+											if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+												that.address = address;
+												//存储address
+												common.setStorage("address", address);
+												//存储token
+												common.setStorage("token", res.data.token);
+												that.isMetaMask = false;
+											} else {
+												uni.showModal({
+													title: '提示',
+													content: '请求失败',
+													showCancel: false
+												})
+											}
+										}).catch(error => {
+											uni.showModal({
+												title: '提示',
+												content: error,
+												showCancel: false
+											})
+										}).finally(() => {
+											common.hideLoading(0);
+										})
+									} else {
+										common.hideLoading(0);
+									}
+								})
+								.catch(errData => {
+									console.log('reject', errData);
+									common.hideLoading(0);
+									uni.showModal({
+										title: '提示',
+										content: errData,
+										showCancel: false
+									});
+								});
+						} else {
+							common.hideLoading(0);
+							uni.showModal({
+								title: '提示',
+								content: "获取address为空",
+								showCancel: false
+							});
+						}
+					} else {
+						common.hideLoading(0);
+						uni.showModal({
+							title: '提示',
+							content: "获取signer为空",
+							showCancel: false
+						});
+					}
+				} else {
+					common.hideLoading(0);
+					uni.showModal({
+						title: '提示',
+						content: "获取provider为空",
+						showCancel: false
+					});
+				}
 			},
 			toIndex() {
 				uni.navigateTo({
@@ -100,7 +242,7 @@
 			/**
 			 * 卖出
 			 */
-			selled(){
+			selled() {
 				uni.navigateTo({
 					url: '/pages/index/mine'
 				})
@@ -108,23 +250,66 @@
 			/**
 			 * 复制地址
 			 */
-			toCopy() {
-
+			copyUrl() {
+				let that = this;
+				let oInput = document.createElement('input');
+				oInput.value = that.address;
+				document.body.appendChild(oInput);
+				oInput.select(); // 选择对象;
+				console.log(oInput.value)
+				document.execCommand("Copy"); // 执行浏览器复制命令
+				uni.showToast({
+					title: '已成功复制到剪切板',
+					duration: 3000,
+					icon: false
+				});
+				oInput.remove();
+				that.isConnect = false;
 			},
 			/**
 			 * 切换路线
 			 */
 			toSwitch() {
-
+				//切换账户为重新选择连接钱包
+				let that = this;
+				that.isMetaMask = true;
+				that.isConnect = false;
 			},
 			/**
 			 * 断开连接
 			 */
 			toBreak() {
-
+				//清除存储缓存输入数据
+				let that = this;
+				logout().then(res => {
+					console.log(res);
+					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+						uni.showToast({
+							title: '断开连接成功',
+							duration: 3000,
+							icon: false
+						});
+						that.isConnect = false;
+						that.address = "";
+						common.removeStorage('address');
+						common.removeStorage('token');
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
 			},
-			
-
 		}
 	}
 </script>

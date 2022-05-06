@@ -8,30 +8,30 @@
 			<view class="right">
 				<view class="r-top">
 					<view class="itemleft">
-						<image class="img" src="/static/book/detail.png"></image>
+						<image class="img" :src="book.cover"></image>
 					</view>
 					<view class="itemright">
-						<view class="name">Harry Potter and the Order of the Phoenix
-							Collector's Edition</view>
-						<text class="author">J. K. Rowling</text>
-						<view class="publisher">出版商：布鲁姆斯伯里出版社</view>
+						<view class="name">{{book.name}}</view>
+						<text class="author">{{book.author_name}}</text>
+						<view class="publisher">出版商：{{book.publisher.name}}</view>
 						<view class="info">
 							<view class="_item">
 								<image class="itemimg" src="/static/book/user.svg"></image>
-								<text class="itemtext">拥有者：4560</text>
+								<text class="itemtext">拥有者：{{book.n_owners}}</text>
 							</view>
 							<view class="_item">
 								<image class="itemimg" src="/static/book/publisher.svg"></image>
-								<text class="itemtext">全部：1000000</text>
+								<text class="itemtext">全部：{{book.amount}}</text>
 							</view>
 							<view class="_item">
 								<image class="itemimg" src="/static/book/circulation.svg"></image>
-								<text class="itemtext">流通中：54561230</text>
+								<text class="itemtext">流通中：{{book.n_circulations}}</text>
 							</view>
 						</view>
 						<view class="button">
 							<button class="_btn" @click="tryRead()">试读</button>
-							<button class="_btn sell" @click="sellOut()">卖出</button>
+							<!-- v-if="book.is_owned" -->
+							<button class="_btn sell" v-if="book.is_owned" @click="sellOut()">卖出</button>
 						</view>
 					</view>
 				</view>
@@ -42,28 +42,19 @@
 							<image class="img" v-if="down1" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down1" src="/static/book/right.svg"></image>
 						</view>
-						<view v-if="down1" class="iteminfo">The author of the Harry Potter series is J.K. Rowling, born
-							on July 31,
-							1965 in Gwentshire, England. He graduated from the University of Exeter in England and is a
-							British writer.</view>
+						<view v-if="down1" class="iteminfo">{{book.desc}}</view>
 						<view class="itemtitle" @click="openContent(2)">
 							<text class="text">作者描述</text>
 							<image class="img" v-if="down2" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down2" src="/static/book/right.svg"></image>
 						</view>
-						<view v-if="down2" class="iteminfo">The author of the Harry Potter series is J.K. Rowling, born
-							on July 31,
-							1965 in Gwentshire, England. He graduated from the University of Exeter in England and is a
-							British writer.</view>
+						<view v-if="down2" class="iteminfo">{{book.author_desc}}</view>
 						<view class="itemtitle" @click="openContent(3)">
 							<text class="text">出版商描述</text>
 							<image class="img" v-if="down3" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down3" src="/static/book/right.svg"></image>
 						</view>
-						<view v-if="down3" class="iteminfo">The author of the Harry Potter series is J.K. Rowling, born
-							on July 31,
-							1965 in Gwentshire, England. He graduated from the University of Exeter in England and is a
-							British writer.</view>
+						<view v-if="down3" class="iteminfo">{{book.publisher.desc}}</view>
 						<view class="itemtitle" @click="openContent(4)">
 							<text class="text">链上细节</text>
 							<image class="img" v-if="down4" src="/static/book/down.svg"></image>
@@ -72,26 +63,26 @@
 						<view v-if="down4" class="iteminfo">
 							<view class="flex">
 								<text class="text">合约地址</text>
-								<text class="text">0ux3j4h...</text>
+								<text class="text">{{book.contract.address | strAddress }}</text>
 							</view>
 							<view class="flex">
 								<text class="text">代币数量</text>
-								<text class="text">10000</text>
+								<text class="text">{{book.contract.token_amount}}</text>
 							</view>
 							<view class="flex">
 								<text class="text">代币标准</text>
-								<text class="text">ERC-1155</text>
+								<text class="text">{{book.contract.token_criteria}}</text>
 							</view>
 							<view class="flex">
 								<text class="text">区块链</text>
-								<text class="text">Poiygon</text>
+								<text class="text">{{book.contract.block_chain}}</text>
 							</view>
 						</view>
 					</view>
 					<view class="itemright">
 						<view class="itemtitle">
 							<text class="text">交易详情</text>
-							<text class="textall">全部列表</text>
+							<text class="textall" @click="toAllTradeList()">全部列表</text>
 						</view>
 						<view class="listtitle">
 							<text class="text">价格</text>
@@ -100,157 +91,22 @@
 							<text class="text other2">地址</text>
 							<text class="text other3"></text>
 						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9" checked="true" />
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once">首发</text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/return.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" @click="buyIn()" src="/static/book/return.svg"></image>
-							</view>
-						</view>
-						<view class="list">
+						<view class="list" v-for="(item,index) in tradeList" :key="index">
 							<view class="text">
 								<radio value="r1" class="radio" color="#6783E9" />
-								<text class="mid">20 USDT</text>
+								<text class="mid">{{item.price}}USDT</text>
 							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
+							<text class="text other1">{{item.amount}}</text>
+							<text class="text other2">{{item.created_at}}</text>
 							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
+								<text>{{item.user.account_addr | strAddress}}</text>
+								<text class="once" v-if="item.first_release">首发</text>
 							</view>
 							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
+								<image class="img" @click="buyIn(item)" src="/static/book/cart.svg"></image>
+								<image class="img" @click="buyIn(item)" src="/static/book/return.svg"></image>
 							</view>
 						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/cart.svg"></image>
-							</view>
-						</view>
-						<view class="list">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9"/>
-								<text class="mid">20 USDT</text>
-							</view>
-							<text class="text other1">100000</text>
-							<text class="text other2">02-21-2022 10:50</text>
-							<view class="text other2">
-								<text>0x213412...</text>
-								<text class="once"></text>
-							</view>
-							<view class="text other3">
-								<image class="img" src="/static/book/return.svg"></image>
-							</view>
-						</view>
-						
 					</view>
 				</view>
 			</view>
@@ -292,14 +148,14 @@
 						<text class="title">USDT</text>
 						<view class="rightb"></view>
 					</view>
-					<input class="input" type="text" placeholder="请输入价格，不能低于最低价格" />
+					<input class="input" v-model="price" type="text" placeholder="请输入价格，不能低于最低价格" />
 				</view>
 				<view class="con">
 					<text class="price">数量</text>
-					<text class="range">剩余数量：2</text>
+					<text class="range">剩余数量：{{book.amount}}</text>
 				</view>
 				<view class="con border">
-					<input class="input" type="text" placeholder="请输入数量" />
+					<input class="input" v-model="amount" type="text" placeholder="请输入数量" />
 				</view>
 				<view class="con">
 					<view class="taxview">
@@ -322,19 +178,19 @@
 				<view class="con border">
 					<view class="left">
 						<image class="icon" src="/static/book/recommend.svg"></image>
-						<text class="title">20 USDT</text>
+						<text class="title">{{currentItem.price}} USDT</text>
 					</view>
 				</view>
 				<view class="con">
 					<text class="price">数量</text>
-					<text class="range">剩余数量：2</text>
+					<text class="range">剩余数量：{{currentItem.amount}}</text>
 				</view>
 				<view class="con border">
-					<input class="input" type="text" placeholder="请输入数量" />
+					<input class="input" v-model="amount" type="text" placeholder="请输入数量" />
 				</view>
 				<view class="con">
 					<view class="taxview">
-						
+
 					</view>
 					<button class="_btn" @click="buyOrder()">支付</button>
 				</view>
@@ -343,10 +199,10 @@
 		<uni-popup ref="dealPopup" type="center" :mask-click="false">
 			<view class="deal">
 				<image class="img" src="/static/book/deal.svg"></image>
-				<view @click="dealSuccuss()">交易进行中</view>
+				<view>交易进行中</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="succussPopup" type="center" :mask-click="false">
+		<uni-popup ref="succussPopup" type="center" :mask-click="true">
 			<view class="deal">
 				<image class="img" src="/static/book/succuss.svg"></image>
 				<view>交易成功</view>
@@ -356,8 +212,16 @@
 </template>
 
 <script>
-	import navBar from '@/components/nav.vue'
-	import left from '@/components/left.vue'
+	import {
+		getIssues,
+		getTrades,
+		postTrades,
+		postTransactions
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
+	import navBar from '@/components/nav.vue';
+	import left from '@/components/left.vue';
+	import wallet from '@/common/wallet.js';
 	export default {
 		components: {
 			navBar,
@@ -365,32 +229,253 @@
 		},
 		data() {
 			return {
+				book: {
+					publisher: {},
+					contract: {}
+				}, //书籍详情
+				tradeList: [], //交易详情列表
+				amount: "", //卖出的数量
+				price: "", //卖出的价格
+				currentItem: {}, //当前选择的交易记录去买入
 				down1: true,
 				down2: false,
 				down3: true,
 				down4: true
 			};
 		},
-		onLoad() {
+		onLoad(option) {
+			let that = this;
+			if (option.id) {
+				that.id = option.id;
+				that.getBookDetail(); //书籍详情
+				that.getTradeList(); //交易详情列表
+			} else {
+
+			}
+		},
+		mounted() {
 
 		},
+		filters: {
+			strAddress:function(val){
+				return common.getAddress(val);//从0下标开始的8个字符
+			},
+		},
 		methods: {
+
+			/**
+			 * 获取书籍详情
+			 */
+			getBookDetail() {
+				let that = this;
+				common.showLoading();
+				getIssues(that.id).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.book = data;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 交易详情的列表接口
+			 */
+			getTradeList() {
+				let that = this;
+				common.showLoading();
+				let params = {
+					issue: that.book.contract.issue,
+				}
+				getTrades().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.tradeList = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 全部列表
+			 */
+			toAllTradeList() {
+
+			},
 			/**
 			 * 挂单
 			 */
-			hangOrder(){
-				
+			hangOrder() {
+				let that = this;
+				if (that.price) {
+					if (parseFloat(that.price) < 20) {
+						uni.showModal({
+							title: '提示',
+							content: '参考价为当前的最低价和最高价之间且不能低于出版商发行价。',
+							showCancel: false
+						})
+						return false;
+					}
+				} else {
+					uni.showModal({
+						title: '提示',
+						content: '请输入价格',
+						showCancel: false
+					})
+					return false;
+				}
+				if (that.amount) {
+					if (parseInt(that.amount) > parseInt(that.book.amount)) {
+						uni.showModal({
+							title: '提示',
+							content: '输入的数量不能大于剩余数量。',
+							showCancel: false
+						})
+						return false;
+					}
+				} else {
+					uni.showModal({
+						title: '提示',
+						content: '请输入数量',
+						showCancel: false
+					})
+					return false;
+				}
+				common.showLoading();
+				let params = {
+					issue: that.book.contract.issue,
+					amount: parseInt(that.amount),
+					price: parseFloat(that.price)
+				}
+				postTrades(params).then(res => {
+					console.log(res);
+					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+						let data = res.data;
+						that.getTradeList(); //卖出挂单成功 重新查询交易列表
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
 			},
 			/**
 			 * 支付
 			 */
-			buyOrder(){
-				this.$refs.dealPopup.open();
+			async buyOrder() {
+				let that = this;
+				if (that.amount) {
+					if (parseInt(that.amount) > parseInt(that.currentItem.amount)) {
+						uni.showModal({
+							title: '提示',
+							content: '输入的数量不能大于剩余数量。',
+							showCancel: false
+						})
+						return false;
+					}
+				} else {
+					uni.showModal({
+						title: '提示',
+						content: '请输入数量',
+						showCancel: false
+					})
+					return false;
+				}
+				//common.showLoading();
+				//购买需要先调用合约
+				//获取判断是否连接
+				let provider = await wallet.connect();
+				if (provider) {
+					let signer = await wallet.getSigner(provider);
+					if (signer) {
+						let seller = that.currentItem.user.account_addr; //卖家地址
+						let nftId = that.currentItem.issue; //the issue id
+						let amount = parseInt(that.amount); //买入的数量
+						//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
+						let metadata = common.strToHexCharCode(JSON.stringify(that.currentItem));
+						let price = parseFloat(that.currentItem.price); //买入的价格
+						//合约执行会返回一个结果
+						let transaction = await wallet.trade(signer, seller, nftId, amount, metadata, price);
+						console.log(transaction);
+						if (!transaction) {
+							transaction = {
+								hash: that.currentItem.user.id
+							}
+						}
+						if (transaction) {
+							let params = {
+								trade: parseInt(that.currentItem.id),
+								amount: parseInt(that.amount),
+								price: parseFloat(price),
+								hash: transaction.hash
+							}
+							that.$refs.dealPopup.open();
+							//购买书籍
+							postTransactions(params).then(res => {
+								console.log(res);
+								if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+									let data = res.data;
+									that.dealSuccuss();
+								} else {
+									uni.showModal({
+										title: '提示',
+										content: '请求失败',
+										showCancel: false
+									})
+								}
+							}).catch(error => {
+								uni.showModal({
+									title: '提示',
+									content: error,
+									showCancel: false
+								})
+							}).finally(() => {
+								//common.hideLoading(0);
+							})
+						}
+					}
+				}
 			},
 			/**
 			 * 交易成功
 			 */
-			dealSuccuss(){
+			dealSuccuss() {
 				let that = this;
 				that.$refs.dealPopup.close();
 				that.$refs.succussPopup.open();
@@ -398,32 +483,35 @@
 			/**
 			 * 试读
 			 */
-			tryRead(){
+			tryRead() {
 				this.$refs.popup.open();
 			},
 			/**
 			 * 卖出
 			 */
-			sellOut(){
+			sellOut() {
 				this.$refs.sellPopup.open();
 			},
-			/** 
+			/**
 			 * 买入
+			 * @param {Object} item
 			 */
-			buyIn(){
-				this.$refs.buyPopup.open()
+			buyIn(item) {
+				let that = this;
+				that.currentItem = item;
+				that.$refs.buyPopup.open();
 			},
 			/**
 			 *  
 			 * 关闭
 			 */
-			close(type){
+			close(type) {
 				let that = this;
-				if(type == 'read'){
+				if (type == 'read') {
 					that.$refs.popup.close()
-				}else if(type == 'sell'){
+				} else if (type == 'sell') {
 					that.$refs.sellPopup.close()
-				}else if(type == 'buy'){
+				} else if (type == 'buy') {
 					that.$refs.buyPopup.close()
 				}
 			},
@@ -475,8 +563,10 @@
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
-		
-		.read,.seller,.buyer{
+
+		.read,
+		.seller,
+		.buyer {
 			width: 6rem;
 			height: 6.5rem;
 			background: #FFFFFF;
@@ -484,13 +574,15 @@
 			padding: .2rem .15rem;
 			position: relative;
 			text-align: center;
-			.title{
+
+			.title {
 				line-height: .24rem;
 				font-size: 32rpx;
 				font-family: Alibaba PuHuiTi;
 				color: #000000;
 			}
-			.closeimg{
+
+			.closeimg {
 				position: absolute;
 				width: .25rem;
 				top: .2rem;
@@ -499,23 +591,27 @@
 				height: .25rem;
 				cursor: pointer;
 			}
-			.con{
+
+			.con {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				margin: .1rem 0;
-				.oimg{
+
+				.oimg {
 					vertical-align: middle;
 					width: .3rem;
 					height: .3rem;
 					cursor: pointer;
 				}
-				.word{
+
+				.word {
 					width: 4.6rem;
 					height: 5.3rem;
 				}
 			}
-			.bot{
+
+			.bot {
 				font-size: 30rpx;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 400;
@@ -523,8 +619,9 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				.op{
-					.opimg{
+
+				.op {
+					.opimg {
 						width: .2rem;
 						height: .2rem;
 						vertical-align: center;
@@ -534,25 +631,32 @@
 				}
 			}
 		}
-		.seller,.buyer{
+
+		.seller,
+		.buyer {
 			width: 5.3rem;
 			height: 3.2rem;
 			background: #FFFFFF;
 			border-radius: .15rem;
-			.con{
+
+			.con {
 				margin-top: .2rem;
 				font-size: 28rpx;
-				.range{
+
+				.range {
 					color: #999999;
 				}
-				.taxview{
+
+				.taxview {
 					flex: 1;
 					text-align: left;
 				}
-				.tax{
+
+				.tax {
 					color: #6783E9;
 					padding-right: .2rem;
 				}
+
 				._btn {
 					width: 1.1rem;
 					height: .45rem;
@@ -562,33 +666,38 @@
 					line-height: .45rem;
 				}
 			}
-			
-			.border{
+
+			.border {
 				justify-content: flex-start;
 				align-items: center;
 				height: .5rem;
 				line-height: .5rem;
 				background: #F8F8F8;
 				border-radius: .1rem;
-				.left{
+
+				.left {
 					width: 18%;
 					display: flex;
 					justify-content: space-around;
-					.icon{
+
+					.icon {
 						width: .25rem;
 						height: .25rem;
 						vertical-align: middle;
 					}
-					.title{
+
+					.title {
 						font-size: 28rpx;
 						color: #999999;
 					}
-					.rightb{
+
+					.rightb {
 						width: 1px;
 						background: #DEDEDE;
 					}
 				}
-				.input{
+
+				.input {
 					width: 80%;
 					text-align: left;
 					text-indent: 25rpx;
@@ -598,11 +707,13 @@
 				}
 			}
 		}
-		.buyer{
-			.title{
+
+		.buyer {
+			.title {
 				color: #000000 !important;
 			}
 		}
+
 		.container {
 			.right {
 				.r-top {
@@ -612,6 +723,7 @@
 					.itemleft {
 						flex: 0.65;
 						margin-right: .29rem;
+
 						.img {
 							border-radius: .20rem;
 							width: 100%;
@@ -682,14 +794,16 @@
 							display: flex;
 							justify-content: flex-start;
 							align-items: center;
-
+							width: 100%;
 							._btn {
-								width: 1.5rem;
+								width: 1.3rem;
 								height: .5rem;
 								background: #6783E9;
 								border-radius: .24rem;
 								color: #FFFFFF;
 								line-height: .5rem;
+								margin-left: 0px;
+								margin-right: 0px;
 							}
 
 							.sell {
@@ -712,7 +826,7 @@
 						height: auto;
 						border-radius: .20rem;
 						background-color: #FFFFFF;
-						
+
 						.itemtitle {
 							display: flex;
 							justify-content: space-between;
@@ -762,6 +876,7 @@
 						border-radius: .20rem;
 						background-color: #FFFFFF;
 						font-size: 28rpx;
+
 						.itemtitle {
 							display: flex;
 							justify-content: space-between;
@@ -769,53 +884,65 @@
 							padding: 0 .15rem;
 							height: .4rem;
 							line-height: .4rem;
-							
+
 							.text {
 								color: #000000;
 							}
-							.textall{
+
+							.textall {
 								color: #6783E9;
 							}
 						}
-						.listtitle,.list{
+
+						.listtitle,
+						.list {
 							display: flex;
 							justify-content: space-around;
 							padding: 0 .15rem;
 							height: .4rem;
 							line-height: .4rem;
 							background: #ECECEC;
-							.text{
+
+							.text {
 								flex: 1.3;
 								color: #999999;
 							}
-							.text:first-child{
-								
-							}
-							.other1{
+
+							.text:first-child {}
+
+							.other1 {
 								flex: .8;
 							}
-							.other2{
+
+							.other2 {
 								flex: 2;
 							}
-							.other3{
+
+							.other3 {
 								flex: .4;
 							}
 						}
-						.list{
+
+						.list {
 							background: #FFFFFF;
-							.text{
+
+							.text {
 								color: #000000;
-								.mid{
+
+								.mid {
 									vertical-align: middle;
 								}
-								.radio{
+
+								.radio {
 									width: .24rem;
 									height: .24rem;
 								}
-								.once{
+
+								.once {
 									background: #E96767;
 									color: #FFFFFF;
 								}
+
 								.img {
 									width: .2rem;
 									height: .2rem;
@@ -823,7 +950,7 @@
 									vertical-align: middle;
 								}
 							}
-							
+
 						}
 					}
 				}

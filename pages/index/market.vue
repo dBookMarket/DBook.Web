@@ -6,12 +6,12 @@
 				<left></left>
 			</view>
 			<view class="right">
-				<uni-swiper-dot :info="bannerArray" :current="current" field="poster" :mode="mode"
+				<uni-swiper-dot :info="bannerArray" :current="current" field="img" :mode="mode"
 					:dotsStyles="{backgroundColor:'rgba(0, 0, 0, 0.3)',selectedBorder:'none',border:'none',color:'#fff'}">
 					<swiper class="swiper-box" autoplay="true" interval="4000" @change="navigateTo">
-						<swiper-item v-for="(item ,index) in bannerArray" :key="index" @click="goToUrl()">
-							<view class="swiper-item">
-								<image :src="item.poster" mode='aspectFit'></image>
+						<swiper-item v-for="(item ,index) in bannerArray" :key="index">
+							<view class="swiper-item" @click="goToUrl(item.redirect_url)">
+								<image :src="item.img" mode='aspectFit'></image>
 							</view>
 						</swiper-item>
 					</swiper>
@@ -22,6 +22,10 @@
 </template>
 
 <script>
+	import {
+		getBanners
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
 	import navBar from '@/components/nav.vue'
 	import left from '@/components/left.vue'
 	export default {
@@ -42,15 +46,48 @@
 				mode: 'dot',
 			};
 		},
+		onLoad(option) {
+			let that = this;
+			that.getBanners();
+		},
 		methods: {
+			/**
+			 * 获取banner
+			 */
+			getBanners: function() {
+				let that = this;
+				common.showLoading();
+				getBanners().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.bannerArray = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+
 			/**
 			 * 跳转下一页
 			 * 
 			 */
-			goToUrl: function() {
+			goToUrl: function(tourl) {
 				let that = this;
 				uni.navigateTo({
-					url: '/pages/index/detail'
+					url: '/pages/index/openWeb?url=' + encodeURIComponent(tourl)
 				})
 			},
 			/**
@@ -82,7 +119,7 @@
 
 				.swiper-item image {
 					width: 100%;
-					height: 8rem;
+					height: 13rem;
 				}
 			}
 		}

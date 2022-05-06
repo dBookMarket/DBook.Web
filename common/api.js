@@ -2,7 +2,7 @@
  * api接口统一管理
  */
 import {
-  post,get,put,deleteP,patch
+  post,get,put,deleteP,patch,formDataReq
 } from '@/common/ajax.js'
 import web from '@/common/web.js'
 
@@ -13,7 +13,7 @@ export const login = params => post('/api/v1/login', params);
 /**
  * 获取登录随机数
  */
-export const getNonce = params => post('/api/v1/nonce', params);
+export const postNonce = params => post('/api/v1/nonce', params);
 /**
  * 登出
  */
@@ -27,25 +27,34 @@ export const getAssets = params => get('/api/v1/assets', params);
  */
 export const bookmarks = params => patch('/api/v1/bookmarks', params);
 /**
- * 书籍
- */
-export const patchIssues = params => patch('/api/v1/issues', params);
-/**
- * 书籍
+ *create book 创建书籍
  */
 export const postIssues = params => post('/api/v1/issues', params);
 /**
- * 书籍
+ * 读取list书籍
  */
-export const getIssues = params => get('/api/v1/issues', params);
+export const getAllIssues = params => get('/api/v1/issues',params);
+/**
+ * 读取书籍
+ */
+export const getIssues = params => get('/api/v1/issues/'+params);
+/**
+ * 修改书籍 update book partially 修改
+ */
+export const formDataIssues = (id,params,method) => formDataReq('/api/v1/issues/'+id,params,method);
+/**
+ * 上传后 上架操作
+ */
+export const putIssuesTrade = params => put('/api/v1/issues/'+params+'/trade');
+/**
+ * 查询当前上传issues的状态 status，"Uploading", "Uploaded", "Failure", "Success”
+ */
+export const getIssuesCurrent = params => get('/api/v1/issues/current', params);
 /**
  * 删除banner
  */
 export const delBanners = params => deleteP('/api/v1/banners', params);
-/**
- * banner
- */
-export const patchBanners = params => patch('/api/v1/banners', params);
+
 /**
  * banner
  */
@@ -59,23 +68,32 @@ export const getBanners = params => get('/api/v1/banners', params);
  */
 export const delTrades = params => deleteP('/api/v1/trades', params);
 /**
- * 挂单
+ * 某一项挂单
  */
 export const patchTrades = params => patch('/api/v1/trades', params);
 /**
- * 挂单
+ * 卖出挂单
  */
 export const postTrades = params => post('/api/v1/trades', params);
 /**
- * 挂单
+ * list 交易详情的列表接口
  */
 export const getTrades = params => get('/api/v1/trades', params);
+/**
+ * list 我的出售中书籍
+ */
+export const getUserTrades = params => get('/api/v1/trades/current-user', params);
+/**
+ * list 我的交易记录
+ */
+export const getUserTransactions = params => get('/api/v1/transactions/current-user', params);
+
 /**
  * 购买
  */
 export const postTransactions = params => post('/api/v1/transactions', params);
 /**
- * 购买
+ * 获取列表
  */
 export const getTransactions = params => get('/api/v1/transactions', params);
 /**

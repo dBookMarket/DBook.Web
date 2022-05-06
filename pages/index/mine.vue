@@ -7,8 +7,9 @@
 			</view>
 			<view class="right">
 				<view class="right-top">
-					<image class="photo" src="/static/book/photo.png"></image>
-					<text class="name">0X231245Jnjcsahhouhiod</text>
+					<view v-if="ismultiavatar" v-html="avatar" class="photo"></view>
+					<image v-if="!ismultiavatar" class="photo" :src="avatar"></image>
+					<text class="name">{{address}}</text>
 				</view>
 				<view class="right-button">
 					<button class="_btn" :class="{'active':active==1}" @click="myBook()">我的书籍</button>
@@ -16,78 +17,47 @@
 					<button class="_btn" :class="{'active':active==3}" @click="activeLog()">活动记录</button>
 				</view>
 				<view class="right-con" v-if="active == 1 || active == 2">
-					<view class="booklist" v-if="bookList.length>0" @click="toDetail(id)">
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
+					<view class="booklist" v-if="bookList.length>0">
+						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
+							<image class="img" :src="item.issue.cover"></image>
+							<view class="info">{{item.issue.name}}</view>
+							<text class="author">{{item.issue.author_name}}</text>
 						</view>
-						<view class="item" v-if="active == 1">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item" v-if="active == 1">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item" v-if="active == 1">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
-						<view class="item">
-							<image class="img" src="/static/book/detail.png"></image>
-							<view class="info">Harry Potter and the Order of the Phoenix Collector's Edition</view>
-							<text class="author">J. K. Rowling</text>
-						</view>
+						
 					</view>
 					<view class="none" v-if="bookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有书籍</view>
+						<view class="empty" v-if="active == 1">没有书籍</view>
+						<view class="empty" v-if="active == 2">没有出售中书籍</view>
 					</view>
 				</view>
 				<view class="right-con" v-if="active == 3">
-					<view class="right-title">
-						<text class="text">名称</text>
-						<text class="text other1">交易类型</text>
-						<text class="text other3">交易时间</text>
-						<text class="text other2">金额</text>
-						<text class="text other2">买方</text>
-						<text class="text other2">卖方</text>
+					<view class="none" v-if="transactionList.length==0">
+						<image class="img" src="/static/book/empty.svg"></image>
+						<view class="empty">没有活动记录</view>
 					</view>
-					<view class="right-list">
-						<view class="text">
-							Harry Potter and the Order of the Phoenix Collector's Edition
+					<view  v-for="(item,index) in transactionList" :key="index">
+						<view class="right-title">
+							<text class="text">名称</text>
+							<text class="text other1">交易类型</text>
+							<text class="text other3">交易时间</text>
+							<text class="text other2">金额</text>
+							<text class="text other2">买方</text>
+							<text class="text other2">卖方</text>
 						</view>
-						<text class="text other1">购买</text>
-						<text class="text other3">02-21-2022 10:50</text>
-						<text class="text other2">20 USDT</text>
-						<view class="text other2">
-							0x213412...
-						</view>
-						<view class="text other2">
-							0x213413...
-						</view>
-					</view>
-					<view class="right-list">
-						<view class="text">
-							Harry Potter and the Order of the Phoenix Collector's Edition
-						</view>
-						<text class="text other1">出售</text>
-						<text class="text other3">02-21-2022 10:50</text>
-						<text class="text other2">20 USDT</text>
-						<view class="text other2">
-							0x213412...
-						</view>
-						<view class="text other2">
-							0x213413...
+						<view class="right-list">
+							<view class="text">
+								{{item.trade_detail.issue_name}}
+							</view>
+							<text class="text other1">{{item.type}}</text>
+							<text class="text other3">{{item.created_at}}</text>
+							<text class="text other2">{{item.price}} USDT</text>
+							<view class="text other2">
+								{{item.buyer.account_addr}}
+							</view>
+							<view class="text other2">
+								{{item.trade_detail.user.account_addr}}
+							</view>
 						</view>
 					</view>
 				</view>
@@ -97,6 +67,11 @@
 </template>
 
 <script>
+	import {
+		getAssets,getUserTrades,getUserTransactions
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
+	import multiavatar from '@/uni_modules/multiavatar'
 	import navBar from '@/components/nav.vue'
 	import left from '@/components/left.vue'
 	export default {
@@ -107,23 +82,121 @@
 		data() {
 			return {
 				active: 1,
-				bookList: [{
-					img: "/static/book/detail.png",
-					author: "J. K. Rowling",
-					info: ""
-				}]
+				avatar: '/static/book/photo.png',//默认头像
+				address:'',
+				ismultiavatar:false,
+				bookList: [],
+				transactionList:[],//交易记录
 			};
 		},
-		onLoad() {
-
+		onLoad(option) {
+			let that = this;
+			that.address = common.getStorage('address');
+			let token = common.getStorage('token');
+			if(that.address && token){
+				that.avatar = multiavatar(that.address);
+				that.ismultiavatar = true;
+				that.getBookList();
+			}else{
+				uni.showModal({
+					title: '提示',
+					content: '请先连接钱包',
+					showCancel: false
+				})
+			}
 		},
 		methods: {
+			/**
+			 * 我的书籍列表接口
+			 */
+			getBookList() {
+				let that = this;
+				common.showLoading();
+				getAssets().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.bookList = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 我的出售中的书籍列表接口
+			 */
+			getMySellList() {
+				let that = this;
+				common.showLoading();
+				getUserTrades().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.bookList = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 我的交易活动记录
+			 */
+			getActiveLogList() {
+				let that = this;
+				common.showLoading();
+				getUserTransactions().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.transactionList = data.results;
+					} else {
+						uni.showModal({
+							title: '提示',
+							content: '请求失败',
+							showCancel: false
+						})
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
 			/**
 			 * 我的书籍
 			 */
 			myBook() {
 				let that = this;
 				that.active = 1;
+				that.getBookList();
 			},
 			/**
 			 * 出售中
@@ -131,6 +204,7 @@
 			onSell() {
 				let that = this;
 				that.active = 2;
+				that.getMySellList();
 			},
 			/**
 			 * 活动记录
@@ -138,6 +212,7 @@
 			activeLog() {
 				let that = this;
 				that.active = 3;
+				that.getActiveLogList();
 			},
 			/**
 			 * 跳转书详情

@@ -187,7 +187,9 @@ uni-radio .uni-radio-input {
 	width: .18rem !important;
 	height: .18rem !important;
 }
-
+uni-toast .uni-toast{
+	width: 11em;
+}
 .deal {
 	width: 2.6rem;
 	height: 1.6rem;
