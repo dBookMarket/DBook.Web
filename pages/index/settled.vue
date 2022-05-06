@@ -53,8 +53,8 @@
 						</view>
 						<view class="title">书籍类型（必选）</view>
 						<picker class="input-style" @change="bindCategoryChange($event)" :range="categoryList"
-							:value="book.category" :range-key="'text'">
-							<view class="uni-input">{{book.category | getCategory}}</view>
+							:value="book.category" :range-key="'name'">
+							<view class="uni-input">{{book.categoryName}}</view>
 						</picker>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
@@ -187,7 +187,7 @@
 		<uni-popup ref="putPopup" type="center" :mask-click="false">
 			<view class="deal">
 				<image class="img1" src="/static/book/onShelf.svg"></image>
-				<view @click="dealSuccuss()">上架中</view>
+				<view>上架中</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="succussPopup" type="center">
@@ -201,6 +201,7 @@
 
 <script>
 	import {
+		getCategories,
 		getIssuesCurrent,
 		postContracts,
 		putIssuesTrade,
@@ -222,37 +223,7 @@
 				cindex: 0,
 				chainList: ['Polyaon'], //网络暂时只支持polygon
 				currencyList: ['USDT'], //货币只支持USDT
-				categoryList: [{
-					id: 0,
-					text: '请选择书籍类型'
-				}, {
-					id: 15,
-					text: '小说'
-				}, {
-					id: 16,
-					text: '文学'
-				}, {
-					id: 16,
-					text: '经管'
-				}, {
-					id: 16,
-					text: '社科'
-				}, {
-					id: 16,
-					text: '科技'
-				}, {
-					id: 16,
-					text: '少儿'
-				}, {
-					id: 16,
-					text: '杂志'
-				}, {
-					id: 16,
-					text: '漫画'
-				}, {
-					id: 16,
-					text: '网络小说'
-				}],
+				categoryList: [],
 				book: {
 					cover: '', //书籍封面
 					cover_url: '', //书籍修改
@@ -267,6 +238,7 @@
 					ratio: '', //出版商版税比例
 					number: '', //issue no
 					category: 0, //书籍类别
+					categoryName:"请选择书籍类型",
 					file: '', //书籍文件
 				},
 				pdfName: '',
@@ -290,9 +262,38 @@
 		},
 		onLoad(option) {
 			let that = this;
-			that.getIssuesCurrentFun();
+			let address = common.getStorage('address');
+			let token = common.getStorage('token');
+			if(address && token){
+				that.getCategoryList();
+				that.getIssuesCurrentFun();
+			}else{
+				common.showModal('请点击右上角，先选择连接钱包');
+			}
 		},
 		methods: {
+			/**
+			 * 左边书籍分类的数据
+			 */
+			getCategoryList(){
+				let that = this;
+				common.showLoading();
+				let params = {}
+				getCategories(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.categoryList = data;
+						common.setStorage("categories", that.categoryList);
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
 			/**
 			 * 上架
 			 * 调用trade上架 => 
@@ -331,17 +332,19 @@
 				if (provider) {
 					let signer = await wallet.getSigner(provider);
 					if (signer) {
-						
-						let nftId = data.id; //the issue id
-						let amount = parseInt(data.amount); //买入的数量
-						//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
-						let metadata = common.strToHexCharCode(JSON.stringify(data));
-						let price = parseFloat(data.price); //买入的价格
-						let ratio = parseFloat(data.ratio); //出版商版税比例
-						let issue = await wallet.issue(signer, nftId, amount, metadata, price,
-							ratio);
-						console.log(issue);
-						that.postContractsFun(issue);
+						let issueJson = await wallet.approveIssue(signer);
+						if(issueJson && issueJson.status == 'Success'){
+							let nftId = data.id; //the issue id
+							let amount = parseInt(data.amount); //买入的数量
+							//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
+							let metadata = common.strToHexCharCode(JSON.stringify(data));
+							let price = parseFloat(data.price); //买入的价格
+							let ratio = parseFloat(data.ratio); //出版商版税比例
+							let issue = await wallet.issue(signer, nftId, amount, metadata, price,
+								ratio);
+							console.log(issue);
+							that.postContractsFun(issue);
+						}
 					}
 				}
 			},
@@ -465,7 +468,7 @@
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
-						if (data) {
+						if (data && data.id) {
 							that.book = data;
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
@@ -537,6 +540,7 @@
 				for (let a = 0; a < that.categoryList.length; a++) {
 					if (targetIndex == a) {
 						that.book.category = that.categoryList[a].id;
+						that.book.categoryName = that.categoryList[a].name;
 						break;
 					}
 				}

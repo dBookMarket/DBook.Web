@@ -51,32 +51,7 @@ export default {
 		if (!val) return false;
 		return val.substr(0, 8) + "...";
 	},
-	/**
-	 * 书籍分类
-	 */
-	getCategory: function(type) {
-		if (type == '0')
-			return '请选择书籍类型';
-		else if (type == '15')
-			return '小说';
-		else if (type == '16')
-			return '文学';
-		else if (type == '17')
-			return '经管';
-		else if (type == '18')
-			return '社科';
-		else if (type == '19')
-			return '科技';
-		else if (type == '20')
-			return '少儿';
-		else if (type == '21')
-			return '杂志';
-		else if (type == '22')
-			return '漫画';
-		else if (type == '23')
-			return '网络小说';
-
-	},
+	
 	/**
 	 * 字符串转16进制
 	 * @param {Object} str

@@ -13,7 +13,7 @@
 				<text>全部</text>
 			</view>
 			<view class="text" v-for="(item,index) in categories" :key="index" @click="toList(item.id,index)">
-				<text v-if="item.parent" :class="{'active':index+1==curindex}">{{item.name}}</text>
+				<text :class="{'active':index+1==curindex}">{{item.name}}</text>
 			</view>
 		</view>
 		<view class="first">
@@ -74,11 +74,7 @@
 			initData() {
 				let that = this;
 				common.showLoading();
-				let params = {
-					parent: 1,
-					name: '',
-					level: 2
-				}
+				let params = {}
 				getCategories(params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
@@ -86,18 +82,10 @@
 						that.categories = data;
 						common.setStorage("categories", that.categories);
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
