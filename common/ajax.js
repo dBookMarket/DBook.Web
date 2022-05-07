@@ -58,6 +58,10 @@ http.interceptors.response.use(response => {
 	return response
 }, err => {
 	if (err && err.data) {
+		if(err.statusCode === '401'){
+			common.removeStorage('address');
+			common.removeStorage('token');
+		}
 		err.message = err.data.detail;
 		return Promise.reject(err.message)
 	} else {

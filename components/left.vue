@@ -52,13 +52,37 @@
 		},
 		mounted() {
 			let that = this;
-			if (common.getStorage('categories')) {
-				that.categories = common.getStorage('categories');
+			let categories = common.getStorage('categories');
+			if (categories && categories.length > 0 ) {
+				that.categories = categories;
 			} else {
 				that.initData();
 			}
 		},
 		methods: {
+			/**
+			 * 跳转地址
+			 * @param {Object} type
+			 */
+			toUrl(type) {
+				let url = "";
+				if (type == 1) {
+					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				} else if (type == 2) {
+					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				} else if (type == 3) {
+					url = 'https://medium.com/@ddid_io';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				}
+			},
 			/**
 			 * 推荐页
 			 */
@@ -73,11 +97,7 @@
 			initData() {
 				let that = this;
 				common.showLoading();
-				let params = {
-					// parent: 1,
-					// name: '',
-					level: 1
-				}
+				let params = {};
 				getCategories(params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
@@ -85,18 +105,10 @@
 						that.categories = data;
 						common.setStorage("categories", that.categories);
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})

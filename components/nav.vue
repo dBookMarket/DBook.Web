@@ -12,7 +12,7 @@
 					</view>
 				</view>
 				<view class="right cflex">
-					<view class="flex">阅读器</view>
+					<view class="flex" @click="toRead()">阅读器</view>
 					<view class="flex" @click="selled()">卖出</view>
 					<view class="flex choosewallet" v-if="!address" @click="toWallet(1)">
 						<image class="svg" src="/static/book/link1.svg"></image>
@@ -27,7 +27,7 @@
 					<view class="_wallet" v-if="isMetaMask">
 						<view class="_walletItem">
 							<image src="/static/book/metamask.jpg" class="metamask"></image>
-							<text class="selectw">链接钱包</text>
+							<text class="selectw">连接钱包</text>
 						</view>
 						<view class="choose" @click="toMetamask()">
 							<text>MeraMask</text>
@@ -51,7 +51,24 @@
 				</view>
 			</view>
 		</view>
-
+		<uni-popup ref="popup" type="center" :mask-click="false">
+			<view class="read">
+				<view class="title">
+					阅读器APP下载
+				</view>
+				<image class="closeimg" @click="close()" src="/static/book/close.svg"></image>
+				<view class="con">
+					<view class="qcode">
+						<image class="qcodeimg" src="/static/book/qcode.png"></image>
+						<view class="text">ios</view>
+					</view>
+					<view class="qcode">
+						<image class="qcodeimg" src="/static/book/qcode.png"></image>
+						<view class="text">android</view>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
 	</view>
 </template>
 
@@ -74,8 +91,8 @@
 			};
 		},
 		filters: {
-			strAddress:function(val){
-				return common.getAddress(val);//从0下标开始的8个字符
+			strAddress: function(val) {
+				return common.getAddress(val); //从0下标开始的8个字符
 			},
 		},
 		onLoad(option) {
@@ -105,6 +122,15 @@
 					that.isConnect = true;
 					that.isMetaMask = false;
 				}
+			},
+			//弹出阅读器
+			toRead(){
+				let that = this;
+				that.$refs.popup.open();
+			},
+			close(){
+				let that = this;
+				that.$refs.popup.close()
 			},
 			/**
 			 * 
@@ -173,7 +199,8 @@
 										//拿到address和signature去登录
 										login(params).then(res => {
 											console.log(res);
-											if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+											if (res && (res.statusCode === 200 || res.statusCode ===
+													201)) {
 												that.address = address;
 												//存储address
 												common.setStorage("address", address);
@@ -384,6 +411,53 @@
 			.cwbg {
 				background: #6783E9;
 				color: #FEFEFE;
+			}
+		}
+	}
+
+	.read {
+		width: 5rem;
+		height: 3.2rem;
+		background: #FFFFFF;
+		border-radius: .15rem;
+		padding: .2rem .15rem;
+		position: relative;
+		text-align: center;
+
+		.title {
+			line-height: .3rem;
+			font-size: 36rpx;
+			font-family: Alibaba PuHuiTi;
+			color: #000000;
+		}
+
+		.closeimg {
+			position: absolute;
+			width: .25rem;
+			top: .2rem;
+			right: 2%;
+			z-index: 10;
+			height: .25rem;
+			cursor: pointer;
+		}
+
+		.con {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			margin: .3rem 0;
+
+			.qcodeimg {
+				vertical-align: middle;
+				width: 2rem;
+				height: 2rem;
+				cursor: pointer;
+			}
+
+			.text {
+				margin-top: .1rem;
+				color: #000000;
+				font-size: 32rpx;
 			}
 		}
 	}

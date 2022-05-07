@@ -60,7 +60,7 @@
 							<image class="img" v-if="down4" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down4" src="/static/book/right.svg"></image>
 						</view>
-						<view v-if="down4" class="iteminfo">
+						<view v-if="down4 && book.contract" class="iteminfo">
 							<view class="flex">
 								<text class="text">合约地址</text>
 								<text class="text">{{book.contract.address | strAddress }}</text>
@@ -82,31 +82,37 @@
 					<view class="itemright">
 						<view class="itemtitle">
 							<text class="text">交易详情</text>
-							<text class="textall" @click="toAllTradeList()">全部列表</text>
-						</view>
-						<view class="listtitle">
-							<text class="text">价格</text>
-							<text class="text other1">数量</text>
-							<text class="text other2">时间</text>
-							<text class="text other2">地址</text>
-							<text class="text other3"></text>
-						</view>
-						<view class="list" v-for="(item,index) in tradeList" :key="index">
-							<view class="text">
-								<radio value="r1" class="radio" color="#6783E9" />
-								<text class="mid">{{item.price}}USDT</text>
-							</view>
-							<text class="text other1">{{item.amount}}</text>
-							<text class="text other2">{{item.created_at}}</text>
-							<view class="text other2">
-								<text>{{item.user.account_addr | strAddress}}</text>
-								<text class="once" v-if="item.first_release">首发</text>
-							</view>
-							<view class="text other3">
-								<image class="img" @click="buyIn(item)" src="/static/book/cart.svg"></image>
-								<image class="img" @click="buyIn(item)" src="/static/book/return.svg"></image>
+							<view @click="openContent(5)">
+								<text class="textall">全部列表</text>
+								<image class="img" v-if="down5" src="/static/book/down.svg"></image>
+								<image class="img" v-if="!down5" src="/static/book/right.svg"></image>
 							</view>
 						</view>
+						<block v-if="down5">
+							<view class="listtitle">
+								<text class="text">价格</text>
+								<text class="text other1">数量</text>
+								<text class="text other2">时间</text>
+								<text class="text other2">地址</text>
+								<text class="text other3"></text>
+							</view>
+							<view class="list" v-for="(item,index) in tradeList" :key="index">
+								<view class="text">
+									<radio value="r1" class="radio" color="#6783E9" />
+									<text class="mid">{{item.price}}USDT</text>
+								</view>
+								<text class="text other1">{{item.amount}}</text>
+								<text class="text other2">{{item.created_at}}</text>
+								<view class="text other2">
+									<text>{{item.user.account_addr | strAddress}}</text>
+									<text class="once" v-if="item.first_release">首发</text>
+								</view>
+								<view class="text other3">
+									<image class="img" @click="buyIn(item)" src="/static/book/cart.svg"></image>
+									<image class="img" @click="buyIn(item)" src="/static/book/return.svg"></image>
+								</view>
+							</view>
+						</block>
 					</view>
 				</view>
 			</view>
@@ -238,9 +244,10 @@
 				price: "", //卖出的价格
 				currentItem: {}, //当前选择的交易记录去买入
 				down1: true,
-				down2: false,
+				down2: true,
 				down3: true,
-				down4: true
+				down4: true,
+				down5: true,
 			};
 		},
 		onLoad(option) {
@@ -257,8 +264,8 @@
 
 		},
 		filters: {
-			strAddress:function(val){
-				return common.getAddress(val);//从0下标开始的8个字符
+			strAddress: function(val) {
+				return common.getAddress(val); //从0下标开始的8个字符
 			},
 		},
 		methods: {
@@ -562,6 +569,12 @@
 					} else {
 						that.down4 = true
 					}
+				}if (num == 5) {
+					if (that.down5) {
+						that.down5 = false;
+					} else {
+						that.down5 = true;
+					}
 				}
 			}
 		}
@@ -808,6 +821,7 @@
 							justify-content: flex-start;
 							align-items: center;
 							width: 100%;
+
 							._btn {
 								width: 1.3rem;
 								height: .5rem;
@@ -904,6 +918,12 @@
 
 							.textall {
 								color: #6783E9;
+							}
+							.img {
+								width: .16rem;
+								height: .18rem;
+								margin-left: .06rem;
+								vertical-align: middle;
 							}
 						}
 

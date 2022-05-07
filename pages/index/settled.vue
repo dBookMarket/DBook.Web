@@ -53,8 +53,8 @@
 						</view>
 						<view class="title">书籍类型（必选）</view>
 						<picker class="input-style" @change="bindCategoryChange($event)" :range="categoryList"
-							:value="catindex" :range-key="'text'">
-							<view class="uni-input">{{categoryList[catindex].text}}</view>
+							:value="book.category" :range-key="'name'">
+							<view class="uni-input">{{getCategoryName(book.category)}}</view>
 						</picker>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
@@ -137,11 +137,10 @@
 						<view class="button _btn" @click="putOn()" v-if="book.status=='Uploaded'">
 							上架
 						</view>
-						<view class="button _btn" @click="formDataIssuesFun()"
-							v-else-if="book.status=='Failure' || book.status=='Uploading'">
+						<view class="button _btn" @click="formDataIssuesFun()" v-else-if="book.status=='Failure'">
 							下一步
 						</view>
-						<view class="button _btn" @click="createIssuesFun()" v-else-if="!book.id">
+						<view class="button _btn" @click="createIssuesFun()" v-else-if="!book.status && !book.id">
 							下一步
 						</view>
 					</view>
@@ -156,7 +155,7 @@
 				</view>
 				<image class="closeimg" @click="close('buy')" src="/static/book/close.svg"></image>
 				<view class="contitle">封面</view>
-				<image class="coverimg" :src="book.cover"></image>
+				<image class="coverimg" :src="book.cover_url"></image>
 				<view class="contitle">书籍名称</view>
 				<input type="text" v-model="book.name" class="input-style" placeholder="请输入书籍名称..." />
 				<view class="contitle">作品介绍</view>
@@ -187,7 +186,7 @@
 		<uni-popup ref="putPopup" type="center" :mask-click="false">
 			<view class="deal">
 				<image class="img1" src="/static/book/onShelf.svg"></image>
-				<view @click="dealSuccuss()">上架中</view>
+				<view>上架中</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="succussPopup" type="center">
@@ -201,11 +200,11 @@
 
 <script>
 	import {
+		getCategories,
 		getIssuesCurrent,
 		postContracts,
 		putIssuesTrade,
-		formDataIssues,
-		getCategories
+		formDataIssues
 	} from '@/common/api.js';
 	import common from '@/common/common.js';
 	import navBar from '@/components/nav.vue';
@@ -221,13 +220,9 @@
 			return {
 				index: 0,
 				cindex: 0,
-				catindex: 0,
 				chainList: ['Polyaon'], //网络暂时只支持polygon
 				currencyList: ['USDT'], //货币只支持USDT
-				categoryList: [{
-					id: 0,
-					text: '请选择书籍类型'
-				}],
+				categoryList: [],
 				book: {
 					cover: '', //书籍封面
 					cover_url: '', //书籍修改
@@ -259,40 +254,38 @@
 			};
 		},
 		filters: {
-			getCategory: function(type) {
-				return common.getCategory(type); //书籍分类
-			},
+			
 		},
 		onLoad(option) {
 			let that = this;
-			that.getCategoryListFun();
-			that.getIssuesCurrentFun();
+			let address = common.getStorage('address');
+			let token = common.getStorage('token');
+			if(address && token){
+				that.getCategoryList();
+				that.getIssuesCurrentFun();
+			}else{
+				common.showModal('请点击右上角，先选择连接钱包');
+			}
 		},
 		methods: {
 			/**
-			 * 获取书籍分类列表
+			 * 左边书籍分类的数据
 			 */
-			getCategoryListFun() {
-				const that = this;
+			getCategoryList(){
+				let that = this;
 				common.showLoading();
-				getCategories().then(res => {
-					if(res?.statusCode===200){
-						const newCategoryList = res?.data.map(item => (
-							{id: item.id, text: item.name}
-						));
-						that.categoryList = [
-							...[{id: 0, text: '请选择书籍类型'}],
-							...newCategoryList
-						];
-					}else{
+				let params = {}
+				getCategories(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.categoryList = data;
+						common.setStorage("categories", that.categoryList);
+					} else {
 						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -307,7 +300,7 @@
 				let that = this;
 				let data = that.book;
 				that.$refs.putPopup.open();
-				putIssuesTrade(data.id).then(async res => {
+				putIssuesTrade(data.id).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let tradeData = res.data;
@@ -315,23 +308,7 @@
 							that.dealSuccuss(); //提示上架成功
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
-							//获取判断是否连接
-							let provider = await wallet.connect();
-							if (provider) {
-								let signer = await wallet.getSigner(provider);
-								if (signer) {
-									let nftId = data.id; //the issue id
-									let amount = parseInt(data.amount); //买入的数量
-									//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
-									let metadata = common.strToHexCharCode(JSON.stringify(data));
-									let price = parseFloat(data.price); //买入的价格
-									let ratio = parseFloat(data.ratio); //出版商版税比例
-									let issue = await wallet.issue(signer, nftId, amount, metadata, price,
-										ratio);
-									console.log(issue);
-									that.postContractsFun(issue);
-								}
-							}
+							that.getContractsFun(data);
 						}
 					} else {
 						common.showModal(res);
@@ -341,6 +318,37 @@
 				}).finally(() => {
 
 				})
+			},
+			/**
+			 * @param {Object} data
+			 */
+			async getContractsFun(data){
+				common.showLoading();
+				//获取判断是否连接
+				let provider = await wallet.connect();
+				if (provider) {
+					let signer = await wallet.getSigner(provider);
+					if (signer) {
+						let issueJson = await wallet.approveIssue(signer);
+						console.log(issueJson);
+						if(issueJson && issueJson.status == 1){
+							let nftId = data.id; //the issue id
+							let amount = parseInt(data.amount); //买入的数量
+							//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
+							let metadata = common.strToHexCharCode(JSON.stringify(data));
+							let price = parseFloat(data.price); //买入的价格
+							let ratio = parseFloat(data.ratio); //出版商版税比例
+							let issue = await wallet.issue(signer, nftId, amount, metadata, price,
+								ratio);
+							console.log(issue);
+							that.postContractsFun(issue);
+							common.hideLoading(0);
+						}else{
+							common.hideLoading(0);
+							//common.showModal('');
+						}
+					}
+				}
 			},
 			/**
 			 * 发布流程:
@@ -353,6 +361,7 @@
 				let that = this;
 				let baseURL = web.host;
 				let url = baseURL + '/api/v1/issues';
+				common.showLoading();
 				const uploadTask = uni.uploadFile({
 					url: url,
 					header: {
@@ -381,18 +390,25 @@
 					},
 					success: (uploadFileRes) => {
 						console.log(uploadFileRes);
-						let data = uploadFileRes.data;
-						if (uploadFileRes && (uploadFileRes.statusCode == 200 || uploadFileRes.statusCode == 201)) {
+						common.hideLoading();
+						console.log(uploadFileRes.data);
+						let data = JSON.parse(uploadFileRes.data);
+						if (uploadFileRes && uploadFileRes.statusCode == 201) {
 							if (data) {
 								that.book = data;
 								that.book.publisher_name = data.publisher.name;
 								that.book.publisher_desc = data.publisher.desc;
+								let inerval = setInterval(function() {
+									that.getIssuesCurrentFun(inerval);
+								}, 40000)
 							}
 						} else {
 							common.showModal(data);
+							return;
 						}
 					},
 					fail: (res) => {
+						common.hideLoading();
 						common.showModal(res);
 					}
 				});
@@ -434,17 +450,22 @@
 					uni.hideLoading();
 					console.log(xhr);
 					if (xhr.readyState == 4 && xhr.status == 200) {
-						let res = JSON.parse(xhr.responseText);
-						console.log(res);
-						if (res) {
+						let data = JSON.parse(xhr.responseText);
+						console.log(data);
+						if (data) {
 							that.book = data;
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
+							let inerval = setInterval(function() {
+								that.getIssuesCurrentFun(inerval);
+							}, 40000)
 						}
 					} else {
 						console.log(xhr.responseText);
-						//common.showModal(xhr.responseText);
+						if(typeof(xhr.responseText) === 'string'){
+							common.showModal(xhr.responseText);
+						}
 					}
 				}
 				//设置token
@@ -455,22 +476,23 @@
 			/**
 			 * 查询当前上传issues的状态 status，"Uploading", "Uploaded", "Failure", "Success”
 			 */
-			getIssuesCurrentFun() {
+			getIssuesCurrentFun(inerval) {
 				let that = this;
 				common.showLoading();
 				getIssuesCurrent().then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
-						if (data) {
+						if (data && data.id) {
 							that.book = data;
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
+							if(that.book.status == 'Uploaded'){
+								//上传成功清空定时器
+								clearInterval(inerval);
+							}
 						}
-						// set category
-						const catindex = that.categoryList.findIndex(item => String(item.id) === String(data.category));
-						that.catindex = catindex==-1? 0:catindex;
 					} else {
 						common.showModal(res);
 					}
@@ -483,6 +505,27 @@
 				}).finally(() => {
 					common.hideLoading(0);
 				})
+			},
+			/**
+			 * 获取分类名称
+			 * @param {Object} type
+			 */
+			getCategoryName: function(type) {
+				let that = this;
+				let categoryName = "请选择书籍类型";
+				if(that.categoryList.length ==0){
+					let categories = common.getStorage('categories');
+					if (categories && categories.length > 0 ) {
+						that.categoryList = categories;
+					} 
+				}
+				for (let a = 0; a < that.categoryList.length; a++) {
+					if (that.categoryList[a].id == type) {
+						categoryName = that.categoryList[a].name;
+						break;
+					}
+				}
+				return categoryName; //书籍分类
 			},
 			/**
 			 * 创建contracts合约
@@ -534,10 +577,10 @@
 			bindCategoryChange(e) {
 				let that = this;
 				let targetIndex = e.target.value;
-				that.catindex = targetIndex;
 				for (let a = 0; a < that.categoryList.length; a++) {
 					if (targetIndex == a) {
 						that.book.category = that.categoryList[a].id;
+						that.book.categoryName = that.categoryList[a].name;
 						break;
 					}
 				}

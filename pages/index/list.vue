@@ -178,6 +178,7 @@
 
 					.info {
 						line-height: .18rem;
+						height: 0.36rem;
 						margin-bottom: .03rem;
 						color: #000000;
 					}

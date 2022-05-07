@@ -99,6 +99,7 @@
 				address:'',
 				ismultiavatar:false,
 				bookList: [],
+				sellBookList:[],//售卖中
 				transactionList:[],//交易记录
 			};
 		},
@@ -114,7 +115,9 @@
 			if(that.address && token){
 				that.avatar = multiavatar(that.address);
 				that.ismultiavatar = true;
-				that.getBookList();
+				that.getBookList();//书籍列表
+				that.getMySellList();//出售中的书籍列表
+				that.getActiveLogList();//交易活动记录
 			}else{
 				uni.showModal({
 					title: '提示',
@@ -136,18 +139,10 @@
 						let data = res.data;
 						that.bookList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -162,20 +157,12 @@
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
-						that.bookList = data.results;
+						that.sellBookList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -192,18 +179,10 @@
 						let data = res.data;
 						that.transactionList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -364,6 +343,7 @@
 
 							.info {
 								line-height: .18rem;
+								height: 0.36rem;
 								margin-bottom: .03rem;
 								color: #000000;
 							}
