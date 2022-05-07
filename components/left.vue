@@ -61,6 +61,29 @@
 		},
 		methods: {
 			/**
+			 * 跳转地址
+			 * @param {Object} type
+			 */
+			toUrl(type) {
+				let url = "";
+				if (type == 1) {
+					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				} else if (type == 2) {
+					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				} else if (type == 3) {
+					url = 'https://medium.com/@ddid_io';
+					uni.navigateTo({
+						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
+					})
+				}
+			},
+			/**
 			 * 推荐页
 			 */
 			toRecommend() {

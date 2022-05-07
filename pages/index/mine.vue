@@ -17,13 +17,19 @@
 					<button class="_btn" :class="{'active':active==3}" @click="activeLog()">活动记录</button>
 				</view>
 				<view class="right-con" v-if="active == 1 || active == 2">
-					<view class="booklist" v-if="bookList.length>0">
-						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
-							<image class="img" :src="item.issue.cover"></image>
+					<view class="booklist" v-if="active == 1">
+						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.issue.id)">
+							<image class="img" :src="item.issue.cover_url"></image>
 							<view class="info">{{item.issue.name}}</view>
 							<text class="author">{{item.issue.author_name}}</text>
 						</view>
-						
+					</view>
+					<view class="booklist" v-if="active == 2">
+						<view class="item" v-for="(item,index) in sellBookList" :key="index" @click="toDetail(item.issue)">
+							<image class="img" :src="item.issue.cover_url"></image>
+							<view class="info">{{item.issue_name}}</view>
+							<text class="author">{{item.user.name}}</text>
+						</view>
 					</view>
 					<view class="none" v-if="bookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
@@ -86,6 +92,7 @@
 				address:'',
 				ismultiavatar:false,
 				bookList: [],
+				sellBookList:[],//售卖中
 				transactionList:[],//交易记录
 			};
 		},
@@ -96,7 +103,9 @@
 			if(that.address && token){
 				that.avatar = multiavatar(that.address);
 				that.ismultiavatar = true;
-				that.getBookList();
+				that.getBookList();//书籍列表
+				that.getMySellList();//出售中的书籍列表
+				that.getActiveLogList();//交易活动记录
 			}else{
 				uni.showModal({
 					title: '提示',
@@ -118,18 +127,10 @@
 						let data = res.data;
 						that.bookList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -144,20 +145,12 @@
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
-						that.bookList = data.results;
+						that.sellBookList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -174,18 +167,10 @@
 						let data = res.data;
 						that.transactionList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -346,6 +331,7 @@
 
 							.info {
 								line-height: .18rem;
+								height: 0.36rem;
 								margin-bottom: .03rem;
 								color: #000000;
 							}

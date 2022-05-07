@@ -54,7 +54,7 @@
 						<view class="title">书籍类型（必选）</view>
 						<picker class="input-style" @change="bindCategoryChange($event)" :range="categoryList"
 							:value="book.category" :range-key="'name'">
-							<view class="uni-input">{{book.categoryName}}</view>
+							<view class="uni-input">{{getCategoryName(book.category)}}</view>
 						</picker>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
@@ -137,11 +137,10 @@
 						<view class="button _btn" @click="putOn()" v-if="book.status=='Uploaded'">
 							上架
 						</view>
-						<view class="button _btn" @click="formDataIssuesFun()"
-							v-else-if="book.status=='Failure' || book.status=='Uploading'">
+						<view class="button _btn" @click="formDataIssuesFun()" v-else-if="book.status=='Failure'">
 							下一步
 						</view>
-						<view class="button _btn" @click="createIssuesFun()" v-else-if="!book.id">
+						<view class="button _btn" @click="createIssuesFun()" v-else-if="!book.status && !book.id">
 							下一步
 						</view>
 					</view>
@@ -156,7 +155,7 @@
 				</view>
 				<image class="closeimg" @click="close('buy')" src="/static/book/close.svg"></image>
 				<view class="contitle">封面</view>
-				<image class="coverimg" :src="book.cover"></image>
+				<image class="coverimg" :src="book.cover_url"></image>
 				<view class="contitle">书籍名称</view>
 				<input type="text" v-model="book.name" class="input-style" placeholder="请输入书籍名称..." />
 				<view class="contitle">作品介绍</view>
@@ -238,7 +237,6 @@
 					ratio: '', //出版商版税比例
 					number: '', //issue no
 					category: 0, //书籍类别
-					categoryName:"请选择书籍类型",
 					file: '', //书籍文件
 				},
 				pdfName: '',
@@ -256,9 +254,7 @@
 			};
 		},
 		filters: {
-			getCategory: function(type) {
-				return common.getCategory(type); //书籍分类
-			},
+			
 		},
 		onLoad(option) {
 			let that = this;
@@ -327,13 +323,15 @@
 			 * @param {Object} data
 			 */
 			async getContractsFun(data){
+				common.showLoading();
 				//获取判断是否连接
 				let provider = await wallet.connect();
 				if (provider) {
 					let signer = await wallet.getSigner(provider);
 					if (signer) {
 						let issueJson = await wallet.approveIssue(signer);
-						if(issueJson && issueJson.status == 'Success'){
+						console.log(issueJson);
+						if(issueJson && issueJson.status == 1){
 							let nftId = data.id; //the issue id
 							let amount = parseInt(data.amount); //买入的数量
 							//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
@@ -344,6 +342,10 @@
 								ratio);
 							console.log(issue);
 							that.postContractsFun(issue);
+							common.hideLoading(0);
+						}else{
+							common.hideLoading(0);
+							//common.showModal('');
 						}
 					}
 				}
@@ -359,6 +361,7 @@
 				let that = this;
 				let baseURL = web.host;
 				let url = baseURL + '/api/v1/issues';
+				common.showLoading();
 				const uploadTask = uni.uploadFile({
 					url: url,
 					header: {
@@ -387,18 +390,25 @@
 					},
 					success: (uploadFileRes) => {
 						console.log(uploadFileRes);
-						let data = uploadFileRes.data;
-						if (uploadFileRes && (uplodFileRes.statusCode == 200 || uplodFileRes.statusCode == 201)) {
+						common.hideLoading();
+						console.log(uploadFileRes.data);
+						let data = JSON.parse(uploadFileRes.data);
+						if (uploadFileRes && uploadFileRes.statusCode == 201) {
 							if (data) {
 								that.book = data;
 								that.book.publisher_name = data.publisher.name;
 								that.book.publisher_desc = data.publisher.desc;
+								let inerval = setInterval(function() {
+									that.getIssuesCurrentFun(inerval);
+								}, 40000)
 							}
 						} else {
 							common.showModal(data);
+							return;
 						}
 					},
 					fail: (res) => {
+						common.hideLoading();
 						common.showModal(res);
 					}
 				});
@@ -440,17 +450,22 @@
 					uni.hideLoading();
 					console.log(xhr);
 					if (xhr.readyState == 4 && xhr.status == 200) {
-						let res = JSON.parse(xhr.responseText);
-						console.log(res);
-						if (res) {
+						let data = JSON.parse(xhr.responseText);
+						console.log(data);
+						if (data) {
 							that.book = data;
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
+							let inerval = setInterval(function() {
+								that.getIssuesCurrentFun(inerval);
+							}, 40000)
 						}
 					} else {
 						console.log(xhr.responseText);
-						//common.showModal(xhr.responseText);
+						if(typeof(xhr.responseText) === 'string'){
+							common.showModal(xhr.responseText);
+						}
 					}
 				}
 				//设置token
@@ -461,7 +476,7 @@
 			/**
 			 * 查询当前上传issues的状态 status，"Uploading", "Uploaded", "Failure", "Success”
 			 */
-			getIssuesCurrentFun() {
+			getIssuesCurrentFun(inerval) {
 				let that = this;
 				common.showLoading();
 				getIssuesCurrent().then(res => {
@@ -473,6 +488,10 @@
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
+							if(that.book.status == 'Uploaded'){
+								//上传成功清空定时器
+								clearInterval(inerval);
+							}
 						}
 					} else {
 						common.showModal(res);
@@ -486,6 +505,27 @@
 				}).finally(() => {
 					common.hideLoading(0);
 				})
+			},
+			/**
+			 * 获取分类名称
+			 * @param {Object} type
+			 */
+			getCategoryName: function(type) {
+				let that = this;
+				let categoryName = "请选择书籍类型";
+				if(that.categoryList.length ==0){
+					let categories = common.getStorage('categories');
+					if (categories && categories.length > 0 ) {
+						that.categoryList = categories;
+					} 
+				}
+				for (let a = 0; a < that.categoryList.length; a++) {
+					if (that.categoryList[a].id == type) {
+						categoryName = that.categoryList[a].name;
+						break;
+					}
+				}
+				return categoryName; //书籍分类
 			},
 			/**
 			 * 创建contracts合约
