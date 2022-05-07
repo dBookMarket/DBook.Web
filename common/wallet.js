@@ -537,9 +537,12 @@ const usdcContractAbi = [
 ]
 
 
-
 export default {
-    connect: async () => {
+	toWei: function(amount) {
+		// 1 usdc = 1000000 wei
+		return parseFloat(amount)*10**6;
+	},
+    connect: async function() {
         // check if metamask
         if (typeof window.ethereum === 'undefined' || !window.ethereum.isMetaMask) {
             alert('MetaMask not found!');
@@ -559,7 +562,7 @@ export default {
             return null;
         }
     },
-    isConnect: async (provider) => {
+    isConnect: async function(provider) {
         // check if the wallet is connected or not
         try {
             const accounts = await provider.listAccounts();
@@ -569,7 +572,7 @@ export default {
             return false;
         }
     },
-    getSigner: (provider) => {
+    getSigner: function(provider) {
         try {
             const signer = provider.getSigner();
             return signer;
@@ -578,7 +581,7 @@ export default {
             return null;
         }
     },
-    getAddress: async (signer) => {
+    getAddress: async function(signer) {
         try {
             const address = await signer.getAddress();
             return address;
@@ -587,7 +590,7 @@ export default {
             return '';
         }
     },
-    getSignature: async (signer, nonce) => {
+    getSignature: async function(signer, nonce) {
         try {
             const signature = await signer.signMessage(nonce);
             return signature;
@@ -596,7 +599,7 @@ export default {
             return '';
         }
     },
-    approveIssue: async (signer) => {
+    approveIssue: async function(signer) {
         /**
          * approve platform for accessing the signer's nft
          * if res.status == 1, that means the transaction is successful, otherwise, failed.
@@ -611,7 +614,7 @@ export default {
             return null;
         }
     },
-    approveTrade: async (signer, amount) => {
+    approveTrade: async function(signer, amount, price) {
         /**
          * approve platform for accessing the signer's usdc
          * if res.status == 1, that means the transaction is successful, otherwise, failed.
@@ -619,11 +622,16 @@ export default {
          * args:
          * 
          * amount
-         *      int, the number of usdc which is approved to platform to use.
+         *      int, the number of books bought.
+		 * 
+		 * price
+		 * 		float, the price per book, unit USDC
          */
         try {
+			let fee = 1000000; // wei
+			let tokenAmount = this.toWei(parseInt(amount)*parseFloat(price)) + fee;
             const usdcContract = new ethers.Contract(usdcContractAddress, usdcContractAbi, signer);
-            let txn = await usdcContract.approve(platformContractAddress, amount);
+            let txn = await usdcContract.approve(platformContractAddress, tokenAmount);
             let res = await txn.wait();
             return res;
         } catch (e) {
@@ -631,7 +639,7 @@ export default {
             return null;
         }
     },
-    issue: async (signer, nftId, amount, metadata, price, ratio) => {
+    issue: async function(signer, nftId, amount, metadata, price, ratio) {
         /**
          * if res.status == 1, that means the transaction is successful, otherwise, failed.
          * 
@@ -661,7 +669,7 @@ export default {
             return null;
         }
     },
-    trade: async (signer, seller, nftId, amount, metadata, price, fee = 1000000) => {
+    trade: async function(signer, seller, nftId, amount, metadata, price, fee = 0) {
         /**
          * if res.status == 1, that means the transaction is successful, otherwise, failed.
          * 
@@ -678,15 +686,15 @@ export default {
          * metadata
          *      hex, meta info
          * price
-         *      float, the unit price per book
+         *      float, the unit price per book, unit USDC
          * fee
-         *      int, not sure
+         *      int, the fee for platform, unit USDC
          */
         try {
             // TODO not sure how to calculate trade value.
-            let tradeValue = amount * price + parseInt(fee);
+            let tradeValue = this.toWei(parseInt(amount) * parseFloat(price) + parseFloat(fee));
             const platformContract = new ethers.Contract(platformContractAddress, platformContractAbi, signer);
-            const buyer = await getAddress(signer);
+            const buyer = await this.getAddress(signer);
             let txn = await platformContract.trade(seller, buyer, nftId, amount, metadata, tradeValue, fee);
             let res = await txn.wait();
             return res;

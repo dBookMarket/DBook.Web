@@ -13,7 +13,7 @@
 				<text>全部</text>
 			</view>
 			<view class="text" v-for="(item,index) in categories" :key="index" @click="toList(item.id,index)">
-				<text v-if="item.parent" :class="{'active':index+1==curindex}">{{item.name}}</text>
+				<text :class="{'active':index+1==curindex}">{{item.name}}</text>
 			</view>
 		</view>
 		<view class="first">
@@ -74,9 +74,9 @@
 				let that = this;
 				common.showLoading();
 				let params = {
-					parent: 1,
-					name: '',
-					level: 2
+					// parent: 1,
+					// name: '',
+					level: 1
 				}
 				getCategories(params).then(res => {
 					console.log(res);

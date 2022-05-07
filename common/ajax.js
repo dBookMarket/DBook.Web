@@ -32,10 +32,7 @@ const http = ajax.create({
 	withCredentials: true, // 允许携带cookie
 	// #endif
 	headers: {
-		'Content-Type': 'application/json;charset=UTF-8',
-		"Access-Control-Allow-Origin": "*",
-		//"Access-Control-Allow-Credentials": "true",
-		"Access-Control-Allow-Methods": "GET,HEAD,POST,PATCH,PUT,DELETE,OPTIONS",
+		'Content-Type': 'application/json;charset=UTF-8'
 	},
 })
 // 添加请求拦截器
@@ -45,7 +42,7 @@ http.interceptors.request.use(
 		// 每次发送请求之前判断是否存在token，如果存在，则统一在http请求的header都加上token，不用每次请求都手动添加了
 		// 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
 		const token = common.getStorage('token');
-		token && (config.header['authorization'] = "Bearer " + token);
+		token && (config.header['Authorization'] = "Bearer " + token);
 		
 		_reqlog(config);
 		return config;
@@ -117,8 +114,14 @@ export function patch(url, params) {
  * @param {String} url [请求的url地址] 
  */
 export function get(url, params) {
+	if (typeof(params) !== 'undefined' && params !== null){
+		url = `${url}?`
+		Object.keys(params).forEach(key => {
+			url += `${key}=${params[key]}&`
+		})
+	}
 	return new Promise((resolve, reject) => {
-		http.get(url, params).then(res => {
+		http.get(url).then(res => {
 			resolve(res);
 			if (res.statusCode != 200 || res.statusCode != 201) {
 				reject('失败');

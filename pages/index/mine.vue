@@ -16,19 +16,30 @@
 					<button class="_btn" :class="{'active':active==2}" @click="onSell()">出售中</button>
 					<button class="_btn" :class="{'active':active==3}" @click="activeLog()">活动记录</button>
 				</view>
-				<view class="right-con" v-if="active == 1 || active == 2">
+				<view class="right-con" v-if="active == 1">
 					<view class="booklist" v-if="bookList.length>0">
-						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
-							<image class="img" :src="item.issue.cover"></image>
+						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.issue.id)">
+							<image class="img" :src="item.issue.cover_url"></image>
 							<view class="info">{{item.issue.name}}</view>
 							<text class="author">{{item.issue.author_name}}</text>
 						</view>
-						
 					</view>
 					<view class="none" v-if="bookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty" v-if="active == 1">没有书籍</view>
-						<view class="empty" v-if="active == 2">没有出售中书籍</view>
+						<view class="empty">没有书籍</view>
+					</view>
+				</view>
+				<view class="right-con" v-if="active == 2">
+					<view class="booklist" v-if="bookList.length>0">
+						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.issue_detail.id)">
+							<image class="img" :src="item.issue_detail.cover_url"></image>
+							<view class="info">{{item.issue_detail.name}}</view>
+							<text class="author">{{item.issue_detail.author_name}}</text>
+						</view>
+					</view>
+					<view class="none" v-if="bookList.length==0">
+						<image class="img" src="/static/book/empty.svg"></image>
+						<view class="empty">没有出售中书籍</view>
 					</view>
 				</view>
 				<view class="right-con" v-if="active == 3">
@@ -36,7 +47,7 @@
 						<image class="img" src="/static/book/empty.svg"></image>
 						<view class="empty">没有活动记录</view>
 					</view>
-					<view  v-for="(item,index) in transactionList" :key="index">
+					<view v-else>
 						<view class="right-title">
 							<text class="text">名称</text>
 							<text class="text other1">交易类型</text>
@@ -45,18 +56,20 @@
 							<text class="text other2">买方</text>
 							<text class="text other2">卖方</text>
 						</view>
-						<view class="right-list">
-							<view class="text">
-								{{item.trade_detail.issue_name}}
-							</view>
-							<text class="text other1">{{item.type}}</text>
-							<text class="text other3">{{item.created_at}}</text>
-							<text class="text other2">{{item.price}} USDT</text>
-							<view class="text other2">
-								{{item.buyer.account_addr}}
-							</view>
-							<view class="text other2">
-								{{item.trade_detail.user.account_addr}}
+						<view v-for="(item,index) in transactionList" :key="index">
+							<view class="right-list">
+								<view class="text">
+									{{item.trade_detail.issue_name}}
+								</view>
+								<text class="text other1">{{item.type}}</text>
+								<text class="text other3">{{item.created_at}}</text>
+								<text class="text other2">{{item.price * item.amount}} USDT</text>
+								<view class="text other2">
+									{{item.buyer.account_addr | strAddress}}
+								</view>
+								<view class="text other2">
+									{{item.trade_detail.user.account_addr | strAddress}}
+								</view>
 							</view>
 						</view>
 					</view>
@@ -88,6 +101,11 @@
 				bookList: [],
 				transactionList:[],//交易记录
 			};
+		},
+		filters: {
+			strAddress:function(val){
+				return common.getAddress(val);//从0下标开始的8个字符
+			},
 		},
 		onLoad(option) {
 			let that = this;

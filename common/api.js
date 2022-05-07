@@ -33,11 +33,11 @@ export const postIssues = params => post('/api/v1/issues', params);
 /**
  * 读取list书籍
  */
-export const getAllIssues = params => get('/api/v1/issues',params);
+export const getAllIssues = params => get('/api/v1/issues', params);
 /**
  * 读取书籍
  */
-export const getIssues = params => get('/api/v1/issues/'+params);
+export const getIssue = id => get('/api/v1/issues/'+id);
 /**
  * 修改书籍 update book partially 修改
  */

@@ -53,8 +53,8 @@
 						</view>
 						<view class="title">书籍类型（必选）</view>
 						<picker class="input-style" @change="bindCategoryChange($event)" :range="categoryList"
-							:value="book.category" :range-key="'text'">
-							<view class="uni-input">{{book.category | getCategory}}</view>
+							:value="catindex" :range-key="'text'">
+							<view class="uni-input">{{categoryList[catindex].text}}</view>
 						</picker>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
@@ -204,7 +204,8 @@
 		getIssuesCurrent,
 		postContracts,
 		putIssuesTrade,
-		formDataIssues
+		formDataIssues,
+		getCategories
 	} from '@/common/api.js';
 	import common from '@/common/common.js';
 	import navBar from '@/components/nav.vue';
@@ -220,38 +221,12 @@
 			return {
 				index: 0,
 				cindex: 0,
+				catindex: 0,
 				chainList: ['Polyaon'], //网络暂时只支持polygon
 				currencyList: ['USDT'], //货币只支持USDT
 				categoryList: [{
 					id: 0,
 					text: '请选择书籍类型'
-				}, {
-					id: 15,
-					text: '小说'
-				}, {
-					id: 16,
-					text: '文学'
-				}, {
-					id: 16,
-					text: '经管'
-				}, {
-					id: 16,
-					text: '社科'
-				}, {
-					id: 16,
-					text: '科技'
-				}, {
-					id: 16,
-					text: '少儿'
-				}, {
-					id: 16,
-					text: '杂志'
-				}, {
-					id: 16,
-					text: '漫画'
-				}, {
-					id: 16,
-					text: '网络小说'
 				}],
 				book: {
 					cover: '', //书籍封面
@@ -290,9 +265,38 @@
 		},
 		onLoad(option) {
 			let that = this;
+			that.getCategoryListFun();
 			that.getIssuesCurrentFun();
 		},
 		methods: {
+			/**
+			 * 获取书籍分类列表
+			 */
+			getCategoryListFun() {
+				const that = this;
+				common.showLoading();
+				getCategories().then(res => {
+					if(res?.statusCode===200){
+						const newCategoryList = res?.data.map(item => (
+							{id: item.id, text: item.name}
+						));
+						that.categoryList = [
+							...[{id: 0, text: '请选择书籍类型'}],
+							...newCategoryList
+						];
+					}else{
+						common.showModal(res);
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
 			/**
 			 * 上架
 			 * 调用trade上架 => 
@@ -378,7 +382,7 @@
 					success: (uploadFileRes) => {
 						console.log(uploadFileRes);
 						let data = uploadFileRes.data;
-						if (uploadFileRes && (uplodFileRes.statusCode == 200 || uplodFileRes.statusCode == 201)) {
+						if (uploadFileRes && (uploadFileRes.statusCode == 200 || uploadFileRes.statusCode == 201)) {
 							if (data) {
 								that.book = data;
 								that.book.publisher_name = data.publisher.name;
@@ -409,7 +413,7 @@
 				let that = this;
 				common.showLoading();
 				let formData = new FormData();
-				formData.append("cover", that.book.cover); //书籍封面
+				that.book.cover && formData.append("cover", that.book.cover); //书籍封面
 				formData.append("name", that.book.name); //书籍名称
 				formData.append("desc", that.book.desc); //书籍描述
 				formData.append("author_name", that.book.author_name); //作者名称
@@ -420,7 +424,7 @@
 				formData.append("price", that.book.price); //发行单价
 				formData.append("ratio", that.book.ratio); //出版商版税比例
 				formData.append("category", that.book.category); //书籍类别
-				formData.append("file", that.book.file); //书籍文件
+				that.book.file && formData.append("file", that.book.file); //书籍文件
 				var xhr = new XMLHttpRequest();
 				let baseURL = web.host;
 				let url = baseURL + '/api/v1/issues/' + that.book.id;
@@ -464,6 +468,9 @@
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
 						}
+						// set category
+						const catindex = that.categoryList.findIndex(item => String(item.id) === String(data.category));
+						that.catindex = catindex==-1? 0:catindex;
 					} else {
 						common.showModal(res);
 					}
@@ -527,6 +534,7 @@
 			bindCategoryChange(e) {
 				let that = this;
 				let targetIndex = e.target.value;
+				that.catindex = targetIndex;
 				for (let a = 0; a < that.categoryList.length; a++) {
 					if (targetIndex == a) {
 						that.book.category = that.categoryList[a].id;
@@ -548,7 +556,7 @@
 			 */
 			checkFirstStep() {
 				let that = this;
-				if (!that.book.cover) {
+				if (!that.book.cover_url&&!that.book.cover) {
 					return '请上传书籍封面';
 				} else if (!that.book.name) {
 					return '请输入书籍名称';

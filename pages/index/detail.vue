@@ -8,7 +8,7 @@
 			<view class="right">
 				<view class="r-top">
 					<view class="itemleft">
-						<image class="img" :src="book.cover"></image>
+						<image class="img" :src="book.cover_url"></image>
 					</view>
 					<view class="itemright">
 						<view class="name">{{book.name}}</view>
@@ -213,7 +213,7 @@
 
 <script>
 	import {
-		getIssues,
+		getIssue,
 		getTrades,
 		postTrades,
 		postTransactions
@@ -269,7 +269,7 @@
 			getBookDetail() {
 				let that = this;
 				common.showLoading();
-				getIssues(that.id).then(res => {
+				getIssue(that.id).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
@@ -298,9 +298,9 @@
 				let that = this;
 				common.showLoading();
 				let params = {
-					issue: that.book.contract.issue,
+					issue: that.id,
 				}
-				getTrades().then(res => {
+				getTrades(params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
@@ -369,7 +369,7 @@
 				}
 				common.showLoading();
 				let params = {
-					issue: that.book.contract.issue,
+					issue: that.id,
 					amount: parseInt(that.amount),
 					price: parseFloat(that.price)
 				}
@@ -417,7 +417,7 @@
 					})
 					return false;
 				}
-				//common.showLoading();
+				common.showLoading();
 				//购买需要先调用合约
 				//获取判断是否连接
 				let provider = await wallet.connect();
@@ -430,20 +430,33 @@
 						//hex,metainfo 原数据，一个json数据可以存nft的相关数据，需要转成十六进制 
 						let metadata = common.strToHexCharCode(JSON.stringify(that.currentItem));
 						let price = parseFloat(that.currentItem.price); //买入的价格
+						//授权平台获取代币USDC
+						let res = await wallet.approveTrade(signer, amount, price);
+						if(res==null||res.status!=1){
+							uni.showModal({
+								title: '提示',
+								content: '授权失败, 请重新提交',
+								showCancel: false
+							});
+							common.hideLoading(0);
+							return;
+						}
 						//合约执行会返回一个结果
 						let transaction = await wallet.trade(signer, seller, nftId, amount, metadata, price);
 						console.log(transaction);
-						if (!transaction) {
-							transaction = {
-								hash: that.currentItem.user.id
-							}
-						}
-						if (transaction) {
+						if (transaction==null||transaction.status!=1) {
+							uni.showModal({
+								title: '提示',
+								content: '交易失败, 请重新提交',
+								showCancel: false
+							});
+							common.hideLoading(0);
+						}else{
 							let params = {
 								trade: parseInt(that.currentItem.id),
 								amount: parseInt(that.amount),
 								price: parseFloat(price),
-								hash: transaction.hash
+								hash: transaction.transactionHash
 							}
 							that.$refs.dealPopup.open();
 							//购买书籍
@@ -466,7 +479,7 @@
 									showCancel: false
 								})
 							}).finally(() => {
-								//common.hideLoading(0);
+								common.hideLoading(0);
 							})
 						}
 					}

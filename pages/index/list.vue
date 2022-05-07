@@ -10,7 +10,7 @@
 					@scrolltolower="lower" @scroll="scroll">
 					<view class="booklist">
 						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
-							<image class="img" :src="item.cover"></image>
+							<image class="img" :src="item.cover_url"></image>
 							<view class="info">{{item.name}}</view>
 							<text class="author">{{item.author_name}}</text>
 						</view>
