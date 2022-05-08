@@ -264,6 +264,7 @@
 				that.getCategoryList();
 				that.getIssuesCurrentFun();
 			}else{
+				common.setStorage('currentPage','/pages/index/settled');
 				common.showModal('请点击右上角，先选择连接钱包');
 			}
 		},
@@ -356,22 +357,14 @@
 							let contractTxn = await wallet.issue(signer, nftId, amount, metadata, price, ratio);
 							console.log(contractTxn);
 							if(contractTxn==null || contractTxn.status != 1) {
-								uni.showModal({
-									title: '提示',
-									content: "生成书籍合约失败，请重试",
-									showCancel: false
-								});
+								common.showModal('生成书籍合约失败，请重试');
 								common.hideLoading(0);
 								return;
 							}
 							that.putOn(amount, contractTxn.contractAddress, data.id);
 							common.hideLoading(0);
 						}else{
-							uni.showModal({
-								title: '提示',
-								content: "授权失败，请重试",
-								showCancel: false
-							});
+							common.showModal('授权失败，请重试');
 							common.hideLoading(0);
 						}
 					}
@@ -524,11 +517,7 @@
 						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -680,33 +669,21 @@
 					//第一步
 					returnMsg = that.checkFirstStep();
 					if (returnMsg) {
-						uni.showModal({
-							title: '提示',
-							content: returnMsg,
-							showCancel: false
-						})
+						common.showModal(returnMsg);
 						return false;
 					}
 				} else if (that.current == 1) {
 					//第二步
 					returnMsg = that.checkSecondStep();
 					if (returnMsg) {
-						uni.showModal({
-							title: '提示',
-							content: returnMsg,
-							showCancel: false
-						})
+						common.showModal(returnMsg);
 						return false;
 					}
 				} else if (that.current == 2) {
 					//第二步
 					returnMsg = that.checkThirdStep();
 					if (returnMsg) {
-						uni.showModal({
-							title: '提示',
-							content: returnMsg,
-							showCancel: false
-						})
+						common.showModal(returnMsg);
 						return false;
 					}
 				}

@@ -299,18 +299,10 @@
 						that.previewUrl = that.book.preview.file;
 						console.log(that.previewUrl)
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -330,18 +322,10 @@
 						let data = res.data;
 						that.tradeList = data.results;
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -396,19 +380,11 @@
 				let that = this;
 				if (that.amount) {
 					if (parseInt(that.amount) > parseInt(that.currentItem.amount)) {
-						uni.showModal({
-							title: '提示',
-							content: '输入的数量不能大于剩余数量。',
-							showCancel: false
-						})
+						common.showModal('输入的数量不能大于剩余数量。');
 						return false;
 					}
 				} else {
-					uni.showModal({
-						title: '提示',
-						content: '请输入数量',
-						showCancel: false
-					})
+					common.showModal('请输入数量');
 					return false;
 				}
 				common.showLoading();
@@ -427,11 +403,7 @@
 						//授权平台获取代币USDC
 						let res = await wallet.approveTrade(signer, amount, price);
 						if (res == null || res.status != 1) {
-							uni.showModal({
-								title: '提示',
-								content: '授权失败, 请重新提交',
-								showCancel: false
-							});
+							common.showModal('授权失败, 请重新提交');
 							common.hideLoading(0);
 							return;
 						}
@@ -439,11 +411,7 @@
 						let transaction = await wallet.trade(signer, seller, nftId, amount, metadata, price);
 						console.log(transaction);
 						if (transaction == null || transaction.status != 1) {
-							uni.showModal({
-								title: '提示',
-								content: '交易失败, 请重新提交',
-								showCancel: false
-							});
+							common.showModal('交易失败, 请重新提交');
 							common.hideLoading(0);
 						} else {
 							let params = {
@@ -460,18 +428,10 @@
 									let data = res.data;
 									that.dealSuccuss();
 								} else {
-									uni.showModal({
-										title: '提示',
-										content: '请求失败',
-										showCancel: false
-									})
+									common.showModal(res);
 								}
 							}).catch(error => {
-								uni.showModal({
-									title: '提示',
-									content: error,
-									showCancel: false
-								})
+								common.showModal(error);
 							}).finally(() => {
 								common.hideLoading(0);
 							})
@@ -491,27 +451,8 @@
 			 * 试读
 			 */
 			tryRead() {
-				//this.$refs.popup.open();
 				let that = this;
-				//获取当前操作系统参数,因Safari 浏览器中没办法在回调函数里面执行window.open, 原因是safari的安全机制将其阻挡了
-				//url 代表后端的完整请求地址路径，类似：https://xxxxxxxxxxx:端口号/项目称/api/common/file/doc-2-html/download?fileId=1111111111111
-				let url = that.previewUrl;
-				let _pf = navigator.platform;
-				if (_pf.indexOf("Win") > -1) {
-					//window系统支持chrome,Edge
-					window.open(
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-					);
-				} else if (_pf.indexOf("Mac") > -1) {
-					//mac系统支持safari;
-					var winRef = window.open("", "_blank"); //先打开一个页面
-					winRef.location =
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-				} else {
-					window.open(
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-					);
-				}
+				that.$refs.popup.open();
 			},
 			/**
 			 * 卖出
@@ -538,11 +479,7 @@
 						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})

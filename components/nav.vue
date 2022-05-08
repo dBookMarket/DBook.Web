@@ -155,12 +155,8 @@
 							let nonce = res.data.nonce;
 							resolve(nonce);
 						} else {
-							uni.showModal({
-								title: '提示',
-								content: '请求失败',
-								showCancel: false
-							})
-							reject('请求失败');
+							common.showModal(res);
+							reject(res);
 						}
 					}).catch(data => {
 						reject(data);
@@ -215,18 +211,10 @@
 												}
 												that.isMetaMask = false;
 											} else {
-												uni.showModal({
-													title: '提示',
-													content: '请求失败',
-													showCancel: false
-												})
+												common.showModal(res);
 											}
 										}).catch(error => {
-											uni.showModal({
-												title: '提示',
-												content: error,
-												showCancel: false
-											})
+											common.showModal(error);
 										}).finally(() => {
 											common.hideLoading(0);
 										})
@@ -237,35 +225,19 @@
 								.catch(errData => {
 									console.log('reject', errData);
 									common.hideLoading(0);
-									uni.showModal({
-										title: '提示',
-										content: errData,
-										showCancel: false
-									});
+									common.showModal(errData);
 								});
 						} else {
 							common.hideLoading(0);
-							uni.showModal({
-								title: '提示',
-								content: "获取address为空",
-								showCancel: false
-							});
+							common.showModal('获取address为空');
 						}
 					} else {
 						common.hideLoading(0);
-						uni.showModal({
-							title: '提示',
-							content: "获取signer为空",
-							showCancel: false
-						});
+						common.showModal('获取signer为空');
 					}
 				} else {
 					common.hideLoading(0);
-					uni.showModal({
-						title: '提示',
-						content: "获取provider为空",
-						showCancel: false
-					});
+					common.showModal('获取provider为空');
 				}
 			},
 			toIndex() {
@@ -328,18 +300,10 @@
 						common.removeStorage('address');
 						common.removeStorage('token');
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
