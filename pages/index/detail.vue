@@ -108,8 +108,8 @@
 									<text class="once" v-if="item.first_release">首发</text>
 								</view>
 								<view class="text other3">
-									<image class="img" @click="buyIn(item)" src="/static/book/cart.svg"></image>
-									<image class="img" @click="buyIn(item)" src="/static/book/return.svg"></image>
+									<image class="img" v-if="item.issue == 2" @click="buyIn(item)" src="/static/book/cart.svg"></image>
+									<image class="img" v-if="item.issue == 3" @click="buyIn(item)" src="/static/book/return.svg"></image>
 								</view>
 							</view>
 						</block>
@@ -117,15 +117,19 @@
 				</view>
 			</view>
 		</view>
+		<!-- <vueshowpdf @closepdf="closepdf" :class="{'isshowpdf':isshowpdf==true}" v-model="isshowpdf" :pdfurl="previewUrl" @pdferr="pdferr" :maxscale='4' :minscale='0.8'
+			:scale='1.2'></vueshowpdf> -->
 		<uni-popup ref="popup" type="center" :mask-click="false">
 			<view class="read">
 				<view class="title">
-					Harry Potter and the Order of the Phoenix Collector's Edition
+					{{book.name}}
 				</view>
 				<image class="closeimg" @click="close('read')" src="/static/book/close.svg"></image>
 				<view class="con">
 					<image class="oimg" src="/static/book/previous.svg"></image>
-					<image class="word" src="/static/book/word.png"></image>
+					<div class="word">
+						
+					</div>
 					<image class="oimg" src="/static/book/next.svg"></image>
 				</view>
 				<view class="bot">
@@ -228,14 +232,18 @@
 	import navBar from '@/components/nav.vue';
 	import left from '@/components/left.vue';
 	import wallet from '@/common/wallet.js';
+	import vueshowpdf from 'vueshowpdf';
+	import web from '@/common/web.js';
 	export default {
 		components: {
 			navBar,
-			left
+			left,
+			vueshowpdf
 		},
 		data() {
 			return {
 				book: {
+					preview:{},
 					publisher: {},
 					contract: {}
 				}, //书籍详情
@@ -248,6 +256,8 @@
 				down3: true,
 				down4: true,
 				down5: true,
+				previewUrl: "/static/test.pdf",
+				isshowpdf:false
 			};
 		},
 		onLoad(option) {
@@ -265,7 +275,11 @@
 		},
 		filters: {
 			strAddress: function(val) {
-				return common.getAddress(val); //从0下标开始的8个字符
+				if(val){
+					return common.getAddress(val); //从0下标开始的8个字符
+				}else{
+					return "";
+				}
 			},
 		},
 		methods: {
@@ -281,6 +295,8 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.book = data;
+						//that.previewUrl = web.host + that.book.preview.file;
+						console.log(that.previewUrl)
 					} else {
 						uni.showModal({
 							title: '提示',
@@ -328,12 +344,6 @@
 				}).finally(() => {
 					common.hideLoading(0);
 				})
-			},
-			/**
-			 * 全部列表
-			 */
-			toAllTradeList() {
-
 			},
 			/**
 			 * 挂单
@@ -439,7 +449,7 @@
 						let price = parseFloat(that.currentItem.price); //买入的价格
 						//授权平台获取代币USDC
 						let res = await wallet.approveTrade(signer, amount, price);
-						if(res==null||res.status!=1){
+						if (res == null || res.status != 1) {
 							uni.showModal({
 								title: '提示',
 								content: '授权失败, 请重新提交',
@@ -451,14 +461,14 @@
 						//合约执行会返回一个结果
 						let transaction = await wallet.trade(signer, seller, nftId, amount, metadata, price);
 						console.log(transaction);
-						if (transaction==null||transaction.status!=1) {
+						if (transaction == null || transaction.status != 1) {
 							uni.showModal({
 								title: '提示',
 								content: '交易失败, 请重新提交',
 								showCancel: false
 							});
 							common.hideLoading(0);
-						}else{
+						} else {
 							let params = {
 								trade: parseInt(that.currentItem.id),
 								amount: parseInt(that.amount),
@@ -500,11 +510,19 @@
 				that.$refs.dealPopup.close();
 				that.$refs.succussPopup.open();
 			},
+			closepdf() {
+				this.isshowpdf = false
+			},
+			pdferr(errurl) {
+				console.log(errurl);
+			},
 			/**
 			 * 试读
 			 */
 			tryRead() {
-				this.$refs.popup.open();
+				//this.$refs.popup.open();
+				let that=this;
+				that.isshowpdf = true;
 			},
 			/**
 			 * 卖出
@@ -569,7 +587,8 @@
 					} else {
 						that.down4 = true
 					}
-				}if (num == 5) {
+				}
+				if (num == 5) {
 					if (that.down5) {
 						that.down5 = false;
 					} else {
@@ -589,7 +608,9 @@
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
-
+		.isshowpdf{
+			display: flex !important;
+		}
 		.read,
 		.seller,
 		.buyer {
@@ -919,6 +940,7 @@
 							.textall {
 								color: #6783E9;
 							}
+
 							.img {
 								width: .16rem;
 								height: .18rem;

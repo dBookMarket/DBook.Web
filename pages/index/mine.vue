@@ -30,14 +30,14 @@
 					</view>
 				</view>
 				<view class="right-con" v-if="active == 2">
-					<view class="booklist" v-if="bookList.length>0">
-						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.issue_detail.id)">
+					<view class="booklist" v-if="sellBookList.length>0">
+						<view class="item" v-for="(item,index) in sellBookList" :key="index" @click="toDetail(item.issue_detail.id)">
 							<image class="img" :src="item.issue_detail.cover_url"></image>
 							<view class="info">{{item.issue_detail.name}}</view>
 							<text class="author">{{item.issue_detail.author_name}}</text>
 						</view>
 					</view>
-					<view class="none" v-if="bookList.length==0">
+					<view class="none" v-if="sellBookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
 						<view class="empty">没有出售中书籍</view>
 					</view>
@@ -193,7 +193,7 @@
 			myBook() {
 				let that = this;
 				that.active = 1;
-				that.getBookList();
+				//that.getBookList();
 			},
 			/**
 			 * 出售中
@@ -201,7 +201,7 @@
 			onSell() {
 				let that = this;
 				that.active = 2;
-				that.getMySellList();
+				//that.getMySellList();
 			},
 			/**
 			 * 活动记录
@@ -209,7 +209,7 @@
 			activeLog() {
 				let that = this;
 				that.active = 3;
-				that.getActiveLogList();
+				//that.getActiveLogList();
 			},
 			/**
 			 * 跳转书详情

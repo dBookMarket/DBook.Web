@@ -134,7 +134,7 @@
 						<view class="button _btn _marright" @click="prevStep()">
 							上一步
 						</view>
-						<view class="button _btn" @click="putOn()" v-if="book.status=='Uploaded'">
+						<view class="button _btn" @click="getContractsFun()" v-if="book.status=='Uploaded'">
 							上架
 						</view>
 						<view class="button _btn" @click="formDataIssuesFun()" v-else-if="book.status=='Failure'">
@@ -292,15 +292,23 @@
 			},
 			/**
 			 * 上架
-			 * 调用trade上架 => 
+			 * 
 			 * 我调用合约wallet.issue()生成书籍合约  => 
-			 * 在调用合约post请求到contracts api，生成合约记录
+			 * 在调用合约post请求到contracts api，生成合约记录=> 
+			 * 调用trade上架 
 			 */
-			putOn() {
+			putOn(amount,account_addr,id) {
 				let that = this;
-				let data = that.book;
 				that.$refs.putPopup.open();
-				putIssuesTrade(data.id).then(res => {
+				let params = {
+					issue: id,
+					address: account_addr,
+					token: common.getStorage('token'),
+					token_amount: amount,
+					token_creteria: "ERC-1155", //代币标准
+					block_chain: that.chainList[0]
+				}
+				putIssuesTrade(data.id,params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let tradeData = res.data;
@@ -308,7 +316,7 @@
 							that.dealSuccuss(); //提示上架成功
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
-							that.getContractsFun(data);
+							//that.getContractsFun(data);
 						}
 					} else {
 						common.showModal(res);
@@ -322,7 +330,9 @@
 			/**
 			 * @param {Object} data
 			 */
-			async getContractsFun(data){
+			async getContractsFun(){
+				let that = this;
+				let data = that.book;
 				common.showLoading();
 				//获取判断是否连接
 				let provider = await wallet.connect();
@@ -341,7 +351,7 @@
 							let issue = await wallet.issue(signer, nftId, amount, metadata, price,
 								ratio);
 							console.log(issue);
-							that.postContractsFun(issue);
+							that.putOn(amount,data.publisher.account_addr,data.id);
 							common.hideLoading(0);
 						}else{
 							common.hideLoading(0);
@@ -400,7 +410,7 @@
 								that.book.publisher_desc = data.publisher.desc;
 								let inerval = setInterval(function() {
 									that.getIssuesCurrentFun(inerval);
-								}, 40000)
+								}, 120000)
 							}
 						} else {
 							common.showModal(data);
@@ -459,12 +469,12 @@
 							that.book.publisher_desc = data.publisher.desc;
 							let inerval = setInterval(function() {
 								that.getIssuesCurrentFun(inerval);
-							}, 40000)
+							}, 120000)
 						}
 					} else {
 						console.log(xhr.responseText);
 						if(typeof(xhr.responseText) === 'string'){
-							common.showModal(xhr.responseText);
+							//common.showModal(xhr.responseText);
 						}
 					}
 				}
@@ -488,8 +498,8 @@
 							that.current = 3;
 							that.book.publisher_name = data.publisher.name;
 							that.book.publisher_desc = data.publisher.desc;
-							if(that.book.status == 'Uploaded'){
-								//上传成功清空定时器
+							if(that.book.status == 'Uploaded' || that.book.status == 'Failure'){
+								//上传成功和失败都清空定时器
 								clearInterval(inerval);
 							}
 						}

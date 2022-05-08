@@ -43,9 +43,9 @@ export const getIssue = id => get('/api/v1/issues/'+id);
  */
 export const formDataIssues = (id,params,method) => formDataReq('/api/v1/issues/'+id,params,method);
 /**
- * 上传后 上架操作
+ * 上传后 上架操作并且生成合约记录
  */
-export const putIssuesTrade = params => put('/api/v1/issues/'+params+'/trade');
+export const putIssuesTrade = (id,params) => put('/api/v1/issues/'+id+'/trade',params);
 /**
  * 查询当前上传issues的状态 status，"Uploading", "Uploaded", "Failure", "Success”
  */
