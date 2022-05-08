@@ -108,8 +108,10 @@
 									<text class="once" v-if="item.first_release">首发</text>
 								</view>
 								<view class="text other3">
-									<image class="img" v-if="item.issue == 2" @click="buyIn(item)" src="/static/book/cart.svg"></image>
-									<image class="img" v-if="item.issue == 3" @click="buyIn(item)" src="/static/book/return.svg"></image>
+									<image class="img" v-if="item.issue == 2" @click="buyIn(item)"
+										src="/static/book/cart.svg"></image>
+									<image class="img" v-if="item.issue == 3" @click="buyIn(item)"
+										src="/static/book/return.svg"></image>
 								</view>
 							</view>
 						</block>
@@ -117,8 +119,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- <vueshowpdf @closepdf="closepdf" :class="{'isshowpdf':isshowpdf==true}" v-model="isshowpdf" :pdfurl="previewUrl" @pdferr="pdferr" :maxscale='4' :minscale='0.8'
-			:scale='1.2'></vueshowpdf> -->
+
 		<uni-popup ref="popup" type="center" :mask-click="false">
 			<view class="read">
 				<view class="title">
@@ -128,7 +129,7 @@
 				<view class="con">
 					<image class="oimg" src="/static/book/previous.svg"></image>
 					<div class="word">
-						
+
 					</div>
 					<image class="oimg" src="/static/book/next.svg"></image>
 				</view>
@@ -232,18 +233,17 @@
 	import navBar from '@/components/nav.vue';
 	import left from '@/components/left.vue';
 	import wallet from '@/common/wallet.js';
-	import vueshowpdf from 'vueshowpdf';
 	import web from '@/common/web.js';
 	export default {
 		components: {
 			navBar,
 			left,
-			vueshowpdf
+
 		},
 		data() {
 			return {
 				book: {
-					preview:{},
+					preview: {},
 					publisher: {},
 					contract: {}
 				}, //书籍详情
@@ -257,7 +257,6 @@
 				down4: true,
 				down5: true,
 				previewUrl: "/static/test.pdf",
-				isshowpdf:false
 			};
 		},
 		onLoad(option) {
@@ -275,9 +274,9 @@
 		},
 		filters: {
 			strAddress: function(val) {
-				if(val){
+				if (val) {
 					return common.getAddress(val); //从0下标开始的8个字符
-				}else{
+				} else {
 					return "";
 				}
 			},
@@ -295,7 +294,7 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.book = data;
-						//that.previewUrl = web.host + that.book.preview.file;
+						that.previewUrl = web.host + that.book.preview.file;
 						console.log(that.previewUrl)
 					} else {
 						uni.showModal({
@@ -510,19 +509,31 @@
 				that.$refs.dealPopup.close();
 				that.$refs.succussPopup.open();
 			},
-			closepdf() {
-				this.isshowpdf = false
-			},
-			pdferr(errurl) {
-				console.log(errurl);
-			},
 			/**
 			 * 试读
 			 */
 			tryRead() {
 				//this.$refs.popup.open();
-				let that=this;
-				that.isshowpdf = true;
+				let that = this;
+				//获取当前操作系统参数,因Safari 浏览器中没办法在回调函数里面执行window.open, 原因是safari的安全机制将其阻挡了
+				//url 代表后端的完整请求地址路径，类似：https://xxxxxxxxxxx:端口号/项目称/api/common/file/doc-2-html/download?fileId=1111111111111
+				let url = that.previewUrl;
+				let _pf = navigator.platform;
+				if (_pf.indexOf("Win") > -1) {
+					//window系统支持chrome,Edge
+					window.open(
+						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
+					);
+				} else if (_pf.indexOf("Mac") > -1) {
+					//mac系统支持safari;
+					var winRef = window.open("", "_blank"); //先打开一个页面
+					winRef.location =
+						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
+				} else {
+					window.open(
+						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
+					);
+				}
 			},
 			/**
 			 * 卖出
@@ -608,9 +619,11 @@
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
-		.isshowpdf{
+
+		.isshowpdf {
 			display: flex !important;
 		}
+
 		.read,
 		.seller,
 		.buyer {
