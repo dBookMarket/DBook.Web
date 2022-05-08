@@ -206,6 +206,13 @@
 												common.setStorage("address", address);
 												//存储token
 												common.setStorage("token", res.data.token);
+												let toUrl = common.getStorage('currentPage');
+												if(toUrl){
+													common.removeStorage('currentPage');
+													uni.navigateTo({
+														url: toUrl
+													})
+												}
 												that.isMetaMask = false;
 											} else {
 												uni.showModal({

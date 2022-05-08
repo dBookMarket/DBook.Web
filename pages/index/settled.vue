@@ -313,6 +313,7 @@
 						let tradeData = res.data;
 						if (tradeData.status == "Success") {
 							that.dealSuccuss(); //提示上架成功
+							// 上架成功，跳转到详情页
 							let inerval = setInterval(function() {
 								uni.navigateTo({
 									url: '/pages/index/detail?id=' + id
@@ -321,10 +322,6 @@
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
 							//that.getContractsFun(data);
-							// 上架成功，跳转到详情页
-							uni.navigateTo({
-								url: '/pages/index/detail?id=' + id
-							})
 						}
 					} else {
 						common.showModal(res);

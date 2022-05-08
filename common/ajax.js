@@ -58,11 +58,11 @@ http.interceptors.response.use(response => {
 	return response
 }, err => {
 	if (err && err.data) {
-		if(err.statusCode === '401'){
+		if(err.statusCode === 401){
 			common.removeStorage('address');
 			common.removeStorage('token');
 		}
-		err.message = err.data.detail;
+		err.message =JSON.stringify(err.data);
 		return Promise.reject(err.message)
 	} else {
 		console.log('连接服务器失败!' + err);

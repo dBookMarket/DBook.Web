@@ -119,6 +119,7 @@
 				that.getMySellList();//出售中的书籍列表
 				that.getActiveLogList();//交易活动记录
 			}else{
+				common.setStorage('currentPage','/pages/index/mine');
 				uni.showModal({
 					title: '提示',
 					content: '请先连接钱包',

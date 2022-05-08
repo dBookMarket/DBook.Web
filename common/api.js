@@ -64,9 +64,9 @@ export const postBanners = params => post('/api/v1/banners', params);
  */
 export const getBanners = params => get('/api/v1/banners', params);
 /**
- * 挂单
+ * 撤销挂单
  */
-export const delTrades = params => deleteP('/api/v1/trades', params);
+export const delTrades = id => deleteP('/api/v1/trades/'+id);
 /**
  * 某一项挂单
  */
