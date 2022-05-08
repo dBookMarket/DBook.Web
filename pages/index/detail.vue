@@ -127,20 +127,20 @@
 				</view>
 				<image class="closeimg" @click="close('read')" src="/static/book/close.svg"></image>
 				<view class="con">
-					<image class="oimg" src="/static/book/previous.svg"></image>
-					<div class="word">
-
+					<!-- <image class="oimg" src="/static/book/previous.svg"></image> -->
+					<div class="word" id="pdfViewer">
+						<embed :src="previewUrl" width="100%" height="100%" type="application/pdf" allowfullscreen></embed>
 					</div>
-					<image class="oimg" src="/static/book/next.svg"></image>
+					<!-- <image class="oimg" src="/static/book/next.svg"></image> -->
 				</view>
-				<view class="bot">
+	<!-- 			<view class="bot">
 					<view class="des">正文324页，试读页2%</view>
 					<view class="page">1/23</view>
 					<view class="op">
 						<image class="opimg" src="/static/book/large.svg"></image>
 						<image class="opimg" src="/static/book/narrow.svg"></image>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</uni-popup>
 		<uni-popup ref="sellPopup" type="center" :mask-click="false">
@@ -222,6 +222,7 @@
 	</view>
 </template>
 
+<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 <script>
 	import {
 		getIssue,
@@ -238,7 +239,6 @@
 		components: {
 			navBar,
 			left,
-
 		},
 		data() {
 			return {
@@ -294,7 +294,7 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.book = data;
-						that.previewUrl = web.host + that.book.preview.file;
+						that.previewUrl = `${that.book.preview.file_url}#toolbar=0`;
 						console.log(that.previewUrl)
 					} else {
 						uni.showModal({
@@ -513,27 +513,22 @@
 			 * 试读
 			 */
 			tryRead() {
-				//this.$refs.popup.open();
-				let that = this;
-				//获取当前操作系统参数,因Safari 浏览器中没办法在回调函数里面执行window.open, 原因是safari的安全机制将其阻挡了
-				//url 代表后端的完整请求地址路径，类似：https://xxxxxxxxxxx:端口号/项目称/api/common/file/doc-2-html/download?fileId=1111111111111
-				let url = that.previewUrl;
-				let _pf = navigator.platform;
-				if (_pf.indexOf("Win") > -1) {
-					//window系统支持chrome,Edge
-					window.open(
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-					);
-				} else if (_pf.indexOf("Mac") > -1) {
-					//mac系统支持safari;
-					var winRef = window.open("", "_blank"); //先打开一个页面
-					winRef.location =
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-				} else {
-					window.open(
-						"/static/pdf/web/viewer.html?file=" + encodeURIComponent(url)
-					);
-				}
+				this.$refs.popup.open();
+				// let that = this;
+				// //获取当前操作系统参数,因Safari 浏览器中没办法在回调函数里面执行window.open, 原因是safari的安全机制将其阻挡了
+				// //url 代表后端的完整请求地址路径，类似：https://xxxxxxxxxxx:端口号/项目称/api/common/file/doc-2-html/download?fileId=1111111111111
+				// let url = that.previewUrl;
+				// let _pf = navigator.platform;
+				// if (_pf.indexOf("Win") > -1) {
+				// 	//window系统支持chrome,Edge
+				// 	window.open(url);
+				// } else if (_pf.indexOf("Mac") > -1) {
+				// 	//mac系统支持safari;
+				// 	var winRef = window.open("", "_blank"); //先打开一个页面
+				// 	winRef.location = url
+				// } else {
+				// 	window.open(url);
+				// }
 			},
 			/**
 			 * 卖出
@@ -666,8 +661,8 @@
 				}
 
 				.word {
-					width: 4.6rem;
-					height: 5.3rem;
+					width: 100%;
+					height: 6rem;
 				}
 			}
 
