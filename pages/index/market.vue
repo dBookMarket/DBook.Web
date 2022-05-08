@@ -86,9 +86,10 @@
 			 */
 			goToUrl: function(tourl) {
 				let that = this;
-				uni.navigateTo({
+				window.location.href = tourl;
+				/* uni.navigateTo({
 					url: '/pages/index/openWeb?url=' + encodeURIComponent(tourl)
-				})
+				}) */
 			},
 			/**
 			 * banner 点击跳转页面

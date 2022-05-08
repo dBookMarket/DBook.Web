@@ -30,9 +30,9 @@
 			<text>社区</text>
 		</view>
 		<view class="second">
-			<view class="text">推特</view>
-			<view class="text">Discord</view>
-			<view class="text">Medium</view>
+			<view @click="toUrl(1)" class="text">推特</view>
+			<view @click="toUrl(2)" class="text">Discord</view>
+			<view @click="toUrl(3)" class="text">Medium</view>
 		</view>
 	</view>
 </template>
@@ -68,20 +68,15 @@
 				let url = "";
 				if (type == 1) {
 					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
-					uni.navigateTo({
+					/*uni.navigateTo({
 						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
-					})
+					}) */
 				} else if (type == 2) {
 					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
-					uni.navigateTo({
-						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
-					})
 				} else if (type == 3) {
 					url = 'https://medium.com/@ddid_io';
-					uni.navigateTo({
-						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
-					})
 				}
+				window.location.href = url;
 			},
 			/**
 			 * 推荐页

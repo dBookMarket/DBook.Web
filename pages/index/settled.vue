@@ -314,6 +314,11 @@
 						let tradeData = res.data;
 						if (tradeData.status == "Success") {
 							that.dealSuccuss(); //提示上架成功
+							let inerval = setInterval(function() {
+								uni.navigateTo({
+									url: '/pages/index/detail?id=' + id
+								})
+							}, 3000)
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
 							//that.getContractsFun(data);
