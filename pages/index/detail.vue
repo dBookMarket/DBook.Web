@@ -108,9 +108,9 @@
 									<text class="once" v-if="item.first_release">首发</text>
 								</view>
 								<view class="text other3">
-									<image class="img" v-if="item.issue == 2" @click="buyIn(item)"
+									<image class="img" v-if="!item.is_owned" @click="buyIn(item)"
 										src="/static/book/cart.svg"></image>
-									<image class="img" v-if="item.issue == 3" @click="buyIn(item)"
+									<image class="img" v-if="item.is_owned" @click="returnTrade(item.id)"
 										src="/static/book/return.svg"></image>
 								</view>
 							</view>
@@ -222,10 +222,10 @@
 	</view>
 </template>
 
-<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
 <script>
 	import {
 		getIssue,
+		delTrades,
 		getTrades,
 		postTrades,
 		postTransactions
@@ -256,6 +256,7 @@
 				down3: true,
 				down4: true,
 				down5: true,
+				id:"",//书籍id
 				previewUrl: "/static/test.pdf",
 			};
 		},
@@ -294,7 +295,7 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.book = data;
-						that.previewUrl = `${that.book.preview.file_url}#toolbar=0`;
+						that.previewUrl = that.book.preview.file_url; //hidde toolbar with appending '#toolbar=0';
 						console.log(that.previewUrl)
 					} else {
 						uni.showModal({
@@ -351,36 +352,20 @@
 				let that = this;
 				if (that.price) {
 					if (parseFloat(that.price) < 20) {
-						uni.showModal({
-							title: '提示',
-							content: '参考价为当前的最低价和最高价之间且不能低于出版商发行价。',
-							showCancel: false
-						})
+						common.showModal('参考价为当前的最低价和最高价之间且不能低于出版商发行价.');
 						return false;
 					}
 				} else {
-					uni.showModal({
-						title: '提示',
-						content: '请输入价格',
-						showCancel: false
-					})
+					common.showModal('请输入价格');
 					return false;
 				}
 				if (that.amount) {
 					if (parseInt(that.amount) > parseInt(that.book.amount)) {
-						uni.showModal({
-							title: '提示',
-							content: '输入的数量不能大于剩余数量。',
-							showCancel: false
-						})
+						common.showModal('输入的数量不能大于剩余数量');
 						return false;
 					}
 				} else {
-					uni.showModal({
-						title: '提示',
-						content: '请输入数量',
-						showCancel: false
-					})
+					common.showModal('请输入数量');
 					return false;
 				}
 				common.showLoading();
@@ -391,22 +376,14 @@
 				}
 				postTrades(params).then(res => {
 					console.log(res);
-					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+					if (res && res.statusCode === 201) {
 						let data = res.data;
 						that.getTradeList(); //卖出挂单成功 重新查询交易列表
 					} else {
-						uni.showModal({
-							title: '提示',
-							content: '请求失败',
-							showCancel: false
-						})
+						common.showModal(res);
 					}
 				}).catch(error => {
-					uni.showModal({
-						title: '提示',
-						content: error,
-						showCancel: false
-					})
+					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
 				})
@@ -535,6 +512,36 @@
 			 */
 			sellOut() {
 				this.$refs.sellPopup.open();
+			},
+			/**
+			 * 撤销挂单
+			 * 如果是自己的书籍
+			 */
+			returnTrade(id){
+				let that = this;
+				common.showLoading();
+				delTrades(id).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 204) {
+						uni.showToast({
+							title: '撤销成功',
+							duration: 3000,
+							icon: false
+						});
+						// 刷新挂单列表
+						that.getTradeList();
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					uni.showModal({
+						title: '提示',
+						content: error,
+						showCancel: false
+					})
+				}).finally(() => {
+					common.hideLoading(0);
+				})
 			},
 			/**
 			 * 买入

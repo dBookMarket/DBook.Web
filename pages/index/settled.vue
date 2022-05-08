@@ -313,18 +313,15 @@
 						let tradeData = res.data;
 						if (tradeData.status == "Success") {
 							that.dealSuccuss(); //提示上架成功
+							// 上架成功，跳转到详情页
 							let inerval = setInterval(function() {
 								uni.navigateTo({
-									url: '/pages/index/detail?id=' + id
+									url: '/pages/index/detail?id=' + issueId
 								})
 							}, 3000)
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
 							//that.getContractsFun(data);
-							// 上架成功，跳转到详情页
-							uni.navigateTo({
-								url: '/pages/index/detail?id=' + id
-							})
 						}
 					} else {
 						common.showModal(res);
@@ -367,7 +364,8 @@
 								common.hideLoading(0);
 								return;
 							}
-							that.putOn(amount, contractTxn.contractAddress, data.id);
+							const contractAddr = '0xa18C1feF1F76a554cD716096f39a051cf4F94523'; // contractTxn.contractAddress
+							that.putOn(amount, contractAddr, data.id);
 							common.hideLoading(0);
 						}else{
 							uni.showModal({

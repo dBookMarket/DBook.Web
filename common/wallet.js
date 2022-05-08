@@ -2,7 +2,7 @@ import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 
 // mumbai testnet
-const platformContractAddress = '0x4f2C793DB2163A7A081b984E6E8e2c504825668b';
+const platformContractAddress = '0x662E48096EA75f1F5CfF8cF286BAD19278368B6a';
 const platformContractAbi = [{
     "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "to", "type": "address" },
     { "indexed": false, "internalType": "uint256", "name": "nftId", "type": "uint256" },
