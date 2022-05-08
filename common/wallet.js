@@ -599,6 +599,16 @@ export default {
             return '';
         }
     },
+	getFee: async function(signer) {
+		try {
+			const platformContract = new ethers.Contract(platformContractAddress, platformContractAbi, signer);
+			let fee = await platformContract.getFee();
+			return fee;
+		} catch (e) {
+			console.log('Exception when calling getFee ->', e);
+			return null;
+		}
+	},
     approveIssue: async function(signer) {
         /**
          * approve platform for accessing the signer's nft
@@ -628,7 +638,13 @@ export default {
 		 * 		float, the price per book, unit USDC
          */
         try {
-			let fee = 1000000; // wei
+			let fee = await this.getFee(signer);
+			if (fee==null) {
+				fee = 1000000; // wei
+			}else{
+				fee = fee.toNumber(); // wei
+			}
+			console.log('fee', fee);
 			let tokenAmount = this.toWei(parseInt(amount)*parseFloat(price)) + fee;
             const usdcContract = new ethers.Contract(usdcContractAddress, usdcContractAbi, signer);
             let txn = await usdcContract.approve(platformContractAddress, tokenAmount);
