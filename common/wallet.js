@@ -654,14 +654,15 @@ export default {
          * metadata
          *      hex, meta information
          * price
-         *      float, the unit price per book
-         * ratio(%%)
-         *      int, it decides the benefit that the publisher will obtain per transaction. eg, ratio=2000 means 20% 
+         *      float, the unit price per book, unit USDC
+         * ratio(%)
+         *      int, it decides the benefit that the publisher will obtain per transaction. eg, ratio=20 means 20% 
          */
         try {
             const platformContract = new ethers.Contract(platformContractAddress, platformContractAbi, signer);
-            const seller = await getAddress(signer);
-            let txn = await platformContract.issue(seller, nftId, amount, metadata, price, seller, ratio);
+            const seller = await this.getAddress(signer);
+			let _price = this.toWei(parseFloat(price));
+            let txn = await platformContract.issue(seller, nftId, amount, metadata, _price, seller, parseFloat(ratio)*100);
             let res = await txn.wait();
             return res;
         } catch (e) {

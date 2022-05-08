@@ -297,18 +297,17 @@
 			 * 在调用合约post请求到contracts api，生成合约记录=> 
 			 * 调用trade上架 
 			 */
-			putOn(amount,account_addr,id) {
+			putOn(amount, contractAddr, issueId) {
 				let that = this;
 				that.$refs.putPopup.open();
 				let params = {
-					issue: id,
-					address: account_addr,
-					token: common.getStorage('token'),
+					issue: issueId,
+					address: contractAddr, // 合约ERC1155的地址？
 					token_amount: amount,
 					token_creteria: "ERC-1155", //代币标准
 					block_chain: that.chainList[0]
 				}
-				putIssuesTrade(data.id,params).then(res => {
+				putIssuesTrade(issueId, params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let tradeData = res.data;
@@ -317,6 +316,10 @@
 							//common.removeStorage('stepcontent');
 							//common.removeStorage('current');
 							//that.getContractsFun(data);
+							// 上架成功，跳转到详情页
+							uni.navigateTo({
+								url: '/pages/index/detail?id=' + id
+							})
 						}
 					} else {
 						common.showModal(res);
@@ -348,14 +351,26 @@
 							let metadata = common.strToHexCharCode(JSON.stringify(data));
 							let price = parseFloat(data.price); //买入的价格
 							let ratio = parseFloat(data.ratio); //出版商版税比例
-							let issue = await wallet.issue(signer, nftId, amount, metadata, price,
-								ratio);
-							console.log(issue);
-							that.putOn(amount,data.publisher.account_addr,data.id);
+							let contractTxn = await wallet.issue(signer, nftId, amount, metadata, price, ratio);
+							console.log(contractTxn);
+							if(contractTxn==null || contractTxn.status != 1) {
+								uni.showModal({
+									title: '提示',
+									content: "生成书籍合约失败，请重试",
+									showCancel: false
+								});
+								common.hideLoading(0);
+								return;
+							}
+							that.putOn(amount, contractTxn.contractAddress, data.id);
 							common.hideLoading(0);
 						}else{
+							uni.showModal({
+								title: '提示',
+								content: "授权失败，请重试",
+								showCancel: false
+							});
 							common.hideLoading(0);
-							//common.showModal('');
 						}
 					}
 				}
