@@ -127,20 +127,16 @@
 				</view>
 				<image class="closeimg" @click="close('read')" src="/static/book/close.svg"></image>
 				<view class="con">
-					<image class="oimg" src="/static/book/previous.svg"></image>
-					<div class="word">
-
-					</div>
-					<image class="oimg" src="/static/book/next.svg"></image>
+					<embed :src='previewUrl' type="application/pdf" width="100%" height="100%" />
 				</view>
-				<view class="bot">
+				<!-- <view class="bot">
 					<view class="des">正文324页，试读页2%</view>
 					<view class="page">1/23</view>
 					<view class="op">
 						<image class="opimg" src="/static/book/large.svg"></image>
 						<image class="opimg" src="/static/book/narrow.svg"></image>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</uni-popup>
 		<uni-popup ref="sellPopup" type="center" :mask-click="false">
@@ -257,7 +253,7 @@
 				down3: true,
 				down4: true,
 				down5: true,
-				id:"",//书籍id
+				id: "", //书籍id
 				previewUrl: "/static/test.pdf",
 			};
 		},
@@ -464,7 +460,7 @@
 			 * 撤销挂单
 			 * 如果是自己的书籍
 			 */
-			returnTrade(id){
+			returnTrade(id) {
 				let that = this;
 				common.showLoading();
 				delTrades(id).then(res => {

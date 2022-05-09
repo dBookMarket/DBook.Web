@@ -8,12 +8,16 @@
 			<view class="right">
 				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper"
 					@scrolltolower="lower" @scroll="scroll">
-					<view class="booklist">
+					<view class="booklist" v-if="bookList.length>0">
 						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
 							<image class="img" :src="item.cover_url"></image>
 							<view class="info">{{item.name}}</view>
 							<text class="author">{{item.author_name}}</text>
 						</view>
+					</view>
+					<view class="none" v-if="bookList.length==0">
+						<image class="img" src="/static/book/empty.svg"></image>
+						<view class="empty">没有书籍</view>
 					</view>
 					<!-- 数据列表 -->
 				</scroll-view>
@@ -146,6 +150,25 @@
 		background-color: #F6F6F6;
 
 		.container {
+			.none {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				min-height: 4.5rem;
+				height: auto;
+			
+				.img {
+					width: .75rem;
+					height: .65rem;
+					margin-bottom: 0.15rem;
+				}
+			
+				.empty {
+					font-size: 28rpx;
+					color: #999999;
+				}
+			}
 			.booklist {
 				text-align: left;
 				width: 100%;
