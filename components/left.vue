@@ -143,14 +143,15 @@
 <style scoped lang="scss">
 	.left {
 		width: 2.4rem;
-		height: auto;
+		height: 7.5rem;
 		background: #FFFFFF;
 		border-radius: .12rem;
 		padding-top: .2rem;
 		font-size: 30rpx;
 		font-family: Alibaba PuHuiTi;
 		margin-bottom: 0.36rem;
-
+		overflow-y: scroll;
+		
 		.first {
 			display: flex;
 			justify-content: flex-start;

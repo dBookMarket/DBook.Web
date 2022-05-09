@@ -178,15 +178,16 @@
 				font-size: 24rpx;
 
 				.item {
-					width: 22%;
+					width: 21%;
 					height: auto;
 					margin-bottom: .2rem;
-					margin-right: 3%;
+					margin-right: 5%;
 					min-width: 0;
 					cursor: pointer;
 
 					.img {
 						width: 100%;
+						height: 2.5rem;
 						margin-bottom: .06rem;
 						border-radius: .2rem;
 					}

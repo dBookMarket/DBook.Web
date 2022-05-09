@@ -339,8 +339,8 @@
 			}
 
 			.searchicon {
-				width: .38rem;
-				height: .38rem;
+				width: .3rem;
+				height: .3rem;
 				text-align: right;
 				cursor: pointer;
 			}
@@ -373,8 +373,8 @@
 				align-items: center;
 
 				.svg {
-					width: .38rem;
-					height: .38rem;
+					width: .3rem;
+					height: .3rem;
 					text-align: left;
 				}
 			}
