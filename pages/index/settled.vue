@@ -424,8 +424,8 @@
 								}, 120000)
 							}
 						} else {
+							data = JSON.stringify(data);
 							common.showModal(data);
-							return;
 						}
 					},
 					fail: (res) => {
@@ -637,13 +637,16 @@
 			 */
 			checkSecondStep() {
 				let that = this;
-				if (!that.book.file) {
-					return '请上传书籍（pdf格式）';
-				} else if (!that.book.category) {
-					return '请选择书籍类型';
-				} else {
-					return null;
+				//新增
+				if (!that.book.id) {
+					if (!that.book.file) {
+						return '请上传书籍（pdf格式）';
+					}
 				}
+				if (!that.book.category) {
+					return '请选择书籍类型';
+				}
+				return null;
 			},
 			/**
 			 * 检查第三步填写信息
@@ -656,9 +659,13 @@
 					return '请设置发行单价';
 				} else if (!that.book.ratio) {
 					return '请设置版税';
-				} else {
-					return null;
 				}
+				if (that.book.ratio) {
+					if (parseInt(that.book.ratio) < 0 || parseInt(that.book.ratio) >50 ) {
+						return '请设置版税0% ~ 50%之间';
+					}
+				} 
+				return null;
 			},
 			/**
 			 * 下一步
