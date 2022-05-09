@@ -603,7 +603,7 @@ export default {
 		try {
 			const platformContract = new ethers.Contract(platformContractAddress, platformContractAbi, signer);
 			let fee = await platformContract.getFee();
-			return fee;
+			return fee.toNumber();
 		} catch (e) {
 			console.log('Exception when calling getFee ->', e);
 			return null;
@@ -638,12 +638,8 @@ export default {
 		 * 		float, the price per book, unit USDC
          */
         try {
-			let fee = await this.getFee(signer);
-			if (fee==null) {
-				fee = 1000000; // wei
-			}else{
-				fee = fee.toNumber(); // wei
-			}
+			let fee = await this.getFee(signer); // wei
+			if (fee==null) fee = 1000000; // wei
 			console.log('fee', fee);
 			let tokenAmount = this.toWei(parseInt(amount)*parseFloat(price)) + fee;
             const usdcContract = new ethers.Contract(usdcContractAddress, usdcContractAbi, signer);
@@ -708,8 +704,11 @@ export default {
          *      int, the fee for platform, unit USDC
          */
         try {
-            // TODO not sure how to calculate trade value.
-            let tradeValue = this.toWei(parseInt(amount) * parseFloat(price) + parseFloat(fee));
+            // get platform fee from contract
+			let _fee = await this.getFee(signer); // wei
+			if(_fee!=null && _fee > fee) fee = _fee;
+			else fee = this.toWei(parseFloat(fee));
+            let tradeValue = this.toWei(parseInt(amount) * parseFloat(price)) + fee;
             const platformContract = new ethers.Contract(platformContractAddress, platformContractAbi, signer);
             const buyer = await this.getAddress(signer);
             let txn = await platformContract.trade(seller, buyer, nftId, amount, metadata, tradeValue, fee);
