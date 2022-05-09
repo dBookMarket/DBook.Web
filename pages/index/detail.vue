@@ -127,9 +127,13 @@
 				</view>
 				<image class="closeimg" @click="close('read')" src="/static/book/close.svg"></image>
 				<view class="con">
-					<embed :src='previewUrl' type="application/pdf" width="100%" height="100%" />
+					<!-- <image class="oimg" src="/static/book/previous.svg"></image> -->
+					<div class="word" id="pdfViewer">
+						<embed :src="previewUrl" width="100%" height="100%" type="application/pdf" allowfullscreen></embed>
+					</div>
+					<!-- <image class="oimg" src="/static/book/next.svg"></image> -->
 				</view>
-				<!-- <view class="bot">
+	<!-- 			<view class="bot">
 					<view class="des">正文324页，试读页2%</view>
 					<view class="page">1/23</view>
 					<view class="op">
@@ -235,7 +239,6 @@
 		components: {
 			navBar,
 			left,
-
 		},
 		data() {
 			return {
@@ -253,7 +256,7 @@
 				down3: true,
 				down4: true,
 				down5: true,
-				id: "", //书籍id
+				id:"",//书籍id
 				previewUrl: "/static/test.pdf",
 			};
 		},
@@ -292,7 +295,7 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.book = data;
-						that.previewUrl = that.book.preview.file;
+						that.previewUrl = that.book.preview.file_url; //hidde toolbar with appending '#toolbar=0';
 						console.log(that.previewUrl)
 					} else {
 						common.showModal(res);
@@ -460,17 +463,19 @@
 			 * 撤销挂单
 			 * 如果是自己的书籍
 			 */
-			returnTrade(id) {
+			returnTrade(id){
 				let that = this;
 				common.showLoading();
 				delTrades(id).then(res => {
 					console.log(res);
-					if (res && res.statusCode === 200) {
+					if (res && res.statusCode === 204) {
 						uni.showToast({
 							title: '撤销成功',
 							duration: 3000,
 							icon: false
 						});
+						// 刷新挂单列表
+						that.getTradeList();
 					} else {
 						common.showModal(res);
 					}
@@ -605,8 +610,8 @@
 				}
 
 				.word {
-					width: 4.6rem;
-					height: 5.3rem;
+					width: 100%;
+					height: 6rem;
 				}
 			}
 

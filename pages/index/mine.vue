@@ -59,7 +59,7 @@
 						<view v-for="(item,index) in transactionList" :key="index">
 							<view class="right-list">
 								<view class="text">
-									{{item.trade_detail.issue_name}}
+									{{item.issue.name}}
 								</view>
 								<text class="text other1">{{item.type}}</text>
 								<text class="text other3">{{item.created_at}}</text>
@@ -68,7 +68,7 @@
 									{{item.buyer.account_addr | strAddress}}
 								</view>
 								<view class="text other2">
-									{{item.trade_detail.user.account_addr | strAddress}}
+									{{item.seller.account_addr | strAddress}}
 								</view>
 							</view>
 						</view>
