@@ -314,6 +314,8 @@
 							that.dealSuccuss(); //提示上架成功
 							// 上架成功，跳转到详情页
 							let inerval = setInterval(function() {
+								//上传成功和失败都清空定时器
+								clearInterval(inerval);
 								uni.navigateTo({
 									url: '/pages/index/detail?id=' + issueId
 								})
