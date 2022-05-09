@@ -52,10 +52,14 @@
 							<view mode="" class="_pdfName" v-if="pdfName">{{pdfName}}</view>
 						</view>
 						<view class="title">书籍类型（必选）</view>
-						<picker class="input-style" @change="bindCategoryChange($event)" :range="categoryList"
-							:value="book.category" :range-key="'name'">
-							<view class="uni-input">{{getCategoryName(book.category)}}</view>
-						</picker>
+						<view class="relative">
+							<view class="input-style cursor" @click="bindCategory()">{{getCategoryName(book.category)}}</view>
+							<view class="selectCategory" v-if="isShowCategory">
+								<view class="item" v-for="(item,index) in categoryList" @click="categoryChange(item)" :class="{'active':book.category==item.id}">
+									{{item.name}}
+								</view>
+							</view>
+						</view>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
 							上一步
@@ -239,6 +243,7 @@
 				},
 				pdfName: '',
 				current: 0,
+				isShowCategory:false,
 				options: [{
 					title: '介绍'
 				}, {
@@ -314,7 +319,7 @@
 							that.dealSuccuss(); //提示上架成功
 							// 上架成功，跳转到详情页
 							let inerval = setInterval(function() {
-								//上传成功和失败都清空定时器
+								//清空定时器
 								clearInterval(inerval);
 								uni.navigateTo({
 									url: '/pages/index/detail?id=' + issueId
@@ -589,18 +594,20 @@
 			},
 			/**
 			 * 绑定书籍分类
-			 * @param {Object} e 获取的是下标 从0开始
+			 * @param {Object} item
 			 */
-			bindCategoryChange(e) {
+			categoryChange(item){
 				let that = this;
-				let targetIndex = e.target.value;
-				for (let a = 0; a < that.categoryList.length; a++) {
-					if (targetIndex == a) {
-						that.book.category = that.categoryList[a].id;
-						that.book.categoryName = that.categoryList[a].name;
-						break;
-					}
-				}
+				that.book.category = item.id;
+				that.book.categoryName = item.name;
+				that.isShowCategory = false;
+			},
+			/**
+			 * 书籍分类弹框
+			 */
+			bindCategory(){
+				let that = this;
+				that.isShowCategory = true;
 			},
 			/**
 			 * 上一步
@@ -851,7 +858,6 @@
 				line-height: .5rem;
 				text-indent: .1rem;
 			}
-
 			._height {
 				height: .9rem;
 				line-height: .3rem;
@@ -984,7 +990,9 @@
 						color: #6783E9;
 						cursor: pointer;
 					}
-
+					.cursor{
+						cursor: pointer;
+					}
 					.input-style {
 						width: 80%;
 						font-size: 30rpx;
@@ -994,7 +1002,41 @@
 						line-height: .5rem;
 						text-indent: .1rem;
 					}
-
+					.relative{
+						position: relative;
+					}
+					.selectCategory{
+						width: 80%;
+						font-size: 30rpx;
+						border-radius: .1rem;
+						height: auto;
+						box-shadow: 2px 0px 16px 0px rgba(86, 86, 86, 0.22);
+						text-align: left;
+						text-indent: .1rem;
+						background: #ffffff;
+						border: 1px solid #F8F8F8;
+						position: absolute;
+						top: .6rem;
+						left: 0;
+						z-index: 100;
+						display: flex;
+						flex-wrap:wrap;
+						.item{
+							width: .9rem;
+							height: .35rem;
+							text-align: center;
+							border-radius: .05rem;
+							line-height: .35rem;
+							background: #F8F8F8;
+							color: #404040;
+							cursor: pointer;
+							margin: 0.15rem 0 0.15rem 0.3rem;
+						}
+						.active{
+							color:#6783E9;
+							background: #EDF1FF;
+						}
+					}
 					._height {
 						height: .9rem;
 						line-height: .3rem;

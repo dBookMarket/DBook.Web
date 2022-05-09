@@ -180,10 +180,10 @@
 				font-size: 24rpx;
 
 				.item {
-					width: 21%;
+					width: 20.2%;
 					height: auto;
 					margin-bottom: .2rem;
-					margin-right: 5%;
+					margin-right: 4%;
 					min-width: 0;
 					cursor: pointer;
 
