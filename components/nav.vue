@@ -97,7 +97,6 @@
 		},
 		onLoad(option) {
 			let that = this;
-
 		},
 		mounted: function() {
 			let that = this;
@@ -105,6 +104,9 @@
 				that.address = common.getStorage('address');
 				that.isMetaMask = false;
 				that.isConnect = false;
+			}
+			if(common.getStorage('search')){
+				that.bookname = common.getStorage('search');
 			}
 		},
 		methods: {
@@ -137,6 +139,7 @@
 			 */
 			toSearch() {
 				let that = this;
+				common.setStorage('search',that.bookname);
 				uni.navigateTo({
 					url: '/pages/index/list?name=' + that.bookname
 				})

@@ -110,11 +110,46 @@
 								<view class="text other3">
 									<image class="img" v-if="!item.is_owned" @click="buyIn(item)"
 										src="/static/book/cart.svg"></image>
-									<image class="img" v-if="item.is_owned" @click="returnTrade(item.id)"
-										src="/static/book/return.svg"></image>
+									<image class="img" v-if="item.is_owned && !item.first_release"
+										@click="returnTrade(item.id)" src="/static/book/return.svg"></image>
 								</view>
 							</view>
 						</block>
+					</view>
+				</view>
+				<view class="r-list">
+					<view class="itemtitle">
+						<text class="text">活动记录</text>
+					</view>
+					<view class="none" v-if="transactionList.length==0">
+						<image class="img" src="/static/book/empty.svg"></image>
+						<view class="empty">没有活动记录</view>
+					</view>
+					<view v-else>
+						<view class="right-title">
+							<text class="text">名称</text>
+							<text class="text other1">交易类型</text>
+							<text class="text other3">交易时间</text>
+							<text class="text other2">金额</text>
+							<text class="text other2">买方</text>
+							<text class="text other2">卖方</text>
+						</view>
+						<view v-for="(item,index) in transactionList" :key="index">
+							<view class="right-list">
+								<view class="text">
+									{{item.issue.name}}
+								</view>
+								<text class="text other1">{{item.type}}</text>
+								<text class="text other3">{{item.created_at}}</text>
+								<text class="text other2">{{item.price * item.amount}} USDT</text>
+								<view class="text other2">
+									{{item.buyer.account_addr | strAddress}}
+								</view>
+								<view class="text other2">
+									{{item.seller.account_addr | strAddress}}
+								</view>
+							</view>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -129,18 +164,11 @@
 				<view class="con">
 					<!-- <image class="oimg" src="/static/book/previous.svg"></image> -->
 					<div class="word" id="pdfViewer">
-						<embed :src="previewUrl" width="100%" height="100%" type="application/pdf" allowfullscreen></embed>
+						<embed :src="previewUrl" width="100%" height="100%" type="application/pdf"
+							allowfullscreen></embed>
 					</div>
 					<!-- <image class="oimg" src="/static/book/next.svg"></image> -->
 				</view>
-	<!-- 			<view class="bot">
-					<view class="des">正文324页，试读页2%</view>
-					<view class="page">1/23</view>
-					<view class="op">
-						<image class="opimg" src="/static/book/large.svg"></image>
-						<image class="opimg" src="/static/book/narrow.svg"></image>
-					</view>
-				</view> -->
 			</view>
 		</uni-popup>
 		<uni-popup ref="sellPopup" type="center" :mask-click="false">
@@ -151,7 +179,7 @@
 				<image class="closeimg" @click="close('sell')" src="/static/book/close.svg"></image>
 				<view class="con">
 					<text class="price">单价</text>
-					<text class="range">参考价范围：20 ~ 40 USDT</text>
+					<text class="range">参考价范围：{{book.price_range.min_price}} ~ {{book.price_range.max_price}} USDT</text>
 				</view>
 				<view class="con border">
 					<view class="left">
@@ -163,7 +191,7 @@
 				</view>
 				<view class="con">
 					<text class="price">数量</text>
-					<text class="range">剩余数量：{{book.amount}}</text>
+					<text class="range">剩余数量：{{book.n_remains}}</text>
 				</view>
 				<view class="con border">
 					<input class="input" v-model="amount" type="text" placeholder="请输入数量" />
@@ -228,7 +256,8 @@
 		delTrades,
 		getTrades,
 		postTrades,
-		postTransactions
+		postTransactions,
+		getTransactions
 	} from '@/common/api.js';
 	import common from '@/common/common.js';
 	import navBar from '@/components/nav.vue';
@@ -245,9 +274,11 @@
 				book: {
 					preview: {},
 					publisher: {},
-					contract: {}
+					contract: {},
+					price_range:{}
 				}, //书籍详情
 				tradeList: [], //交易详情列表
+				transactionList:[],//活动日志
 				amount: "", //卖出的数量
 				price: "", //卖出的价格
 				currentItem: {}, //当前选择的交易记录去买入
@@ -256,7 +287,7 @@
 				down3: true,
 				down4: true,
 				down5: true,
-				id:"",//书籍id
+				id: "", //书籍id
 				previewUrl: "/static/test.pdf",
 			};
 		},
@@ -266,6 +297,7 @@
 				that.id = option.id;
 				that.getBookDetail(); //书籍详情
 				that.getTradeList(); //交易详情列表
+				that.getActiveLogList();//活动日志
 			} else {
 
 			}
@@ -297,6 +329,26 @@
 						that.book = data;
 						that.previewUrl = that.book.preview.file_url; //hidde toolbar with appending '#toolbar=0';
 						console.log(that.previewUrl)
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 我的交易活动记录
+			 */
+			getActiveLogList() {
+				let that = this;
+				common.showLoading();
+				getTransactions({'issue':that.id}).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						that.transactionList = data.results;
 					} else {
 						common.showModal(res);
 					}
@@ -362,6 +414,7 @@
 					console.log(res);
 					if (res && res.statusCode === 201) {
 						let data = res.data;
+						that.$refs.sellPopup.close();
 						that.getTradeList(); //卖出挂单成功 重新查询交易列表
 					} else {
 						common.showModal(res);
@@ -463,7 +516,7 @@
 			 * 撤销挂单
 			 * 如果是自己的书籍
 			 */
-			returnTrade(id){
+			returnTrade(id) {
 				let that = this;
 				common.showLoading();
 				delTrades(id).then(res => {
@@ -730,8 +783,8 @@
 
 						.img {
 							border-radius: .20rem;
-							width: 100%;
-							height: 2.4rem;
+							width: 88%;
+							height: 2.5rem;
 						}
 					}
 
@@ -963,6 +1016,84 @@
 								}
 							}
 
+						}
+					}
+				}
+				.r-list {
+					margin-top: .2rem;
+					min-height: 2rem;
+					height: auto;
+					border-radius: .20rem;
+					background: #FFFFFF;
+					.itemtitle {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						padding: 0 .15rem;
+						height: .4rem;
+						line-height: .4rem;
+					
+						.text {
+							font-size: 28rpx;
+							color: #000000;
+						}
+					}
+					.none {
+						display: flex;
+						justify-content: center;
+						flex-direction: column;
+						align-items: center;
+						min-height: 1.5rem;
+						height: auto;
+				
+						.img {
+							width: .75rem;
+							height: .65rem;
+							margin-bottom: 0.15rem;
+						}
+				
+						.empty {
+							font-size: 28rpx;
+							color: #999999;
+						}
+					}
+					.right-title,
+					.right-list {
+						height: .4rem;
+						background: #ECECEC;
+						/* border-radius: .15rem .15rem 0 0; */
+						line-height: .4rem;
+						display: flex;
+						justify-content: space-around;
+						padding: 0 .15rem;
+					
+						.text {
+							flex: 1.8;
+							color: #999999;
+						}
+					
+						.other1 {
+							flex: .8;
+						}
+					
+						.other2 {
+							flex: .6;
+						}
+					
+						.other3 {
+							flex: 1;
+						}
+					}
+					
+					.right-list {
+						color: #000000;
+						background: #FFFFFF;
+						font-size: 28rpx;
+						margin-top: .15rem;
+					
+						.text {
+							line-height: .2rem;
+							color: #000000;
 						}
 					}
 				}

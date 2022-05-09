@@ -63,6 +63,7 @@
 						<view class="button _btn" @click="nextStep()">
 							下一步
 						</view>
+						
 					</view>
 					<view class="stepCon" v-if="current==2">
 						<view class="stepname">
@@ -103,12 +104,9 @@
 						<view class="title">上架后信息将不可以修改，请确认无误后点击上架。用户交易成功后D-Book会收取2.5%的手续费。</view>
 						<view class="title detail" @click="openDetail">信息详情</view>
 						<view v-if="book.status=='Uploading'">
-							<view class="stepInfo">
-								<uni-icons color="#6783E9" type="checkbox-filled" size="28"></uni-icons>
-								<text class="text">文件加密-正在进行同步加密，请等待</text>
-							</view>
 							<view class="stepInfo" style="margin-left: 3px;">
-								<uni-icons class="loading" color="#fff" type="spinner-cycle" size="22"></uni-icons>
+								<!-- <uni-icons class="loading" color="#fff" type="spinner-cycle" size="22"></uni-icons> -->
+								<image src="/static/book/loding.gif" class="loading"></image>
 								<text class="text">文件待上传</text>
 							</view>
 						</view>
@@ -960,8 +958,11 @@
 
 						.loading {
 							color: #ffffff;
-							background: #999999;
-							border-radius: 50%;
+							/* background: #999999;
+							border-radius: 50%; */
+							vertical-align: middle;
+							width: 24px;
+							height: 24px;
 						}
 					}
 

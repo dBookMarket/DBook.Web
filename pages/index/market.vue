@@ -11,6 +11,15 @@
 					<swiper class="swiper-box" autoplay="true" interval="4000" @change="navigateTo">
 						<swiper-item v-for="(item ,index) in bannerArray" :key="index">
 							<view class="swiper-item" @click="goToUrl(item.redirect_url)">
+								<view class="info">
+									<text class="title">
+										{{item.name}}
+									</text>
+									<text class="desc">
+										{{item.desc}}
+									</text>
+									<button class="buy">购买</button>
+								</view>
 								<image :src="item.img" mode='aspectFit'></image>
 							</view>
 						</swiper-item>
@@ -101,18 +110,52 @@
 		margin: 0 auto;
 		min-width: 1280px;
 		background-color: #F6F6F6;
-
+		font-family: Alibaba PuHuiTi;
+		font-weight: 400;
 		.container {
 			.right {
 				.swiper-box {
 					display: block;
-					height: 7rem;
+					height: 7.5rem;
 					position: relative;
 				}
-
+				.swiper-item{
+					height: 7.5rem;
+					display: flex;
+					justify-content: space-around;
+					.info{
+						text-align: center;
+						flex: 1;
+						height: 7.5rem;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						color: #000000;
+						.title{
+							font-size: 38rpx;
+							line-height: .3rem;
+							padding-bottom: .33rem;
+						}
+						.desc{
+							color: #444;
+							font-size: 30rpx;
+							line-height: .28rem;
+							padding-bottom: .33rem;
+						}
+						.buy{
+							width: 100px;
+							border: 1px solid #6783E9;
+							border-radius: .15rem;
+							color: #FEFEFE;
+							background: #6783E9;
+						}
+					}
+				}
+				
 				.swiper-item image {
+					flex: 3;
 					width: 100%;
-					height: 13rem;
+					height: 100%;
 				}
 			}
 		}

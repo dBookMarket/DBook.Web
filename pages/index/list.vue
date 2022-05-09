@@ -56,6 +56,8 @@
 			}
 			if (option.name) {
 				that.name = option.name;
+			}else{
+				common.removeStorage('search');
 			}
 			that.getBookData();
 		},
