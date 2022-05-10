@@ -125,29 +125,35 @@
 			 */
 			toSettled() {
 				let that = this;
-				common.showLoading();
-				let params = {};
-				getPermissions(params).then(res => {
-					console.log(res);
-					if (res && res.statusCode === 200) {
-						let data = res.data;
-						if(data.has_issue_perm){
-							uni.navigateTo({
-								url: '/pages/index/settled'
-							})
-						}else{
-							common.showModal('请向管理人员申请发布权限');
-							return;
+				let address = common.getStorage('address');
+				let token = common.getStorage('token');
+				if(address && token){
+					common.showLoading();
+					let params = {};
+					getPermissions(params).then(res => {
+						console.log(res);
+						if (res && res.statusCode === 200) {
+							let data = res.data;
+							if(data.has_issue_perm){
+								uni.navigateTo({
+									url: '/pages/index/settled'
+								})
+							}else{
+								common.showModal('请向管理人员申请发布权限');
+								return;
+							}
+						} else {
+							common.showModal(res);
 						}
-					} else {
-						common.showModal(res);
-					}
-				}).catch(error => {
-					common.showModal(error);
-				}).finally(() => {
-					common.hideLoading(0);
-				})
-				
+					}).catch(error => {
+						common.showModal(error);
+					}).finally(() => {
+						common.hideLoading(0);
+					})
+				}else{
+					//common.setStorage('currentPage','/pages/index/settled');
+					common.showModal('请点击右上角，先选择连接钱包');
+				}
 			},
 			/**
 			 * 入驻申请/版权验证
