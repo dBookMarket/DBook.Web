@@ -39,7 +39,7 @@
 
 <script>
 	import {
-		getCategories
+		getCategories,getPermissions
 	} from '@/common/api.js';
 	import common from '@/common/common.js';
 	export default {
@@ -124,9 +124,30 @@
 			 * 发布dbook
 			 */
 			toSettled() {
-				uni.navigateTo({
-					url: '/pages/index/settled'
+				let that = this;
+				common.showLoading();
+				let params = {};
+				getPermissions(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						let data = res.data;
+						if(data.has_issue_perm){
+							uni.navigateTo({
+								url: '/pages/index/settled'
+							})
+						}else{
+							common.showModal('请向管理人员申请发布权限');
+							return;
+						}
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
 				})
+				
 			},
 			/**
 			 * 入驻申请/版权验证

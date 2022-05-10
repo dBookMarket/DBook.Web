@@ -50,6 +50,12 @@ export const putIssuesTrade = (id,params) => put('/api/v1/issues/'+id+'/trade',p
  * 查询当前上传issues的状态 status，"Uploading", "Uploaded", "Failure", "Success”
  */
 export const getIssuesCurrent = params => get('/api/v1/issues/current', params);
+
+/**
+ * 获取发布书籍的权限
+ */
+export const getPermissions = params => get('/api/v1/permissions', params);
+
 /**
  * 删除banner
  */

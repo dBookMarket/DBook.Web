@@ -569,7 +569,7 @@
 						let data = res.data;
 						
 					} else {
-						common.showModal('请求失败');
+						common.showModal(res);
 					}
 				}).catch(error => {
 					common.showModal(error);

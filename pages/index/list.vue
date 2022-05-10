@@ -136,7 +136,7 @@
 				});
 				uni.showToast({
 					icon: "none",
-					title: "纵向滚动 scrollTop 值已被修改为 0"
+					title: " scrollTop 0"
 				})
 			},
 
