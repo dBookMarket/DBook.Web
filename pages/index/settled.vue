@@ -366,7 +366,7 @@
 								common.hideLoading(0);
 								return;
 							}
-							const contractAddr = '0xa18C1feF1F76a554cD716096f39a051cf4F94523'; // contractTxn.contractAddress
+							const contractAddr = wallet.getNFTContractAddress(); // contractTxn.contractAddress is null???
 							that.putOn(amount, contractAddr, data.id);
 							common.hideLoading(0);
 						}else{

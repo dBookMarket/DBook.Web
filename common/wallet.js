@@ -538,6 +538,7 @@ const usdcContractAbi = [
 
 
 export default {
+	getNFTContractAddress: () => nftContractAddress,
 	toWei: function(amount) {
 		// 1 usdc = 1000000 wei
 		return parseFloat(amount)*10**6;
