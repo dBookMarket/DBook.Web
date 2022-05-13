@@ -13,99 +13,99 @@
 					<view class="itemright">
 						<view class="name">{{book.name}}</view>
 						<text class="author">{{book.author_name}}</text>
-						<view class="publisher">出版商：{{book.publisher.name}}</view>
+						<view class="publisher">publisher:{{book.publisher.name}}</view>
 						<view class="info">
 							<view class="_item">
 								<image class="itemimg" src="/static/book/user.svg"></image>
-								<text class="itemtext">拥有者：{{book.n_owners}}</text>
+								<text class="itemtext">owner:{{book.n_owners}}</text>
 							</view>
 							<view class="_item">
 								<image class="itemimg" src="/static/book/publisher.svg"></image>
-								<text class="itemtext">全部：{{book.amount}}</text>
+								<text class="itemtext">all:{{book.amount}}</text>
 							</view>
 							<view class="_item">
 								<image class="itemimg" src="/static/book/circulation.svg"></image>
-								<text class="itemtext">流通中：{{book.n_circulations}}</text>
+								<text class="itemtext">in circulation:{{book.n_circulations}}</text>
 							</view>
 						</view>
 						<view class="button">
-							<button class="_btn" @click="tryRead()">试读</button>
+							<button class="_btn" @click="tryRead()">Try reading</button>
 							<!-- v-if="book.is_owned" -->
-							<button class="_btn sell" v-if="book.is_owned" @click="sellOut()">卖出</button>
+							<button class="_btn sell" v-if="book.is_owned" @click="sellOut()">Resell</button>
 						</view>
 					</view>
 				</view>
 				<view class="r-bottom">
 					<view class="itemleft">
 						<view class="itemtitle" @click="openContent(1)">
-							<text class="text">作品描述</text>
+							<text class="text">Synopsis</text>
 							<image class="img" v-if="down1" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down1" src="/static/book/right.svg"></image>
 						</view>
 						<view v-if="down1" class="iteminfo">{{book.desc}}</view>
 						<view class="itemtitle" @click="openContent(2)">
-							<text class="text">作者描述</text>
+							<text class="text">Author’s Bio</text>
 							<image class="img" v-if="down2" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down2" src="/static/book/right.svg"></image>
 						</view>
 						<view v-if="down2" class="iteminfo">{{book.author_desc}}</view>
 						<view class="itemtitle" @click="openContent(3)">
-							<text class="text">出版商描述</text>
+							<text class="text">Publisher description</text>
 							<image class="img" v-if="down3" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down3" src="/static/book/right.svg"></image>
 						</view>
 						<view v-if="down3" class="iteminfo">{{book.publisher.desc}}</view>
 						<view class="itemtitle" @click="openContent(4)">
-							<text class="text">链上细节</text>
+							<text class="text">Details on the chain</text>
 							<image class="img" v-if="down4" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down4" src="/static/book/right.svg"></image>
 						</view>
 						<view v-if="down4 && book.contract" class="iteminfo">
 							<view class="flex">
-								<text class="text">合约地址</text>
-								<text class="text">{{book.contract.address | strAddress }}</text>
+								<text class="text">Contract address</text>
+								<text class="text maincolor" @click="toPolygon(book.contract.address)">{{book.contract.address | strAddress }}</text>
 							</view>
 							<view class="flex">
-								<text class="text">代币数量</text>
+								<text class="text">Quantity of tokens</text>
 								<text class="text">{{book.contract.token_amount}}</text>
 							</view>
 							<view class="flex">
-								<text class="text">代币标准</text>
+								<text class="text">Tokens standard</text>
 								<text class="text">{{book.contract.token_criteria}}</text>
 							</view>
 							<view class="flex">
-								<text class="text">区块链</text>
+								<text class="text">Block chain</text>
 								<text class="text">{{book.contract.block_chain}}</text>
 							</view>
 						</view>
 					</view>
 					<view class="itemright">
 						<view class="itemtitle">
-							<text class="text">交易详情</text>
+							<text class="text">Transaction details</text>
 							<view @click="openContent(5)">
-								<text class="textall">全部列表</text>
+								<text class="textall">All the list</text>
 								<image class="img" v-if="down5" src="/static/book/down.svg"></image>
 								<image class="img" v-if="!down5" src="/static/book/right.svg"></image>
 							</view>
 						</view>
 						<block v-if="down5">
 							<view class="listtitle">
-								<text class="text">价格</text>
-								<text class="text other1">数量</text>
-								<text class="text other2">时间</text>
-								<text class="text other2">地址</text>
+								<text class="text">price</text>
+								<text class="text other1">quantity</text>
+								<text class="text other2">time</text>
+								<text class="text other2">address</text>
 								<text class="text other3"></text>
 							</view>
 							<view class="list" v-for="(item,index) in tradeList" :key="index">
 								<view class="text">
 									<radio value="r1" class="radio" color="#6783E9" />
-									<text class="mid">{{item.price}}USDT</text>
+									<text class="mid">{{item.price}}USDC</text>
 								</view>
 								<text class="text other1">{{item.amount}}</text>
 								<text class="text other2">{{item.created_at}}</text>
 								<view class="text other2">
-									<text>{{item.user.account_addr | strAddress}}</text>
-									<text class="once" v-if="item.first_release">首发</text>
+									<text class="maincolor" @click="toPolygon(item.user.account_addr)">{{item.user.account_addr | strAddress}}</text>
+									<text class="once" v-if="item.first_release">first</text>
 								</view>
 								<view class="text other3">
 									<image class="img" v-if="!item.is_owned" @click="buyIn(item)"
@@ -119,20 +119,20 @@
 				</view>
 				<view class="r-list">
 					<view class="itemtitle">
-						<text class="text">活动记录</text>
+						<text class="text">Activity History</text>
 					</view>
 					<view class="none" v-if="transactionList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有活动记录</view>
+						<view class="empty">The active history is empty</view>
 					</view>
 					<view v-else>
 						<view class="right-title">
-							<text class="text">名称</text>
-							<text class="text other1">交易类型</text>
-							<text class="text other3">交易时间</text>
-							<text class="text other2">金额</text>
-							<text class="text other2">买方</text>
-							<text class="text other2">卖方</text>
+							<text class="text">name</text>
+							<text class="text other1">transaction type</text>
+							<text class="text other3">trading hours</text>
+							<text class="text other2">amount</text>
+							<text class="text other2">buyer</text>
+							<text class="text other2">seller</text>
 						</view>
 						<view v-for="(item,index) in transactionList" :key="index">
 							<view class="right-list">
@@ -141,11 +141,11 @@
 								</view>
 								<text class="text other1">{{item.type}}</text>
 								<text class="text other3">{{item.created_at}}</text>
-								<text class="text other2">{{item.price * item.amount}} USDT</text>
-								<view class="text other2">
+								<text class="text other2">{{item.price * item.amount}} USDC</text>
+								<view class="text other2 maincolor" @click="toPolygon(item.buyer.account_addr)">
 									{{item.buyer.account_addr | strAddress}}
 								</view>
-								<view class="text other2">
+								<view class="text other2 maincolor" @click="toPolygon(item.seller.account_addr)">
 									{{item.seller.account_addr | strAddress}}
 								</view>
 							</view>
@@ -174,77 +174,77 @@
 		<uni-popup ref="sellPopup" type="center" :mask-click="false">
 			<view class="seller">
 				<view class="title">
-					卖出
+					Sell
 				</view>
 				<image class="closeimg" @click="close('sell')" src="/static/book/close.svg"></image>
 				<view class="con">
-					<text class="price">单价</text>
-					<text class="range">参考价范围：{{book.price_range.min_price}} ~ {{book.price_range.max_price}} USDT</text>
+					<text class="price">Price</text>
+					<text class="range">Suggested price:{{book.price_range.min_price}} ~ {{book.price_range.max_price}} USDC</text>
 				</view>
 				<view class="con border">
 					<view class="left">
 						<image class="icon" src="/static/book/recommend.svg"></image>
-						<text class="title">USDT</text>
+						<text class="title">USDC</text>
 						<view class="rightb"></view>
 					</view>
-					<input class="input" v-model="price" type="text" placeholder="请输入价格，不能低于最低价格" />
+					<input class="input" v-model="price" type="text" placeholder="Enter price" />
 				</view>
 				<view class="con">
-					<text class="price">数量</text>
-					<text class="range">剩余数量：{{book.n_remains}}</text>
+					<text class="price">Quantity</text>
+					<text class="range">Available:{{book.n_remains}}</text>
 				</view>
 				<view class="con border">
-					<input class="input" v-model="amount" type="text" placeholder="请输入数量" />
+					<input class="input" v-model="amount" type="text" placeholder="Enter quantity" />
 				</view>
 				<view class="con">
 					<view class="taxview">
-						<text class="tax">手续费：2.5%</text>
-						<text class="tax">版税：20%</text>
+						<text class="tax">Transaction Fee: 2.5%</text>
+						<text class="tax">Royalty: 20%</text>
 					</view>
-					<button class="_btn" @click="hangOrder()">挂单</button>
+					<button class="_btn" @click="hangOrder()">Pending order</button>
 				</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="buyPopup" type="center" :mask-click="false">
 			<view class="buyer">
 				<view class="title">
-					买入
+					Buy
 				</view>
 				<image class="closeimg" @click="close('buy')" src="/static/book/close.svg"></image>
 				<view class="con">
-					<text class="price">单价</text>
+					<text class="price">price</text>
 				</view>
 				<view class="con border">
 					<view class="left">
 						<image class="icon" src="/static/book/recommend.svg"></image>
-						<text class="title">{{currentItem.price}} USDT</text>
+						<text class="title">{{currentItem.price}} USDC</text>
 					</view>
 				</view>
 				<view class="con">
-					<text class="price">数量</text>
-					<text class="range">剩余数量：{{currentItem.amount}}</text>
+					<text class="price">Quantity</text>
+					<text class="range">Available:{{currentItem.amount}}</text>
 				</view>
 				<view class="con border">
-					<input class="input" v-model="amount" type="text" placeholder="请输入数量" />
+					<input class="input" v-model="amount" type="text" placeholder="Enter quantity" />
 				</view>
 				<view class="con">
 					<view class="taxview">
 
 					</view>
-					<button class="_btn" @click="buyOrder()">支付</button>
+					<button class="_btn" @click="buyOrder()">Pay</button>
 				</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="dealPopup" type="center" :mask-click="false">
 			<view class="deal">
 				<image class="img" src="/static/book/deal.svg"></image>
-				<view>交易进行中</view>
+				<view>Trading</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="succussPopup" type="center" :mask-click="true">
 			<view class="deal">
 				<image class="img" src="/static/book/succuss.svg"></image>
-				<view>交易成功</view>
+				<view>Trade successfully</view>
 			</view>
 		</uni-popup>
 	</view>
@@ -315,7 +315,15 @@
 			},
 		},
 		methods: {
-
+			/**
+			 * 跳转到Polygon网址
+			 * @param {Object} address
+			 */
+			toPolygon(address){
+				if(address){
+					window.location.href = 'https://polygonscan.com/address/'+address;
+				}
+			},
 			/**
 			 * 获取书籍详情
 			 */
@@ -388,20 +396,20 @@
 				let that = this;
 				if (that.price) {
 					if (parseFloat(that.price) < 20) {
-						common.showModal('参考价为当前的最低价和最高价之间且不能低于出版商发行价.');
-						return false;
+						/* common.showModal('price range is between lowest price and highest price and not lower than first published price.');
+						return false; */
 					}
 				} else {
-					common.showModal('请输入价格');
+					common.showModal('please key in price');
 					return false;
 				}
 				if (that.amount) {
 					if (parseInt(that.amount) > parseInt(that.book.amount)) {
-						common.showModal('输入的数量不能大于剩余数量');
+						common.showModal('quantity cannot be higher than available');
 						return false;
 					}
 				} else {
-					common.showModal('请输入数量');
+					common.showModal('please key in quantity');
 					return false;
 				}
 				common.showLoading();
@@ -432,11 +440,11 @@
 				let that = this;
 				if (that.amount) {
 					if (parseInt(that.amount) > parseInt(that.currentItem.amount)) {
-						common.showModal('输入的数量不能大于剩余数量。');
+						common.showModal('quantity cannot be higher than available');
 						return false;
 					}
 				} else {
-					common.showModal('请输入数量');
+					common.showModal('please key in quantity');
 					return false;
 				}
 				common.showLoading();
@@ -455,7 +463,7 @@
 						//授权平台获取代币USDC
 						let res = await wallet.approveTrade(signer, amount, price);
 						if (res == null || res.status != 1) {
-							common.showModal('授权失败, 请重新提交');
+							common.showModal('submission error, please try again');
 							common.hideLoading(0);
 							return;
 						}
@@ -463,7 +471,7 @@
 						let transaction = await wallet.trade(signer, seller, nftId, amount, metadata, price);
 						console.log(transaction);
 						if (transaction == null || transaction.status != 1) {
-							common.showModal('交易失败, 请重新提交');
+							common.showModal('transaction error, please try again');
 							common.hideLoading(0);
 						} else {
 							let params = {
@@ -523,7 +531,7 @@
 					console.log(res);
 					if (res && res.statusCode === 204) {
 						uni.showToast({
-							title: '撤销成功',
+							title: 'transaction cancelled',
 							duration: 3000,
 							icon: false
 						});
@@ -620,7 +628,6 @@
 		.isshowpdf {
 			display: flex !important;
 		}
-
 		.read,
 		.seller,
 		.buyer {
@@ -778,13 +785,13 @@
 					justify-content: flex-start;
 
 					.itemleft {
-						flex: 0.65;
-						margin-right: .29rem;
+						width: 520rpx;
+						margin-right: .3rem;
 
 						.img {
 							border-radius: .20rem;
-							width: 88%;
-							height: 2.5rem;
+							width: 520rpx;
+							height: 580rpx;
 						}
 					}
 
@@ -879,8 +886,8 @@
 					margin: .2rem 0;
 
 					.itemleft {
-						flex: 0.65;
-						margin-right: .29rem;
+						width: 520rpx;
+						margin-right: .3rem;
 						height: auto;
 						border-radius: .20rem;
 						background-color: #FFFFFF;
@@ -1089,10 +1096,8 @@
 						color: #000000;
 						background: #FFFFFF;
 						font-size: 28rpx;
-						margin-top: .15rem;
 					
 						.text {
-							line-height: .2rem;
 							color: #000000;
 						}
 					}

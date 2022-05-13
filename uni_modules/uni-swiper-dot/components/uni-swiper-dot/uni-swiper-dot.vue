@@ -79,14 +79,14 @@
 		data() {
 			return {
 				dots: {
-					width: 6,
-					height: 6,
-					bottom: 10,
+					width: 10,
+					height: 10,
+					bottom: 0,
 					color: '#fff',
-					backgroundColor: 'rgba(0, 0, 0, .3)',
-					border: '1px rgba(0, 0, 0, .3) solid',
-					selectedBackgroundColor: '#333',
-					selectedBorder: '1px rgba(0, 0, 0, .9) solid'
+					backgroundColor: '#ffffff',
+					border: '1px #ffffff solid',
+					selectedBackgroundColor: '#ffffff',
+					selectedBorder: '1px #ffffff solid'
 				}
 			}
 		},
@@ -149,7 +149,7 @@
 		width: 8px;
 		border-radius: 100px;
 		margin-left: 6px;
-		background-color: rgba(0, 0, 0, 0.4);
+		background-color: #ffffff;
 		/* #ifndef APP-NVUE */
 		cursor: pointer;
 		/* #endif */

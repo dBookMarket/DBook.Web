@@ -7,16 +7,16 @@
 				</view>
 				<view class="center cflex">
 					<view class="search">
-						<input class="searchinput" v-model="bookname" type="text" placeholder="搜索书籍" />
+						<input class="searchinput" v-model="bookname" type="text" placeholder="Search" />
 						<image class="searchicon" @click="toSearch()" src="/static/book/search.svg"></image>
 					</view>
 				</view>
 				<view class="right cflex">
-					<view class="flex" @click="toRead()">阅读器</view>
-					<view class="flex" @click="selled()">卖出</view>
+					<view class="flex" @click="toRead()">Reader</view>
+					<view class="flex" @click="selled()">Resell</view>
 					<view class="flex choosewallet" v-if="!address" @click="toWallet(1)">
 						<image class="svg" src="/static/book/link1.svg"></image>
-						<text>选择钱包</text>
+						<text>Choose Wallet</text>
 						<text></text>
 					</view>
 					<view class="flex choosewallet cwbg" v-if="address">
@@ -27,7 +27,7 @@
 					<view class="_wallet" v-if="isMetaMask">
 						<view class="_walletItem">
 							<image src="/static/book/metamask.jpg" class="metamask"></image>
-							<text class="selectw">连接钱包</text>
+							<text class="selectw">Connect Wallet</text>
 						</view>
 						<view class="choose" @click="toMetamask()">
 							<text>MeraMask</text>
@@ -37,15 +37,15 @@
 					<view class="_connect" v-if="isConnect">
 						<view class="_item" @click="copyUrl()">
 							<image class="svg" src="/static/book/copy.svg"></image>
-							<text>复制地址</text>
+							<text>Copy Address</text>
 						</view>
 						<view class="_item" @click="toSwitch()">
 							<image class="svg" src="/static/book/switch.svg"></image>
-							<text>切换账户</text>
+							<text>Use another account</text>
 						</view>
 						<view class="_item" @click="toBreak()">
 							<image class="svg" src="/static/book/break.svg"></image>
-							<text>断开连接</text>
+							<text>Disconnect / Sign-Out</text>
 						</view>
 					</view>
 				</view>
@@ -54,7 +54,7 @@
 		<uni-popup ref="popup" type="center" :mask-click="false">
 			<view class="read">
 				<view class="title">
-					阅读器APP下载
+					App Download
 				</view>
 				<image class="closeimg" @click="close()" src="/static/book/close.svg"></image>
 				<view class="con">
@@ -232,15 +232,15 @@
 								});
 						} else {
 							common.hideLoading(0);
-							common.showModal('获取address为空');
+							common.showModal('the address is empty');
 						}
 					} else {
 						common.hideLoading(0);
-						common.showModal('获取signer为空');
+						common.showModal('the signer is empty');
 					}
 				} else {
 					common.hideLoading(0);
-					common.showModal('获取provider为空');
+					common.showModal('the provider is empty');
 				}
 			},
 			toIndex() {
@@ -268,7 +268,7 @@
 				console.log(oInput.value)
 				document.execCommand("Copy"); // 执行浏览器复制命令
 				uni.showToast({
-					title: '已成功复制到剪切板',
+					title: 'successfully copied to the clipboard',
 					duration: 3000,
 					icon: false
 				});
@@ -294,7 +294,7 @@
 					console.log(res);
 					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
 						uni.showToast({
-							title: '断开连接成功',
+							title: 'disconnect succeeded',
 							duration: 3000,
 							icon: false
 						});

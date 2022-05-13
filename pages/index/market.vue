@@ -7,7 +7,7 @@
 			</view>
 			<view class="right">
 				<uni-swiper-dot :info="bannerArray" :current="current" field="img" :mode="mode"
-					:dotsStyles="{backgroundColor:'rgba(0, 0, 0, 0.3)',selectedBorder:'none',border:'none',color:'#fff'}">
+					:dotsStyles="{backgroundColor:'#6783E9',selectedBorder:'none',border:'none',color:'#fff'}">
 					<swiper class="swiper-box" autoplay="true" interval="4000" @change="navigateTo">
 						<swiper-item v-for="(item ,index) in bannerArray" :key="index">
 							<view class="swiper-item" @click="goToUrl(item.redirect_url)">
@@ -18,9 +18,12 @@
 									<text class="desc">
 										{{item.desc}}
 									</text>
-									<button class="buy">购买</button>
+									<button class="buy">buy</button>
 								</view>
-								<image :src="item.img" mode='aspectFit'></image>
+								<view class="image">
+									<image class="img" :src="item.img" mode='aspectFit'></image>
+								</view>
+								
 							</view>
 						</swiper-item>
 					</swiper>
@@ -57,6 +60,7 @@
 		},
 		onLoad(option) {
 			let that = this;
+			common.removeStorage('categories');
 			that.getBanners();
 		},
 		methods: {
@@ -114,6 +118,8 @@
 		font-weight: 400;
 		.container {
 			.right {
+				background: #060219;
+				border-radius: 0.25rem;
 				.swiper-box {
 					display: block;
 					height: 7.5rem;
@@ -130,32 +136,39 @@
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
-						color: #000000;
+						color: #FFFFFF;
 						.title{
 							font-size: 38rpx;
 							line-height: .3rem;
 							padding-bottom: .33rem;
 						}
 						.desc{
-							color: #444;
+							color: #999999;
 							font-size: 30rpx;
 							line-height: .28rem;
 							padding-bottom: .33rem;
 						}
 						.buy{
-							width: 100px;
+							width: 110px;
 							border: 1px solid #6783E9;
-							border-radius: .15rem;
+							border-radius: .5rem;
 							color: #FEFEFE;
 							background: #6783E9;
 						}
 					}
 				}
 				
-				.swiper-item image {
-					flex: 3;
-					width: 100%;
-					height: 100%;
+				.swiper-item .image {
+					border-radius: .2rem;
+					flex: 1.1;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					.img{
+						width: 96%;
+						height: 90%;
+						border-radius: .2rem;
+					}
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 	<view class="left">
 		<view class="first" @click="toRecommend()">
 			<image class="svg" src="/static/book/recommend.svg"></image>
-			<text>推荐</text>
+			<text>Recommend</text>
 		</view>
 		<view class="first">
 			<image class="svg" src="/static/book/D-BOOK.svg"></image>
@@ -10,7 +10,7 @@
 		</view>
 		<view class="second">
 			<view class="text" @click="toList('',-1)">
-				<text>全部</text>
+				<text>All</text>
 			</view>
 			<view class="text" v-for="(item,index) in categories" :key="index" @click="toList(item.id,index)">
 				<text :class="{'active':index+1==curindex}">{{item.name}}</text>
@@ -18,19 +18,19 @@
 		</view>
 		<view class="first">
 			<image class="svg" src="/static/book/publisher.svg"></image>
-			<text>出版商&作者</text>
+			<text>Publisher & Author</text>
 		</view>
 		<view class="second">
-			<view class="text" @click="toApply()">入驻申请</view>
-			<view class="text" @click="toApply()">版权验证</view>
-			<view class="text" @click="toSettled()">发布D-Book</view>
+			<view class="text" @click="toApply()">Publisher/Author apply</view>
+			<view class="text" @click="toApply()">Copyright verification</view>
+			<view class="text" @click="toSettled()">Publish DBook</view>
 		</view>
 		<view class="first">
 			<image class="svg" src="/static/book/community.svg"></image>
-			<text>社区</text>
+			<text>Community</text>
 		</view>
 		<view class="second">
-			<view @click="toUrl(1)" class="text">推特</view>
+			<view @click="toUrl(1)" class="text">Twitter</view>
 			<view @click="toUrl(2)" class="text">Discord</view>
 			<view @click="toUrl(3)" class="text">Medium</view>
 		</view>
@@ -169,7 +169,7 @@
 
 <style scoped lang="scss">
 	.left {
-		width: 2.4rem;
+		width: 2.6rem;
 		height: 7.5rem;
 		background: #FFFFFF;
 		border-radius: .12rem;
@@ -202,7 +202,7 @@
 
 			.text {
 				cursor: pointer;
-				margin-left: .6rem;
+				margin-left: .35rem;
 				font-weight: 400;
 				color: #999999;
 			}

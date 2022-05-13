@@ -12,9 +12,9 @@
 					<text class="name">{{address}}</text>
 				</view>
 				<view class="right-button">
-					<button class="_btn" :class="{'active':active==1}" @click="myBook()">我的书籍</button>
-					<button class="_btn" :class="{'active':active==2}" @click="onSell()">出售中</button>
-					<button class="_btn" :class="{'active':active==3}" @click="activeLog()">活动记录</button>
+					<button class="_btn" :class="{'active':active==1}" @click="myBook()">My Books</button>
+					<button class="_btn" :class="{'active':active==2}" @click="onSell()">On Sale</button>
+					<button class="_btn" :class="{'active':active==3}" @click="activeLog()">Activity History</button>
 				</view>
 				<view class="right-con" v-if="active == 1">
 					<view class="booklist" v-if="bookList.length>0">
@@ -26,7 +26,7 @@
 					</view>
 					<view class="none" v-if="bookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有书籍</view>
+						<view class="empty">Books is empty</view>
 					</view>
 				</view>
 				<view class="right-con" v-if="active == 2">
@@ -39,22 +39,22 @@
 					</view>
 					<view class="none" v-if="sellBookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有出售中书籍</view>
+						<view class="empty">Books on sale are empty</view>
 					</view>
 				</view>
 				<view class="right-con" v-if="active == 3">
 					<view class="none" v-if="transactionList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有活动记录</view>
+						<view class="empty">The active history is empty</view>
 					</view>
 					<view v-else>
 						<view class="right-title">
-							<text class="text">名称</text>
-							<text class="text other1">交易类型</text>
-							<text class="text other3">交易时间</text>
-							<text class="text other2">金额</text>
-							<text class="text other2">买方</text>
-							<text class="text other2">卖方</text>
+							<text class="text">name</text>
+							<text class="text other1">transaction type</text>
+							<text class="text other3">trading hours</text>
+							<text class="text other2">amount</text>
+							<text class="text other2">buyer</text>
+							<text class="text other2">seller</text>
 						</view>
 						<view v-for="(item,index) in transactionList" :key="index">
 							<view class="right-list">
@@ -63,7 +63,7 @@
 								</view>
 								<text class="text other1">{{item.type}}</text>
 								<text class="text other3">{{item.created_at}}</text>
-								<text class="text other2">{{item.price * item.amount}} USDT</text>
+								<text class="text other2">{{item.price * item.amount}} USDC</text>
 								<view class="text other2">
 									{{item.buyer.account_addr | strAddress}}
 								</view>
@@ -120,7 +120,7 @@
 				that.getActiveLogList();//交易活动记录
 			}else{
 				common.setStorage('currentPage','/pages/index/mine');
-				common.showModal('请点击右上角，先选择连接钱包');
+				common.showModal('please connect wallet');
 			}
 		},
 		methods: {
@@ -332,8 +332,8 @@
 							margin: 0 0 0.2rem 4%;
 
 							.img {
-								width: 100%;
-								height: 73%;
+								width: 440rpx;
+								height: 500rpx;
 								margin-bottom: .06rem;
 								border-radius: .2rem;
 							}

@@ -8,11 +8,11 @@
 			<view class="right">
 				<view class="connectWallet" v-if="status==1">
 					<image class="img" src="/static/book/connectWallet.svg"></image>
-					<view class="empty">请先连接钱包</view>
+					<view class="empty">Please connect your wallet</view>
 				</view>
 				<view class="unqualified" v-if="status==2">
 					<image class="img" src="/static/book/none.svg"></image>
-					<view class="empty">您当前未获得入驻资格，请先填写入驻申请</view>
+					<view class="empty">You are not registered，Please apply</view>
 				</view>
 			</view>
 		</view>

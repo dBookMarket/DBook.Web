@@ -10,48 +10,47 @@
 					<uni-steps :options="options" :active="current" active-color="#6783E9"></uni-steps>
 					<view class="stepCon" v-if="current==0">
 						<view class="stepname">
-							<text>D-Book介绍</text>
-							<text class="min">（第一步）</text>
+							<text>Step 1: Basic Information</text>
 						</view>
-						<view class="title">上传封面（必填）</view>
+						<view class="title">Upload book cover (*mandatory)</view>
 						<view class="upload" @click="uploadPhoto">
 							<image :src="book.cover_url" mode="" class="_upimg" v-if="book.cover_url"></image>
 							<image :src="book.cover" mode="" class="_upimg" v-else></image>
 							<image src="/static/book/cover.svg" mode="" class="cover"></image>
 						</view>
-						<view class="title">书籍名称（必填）</view>
+						<view class="title">Book title (*mandatory) </view>
 						<input maxlength="150" type="text" v-model="book.name" class="input-style"
-							placeholder="请输入书籍名称..." />
-						<view class="title">作品介绍（必填）</view>
+							placeholder="Insert book title here…" />
+						<view class="title">Synopsis (*mandatory)</view>
 						<textarea maxlength="1500" v-model="book.desc" class="input-style _height"
-							placeholder="请输入作品介绍..."></textarea>
-						<view class="title">作者姓名（必填）</view>
+							placeholder="Insert synopsis here…"></textarea>
+						<view class="title">Author (*mandatory)</view>
 						<input maxlength="150" type="text" v-model="book.author_name" class="input-style"
-							placeholder="请输入作者姓名..." />
-						<view class="title">作者介绍（必填）</view>
+							placeholder="Insert author’s name here…" />
+						<view class="title">Author’s Bio (*mandatory)</view>
 						<textarea maxlength="1500" v-model="book.author_desc" type="text" class="input-style _height"
-							placeholder="请输入作者介绍..."></textarea>
-						<view class="title">出版商名称（必填）</view>
+							placeholder="Key in author’s bio here… "></textarea>
+						<view class="title">Publisher (*mandatory) </view>
 						<input maxlength="150" type="text" v-model="book.publisher_name" class="input-style"
-							placeholder="请输入出版商名称..." />
-						<view class="title">出版商介绍（选填）</view>
+							placeholder="Insert publisher name here…" />
+						<view class="title">Publisher description (*optional)</view>
 						<textarea maxlength="1500" v-model="book.publisher_desc" type="text" class="input-style _height"
-							placeholder="若你是作者可以忽略此内容..."></textarea>
+							placeholder="Publisher (*optional)"></textarea>
 						<view class="button _btn" @click="nextStep()">
-							下一步
+							Next Step
 						</view>
 					</view>
 					<view class="stepCon" v-if="current==1">
 						<view class="stepname">
-							<text>D-Book书籍上传</text>
-							<text class="min">（第二步）</text>
+							<text>Step 2: Upload digital book</text>
+							<!-- <text class="min">（第二步）</text> -->
 						</view>
-						<view class="title">上传书籍（PDF格式）</view>
+						<view class="title">Upload digital book (pdf format only) </view>
 						<view class="upload" @click="uploadPdf">
 							<image src="/static/book/cover.svg" mode="" class="cover"></image>
 							<view mode="" class="_pdfName" v-if="pdfName">{{pdfName}}</view>
 						</view>
-						<view class="title">书籍类型（必选）</view>
+						<view class="title">Category (choose from list)</view>
 						<view class="relative">
 							<view class="input-style cursor" @click="bindCategory()">{{getCategoryName(book.category)}}</view>
 							<view class="selectCategory" v-if="isShowCategory">
@@ -62,88 +61,89 @@
 						</view>
 						<view style="height: 100px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
-							上一步
+							Back
 						</view>
 						<view class="button _btn" @click="nextStep()">
-							下一步
+							Next
 						</view>
 						
 					</view>
 					<view class="stepCon" v-if="current==2">
 						<view class="stepname">
-							<text>D-Book价格&版税</text>
-							<text class="min">（第三步）</text>
+							<text>Step 3: Smart Settings</text>
 						</view>
-						<view class="title">选择区块链</view>
+						<view class="title">Choose blockchain</view>
 						<picker class="input-style" @change="bindPickerChange($event)" :value="index"
 							:range="chainList">
 							<view class="uni-input">{{chainList[index]}}</view>
 						</picker>
-						<view class="title">设置发行量</view>
-						<input v-model="book.amount" type="number" class="input-style" placeholder="请设置发行量..." />
-						<view class="title">设置数字货币</view>
+						<view class="title">Set quantity (circulation)</view>
+						<input v-model="book.amount" type="number" class="input-style" placeholder="" />
+						<view class="title">Choose cryptocurrency </view>
 						<picker class="input-style" @change="bindCurrencyChange($event)" :value="cindex"
 							:range="currencyList">
 							<view class="uni-input">{{currencyList[cindex]}}</view>
 						</picker>
-						<view class="title">设置发行单价</view>
+						<view class="title">Set price </view>
 						<input v-model="book.price" type="number" class="input-style" placeholder="" />
-						<view class="title"><text>设置版税</text><text>0% ~ 50%之间</text></view>
+						<view class="title"><text>Set royalty </text>
+							<!-- <text>0% ~ 50%之间</text> -->
+						</view>
 						<view class="relative">
 							<input type="number" v-model="book.ratio" class="input-style " placeholder="" />
 							<text class="unit">%</text>
 						</view>
 						<view class="button _btn _marright" @click="prevStep()">
-							上一步
+							Back
 						</view>
 						<view class="button _btn" @click="nextStep()">
-							下一步
+							Next
 						</view>
 					</view>
 					<view class="stepCon" v-if="current==3">
 						<view class="stepname">
-							<text>确认信息/上架</text>
-							<text class="min">（第四步）</text>
+							<text>Step 4: Confirm and Upload</text>
 						</view>
-						<view class="title">上架后信息将不可以修改，请确认无误后点击上架。用户交易成功后D-Book会收取2.5%的手续费。</view>
-						<view class="title detail" @click="openDetail">信息详情</view>
+						<view class="title">Information cannot be changed after confirmation and upload. Please ensure that there are no errors before clicking on upload. 
+</view>
+						<view class="title detail" @click="openDetail">Information details</view>
 						<view v-if="book.status=='Uploading'">
 							<view class="stepInfo" style="margin-left: 3px;">
 								<!-- <uni-icons class="loading" color="#fff" type="spinner-cycle" size="22"></uni-icons> -->
 								<image src="/static/book/loding.gif" class="loading"></image>
-								<text class="text">文件待上传</text>
+								<text class="text">File to be uploaded</text>
 							</view>
 						</view>
 						<view v-else-if="book.status=='Uploaded'">
 							<view class="stepInfo">
 								<uni-icons color="#6783E9" type="checkbox-filled" size="22"></uni-icons>
-								<text class="text">文件已上传</text>
+								<text class="text">File uploaded</text>
 							</view>
 						</view>
 						<view v-else-if="book.status=='Failure'">
 							<view class="stepInfo">
 								<uni-icons color="#999999" type="clear" size="22"></uni-icons>
-								<text class="text" style="color: #999999;">文件上传失败</text>
+								<text class="text" style="color: #999999;">Failed to upload files</text>
 							</view>
 						</view>
 						<view v-else-if="book.status=='Success'">
 							<view class="stepInfo">
 								<uni-icons color="#6783E9" type="checkbox-filled" size="22"></uni-icons>
-								<text class="text">书籍上架成功</text>
+								<text class="text">Success of the book</text>
 							</view>
 						</view>
 						<view style="height: 180px;"></view>
 						<view class="button _btn _marright" @click="prevStep()">
-							上一步
+							Back
 						</view>
 						<view class="button _btn" @click="getContractsFun()" v-if="book.status=='Uploaded'">
-							上架
+							Publish
 						</view>
 						<view class="button _btn" @click="formDataIssuesFun()" v-else-if="book.status=='Failure'">
-							下一步
+							Next
 						</view>
 						<view class="button _btn" @click="createIssuesFun()" v-else-if="!book.status && !book.id">
-							下一步
+							Next
 						</view>
 					</view>
 				</view>
@@ -153,48 +153,48 @@
 		<uni-popup ref="detailPopup" type="center" :mask-click="false">
 			<view class="detailInfo">
 				<view class="title">
-					上架信息详情
+					Listing Information Details
 				</view>
 				<image class="closeimg" @click="close('buy')" src="/static/book/close.svg"></image>
-				<view class="contitle">封面</view>
+				<view class="contitle">Book cover</view>
 				<image class="coverimg" :src="book.cover_url"></image>
-				<view class="contitle">书籍名称</view>
-				<input type="text" v-model="book.name" class="input-style" placeholder="请输入书籍名称..." />
-				<view class="contitle">作品介绍</view>
-				<textarea v-model="book.desc" class="input-style _height" placeholder="请输入作品介绍..."></textarea>
-				<view class="contitle">作者姓名（必填）</view>
-				<input type="text" v-model="book.author_name" class="input-style" placeholder="请输入作者姓名..." />
-				<view class="contitle">作者介绍（必填）</view>
+				<view class="contitle">Book title</view>
+				<input type="text" v-model="book.name" class="input-style" placeholder="" />
+				<view class="contitle">Synopsis</view>
+				<textarea v-model="book.desc" class="input-style _height" placeholder=""></textarea>
+				<view class="contitle">Author</view>
+				<input type="text" v-model="book.author_name" class="input-style" placeholder="" />
+				<view class="contitle">Author’s Bio</view>
 				<textarea v-model="book.author_desc" type="text" class="input-style _height"
-					placeholder="若你是作者可以忽略此内容..."></textarea>
-				<view class="contitle">出版商名称（必填）</view>
-				<input type="text" v-model="book.publisher_name" class="input-style" placeholder="请输入出版商名称..." />
-				<view class="contitle">出版商介绍</view>
+					placeholder=""></textarea>
+				<view class="contitle">Publisher</view>
+				<input type="text" v-model="book.publisher_name" class="input-style" placeholder="" />
+				<view class="contitle">Publisher description</view>
 				<textarea v-model="book.publisher_desc" class="input-style _height"
-					placeholder="请输入出版商介绍..."></textarea>
-				<view class="contitle">选择区块链</view>
-				<input type="text" class="input-style" value="Polygon" placeholder="请输入书籍名称..." />
-				<view class="contitle">设置发行量</view>
+					placeholder=""></textarea>
+				<view class="contitle">Choose blockchain</view>
+				<input type="text" class="input-style" value="Polygon" placeholder="" />
+				<view class="contitle">Set quantity</view>
 				<input type="text" v-model="book.amount" class="input-style" />
-				<view class="contitle">设置数字货币</view>
+				<view class="contitle">Choose cryptocurrency</view>
 				<input type="text" class="input-style" value="USTD" />
-				<view class="contitle">设置发行单价</view>
+				<view class="contitle">Set price</view>
 				<input type="text" v-model="book.price" class="input-style" />
-				<view class="contitle">设置版税</view>
+				<view class="contitle">Set royalty</view>
 				<input type="text" v-model="book.ratio" class="input-style" />
-				<view class="between">0%~50%之间</view>
+				<view class="between"></view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="putPopup" type="center" :mask-click="false">
 			<view class="deal">
 				<image class="img1" src="/static/book/onShelf.svg"></image>
-				<view>上架中</view>
+				<view>On the shelf</view>
 			</view>
 		</uni-popup>
 		<uni-popup ref="succussPopup" type="center">
 			<view class="deal">
 				<image class="img2" src="/static/book/shelf.svg"></image>
-				<view>上架成功</view>
+				<view>On a successful</view>
 			</view>
 		</uni-popup>
 	</view>
@@ -222,8 +222,8 @@
 			return {
 				index: 0,
 				cindex: 0,
-				chainList: ['Polyaon'], //网络暂时只支持polygon
-				currencyList: ['USDT'], //货币只支持USDT
+				chainList: ['Polygon'], //网络暂时只支持polygon
+				currencyList: ['USDC'], //货币只支持USDC
 				categoryList: [],
 				book: {
 					cover: '', //书籍封面
@@ -242,16 +242,16 @@
 					file: '', //书籍文件
 				},
 				pdfName: '',
-				current: 0,
+				current: 1,
 				isShowCategory:false,
 				options: [{
-					title: '介绍'
+					title: 'Info'
 				}, {
-					title: '上传书籍'
+					title: 'Upload'
 				}, {
-					title: '价格&版税'
+					title: 'Price & Royalty'
 				}, {
-					title: '提交'
+					title: 'Submit'
 				}],
 
 			};
@@ -268,7 +268,7 @@
 				that.getIssuesCurrentFun();
 			}else{
 				common.setStorage('currentPage','/pages/index/settled');
-				common.showModal('请点击右上角，先选择连接钱包');
+				common.showModal('please connect wallet');
 			}
 		},
 		methods: {
@@ -362,7 +362,7 @@
 							let contractTxn = await wallet.issue(signer, nftId, amount, metadata, price, ratio);
 							console.log(contractTxn);
 							if(contractTxn==null || contractTxn.status != 1) {
-								common.showModal('生成书籍合约失败，请重试');
+								common.showModal('smart contract error, please try again');
 								common.hideLoading(0);
 								return;
 							}
@@ -370,7 +370,7 @@
 							that.putOn(amount, contractAddr, data.id);
 							common.hideLoading(0);
 						}else{
-							common.showModal('授权失败，请重试');
+							common.showModal('transaction error, please try again');
 							common.hideLoading(0);
 						}
 					}
@@ -439,9 +439,9 @@
 					}
 				});
 				uploadTask.onProgressUpdate((res) => {
-					console.log('上传进度' + res.progress);
-					console.log('已经上传的数据长度' + res.totalBytesSent);
-					console.log('预期需要上传的数据总长度' + res.totalBytesExpectedToSend);
+					console.log('progress:' + res.progress);
+					console.log('totalBytesSent:' + res.totalBytesSent);
+					console.log('totalBytesExpectedToSend:' + res.totalBytesExpectedToSend);
 				});
 			},
 			/**
@@ -534,7 +534,7 @@
 			 */
 			getCategoryName: function(type) {
 				let that = this;
-				let categoryName = "请选择书籍类型";
+				let categoryName = "Category (choose from list)";
 				if(that.categoryList.length ==0){
 					let categories = common.getStorage('categories');
 					if (categories && categories.length > 0 ) {
@@ -624,17 +624,17 @@
 			checkFirstStep() {
 				let that = this;
 				if (!that.book.cover_url&&!that.book.cover) {
-					return '请上传书籍封面';
+					return 'please upload book cover';
 				} else if (!that.book.name) {
-					return '请输入书籍名称';
+					return 'please key in book title';
 				} else if (!that.book.desc) {
-					return '请输入作品介绍';
+					return 'please key in author bio';
 				} else if (!that.book.author_name) {
-					return '请输入作者姓名';
+					return 'please key in author name';
 				} else if (!that.book.author_desc) {
-					return '请输入作者描述';
+					return 'please key in author description';
 				} else if (!that.book.publisher_name) {
-					return '请输入出版商名称';
+					return 'please key in publisher name';
 				} else {
 					return null;
 				}
@@ -647,11 +647,11 @@
 				//新增
 				if (!that.book.id) {
 					if (!that.book.file) {
-						return '请上传书籍（pdf格式）';
+						return 'please upload digital book in pdf format';
 					}
 				}
 				if (!that.book.category) {
-					return '请选择书籍类型';
+					return 'please choose book category';
 				}
 				return null;
 			},
@@ -661,15 +661,15 @@
 			checkThirdStep() {
 				let that = this;
 				if (!that.book.amount) {
-					return '请设置发行量';
+					return 'please key in quantity to publish';
 				} else if (!that.book.price) {
-					return '请设置发行单价';
+					return 'please key in price';
 				} else if (!that.book.ratio) {
-					return '请设置版税';
+					return 'please key in royalty';
 				}
 				if (that.book.ratio) {
 					if (parseInt(that.book.ratio) < 0 || parseInt(that.book.ratio) >50 ) {
-						return '请设置版税0% ~ 50%之间';
+						return 'please key in royalty between 0-50%';
 					}
 				} 
 				return null;
@@ -735,7 +735,7 @@
 			 */
 			bindPickerChange: function(e) {
 				let that = this;
-				console.log('picker发送选择改变，携带值为', e.detail.value)
+				console.log('picker', e.detail.value)
 				that.index = e.detail.value;
 			},
 			/**
@@ -744,7 +744,7 @@
 			 */
 			bindCurrencyChange: function(e) {
 				let that = this;
-				console.log('picker发送选择改变，携带值为', e.detail.value)
+				console.log('picker', e.detail.value)
 				that.cindex = e.detail.value;
 			},
 			/**
@@ -1022,7 +1022,7 @@
 						display: flex;
 						flex-wrap:wrap;
 						.item{
-							width: .9rem;
+							padding: 0 .1rem;
 							height: .35rem;
 							text-align: center;
 							border-radius: .05rem;

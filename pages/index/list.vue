@@ -17,7 +17,7 @@
 					</view>
 					<view class="none" v-if="bookList.length==0">
 						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">没有书籍</view>
+						<view class="empty">Books is empty</view>
 					</view>
 					<!-- 数据列表 -->
 				</scroll-view>
@@ -188,8 +188,8 @@
 					cursor: pointer;
 
 					.img {
-						width: 100%;
-						height: 2.5rem;
+						width: 440rpx;
+						height: 500rpx;
 						margin-bottom: .06rem;
 						border-radius: .2rem;
 					}

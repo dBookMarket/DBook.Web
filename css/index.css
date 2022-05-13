@@ -21,6 +21,11 @@ body {
 	min-width: 1024px
 }
 
+.maincolor {
+	color: #6783E9 !important;
+	cursor: pointer;
+}
+
 .navbg,
 .bootombg {
 	width: 100%;
@@ -139,7 +144,7 @@ uni-textarea {
 }
 
 .container .left {
-	flex: 1;
+	flex: 1.2;
 }
 
 .container .right {
@@ -187,9 +192,11 @@ uni-radio .uni-radio-input {
 	width: .18rem !important;
 	height: .18rem !important;
 }
-uni-toast .uni-toast{
+
+uni-toast .uni-toast {
 	width: 11em;
 }
+
 .deal {
 	width: 2.6rem;
 	height: 1.6rem;
@@ -206,12 +213,14 @@ uni-toast .uni-toast{
 	margin-top: 0.25rem;
 	margin-bottom: .15rem;
 }
+
 .deal .img1 {
 	width: .56rem;
 	height: .7rem;
 	margin-top: 0.25rem;
 	margin-bottom: .15rem;
 }
+
 .deal .img2 {
 	width: .66rem;
 	height: .66rem;
