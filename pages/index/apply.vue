@@ -52,7 +52,8 @@
 	.apply {
 		width: 100%;
 		margin: 0 auto;
-		min-width: 1280px;
+		min-width: 1440px;
+		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
 

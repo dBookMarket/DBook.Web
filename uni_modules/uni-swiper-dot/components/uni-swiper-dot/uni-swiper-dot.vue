@@ -79,7 +79,7 @@
 		data() {
 			return {
 				dots: {
-					width: 10,
+					width: 22,
 					height: 10,
 					bottom: 0,
 					color: '#fff',

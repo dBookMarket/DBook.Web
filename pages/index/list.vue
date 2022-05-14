@@ -148,9 +148,10 @@
 	.list {
 		width: 100%;
 		margin: 0 auto;
-		min-width: 1280px;
+		min-width: 1440px;
 		background-color: #F6F6F6;
-
+		font-family: Alibaba PuHuiTi;
+		font-weight: 400;
 		.container {
 			.none {
 				display: flex;
@@ -180,7 +181,7 @@
 				font-size: 24rpx;
 
 				.item {
-					width: 20.2%;
+					width: 440rpx;
 					height: auto;
 					margin-bottom: .2rem;
 					margin-right: 4%;

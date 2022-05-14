@@ -7,11 +7,11 @@
 				</view>
 				<view class="center cflex">
 					<view class="search">
-						<input class="searchinput" v-model="bookname" type="text" placeholder="Search" />
+						<input class="searchinput" @input="toSearch()" v-model="bookname" type="text" placeholder="Search" />
 						<image class="searchicon" @click="toSearch()" src="/static/book/search.svg"></image>
 					</view>
 				</view>
-				<view class="right cflex">
+				<view class="right cflex" style="flex: 1.5;">
 					<view class="flex" @click="toRead()">Reader</view>
 					<view class="flex" @click="selled()">Resell</view>
 					<view class="flex choosewallet" v-if="!address" @click="toWallet(1)">
@@ -118,10 +118,18 @@
 			toWallet(type) {
 				let that = this;
 				if (type == 1) {
-					that.isMetaMask = true;
+					if (that.isMetaMask) {
+						that.isMetaMask = false;
+					} else {
+						that.isMetaMask = true;
+					}
 					that.isConnect = false;
 				} else if (type == 2) {
-					that.isConnect = true;
+					if (that.isConnect) {
+						that.isConnect = false;
+					} else {
+						that.isConnect = true;
+					}
 					that.isMetaMask = false;
 				}
 			},
@@ -320,7 +328,8 @@
 		background-color: #FFFFFF;
 		width: 100%;
 		font-size: 28rpx;
-
+		font-family: Alibaba PuHuiTi;
+		font-weight: 400;
 		.search {
 			width: 6rem;
 			height: .4rem;
@@ -344,6 +353,7 @@
 			.searchicon {
 				width: .3rem;
 				height: .3rem;
+				margin-right: 0.1rem;
 				text-align: right;
 				cursor: pointer;
 			}
@@ -378,6 +388,7 @@
 				.svg {
 					width: .3rem;
 					height: .3rem;
+					margin-left: 0.1rem;
 					text-align: left;
 				}
 			}

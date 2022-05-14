@@ -47,12 +47,14 @@
 						</view>
 						<view class="title">Upload digital book (pdf format only) </view>
 						<view class="upload" @click="uploadPdf">
-							<image src="/static/book/cover.svg" mode="" class="cover"></image>
+							<image src="/static/book/pdf.svg" class="cover" v-if="pdfName"></image>
+							<image src="/static/book/cover.svg" v-else class="cover"></image>
 							<view mode="" class="_pdfName" v-if="pdfName">{{pdfName}}</view>
 						</view>
 						<view class="title">Category (choose from list)</view>
 						<view class="relative">
 							<view class="input-style cursor" @click="bindCategory()">{{getCategoryName(book.category)}}</view>
+							<image class="down" src="/static/book/down.svg"></image>
 							<view class="selectCategory" v-if="isShowCategory">
 								<view class="item" v-for="(item,index) in categoryList" @click="categoryChange(item)" :class="{'active':book.category==item.id}">
 									{{item.name}}
@@ -73,17 +75,29 @@
 							<text>Step 3: Smart Settings</text>
 						</view>
 						<view class="title">Choose blockchain</view>
-						<picker class="input-style" @change="bindPickerChange($event)" :value="index"
-							:range="chainList">
-							<view class="uni-input">{{chainList[index]}}</view>
-						</picker>
+						<view class="relative">
+							<view class="input-style cursor" @click="bindPickerChange()">{{chainList[index]}}</view>
+							<image class="down" src="/static/book/down.svg"></image>
+							<view class="selectCategory" v-if="isChainList">
+								<view class="item" v-for="(item,idx) in chainList" @click="chainListChange(item)" :class="{'active':idx==index}">
+									{{chainList[index]}}
+								</view>
+							</view>
+						</view>
+						
 						<view class="title">Set quantity (circulation)</view>
 						<input v-model="book.amount" type="number" class="input-style" placeholder="" />
 						<view class="title">Choose cryptocurrency </view>
-						<picker class="input-style" @change="bindCurrencyChange($event)" :value="cindex"
-							:range="currencyList">
-							<view class="uni-input">{{currencyList[cindex]}}</view>
-						</picker>
+						<view class="relative">
+							<view class="input-style cursor" @click="bindCurrencyChange()">{{currencyList[cindex]}}</view>
+							<image class="down" src="/static/book/down.svg"></image>
+							<view class="selectCategory" v-if="isCurrency">
+								<view class="item" v-for="(item,idx) in currencyList" @click="currencyChange(item)" :class="{'active':idx==cindex}">
+									{{currencyList[cindex]}}
+								</view>
+							</view>
+						</view>
+						
 						<view class="title">Set price </view>
 						<input v-model="book.price" type="number" class="input-style" placeholder="" />
 						<view class="title"><text>Set royalty </text>
@@ -104,12 +118,19 @@
 						<view class="stepname">
 							<text>Step 4: Confirm and Upload</text>
 						</view>
-						<view class="title">Information cannot be changed after confirmation and upload. Please ensure that there are no errors before clicking on upload. 
-</view>
+						<view class="title">
+							Information cannot be changed after confirmation and upload. Please ensure that there are no errors before clicking on upload. 
+						</view>
 						<view class="title detail" @click="openDetail">Information details</view>
 						<view v-if="book.status=='Uploading'">
 							<view class="stepInfo" style="margin-left: 3px;">
 								<!-- <uni-icons class="loading" color="#fff" type="spinner-cycle" size="22"></uni-icons> -->
+								<image src="/static/book/loding.gif" class="loading"></image>
+								<text class="text">File encryption - Synchronous encryption in progress, please wait</text>
+							</view>
+						</view>
+						<view v-if="book.status=='Uploading'">
+							<view class="stepInfo" style="margin-left: 3px;">
 								<image src="/static/book/loding.gif" class="loading"></image>
 								<text class="text">File to be uploaded</text>
 							</view>
@@ -242,8 +263,10 @@
 					file: '', //书籍文件
 				},
 				pdfName: '',
-				current: 1,
+				current: 0,
 				isShowCategory:false,
+				isChainList:false,
+				isCurrency:false,
 				options: [{
 					title: 'Info'
 				}, {
@@ -603,11 +626,54 @@
 				that.isShowCategory = false;
 			},
 			/**
+			 * 选择区块链
+			 * @param {Object} item
+			 */
+			chainListChange(item){
+				let that = this;
+				that.isChainList = false;
+			},
+			/**
+			 * 设置数字货币
+			 */
+			currencyChange(){
+				let that = this;
+				that.isCurrency = false;
+			},
+			/**
 			 * 书籍分类弹框
 			 */
 			bindCategory(){
 				let that = this;
-				that.isShowCategory = true;
+				if(that.isShowCategory){
+					that.isShowCategory = false;
+				}else{
+					that.isShowCategory = true;
+				}
+			},
+			/**
+			 * @param {Object} e
+			 * 选择区块链
+			 */
+			bindPickerChange: function() {
+				let that = this;
+				if(that.isChainList){
+					that.isChainList = false;
+				}else{
+					that.isChainList = true;
+				}
+			},
+			/**
+			 * 设置数字货币
+			 * @param {Object} e
+			 */
+			bindCurrencyChange: function(e) {
+				let that = this;
+				if(that.isCurrency){
+					that.isCurrency = false;
+				}else{
+					that.isCurrency = true;
+				}
 			},
 			/**
 			 * 上一步
@@ -728,25 +794,6 @@
 				that.$refs.putPopup.close();
 				that.$refs.succussPopup.open();
 			},
-
-			/**
-			 * @param {Object} e
-			 * 选择区块链
-			 */
-			bindPickerChange: function(e) {
-				let that = this;
-				console.log('picker', e.detail.value)
-				that.index = e.detail.value;
-			},
-			/**
-			 * 设置数字货币
-			 * @param {Object} e
-			 */
-			bindCurrencyChange: function(e) {
-				let that = this;
-				console.log('picker', e.detail.value)
-				that.cindex = e.detail.value;
-			},
 			/**
 			 * 上传图片
 			 */
@@ -796,7 +843,8 @@
 	.settled {
 		width: 100%;
 		margin: 0 auto;
-		min-width: 1280px;
+		min-width: 1440px;
+		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
 
@@ -1004,6 +1052,14 @@
 					}
 					.relative{
 						position: relative;
+					}
+					.down{
+						position: absolute;
+						right: 21%;
+						top: .17rem;
+						width: .16rem;
+						height: .18rem;
+						vertical-align: middle;
 					}
 					.selectCategory{
 						width: 80%;

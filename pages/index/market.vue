@@ -112,12 +112,13 @@
 	.market {
 		width: 100%;
 		margin: 0 auto;
-		min-width: 1280px;
+		min-width: 1440px;
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
 		.container {
 			.right {
+				height: 7.7rem;
 				background: #060219;
 				border-radius: 0.25rem;
 				.swiper-box {
@@ -130,7 +131,8 @@
 					display: flex;
 					justify-content: space-around;
 					.info{
-						text-align: center;
+						margin-left: .5rem;
+						text-align: left;
 						flex: 1;
 						height: 7.5rem;
 						display: flex;
@@ -138,21 +140,22 @@
 						justify-content: center;
 						color: #FFFFFF;
 						.title{
-							font-size: 38rpx;
-							line-height: .3rem;
-							padding-bottom: .33rem;
+							font-size: 60rpx;
+							line-height: .4rem;
+							padding-bottom: .5rem;
 						}
 						.desc{
 							color: #999999;
-							font-size: 30rpx;
+							font-size: 28rpx;
 							line-height: .28rem;
-							padding-bottom: .33rem;
+							padding-bottom: .4rem;
 						}
 						.buy{
 							width: 110px;
 							border: 1px solid #6783E9;
 							border-radius: .5rem;
 							color: #FEFEFE;
+							font-size: 32rpx;
 							background: #6783E9;
 						}
 					}

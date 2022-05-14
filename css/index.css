@@ -5,7 +5,6 @@ html {
 body {
 	font-size: 14px;
 	min-height: 101%;
-	background-color: #F6F6F6;
 	overflow: auto;
 }
 
@@ -14,11 +13,27 @@ body {
 	padding: 0;
 	margin: 0;
 }
-
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+}
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(97, 184, 179, 0.1);
+  background: #6783E9;
+}
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow: inset 0 0 5px rgba(87, 175, 187, 0.1);
+  border-radius: 10px;
+  background: #ededed;
+}
 #app {
 	width: 100%;
 	margin: 0 auto;
-	min-width: 1024px
+	min-width: 1440px
 }
 
 .maincolor {
@@ -60,7 +75,7 @@ body {
 }
 
 .nav .left {
-	flex: 1;
+	flex: 1.5;
 	font-size: 0.18rem;
 	font-weight: bold;
 	cursor: pointer;
@@ -133,11 +148,13 @@ body {
 uni-textarea {
 	width: 100%;
 }
-
+.uni-textarea-textarea{
+	overflow-y: hidden !important;
+}
 .container {
 	display: flex;
 	justify-content: space-between;
-	width: 75%;
+	width: 80%;
 	margin: .36rem auto;
 	font-family: Alibaba PuHuiTi;
 	font-weight: 400;
@@ -196,7 +213,12 @@ uni-radio .uni-radio-input {
 uni-toast .uni-toast {
 	width: 11em;
 }
-
+.uni-input-placeholder{
+	font-weight: 400;
+}
+.border-style{
+	border-radius:0 0 .2rem .2rem;
+}
 .deal {
 	width: 2.6rem;
 	height: 1.6rem;

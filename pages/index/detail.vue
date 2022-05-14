@@ -13,14 +13,15 @@
 					<view class="itemright">
 						<view class="name">{{book.name}}</view>
 						<text class="author">{{book.author_name}}</text>
-						<view class="publisher">publisher:{{book.publisher.name}}</view>
+						<text class="publisher">publisher:{{book.publisher.name}}</text>
+						<view class="desc">{{book.desc}}</view>
 						<view class="info">
 							<view class="_item">
 								<image class="itemimg" src="/static/book/user.svg"></image>
 								<text class="itemtext">owner:{{book.n_owners}}</text>
 							</view>
 							<view class="_item">
-								<image class="itemimg" src="/static/book/publisher.svg"></image>
+								<image class="itemimg" src="/static/book/all.svg"></image>
 								<text class="itemtext">all:{{book.amount}}</text>
 							</view>
 							<view class="_item">
@@ -37,12 +38,6 @@
 				</view>
 				<view class="r-bottom">
 					<view class="itemleft">
-						<view class="itemtitle" @click="openContent(1)">
-							<text class="text">Synopsis</text>
-							<image class="img" v-if="down1" src="/static/book/down.svg"></image>
-							<image class="img" v-if="!down1" src="/static/book/right.svg"></image>
-						</view>
-						<view v-if="down1" class="iteminfo">{{book.desc}}</view>
 						<view class="itemtitle" @click="openContent(2)">
 							<text class="text">Author’s Bio</text>
 							<image class="img" v-if="down2" src="/static/book/down.svg"></image>
@@ -60,7 +55,7 @@
 							<image class="img" v-if="down4" src="/static/book/down.svg"></image>
 							<image class="img" v-if="!down4" src="/static/book/right.svg"></image>
 						</view>
-						<view v-if="down4 && book.contract" class="iteminfo">
+						<view v-if="down4 && book.contract" class="iteminfo border-style">
 							<view class="flex">
 								<text class="text">Contract address</text>
 								<text class="text maincolor" @click="toPolygon(book.contract.address)">{{book.contract.address | strAddress }}</text>
@@ -79,7 +74,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="itemright">
+					<view class="itemright" id="closeDiv">
 						<view class="itemtitle">
 							<text class="text">Transaction details</text>
 							<view @click="openContent(5)">
@@ -98,7 +93,7 @@
 							</view>
 							<view class="list" v-for="(item,index) in tradeList" :key="index">
 								<view class="text">
-									<radio value="r1" class="radio" color="#6783E9" />
+									<image src="/static/book/USDT.svg" class="radio"></image>
 									<text class="mid">{{item.price}}USDC</text>
 								</view>
 								<text class="text other1">{{item.amount}}</text>
@@ -183,7 +178,7 @@
 				</view>
 				<view class="con border">
 					<view class="left">
-						<image class="icon" src="/static/book/recommend.svg"></image>
+						<image class="icon" src="/static/book/USDT.svg"></image>
 						<text class="title">USDC</text>
 						<view class="rightb"></view>
 					</view>
@@ -216,7 +211,7 @@
 				</view>
 				<view class="con border">
 					<view class="left">
-						<image class="icon" src="/static/book/recommend.svg"></image>
+						<image class="icon" src="/static/book/USDT.svg"></image>
 						<text class="title">{{currentItem.price}} USDC</text>
 					</view>
 				</view>
@@ -606,9 +601,11 @@
 				}
 				if (num == 5) {
 					if (that.down5) {
+						document.getElementById('closeDiv').style.height = 40+'px';
 						that.down5 = false;
 					} else {
 						that.down5 = true;
+						document.getElementById('closeDiv').style.height = 'auto';
 					}
 				}
 			}
@@ -620,7 +617,7 @@
 	.detail {
 		width: 100%;
 		margin: 0 auto;
-		min-width: 1280px;
+		min-width: 1440px;
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
@@ -740,13 +737,15 @@
 				border-radius: .1rem;
 
 				.left {
-					width: 18%;
+					width: 23%;
 					display: flex;
 					justify-content: space-around;
 
 					.icon {
-						width: .25rem;
-						height: .25rem;
+						width: .21rem;
+						height: .21rem;
+						margin-left: .08rem;
+						margin-right: .05rem;
 						vertical-align: middle;
 					}
 
@@ -800,33 +799,44 @@
 						font-weight: 400;
 
 						.name {
-							line-height: .35rem;
-							font-size: 36rpx;
+							line-height: .4rem;
+							font-size: 50rpx;
+							font-family: Alibaba PuHuiTi;
+							font-weight: 800;
 							color: #000000;
+							margin-bottom: .15rem;
 						}
 
 						.author {
-							margin-top: .1rem;
-							width: 30%;
+							margin-right: .1rem;
 							text-align: left;
-							padding: 0rpx 20rpx;
+							padding: 12rpx 22rpx;
 							background: #E1E1E1;
-							border-radius: .2rem;
-							height: .2rem;
-							line-height: .2rem;
+							border-radius: .05rem;
+							height: .22rem;
+							line-height: .22rem;
 							font-size: 24rpx;
 							color: #999999;
 						}
 
 						.publisher {
-							margin-top: .05rem;
-							height: .2rem;
+							padding: 12rpx 22rpx;
+							border-radius: .05rem;
+							height: .22rem;
+							line-height: .22rem;
 							font-size: 24rpx;
 							color: #999999;
+							background: #E1E1E1;
 						}
-
+						.desc{
+							color: #999999;
+							font-size: 24rpx;
+							margin-top: .12rem;
+							text-align: left;
+							line-height: .25rem;
+						}
 						.info {
-							margin-top: .1rem;
+							margin-top: .12rem;
 							display: flex;
 							justify-content: flex-start;
 							line-height: .2rem;
@@ -840,7 +850,7 @@
 									width: .18rem;
 									height: .2rem;
 									margin-right: 0.05rem;
-									vertical-align: middle;
+									vertical-align: bottom;
 								}
 
 								.itemtext {
@@ -917,7 +927,7 @@
 							line-height: .19rem;
 							font-size: 24rpx;
 							color: #999999;
-							background: #ECECEC;
+							background: #F6F8FE;
 
 							.flex {
 								display: flex;
@@ -973,7 +983,7 @@
 							padding: 0 .15rem;
 							height: .4rem;
 							line-height: .4rem;
-							background: #ECECEC;
+							background: #F6F8FE;
 
 							.text {
 								flex: 1.3;
@@ -1000,19 +1010,25 @@
 
 							.text {
 								color: #000000;
-
+								margin-right: 0.1rem;
 								.mid {
 									vertical-align: middle;
 								}
 
 								.radio {
-									width: .24rem;
-									height: .24rem;
+									width: .21rem;
+									height: .21rem;
+									margin-right: .05rem;
+									vertical-align: middle;
 								}
-
+								.maincolor{
+									margin-right: 0.05rem;
+								}
 								.once {
 									background: #E96767;
 									color: #FFFFFF;
+									padding: .01rem .1rem;
+									border-radius: .12rem;
 								}
 
 								.img {
@@ -1067,7 +1083,7 @@
 					.right-title,
 					.right-list {
 						height: .4rem;
-						background: #ECECEC;
+						background: #F6F8FE;
 						/* border-radius: .15rem .15rem 0 0; */
 						line-height: .4rem;
 						display: flex;
