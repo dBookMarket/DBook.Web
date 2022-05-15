@@ -840,6 +840,9 @@
 </script>
 
 <style scoped lang="scss">
+	.pages-index-settled{
+		background: #F6F6F6;
+	}
 	.settled {
 		width: 100%;
 		margin: 0 auto;
@@ -976,6 +979,7 @@
 						._upimg {
 							width: 1.2rem;
 							height: 1.4rem;
+							border-radius: 0.1rem;
 							position: absolute;
 							z-index: 10;
 							left: 0;

@@ -7,7 +7,7 @@
 				</view>
 				<view class="center cflex">
 					<view class="search">
-						<input class="searchinput" @input="toSearch()" v-model="bookname" type="text" placeholder="Search" />
+						<input class="searchinput" v-model="bookname" type="text" placeholder="Search" />
 						<image class="searchicon" @click="toSearch()" src="/static/book/search.svg"></image>
 					</view>
 				</view>
@@ -151,6 +151,10 @@
 				uni.navigateTo({
 					url: '/pages/index/list?name=' + that.bookname
 				})
+			},
+			toSearchData() {
+				let that = this;
+				that.$emit('getBookData',that.bookname);
 			},
 			/**
 			 * 获取nonce
@@ -365,8 +369,7 @@
 			.flex {
 				flex: 1;
 				line-height: .4rem;
-				font-family: Alibaba PuHuiTi;
-				font-weight: 400;
+				font-weight: normal;
 				color: #000000;
 				cursor: pointer;
 			}

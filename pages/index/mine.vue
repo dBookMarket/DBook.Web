@@ -289,7 +289,7 @@
 
 				.right-con {
 					margin-top: .2rem;
-					min-height: 6.63rem;
+					min-height: 3.5rem;
 					height: auto;
 					background: #FFFFFF;
 					border-radius: 15px;

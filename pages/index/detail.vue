@@ -12,8 +12,11 @@
 					</view>
 					<view class="itemright">
 						<view class="name">{{book.name}}</view>
-						<text class="author">{{book.author_name}}</text>
-						<text class="publisher">publisher:{{book.publisher.name}}</text>
+						<view>
+							<text class="author">{{book.author_name}}</text>
+							<text class="publisher">publisher:{{book.publisher.name}}</text>
+						</view>
+						
 						<view class="desc">{{book.desc}}</view>
 						<view class="info">
 							<view class="_item">
@@ -797,14 +800,15 @@
 					.itemright {
 						flex: 2;
 						font-weight: 400;
-
+						display: flex;
+						flex-direction: column;
+						justify-content: space-around;
 						.name {
 							line-height: .4rem;
 							font-size: 50rpx;
 							font-family: Alibaba PuHuiTi;
 							font-weight: 800;
 							color: #000000;
-							margin-bottom: .15rem;
 						}
 
 						.author {
@@ -831,12 +835,10 @@
 						.desc{
 							color: #999999;
 							font-size: 24rpx;
-							margin-top: .12rem;
 							text-align: left;
-							line-height: .25rem;
+							line-height: .2rem;
 						}
 						.info {
-							margin-top: .12rem;
 							display: flex;
 							justify-content: flex-start;
 							line-height: .2rem;
@@ -844,7 +846,7 @@
 							font-size: 24rpx;
 
 							._item {
-								flex: 1;
+								margin-right: .6rem;
 
 								.itemimg {
 									width: .18rem;
@@ -864,7 +866,6 @@
 
 						.button {
 							background-color: transparent;
-							margin-top: .25rem;
 							display: flex;
 							justify-content: flex-start;
 							align-items: center;

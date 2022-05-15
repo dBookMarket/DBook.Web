@@ -11,17 +11,22 @@
 					<swiper class="swiper-box" autoplay="true" interval="4000" @change="navigateTo">
 						<swiper-item v-for="(item ,index) in bannerArray" :key="index">
 							<view class="swiper-item" @click="goToUrl(item.redirect_url)">
-								<view class="info">
-									<text class="title">
-										{{item.name}}
-									</text>
-									<text class="desc">
-										{{item.desc}}
-									</text>
-									<button class="buy">buy</button>
+								<view class="leftheight">
+									<view class="info">
+										<view class="title">
+											<view class="border"></view>
+											<view class="name">{{item.name}}</view>
+										</view>
+										<text class="desc">
+											{{item.desc}}
+										</text>
+										<view ><button class="buy">buy</button></view>
+										
+									</view>
 								</view>
+								
 								<view class="image">
-									<image class="img" :src="item.img" mode='aspectFit'></image>
+									<image class="img" :src="item.img"></image>
 								</view>
 								
 							</view>
@@ -130,21 +135,42 @@
 					height: 7.5rem;
 					display: flex;
 					justify-content: space-around;
-					.info{
-						margin-left: .5rem;
-						text-align: left;
-						flex: 1;
-						height: 7.5rem;
+					.leftheight{
 						display: flex;
 						flex-direction: column;
 						justify-content: center;
+						flex: 1;
+					}
+					.info{
+						margin-right: .5rem;
+						text-align: left;
+						flex: 1;
+						height:90%;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-around;
 						color: #FFFFFF;
 						.title{
-							font-size: 60rpx;
+							font-size: 58rpx;
 							line-height: .4rem;
+							font-family: Alibaba PuHuiTi;
+							font-weight: 800;
 							padding-bottom: .5rem;
+							display: flex;
+							justify-content: flex-start;
+							.border{
+								width: .15rem;
+								height: .2rem;
+								background: #FFFFFF;
+								margin-top: .1rem;
+								margin-right: .3rem;
+							}
+							.name{
+								flex: 1;
+							}
 						}
 						.desc{
+							margin-left: .45rem;
 							color: #999999;
 							font-size: 28rpx;
 							line-height: .28rem;
@@ -152,6 +178,7 @@
 						}
 						.buy{
 							width: 110px;
+							margin-left: .45rem;
 							border: 1px solid #6783E9;
 							border-radius: .5rem;
 							color: #FEFEFE;
@@ -163,7 +190,7 @@
 				
 				.swiper-item .image {
 					border-radius: .2rem;
-					flex: 1.1;
+					flex: 1;
 					display: flex;
 					flex-direction: column;
 					justify-content: center;

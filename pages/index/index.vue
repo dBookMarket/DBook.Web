@@ -1,192 +1,195 @@
 <template>
-	<view class="indexapp">
-		<view class="navbg">
-			<view class="nav">
-				<view class="left">
-					<image src="/static/img/logodbook.png" mode="" class="logo"></image>
-				</view>
-				<view class="center">
-					<a href="#Learn"><text class="text _marleft">Learn</text></a>
-					<a href="#Solution"><text class="text">Solution</text></a>
-					<a href="#Cooperation"><text class="text">Cooperation</text></a>
-					<a href="#Community"><text class="text">Community</text></a>
-				</view>
-				<view class="right">
-					<button id="airdrop" @click="toMarket()" class="button">Explore the market</button>
-				</view>
-			</view>
-		</view>
-		<view class="content_1_bg">
-			<view class="content_1">
-				<image src="/static/img/dbook.png" mode="" class="img1"></image>
-				<view class="font1">
-					D-Book is an nft book marketplace that allows authors/publishers to publish their works as nfts.
-					Readers/collectors can purchase these nft books by their favorite authors for their reading pleasure
-					using the D-Book app.
-					Readers can also choose to resell or transfer ownership of their nft book collection at any point of
-					time. Authors/publishers are guaranteed of their royalty earnings with each secondary sale of their
-					work.
-				</view>
-			</view>
-		</view>
-		<view class="content_2_bg">
-			<view class="content_2" id="Learn">
-				<view class="item">
-					<image src="/static/img/icon1.svg" mode="" class="icon1"></image>
-					<view class="font2">Copyright Protection</view>
-					<view class="font3">
-						Genuine transaction records can be traced and held, no additional copies will be generated for
-						D-Book transactions.
-					</view>
-				</view>
-				<view class="item">
-					<image src="/static/img/icon2.svg" mode="" class="icon1"></image>
-					<view class="font2">Digital Transaction</view>
-					<view class="font3">
-						In addition to publishers and authors who can release D-Books, readers have the right to resell
-						D-Books again.
-					</view>
-				</view>
-				<view class="item">
-					<image src="/static/img/icon3.svg" mode="" class="icon1"></image>
-					<view class="font2">Collection Value</view>
-					<view class="font3">
-						Each D-Book is a limited edition with the opportunity to obtain the author's rare and precious
-						signature.
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="content_3_bg" id="Solution">
-			<view class="content_3">
-				<view class="item">
-					<image src="/static/img/what.png" mode="" class="img0"></image>
-					<view class="font1">
-						Publisher & Author
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">Genuine guarantee, NFT and traceability of D-Books.</text>
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">Fully Homomorphic Encryption ensures that no additional copies will be
-							generated during the transaction process.</text>
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">Conform to the DRM design scheme, only the owner can get decryption reading
-							permission.</text>
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">Guarantee the rights of copyright owners, allow owners to trade, and up to
-							50% of the copyright tax can be levied.</text>
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">Fully decentralized, publishers and authors can release works after
-							verifying the copyright ownership.</text>
-					</view>
-					<view class="list">
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-						<text class="text1">There is no middleman, you can get all the income without sharing with the
-							platform.</text>
-					</view>
-				</view>
-				<view class="item">
-					<image src="/static/img/book.png" mode="" class="img2"></image>
-				</view>
-			</view>
-		</view>
-		<view class="content_4_bg">
-			<view class="content_4">
-				<view class="item">
-					<image src="/static/img/photo.png" mode="" class="img2"></image>
-				</view>
-				<view class="item">
-					<text class="font1">
-						Reader
-					</text>
-					<view class="list">
-						<text class="text1">Copyright is limited worldwide, with collection value.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-					<view class="list">
-						<text class="text1">Resell at any time, with a safe and reliable trading platform.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-					<view class="list">
-						<text class="text1">On-chain traceability, which ensures that all purchases / sales on the
-							trading platform are genuine.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-					<view class="list">
-						<text class="text1">Free trial reading, and choose to purchase if the content has value.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-					<view class="list">
-						<text class="text1">Dedicated decoder, the super ultimate reading experience.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-					<view class="list">
-						<text class="text1">Link meta-universe, which can be read in the virtual world.</text>
-						<image src="/static/img/right.svg" mode="" class="img1"></image>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="content_5_bg">
-			<view class="content_5">
-				<image src="/static/img/developers.png" mode="" class="img1"></image>
-				<view class="item">
-					<view class="info">D-Book allows publishers or authors to sell NFT on multiple public chains, such
-						as Ethereum, Polygon, BSC, Solana, Dfinity etc.</view>
-					<view class="info">D-book will not issue its own digital currency, but will support payments with
-						the mainstream digital currency in the market.</view>
-					<view class="info">D-Book will provide API for developers to carry out secondary development on
-						D-Book, and you can also leave a message in the community if you have any ideas and suggestions.
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="content_6_bg" id="Cooperation">
-			<view class="content_6">
-				<image src="/static/img/author.png" mode="" class="img1"></image>
-				<view class="font1">
-					If you're a publisher & author who wants to publish your own digital right, D-Book is a good choice
-					for you. Join us for a whole new experience that blockchain brings to you!
-				</view>
-				<view class="input-style">
-					<input type="text" class="emailinput" placeholder="Enter your email address" />
-					<button class="submit" @click="toEmail()">submit</button>
-				</view>
-				<view class="font2">We will contact you within 3-7 working days after submission.</view>
-			</view>
-		</view>
-		<view class="content_7_bg" id="Community">
-			<view class="content_7">
-				<view class="top">
-					<view class="font1" style="display: none;">Partner</view>
-					<view class="font2" style="height: 1.8rem;"></view>
-				</view>
-				<view class="flexbottom">
+	<view class="bg">
+		<view class="indexapp">
+			<view class="navbg">
+				<view class="nav">
 					<view class="left">
-						<view class="item">
-							<image src="/static/img/twitter.svg" mode="" @click="toUrl(1)" class="img img1"></image>
-							<image src="/static/img/discord.svg" mode="" @click="toUrl(2)" class="img img1"></image>
-							<image src="/static/img/youtube.svg" mode="" @click="toUrl(3)" class="img img3"></image>
-							<image src="/static/img/medium.svg" mode="" @click="toUrl(4)" class="img img4"></image>
-						</view>
+						<image src="/static/img/logodbook.png" mode="" class="logo"></image>
+					</view>
+					<view class="center">
+						<a href="#Learn"><text class="text _marleft">Learn</text></a>
+						<a href="#Solution"><text class="text">Solution</text></a>
+						<a href="#Cooperation"><text class="text">Cooperation</text></a>
+						<a href="#Community"><text class="text">Community</text></a>
 					</view>
 					<view class="right">
-						<image src="/static/img/app.svg" mode="" class="android"></image>
-						<image src="/static/img/google.svg" mode="" class="apple"></image>
+						<button id="airdrop" @click="toMarket()" class="button">Explore the market</button>
+					</view>
+				</view>
+			</view>
+			<view class="content_1_bg">
+				<view class="content_1">
+					<image src="/static/img/dbook.png" mode="" class="img1"></image>
+					<view class="font1">
+						D-Book is an nft book marketplace that allows authors/publishers to publish their works as nfts.
+						Readers/collectors can purchase these nft books by their favorite authors for their reading pleasure
+						using the D-Book app.
+						Readers can also choose to resell or transfer ownership of their nft book collection at any point of
+						time. Authors/publishers are guaranteed of their royalty earnings with each secondary sale of their
+						work.
+					</view>
+				</view>
+			</view>
+			<view class="content_2_bg">
+				<view class="content_2" id="Learn">
+					<view class="item">
+						<image src="/static/img/icon1.svg" mode="" class="icon1"></image>
+						<view class="font2">Copyright Protection</view>
+						<view class="font3">
+							Genuine transaction records can be traced and held, no additional copies will be generated for
+							D-Book transactions.
+						</view>
+					</view>
+					<view class="item">
+						<image src="/static/img/icon2.svg" mode="" class="icon1"></image>
+						<view class="font2">Digital Transaction</view>
+						<view class="font3">
+							In addition to publishers and authors who can release D-Books, readers have the right to resell
+							D-Books again.
+						</view>
+					</view>
+					<view class="item">
+						<image src="/static/img/icon3.svg" mode="" class="icon1"></image>
+						<view class="font2">Collection Value</view>
+						<view class="font3">
+							Each D-Book is a limited edition with the opportunity to obtain the author's rare and precious
+							signature.
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="content_3_bg" id="Solution">
+				<view class="content_3">
+					<view class="item">
+						<image src="/static/img/what.png" mode="" class="img0"></image>
+						<view class="font1">
+							Publisher & Author
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">Genuine guarantee, NFT and traceability of D-Books.</text>
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">Fully Homomorphic Encryption ensures that no additional copies will be
+								generated during the transaction process.</text>
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">Conform to the DRM design scheme, only the owner can get decryption reading
+								permission.</text>
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">Guarantee the rights of copyright owners, allow owners to trade, and up to
+								50% of the copyright tax can be levied.</text>
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">Fully decentralized, publishers and authors can release works after
+								verifying the copyright ownership.</text>
+						</view>
+						<view class="list">
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+							<text class="text1">There is no middleman, you can get all the income without sharing with the
+								platform.</text>
+						</view>
+					</view>
+					<view class="item">
+						<image src="/static/img/book.png" mode="" class="img2"></image>
+					</view>
+				</view>
+			</view>
+			<view class="content_4_bg">
+				<view class="content_4">
+					<view class="item">
+						<image src="/static/img/photo.png" mode="" class="img2"></image>
+					</view>
+					<view class="item">
+						<text class="font1">
+							Reader
+						</text>
+						<view class="list">
+							<text class="text1">Copyright is limited worldwide, with collection value.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+						<view class="list">
+							<text class="text1">Resell at any time, with a safe and reliable trading platform.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+						<view class="list">
+							<text class="text1">On-chain traceability, which ensures that all purchases / sales on the
+								trading platform are genuine.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+						<view class="list">
+							<text class="text1">Free trial reading, and choose to purchase if the content has value.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+						<view class="list">
+							<text class="text1">Dedicated decoder, the super ultimate reading experience.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+						<view class="list">
+							<text class="text1">Link meta-universe, which can be read in the virtual world.</text>
+							<image src="/static/img/right.svg" mode="" class="img1"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="content_5_bg">
+				<view class="content_5">
+					<image src="/static/img/developers.png" mode="" class="img1"></image>
+					<view class="item">
+						<view class="info">D-Book allows publishers or authors to sell NFT on multiple public chains, such
+							as Ethereum, Polygon, BSC, Solana, Dfinity etc.</view>
+						<view class="info">D-book will not issue its own digital currency, but will support payments with
+							the mainstream digital currency in the market.</view>
+						<view class="info">D-Book will provide API for developers to carry out secondary development on
+							D-Book, and you can also leave a message in the community if you have any ideas and suggestions.
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="content_6_bg" id="Cooperation">
+				<view class="content_6">
+					<image src="/static/img/author.png" mode="" class="img1"></image>
+					<view class="font1">
+						If you're a publisher & author who wants to publish your own digital right, D-Book is a good choice
+						for you. Join us for a whole new experience that blockchain brings to you!
+					</view>
+					<view class="input-style">
+						<input type="text" class="emailinput" placeholder="Enter your email address" />
+						<button class="submit" @click="toEmail()">submit</button>
+					</view>
+					<view class="font2">We will contact you within 3-7 working days after submission.</view>
+				</view>
+			</view>
+			<view class="content_7_bg" id="Community">
+				<view class="content_7">
+					<view class="top">
+						<view class="font1" style="display: none;">Partner</view>
+						<view class="font2" style="height: 1.8rem;"></view>
+					</view>
+					<view class="flexbottom">
+						<view class="left">
+							<view class="item">
+								<image src="/static/img/twitter.svg" mode="" @click="toUrl(1)" class="img img1"></image>
+								<image src="/static/img/discord.svg" mode="" @click="toUrl(2)" class="img img1"></image>
+								<image src="/static/img/youtube.svg" mode="" @click="toUrl(3)" class="img img3"></image>
+								<image src="/static/img/medium.svg" mode="" @click="toUrl(4)" class="img img4"></image>
+							</view>
+						</view>
+						<view class="right">
+							<image src="/static/img/app.svg" mode="" class="android"></image>
+							<image src="/static/img/google.svg" mode="" class="apple"></image>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 	</view>
+	
 </template>
 
 <script>
@@ -230,12 +233,12 @@
 		width: 100%;
 		margin: 0 auto;
 		min-width: 1280px;
-		height: 6.7rem;
+		height: auto;
 		background-color: #FFFFFF;
 		background-image: url(../../static/img/bg.png);
 		background-repeat: no-repeat;
 		background-position: center top;
-		background-size: cover;
+		background-size: contain;
 	}
 
 	.nav .center a {

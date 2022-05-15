@@ -3,7 +3,7 @@
 		<nav-bar></nav-bar>
 		<view class="container">
 			<view class="left">
-				<left></left>
+				<left @getBookData="getBookData"></left>
 			</view>
 			<view class="right">
 				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper"

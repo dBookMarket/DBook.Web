@@ -6,6 +6,8 @@ body {
 	font-size: 14px;
 	min-height: 101%;
 	overflow: auto;
+	background: #F6F6F6;
+	
 }
 
 * {
@@ -33,7 +35,8 @@ body {
 #app {
 	width: 100%;
 	margin: 0 auto;
-	min-width: 1440px
+	min-width: 1440px;
+	background: #F6F6F6;
 }
 
 .maincolor {
@@ -70,8 +73,8 @@ body {
 
 .bootom .logo {
 	vertical-align: middle;
-	width: 1.38rem;
-	height: .38rem;
+	width: 1.22rem;
+	height: .22rem;
 }
 
 .nav .left {
@@ -91,8 +94,8 @@ body {
 
 .nav .left .logo {
 	vertical-align: middle;
-	width: 1.38rem;
-	height: .38rem;
+	width: 1.22rem;
+	height: .25rem;
 }
 
 .nav .text {
@@ -150,6 +153,9 @@ uni-textarea {
 }
 .uni-textarea-textarea{
 	overflow-y: hidden !important;
+}
+uni-modal .uni-modal{
+	border-radius: .1rem !important;
 }
 .container {
 	display: flex;
