@@ -56,7 +56,7 @@
 							<view class="input-style cursor" @click="bindCategory()">{{getCategoryName(book.category)}}</view>
 							<image class="down" src="/static/book/down.svg"></image>
 							<view class="selectCategory" v-if="isShowCategory">
-								<view class="item" v-for="(item,index) in categoryList" @click="categoryChange(item)" :class="{'active':book.category==item.id}">
+								<view class="item" v-for="(item,index) in categoryList" :key="index" @click="categoryChange(item)" :class="{'active':book.category==item.id}">
 									{{item.name}}
 								</view>
 							</view>
@@ -79,7 +79,7 @@
 							<view class="input-style cursor" @click="bindPickerChange()">{{chainList[index]}}</view>
 							<image class="down" src="/static/book/down.svg"></image>
 							<view class="selectCategory" v-if="isChainList">
-								<view class="item" v-for="(item,idx) in chainList" @click="chainListChange(item)" :class="{'active':idx==index}">
+								<view class="item" v-for="(item,idx) in chainList" :key="idx" @click="chainListChange(item)" :class="{'active':idx==index}">
 									{{chainList[index]}}
 								</view>
 							</view>
@@ -92,7 +92,7 @@
 							<view class="input-style cursor" @click="bindCurrencyChange()">{{currencyList[cindex]}}</view>
 							<image class="down" src="/static/book/down.svg"></image>
 							<view class="selectCategory" v-if="isCurrency">
-								<view class="item" v-for="(item,idx) in currencyList" @click="currencyChange(item)" :class="{'active':idx==cindex}">
+								<view class="item" v-for="(item,idx) in currencyList" :key="idx" @click="currencyChange(item)" :class="{'active':idx==cindex}">
 									{{currencyList[cindex]}}
 								</view>
 							</view>
@@ -769,8 +769,8 @@
 					}
 				}
 				that.current = that.current + 1;
-				common.setStorage("current", that.current);
-				common.setStorage("stepcontent", that.book);
+				//common.setStorage("current", that.current);
+				//common.setStorage("stepcontent", that.book);
 			},
 			/**
 			 * 信息详细

@@ -1,8 +1,16 @@
 import Web3Modal from 'web3modal';
+import web3 from 'web3';
 import { ethers } from 'ethers';
 
 // mumbai testnet
 const platformContractAddress = '0x662E48096EA75f1F5CfF8cF286BAD19278368B6a';
+// Chosen wallet provider given by the dialog window
+let connection;
+const web3Modal = new Web3Modal({
+	// network: 'mainnet',
+	network: 'mumbai',
+	cacheProvider: true
+});
 const platformContractAbi = [{
     "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "to", "type": "address" },
     { "indexed": false, "internalType": "uint256", "name": "nftId", "type": "uint256" },
@@ -543,26 +551,94 @@ export default {
 		// 1 usdc = 1000000 wei
 		return parseFloat(amount)*10**6;
 	},
+	//一旦用户的小狐狸钱包现在的链不一致，就询问切换网络，没有就创建网络，网络切换成功后，收到监听，重新连接一下web3,就是重新调用一些connectWeb3这个方法
+	connectWeb3: async function() {
+		let that = this;
+		// check if metamask
+		if (typeof window.ethereum === 'undefined' || !window.ethereum.isMetaMask) {
+		    alert('MetaMask not found!');
+		    return null;
+		}
+		// 判断链对不，链不对就请求切换网络，或者添加网络，
+		if (window.ethereum) {
+			try {
+				await window.ethereum.request({
+					method: 'wallet_switchEthereumChain',
+					params: [{
+						chainId: web3.utils.numberToHex(137) // 目标链ID Polygon Mainnet
+					}]
+				});
+				return that.connect();
+			} catch (e) {
+				//是4902，说明请求的链没有被 MetaMask 添加，需要通过 请求添加wallet_addEthereumChain
+				// This error code indicates that the chain has not been added to MetaMask.
+				if (e.code === 4902) {
+					try {
+						await window.ethereum.request({
+							method: 'wallet_addEthereumChain',
+							params: [{
+								chainId: web3.utils.numberToHex(137), // 目标链ID Polygon Mainnet
+								chainName: 'Polygon Mainnet',
+								nativeCurrency: {
+									name: 'Polygon',
+									symbol: 'Polygon',
+									decimals: 18
+								},
+								rpcUrls: ['https://rpc-mainnet.maticvigil.com'], // 节点
+								blockExplorerUrls: ['https://polygonscan.com']
+							}]
+						});
+					 return	that.connect();
+					} catch (ee) {
+						//
+						 return null;
+					}
+				} else if (e.code === 4001) return null;
+			}
+		}
+	},
+	accountsChanged:function(){
+		//监听钱包切换
+		ethereum.on("accountsChanged", function(accounts) {
+		    console.log('钱包切换')
+		    window.location.reload();
+		});
+	},
+	chainChanged:function(){
+		//监听链网络改变
+		ethereum.on("chainChanged",()=>{
+		    console.log('链切换')
+		    window.location.reload();
+		});
+	},        
     connect: async function() {
-        // check if metamask
-        if (typeof window.ethereum === 'undefined' || !window.ethereum.isMetaMask) {
-            alert('MetaMask not found!');
-            return;
-        }
-        const web3Modal = new Web3Modal({
-            // network: 'mainnet',
-            network: 'mumbai',
-            cacheProvider: true
-        });
         try {
-            const connection = await web3Modal.connect();
-            const provider = new ethers.providers.Web3Provider(connection);
+            connection = await web3Modal.connect();
+            let provider = new ethers.providers.Web3Provider(connection);
             return provider;
         } catch (e) {
             console.log('Exception when calling connect ->', e);
             return null;
         }
     },
+	/**
+	 * Disconnect wallet button pressed.
+	 */
+	 disconnect:async function() {
+	  console.log("Killing the wallet connection", connection);
+	
+	  // TODO: Which providers have close method?
+	  if(connection.close) {
+	    await connection.close();
+	
+	    // If the cached provider is not cleared,
+	    // WalletConnect will default to the existing session
+	    // and does not allow to re-scan the QR code with a new wallet.
+	    // Depending on your use case you may want or want not his behavir.
+	    await web3Modal.clearCachedProvider();
+	    connection = null;
+	  }
+	},
     isConnect: async function(provider) {
         // check if the wallet is connected or not
         try {

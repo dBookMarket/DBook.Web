@@ -188,8 +188,10 @@
 				common.showLoading();
 				let nonce = "";
 				let signature = "";
-				//获取判断是否连接
-				let provider = await wallet.connect();
+				let provider = "";
+				//目标链ID Polygon 链不一致，就询问切换网络，没有就创建网络 然后连接
+				provider = await wallet.connectWeb3();
+				
 				if (provider) {
 					let signer = await wallet.getSigner(provider);
 					if (signer) {
@@ -302,7 +304,8 @@
 			toBreak() {
 				//清除存储缓存输入数据
 				let that = this;
-				logout().then(res => {
+				common.showLoading();
+				logout().then(async res => {
 					console.log(res);
 					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
 						uni.showToast({
@@ -310,6 +313,7 @@
 							duration: 3000,
 							icon: false
 						});
+						await wallet.disconnect();
 						that.isConnect = false;
 						that.address = "";
 						common.removeStorage('address');
@@ -487,7 +491,7 @@
 		position: absolute;
 		z-index: 10;
 		top: .9rem;
-		right: 3%;
+		right: 1.5%;
 		font-size: 30rpx;
 		background-color: #FFFFFF;
 		border-radius: .1rem;
