@@ -11,6 +11,7 @@ const web3Modal = new Web3Modal({
 	network: 'mumbai',
 	cacheProvider: true
 });
+let chainId = ""
 const platformContractAbi = [{
     "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "to", "type": "address" },
     { "indexed": false, "internalType": "uint256", "name": "nftId", "type": "uint256" },
@@ -561,31 +562,33 @@ export default {
 		}
 		// 判断链对不，链不对就请求切换网络，或者添加网络，
 		if (window.ethereum) {
+			// 返回16进制形式的chainID，如0x1, 0x4等
+			chainId = await ethereum.request({ method: 'eth_chainId' })
+			console.log(chainId);
 			try {
 				await window.ethereum.request({
 					method: 'wallet_switchEthereumChain',
 					params: [{
-						chainId: web3.utils.numberToHex(137) // 目标链ID Polygon Mainnet
+						chainId: "0x13881" //web3.utils.numberToHex(137) // 目标链ID 主链 Polygon Mainnet： 0x89  测试链： 0x13881
 					}]
 				});
 				return that.connect();
 			} catch (e) {
 				//是4902，说明请求的链没有被 MetaMask 添加，需要通过 请求添加wallet_addEthereumChain
 				// This error code indicates that the chain has not been added to MetaMask.
+				// 主链 Polygon Mainnet： 0x89  测试链： 0x13881
 				if (e.code === 4902) {
 					try {
 						await window.ethereum.request({
 							method: 'wallet_addEthereumChain',
-							params: [{
-								chainId: web3.utils.numberToHex(137), // 目标链ID Polygon Mainnet
-								chainName: 'Polygon Mainnet',
-								nativeCurrency: {
-									name: 'Polygon',
-									symbol: 'Polygon',
-									decimals: 18
-								},
-								rpcUrls: ['https://rpc-mainnet.maticvigil.com'], // 节点
-								blockExplorerUrls: ['https://polygonscan.com']
+							params: [
+								{
+								  // "chainId":'0x89',
+								  // "chainName":'Polygon Mainnet',
+								  // "rpcUrls":['https://rpc-mainnet.maticvigil.com']
+								  "chainId":'0x13881',
+								  "chainName":'Mumbai',
+								  "rpcUrls":['https://rpc-mumbai.matic.today']
 							}]
 						});
 					 return	that.connect();
@@ -595,6 +598,15 @@ export default {
 					}
 				} else if (e.code === 4001) return null;
 			}
+			that.chainChanged();
+		}
+		if (window.ethereum) {
+			// 监听链id变化
+			window.ethereum.on("chainChanged", (chainId1) => {
+				let chainId = chainId1;
+				console.log('链切换')
+				window.location.reload();
+			});
 		}
 	},
 	accountsChanged:function(){
@@ -628,7 +640,7 @@ export default {
 	  console.log("Killing the wallet connection", connection);
 	
 	  // TODO: Which providers have close method?
-	  if(connection.close) {
+	  if(connection && connection.close) {
 	    await connection.close();
 	
 	    // If the cached provider is not cleared,

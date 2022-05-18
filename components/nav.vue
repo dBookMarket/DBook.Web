@@ -104,6 +104,8 @@
 				that.address = common.getStorage('address');
 				that.isMetaMask = false;
 				that.isConnect = false;
+			}else{
+				//that.toBreak();
 			}
 			if(common.getStorage('search')){
 				that.bookname = common.getStorage('search');
@@ -301,11 +303,12 @@
 			/**
 			 * 断开连接
 			 */
-			toBreak() {
+			async toBreak() {
 				//清除存储缓存输入数据
 				let that = this;
 				common.showLoading();
-				logout().then(async res => {
+				await wallet.disconnect();
+				logout().then(res => {
 					console.log(res);
 					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
 						uni.showToast({
@@ -313,7 +316,6 @@
 							duration: 3000,
 							icon: false
 						});
-						await wallet.disconnect();
 						that.isConnect = false;
 						that.address = "";
 						common.removeStorage('address');
