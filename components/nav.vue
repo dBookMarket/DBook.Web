@@ -13,10 +13,10 @@
 				</view>
 				<view class="right cflex" style="flex: 1.5;">
 					<view class="flex" @click="toRead()">Reader</view>
-					<view class="flex" @click="selled()">Resell</view>
+					<view class="flex" @click="selled()">Sell</view>
 					<view class="flex choosewallet" v-if="!address" @click="toWallet(1)">
 						<image class="svg" src="/static/book/link1.svg"></image>
-						<text>Choose Wallet</text>
+						<text>Connect Wallet</text>
 						<text></text>
 					</view>
 					<view class="flex choosewallet cwbg" v-if="address">
@@ -58,14 +58,15 @@
 				</view>
 				<image class="closeimg" @click="close()" src="/static/book/close.svg"></image>
 				<view class="con">
-					<view class="qcode">
+					<view class="text1">Coming Soon</view>
+					<!-- <view class="qcode">
 						<image class="qcodeimg" src="/static/book/qcode.png"></image>
 						<view class="text">ios</view>
 					</view>
 					<view class="qcode">
 						<image class="qcodeimg" src="/static/book/qcode.png"></image>
 						<view class="text">android</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 		</uni-popup>
@@ -440,7 +441,13 @@
 			justify-content: space-around;
 			align-items: center;
 			margin: .3rem 0;
-
+			flex-direction:column;
+			.text1{
+				width: 2rem;
+				height: 2rem;
+				color: #000000;
+				font-size: 32rpx;
+			}
 			.qcodeimg {
 				vertical-align: middle;
 				width: 2rem;

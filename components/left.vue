@@ -23,8 +23,8 @@
 			<text>Publisher & Author</text>
 		</view>
 		<view class="second">
-			<view class="text" :class="{'active':id==-3}" @click="toApply(-3)">Publisher/Author apply</view>
-			<view class="text" :class="{'active':id==-4}" @click="toApply(-4)">Copyright verification</view>
+			<view class="text" :class="{'active':id==-3}" @click="toUrl(4)">Publisher/Author apply</view>
+			<view class="text" :class="{'active':id==-4}" @click="toUrl(4)">Copyright verification</view>
 			<view class="text" :class="{'active':id==-5}" @click="toSettled()">Publish DBook</view>
 		</view>
 		<view class="first">
@@ -97,6 +97,8 @@
 					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
 				} else if (type == 3) {
 					url = 'https://medium.com/@ddid_io';
+				} else if (type == 4) {
+					url = 'https://docs.google.com/forms/d/e/1FAIpQLSdIWjyAFFCo2qNxoPOPUHeRN8w9zguD0_iEpt65FV5VqcdjuA/viewform?usp=sf_link';
 				}
 				window.location.href = url;
 			},
@@ -187,10 +189,10 @@
 			 * 入驻申请/版权验证
 			 */
 			toApply(id) {
-				common.setStorage("currentId", id);
-				uni.navigateTo({
-					url: '/pages/index/apply'
-				})
+				//common.setStorage("currentId", id);
+				// uni.navigateTo({
+				// 	url: '/pages/index/apply'
+				// })
 			},
 		}
 	}

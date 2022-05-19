@@ -35,7 +35,7 @@
 						<view class="button">
 							<button class="_btn" @click="tryRead()">Try reading</button>
 							<!-- v-if="book.is_owned" -->
-							<button class="_btn sell" v-if="book.is_owned" @click="sellOut()">Resell</button>
+							<button class="_btn sell" v-if="book.is_owned" @click="sellOut()">Sell</button>
 						</view>
 					</view>
 				</view>
