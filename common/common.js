@@ -15,7 +15,7 @@ export default {
 			mask = true;
 		}
 		uni.showLoading({
-			title: '加载中...',
+			title: 'Loading...',
 			mask: mask
 		});
 	},

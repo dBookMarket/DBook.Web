@@ -513,6 +513,7 @@
 			dealSuccuss() {
 				let that = this;
 				that.$refs.dealPopup.close();
+				that.$refs.buyPopup.close();
 				that.$refs.succussPopup.open();
 			},
 			/**

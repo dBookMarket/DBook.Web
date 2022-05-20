@@ -445,7 +445,8 @@
 			.text1{
 				width: 2rem;
 				height: 2rem;
-				color: #000000;
+				color: #999;
+				margin-top: 1rem;
 				font-size: 32rpx;
 			}
 			.qcodeimg {

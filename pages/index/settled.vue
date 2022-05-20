@@ -35,7 +35,7 @@
 							placeholder="Insert publisher name here…" />
 						<view class="title">Publisher description (*optional)</view>
 						<textarea maxlength="1500" v-model="book.publisher_desc" type="text" class="input-style _height"
-							placeholder="Publisher (*optional)"></textarea>
+							placeholder="Publisher description(*optional)"></textarea>
 						<view class="button _btn" @click="nextStep()">
 							Next Step
 						</view>
