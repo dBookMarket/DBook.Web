@@ -390,7 +390,7 @@
 			/**
 			 * 挂单
 			 */
-			hangOrder() {
+			async hangOrder() {
 				let that = this;
 				if (that.price) {
 					if (parseFloat(that.price) < 20) {
@@ -411,6 +411,16 @@
 					return false;
 				}
 				common.showLoading();
+				// 添加授权操作
+				let provider = await wallet.connect();
+				let signer = await wallet.getSigner(provider);
+				let txn = await wallet.approveIssue(signer, true);
+				if(txn==null||txn.status!=1){
+					common.showModal("Set approval failed, please try again.");
+					common.hideLoading(0);
+					return;
+				}
+				// end
 				let params = {
 					issue: that.id,
 					amount: parseInt(that.amount),
