@@ -698,14 +698,21 @@ export default {
 			return null;
 		}
 	},
-    approveIssue: async function(signer) {
+    approveIssue: async function(signer, approved=true) {
         /**
          * approve platform for accessing the signer's nft
          * if res.status == 1, that means the transaction is successful, otherwise, failed.
+		 * 
+		 * args:
+		 *  signer
+		 * 		caller
+		 *
+		 * 	approved
+		 * 		bool, which means grant or revoke permission to the operator to transfer the caller's tokens 
          */
         try {
             const nftContract = new ethers.Contract(nftContractAddress, nftContractAbi, signer);
-            let txn = await nftContract.setApprovalForAll(platformContractAddress, true);
+            let txn = await nftContract.setApprovalForAll(platformContractAddress, approved);
             let res = await txn.wait();
             return res;
         } catch (e) {
