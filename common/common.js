@@ -77,6 +77,8 @@ export default {
 		uni.showModal({
 			title: 'tip',
 			content: msg,
+			cancelText:'cancel',
+			confirmText:'confirm',
 			showCancel: showCancel
 		})
 	},

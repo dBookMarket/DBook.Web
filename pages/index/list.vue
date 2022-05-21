@@ -6,21 +6,19 @@
 				<left @getBookData="getBookData"></left>
 			</view>
 			<view class="right">
-				<scroll-view :scroll-top="scrollTop" scroll-y="true" class="scroll-Y" @scrolltoupper="upper"
-					@scrolltolower="lower" @scroll="scroll">
-					<view class="booklist" v-if="bookList.length>0">
-						<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
-							<image class="img" :src="item.cover_url"></image>
-							<view class="info">{{item.name}}</view>
-							<text class="author">{{item.author_name}}</text>
-						</view>
+
+				<view class="booklist" v-if="bookList.length>0">
+					<view class="item" v-for="(item,index) in bookList" :key="index" @click="toDetail(item.id)">
+						<image class="img" :src="item.cover_url"></image>
+						<view class="info">{{item.name}}</view>
+						<text class="author">{{item.author_name}}</text>
 					</view>
-					<view class="none" v-if="bookList.length==0">
-						<image class="img" src="/static/book/empty.svg"></image>
-						<view class="empty">Books is empty</view>
-					</view>
-					<!-- 数据列表 -->
-				</scroll-view>
+				</view>
+				<view class="none" v-if="bookList.length==0">
+					<image class="img" src="/static/book/empty.svg"></image>
+					<view class="empty">Books is empty</view>
+				</view>
+				<!-- 数据列表 -->
 			</view>
 		</view>
 	</view>
@@ -46,48 +44,56 @@
 					scrollTop: 0
 				},
 				name: '',
-				bookList: []
+				bookList: [],
+				page_count:1,
+				params:{
+					page_number: 1,
+					category:"",
+					name: ""
+				}
 			};
 		},
 		onLoad(option) {
 			let that = this;
 			if (option.id) {
 				that.id = option.id;
+				that.params.category = that.id;
 			}
 			if (option.name) {
 				that.name = option.name;
-			}else{
+				that.params.name = that.name;
+			} else {
 				common.removeStorage('search');
 			}
-			that.getBookData();
+			that.getBookData(that.params);
+		},
+		onReachBottom() {
+			console.log("我已经滚动到底部了");
+			let that = this;
+			if(parseInt(that.page_count)>parseInt(that.params.page_number)){
+				that.params.page_number = that.params.page_number+1;
+				console.log(that.params.page_number)
+				that.getBookData(that.params);
+			}
 		},
 		mounted() {
-			let that = this;
-
+			
 		},
 		methods: {
 			/**
 			 * 获取书籍列表
 			 * 
 			 */
-			getBookData() {
+			getBookData(params) {
 				let that = this;
 				common.showLoading();
-				let params = {};
-				if (that.id) {
-					params = {
-						category: that.id
-					}
-				} else if (that.name) {
-					params = {
-						name: that.name
-					}
-				}
 				getAllIssues(params).then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
 						let data = res.data;
-						that.bookList = data.results;
+						that.page_count = data.page_count;
+						that.params.page_number = data.page_number;
+						that.bookList = that.bookList.concat(data.results);
 					} else {
 						common.showModal(res);
 					}
@@ -152,6 +158,7 @@
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
+
 		.container {
 			.none {
 				display: flex;
@@ -160,19 +167,23 @@
 				align-items: center;
 				min-height: 4.5rem;
 				height: auto;
-			
+
 				.img {
 					width: .75rem;
 					height: .65rem;
 					margin-bottom: 0.15rem;
 				}
-			
+
 				.empty {
 					font-size: 28rpx;
 					color: #999999;
 				}
 			}
+
+			.scroll-Y {}
+
 			.booklist {
+				height: 7.5rem;
 				text-align: left;
 				width: 100%;
 				display: flex;
