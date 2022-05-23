@@ -3,7 +3,7 @@ import web3 from 'web3';
 import { ethers } from 'ethers';
 
 // mumbai testnet
-const platformContractAddress = '0x662E48096EA75f1F5CfF8cF286BAD19278368B6a';
+const platformContractAddress = '0xa2EBc3CeF87654B20B8096C8e37C55515362c068';
 // Chosen wallet provider given by the dialog window
 let connection;
 const web3Modal = new Web3Modal({
@@ -136,7 +136,7 @@ const platformContractAbi = [{
     "name": "trade", "outputs": [], "stateMutability": "nonpayable", "type": "function"
 }];
 
-const nftContractAddress = '0xa18C1feF1F76a554cD716096f39a051cf4F94523';
+const nftContractAddress = '0x7651Fa608c990Ed1294A8A9f63ba89179BC0455D';
 const nftContractAbi = [{
     "inputs": [{ "internalType": "string", "name": "name", "type": "string" },
     { "internalType": "string", "name": "symbol", "type": "string" },
@@ -245,7 +245,7 @@ const nftContractAbi = [{
     "stateMutability": "view", "type": "function"
 }];
 
-const usdcContractAddress = '0xB556b362EC02d2384F4645d7160562538fdf40c4';
+const usdcContractAddress = '0xeE4Fa11C6afd8002c539F653D3C75bB4C0467210';
 const usdcContractAbi = [
     {
         "inputs": [

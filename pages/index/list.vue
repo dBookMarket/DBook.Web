@@ -47,7 +47,7 @@
 				bookList: [],
 				page_count:1,
 				params:{
-					page_number: 1,
+					page: 1,
 					category:"",
 					name: ""
 				}
@@ -70,9 +70,9 @@
 		onReachBottom() {
 			console.log("我已经滚动到底部了");
 			let that = this;
-			if(parseInt(that.page_count)>parseInt(that.params.page_number)){
-				that.params.page_number = that.params.page_number+1;
-				console.log(that.params.page_number)
+			if(parseInt(that.page_count)>parseInt(that.params.page)){
+				that.params.page = that.params.page+1;
+				console.log(that.params.page)
 				that.getBookData(that.params);
 			}
 		},
@@ -92,7 +92,7 @@
 					if (res && res.statusCode === 200) {
 						let data = res.data;
 						that.page_count = data.page_count;
-						that.params.page_number = data.page_number;
+						that.params.page = data.page_number;
 						that.bookList = that.bookList.concat(data.results);
 					} else {
 						common.showModal(res);
