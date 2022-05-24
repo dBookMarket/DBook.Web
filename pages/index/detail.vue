@@ -319,7 +319,7 @@
 			 */
 			toPolygon(address){
 				if(address){
-					window.location.href = 'https://polygonscan.com/address/'+address;
+					window.location.href = 'https://mumbai.polygonscan.com/address/'+address;
 				}
 			},
 			/**

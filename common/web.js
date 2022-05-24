@@ -1,3 +1,3 @@
 export default {
-	host: "http://test.ddid.info"
+	host: "http://server:8000"//test.ddid.info
 }
