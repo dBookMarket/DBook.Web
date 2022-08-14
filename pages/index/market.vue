@@ -1,6 +1,10 @@
 <template>
 	<view class="market">
 		<nav-bar></nav-bar>
+		<view class="warn">
+			<image class="img" src="/static/index/warn.svg"></image>
+			<text class="_text">应用页面重新建设中，您仍能体验初期DEMO</text>
+		</view>
 		<view class="container">
 			<view class="left">
 				<left></left>
@@ -121,6 +125,26 @@
 		background-color: #F6F6F6;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
+		.warn{
+			width: 100%;
+			height: 50rpx;
+			line-height: 50rpx;
+			text-align: center;
+			background: #FFEDED;
+			.img{
+				width: 30rpx;
+				height: 38rpx;
+				margin-right: .05rem;
+				vertical-align: middle;
+			}
+			._text{
+				font-size: 26rpx;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 500;
+				color: #D02323;
+				line-height: 22px;
+			}
+		}
 		.container {
 			.right {
 				height: 7.7rem;

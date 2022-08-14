@@ -141,12 +141,13 @@
 				let that = this;
 				that.$refs.popup.open();
 			},
+			//关闭弹框
 			close(){
 				let that = this;
 				that.$refs.popup.close()
 			},
 			/**
-			 * 
+			 * 搜索
 			 */
 			toSearch() {
 				let that = this;
@@ -260,6 +261,9 @@
 					common.showModal('the provider is empty');
 				}
 			},
+			/**
+			 * 跳转首页
+			 */
 			toIndex() {
 				uni.navigateTo({
 					url: '/pages/index/index'

@@ -81,8 +81,8 @@ http.interceptors.response.use(response => {
 export function post(url, params) {
 	return new Promise((resolve, reject) => {
 		http.post(url, params).then(res => {
-			resolve(res);
-			if (res.statusCode != 200 || res.statusCode != 201) {
+			//resolve(res);
+			if (res.statusCode != 200 && res.statusCode != 201) {
 				reject('失败');
 			} else {
 				resolve(res);
@@ -101,8 +101,8 @@ export function post(url, params) {
 export function patch(url, params) {
 	return new Promise((resolve, reject) => {
 		http.patch(url, params).then(res => {
-			resolve(res);
-			if (res.statusCode != 200 || res.statusCode != 201) {
+			//resolve(res);
+			if (res.statusCode != 200 && res.statusCode != 201) {
 				reject('失败');
 			} else {
 				resolve(res);
@@ -126,8 +126,8 @@ export function get(url, params) {
 	}
 	return new Promise((resolve, reject) => {
 		http.get(url).then(res => {
-			resolve(res);
-			if (res.statusCode != 200 || res.statusCode != 201) {
+			//resolve(res);
+			if (res.statusCode != 200 && res.statusCode != 201) {
 				reject('失败');
 			} else {
 				resolve(res);
@@ -145,8 +145,8 @@ export function put(url, params) {
 	console.log(url)
 	return new Promise((resolve, reject) => {
 		http.put(url, params).then(res => {
-			resolve(res);
-			if (res.statusCode != 200 || res.statusCode != 201) {
+			//resolve(res);
+			if (res.statusCode != 200 && res.statusCode != 201) {
 				reject('失败');
 			} else {
 				resolve(res);
@@ -163,8 +163,8 @@ export function put(url, params) {
 export function deleteP(url, params) {
 	return new Promise((resolve, reject) => {
 		http.delete(url, params).then(res => {
-			resolve(res);
-			if (res.statusCode != 200 || res.statusCode != 201) {
+			//resolve(res);
+			if (res.statusCode != 200 && res.statusCode != 201) {
 				reject('失败');
 			} else {
 				resolve(res);

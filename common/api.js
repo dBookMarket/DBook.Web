@@ -19,6 +19,18 @@ export const postNonce = params => post('/api/v1/nonce', params);
  */
 export const logout = params => post('/api/v1/logout', params);
 /**
+ * 连接媒介
+ */
+export const auth = params => post('/api/v1/social-medias/auth', params);
+/**
+ * 发送动态 添加权限
+ */
+export const share = params => post('/api/v1/social-medias/share', params);
+/**
+ * 验证状态
+ */
+export const verify = params => get('/api/v1/social-medias/verification-state', params);
+/**
  * 个人资产
  */
 export const getAssets = params => get('/api/v1/assets', params);

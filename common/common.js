@@ -45,11 +45,17 @@ export default {
 		}, time);
 	},
 	/**
+	 * 
 	 * @param {Object} val
+	 * @param {Object} num
+	 * 
 	 */
-	getAddress: function(val) {
+	getAddress: function(val,num) {
+		if(!num){
+			num = 8;
+		}
 		if (!val) return false;
-		return val.substr(0, 8) + "...";
+		return val.substr(0, num) + "...";
 	},
 	
 	/**

@@ -1,3 +1,3 @@
 export default {
-	host: "http://server:8000"//test.ddid.info
+	host: "http://testnet.dbookmarket.com:56789"//testnet.dbookmarket.com/api/v1/
 }

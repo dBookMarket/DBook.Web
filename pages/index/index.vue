@@ -1,700 +1,816 @@
 <template>
 	<view class="bg">
 		<view class="indexapp">
-			<view class="navbg">
-				<view class="nav">
-					<view class="left">
-						<image src="/static/img/logodbook.png" mode="" class="logo"></image>
+			<view class="newbg">
+				<new-nav></new-nav>
+			</view>
+		</view>
+		<view class="content_1_bg">
+			<view class="_title">NOW JOIN IN MARING YOUR BOOK</view>
+			<view class="_desc">DBook is an e-book marketplace with SOCiaIF attributes.<br /> You can publish/trade your
+				own books, read them for money, and review them with other readers.</view>
+			<view class="_info">
+				<view class="_left">
+					<view class="_item">
+						<view class="_font">NFT Collection</view>
+						<view class="_dot"></view>
+						<view class="_line"></view>
 					</view>
-					<view class="center">
-						<a href="#Learn"><text class="text _marleft">Learn</text></a>
-						<a href="#Solution"><text class="text">Solution</text></a>
-						<a href="#Cooperation"><text class="text">Cooperation</text></a>
-						<a href="#Community"><text class="text">Community</text></a>
+					<view class="_item">
+						<view class="_font">On-chain traceability</view>
+						<view class="_dot"></view>
+						<view class="_line"></view>
 					</view>
-					<view class="right">
-						<button id="airdrop" @click="toMarket()" class="button">Explore the market</button>
+					<view class="_item">
+						<view class="_font">Resaleable</view>
+						<view class="_dot"></view>
+						<view class="_line"></view>
 					</view>
 				</view>
-			</view>
-			<view class="content_1_bg">
-				<view class="content_1">
-					<image src="/static/img/dbook.png" mode="" class="img1"></image>
-					<view class="font1">
-						D-Book is an nft book marketplace that allows authors/publishers to publish their works as nfts.
-						Readers/collectors can purchase these nft books by their favorite authors for their reading pleasure
-						using the D-Book app.
-						Readers can also choose to resell or transfer ownership of their nft book collection at any point of
-						time. Authors/publishers are guaranteed of their royalty earnings with each secondary sale of their
-						work.
-					</view>
+				<view class="_center">
+					<image src="/static/index/book.svg" mode="" class="book"></image>
 				</view>
-			</view>
-			<view class="content_2_bg">
-				<view class="content_2" id="Learn">
-					<view class="item">
-						<image src="/static/img/icon1.svg" mode="" class="icon1"></image>
-						<view class="font2">Copyright Protection</view>
-						<view class="font3">
-							Genuine transaction records can be traced and held, no additional copies will be generated for
-							D-Book transactions.
-						</view>
+				<view class="_right">
+					<view class="_item">
+						<view class="_line"></view>
+						<view class="_dot"></view>
+						<view class="_font">Web3</view>
 					</view>
-					<view class="item">
-						<image src="/static/img/icon2.svg" mode="" class="icon1"></image>
-						<view class="font2">Digital Transaction</view>
-						<view class="font3">
-							In addition to publishers and authors who can release D-Books, readers have the right to resell
-							D-Books again.
-						</view>
+					<view class="_item">
+						<view class="_line"></view>
+						<view class="_dot"></view>
+						<view class="_font">No platform sharing</view>
 					</view>
-					<view class="item">
-						<image src="/static/img/icon3.svg" mode="" class="icon1"></image>
-						<view class="font2">Collection Value</view>
-						<view class="font3">
-							Each D-Book is a limited edition with the opportunity to obtain the author's rare and precious
-							signature.
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="content_3_bg" id="Solution">
-				<view class="content_3">
-					<view class="item">
-						<image src="/static/img/what.png" mode="" class="img0"></image>
-						<view class="font1">
-							Publisher & Author
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">Genuine guarantee, NFT and traceability of D-Books.</text>
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">Fully Homomorphic Encryption ensures that no additional copies will be
-								generated during the transaction process.</text>
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">Conform to the DRM design scheme, only the owner can get decryption reading
-								permission.</text>
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">Guarantee the rights of copyright owners, allow owners to trade, and up to
-								50% of the copyright tax can be levied.</text>
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">Fully decentralized, publishers and authors can release works after
-								verifying the copyright ownership.</text>
-						</view>
-						<view class="list">
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-							<text class="text1">There is no middleman, you can get all the income without sharing with the
-								platform.</text>
-						</view>
-					</view>
-					<view class="item">
-						<image src="/static/img/book.png" mode="" class="img2"></image>
-					</view>
-				</view>
-			</view>
-			<view class="content_4_bg">
-				<view class="content_4">
-					<view class="item">
-						<image src="/static/img/photo.png" mode="" class="img2"></image>
-					</view>
-					<view class="item">
-						<text class="font1">
-							Reader
-						</text>
-						<view class="list">
-							<text class="text1">Copyright is limited worldwide, with collection value.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-						<view class="list">
-							<text class="text1">Resell at any time, with a safe and reliable trading platform.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-						<view class="list">
-							<text class="text1">On-chain traceability, which ensures that all purchases / sales on the
-								trading platform are genuine.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-						<view class="list">
-							<text class="text1">Free trial reading, and choose to purchase if the content has value.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-						<view class="list">
-							<text class="text1">Dedicated decoder, the super ultimate reading experience.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-						<view class="list">
-							<text class="text1">Link meta-universe, which can be read in the virtual world.</text>
-							<image src="/static/img/right.svg" mode="" class="img1"></image>
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="content_5_bg">
-				<view class="content_5">
-					<image src="/static/img/developers.png" mode="" class="img1"></image>
-					<view class="item">
-						<view class="info">D-Book allows publishers or authors to sell NFT on multiple public chains, such
-							as Ethereum, Polygon, BSC, Solana, Dfinity etc.</view>
-						<view class="info">D-book will not issue its own digital currency, but will support payments with
-							the mainstream digital currency in the market.</view>
-						<view class="info">D-Book will provide API for developers to carry out secondary development on
-							D-Book, and you can also leave a message in the community if you have any ideas and suggestions.
-						</view>
-					</view>
-				</view>
-			</view>
-			<view class="content_6_bg" id="Cooperation">
-				<view class="content_6">
-					<image src="/static/img/author.png" mode="" class="img1"></image>
-					<view class="font1">
-						If you're a publisher & author who wants to publish your own digital right, D-Book is a good choice
-						for you. Join us for a whole new experience that blockchain brings to you!
-					</view>
-					<view class="input-style">
-						<input type="text" class="emailinput" placeholder="Enter your email address" />
-						<button class="submit" @click="toEmail()">submit</button>
-					</view>
-					<view class="font2">We will contact you within 3-7 working days after submission.</view>
-				</view>
-			</view>
-			<view class="content_7_bg" id="Community">
-				<view class="content_7">
-					<view class="top">
-						<view class="font1" style="display: none;">Partner</view>
-						<view class="font2" style="height: 1.8rem;"></view>
-					</view>
-					<view class="flexbottom">
-						<view class="left">
-							<view class="item">
-								<image src="/static/img/twitter.svg" mode="" @click="toUrl(1)" class="img img1"></image>
-								<image src="/static/img/discord.svg" mode="" @click="toUrl(2)" class="img img1"></image>
-								<image src="/static/img/youtube.svg" mode="" @click="toUrl(3)" class="img img3"></image>
-								<image src="/static/img/medium.svg" mode="" @click="toUrl(4)" class="img img4"></image>
-							</view>
-						</view>
-						<view class="right">
-							<image src="/static/img/app.svg" mode="" class="android"></image>
-							<image src="/static/img/google.svg" mode="" class="apple"></image>
-						</view>
+					<view class="_item">
+						<view class="_line"></view>
+						<view class="_dot"></view>
+						<view class="_font">Data encryption</view>
 					</view>
 				</view>
 			</view>
 		</view>
+		<view class="content_2_bg">
+			<view class="_title">How to make money</view>
+			<view class="_desc">DBook, with a complete token model, <br />
+				forms a unique Web3 + Web2 mode through its internal circulation and opening up some economic systems of
+				Web2.</view>
+			<view class="_someone">
+				<view class="_item">
+					<image src="/static/index/author.svg" class="_img"></image>
+					<view class="_text">I am a writer</view>
+				</view>
+				<view class="_jianju"></view>
+				<view class="_item">
+					<image src="/static/index/reader.svg" class="_img"></image>
+					<view class="_text">I am a reader</view>
+				</view>
+			</view>
+		</view>
+		<view class="content_3_bg">
+			<view class="_title">Through the economic</view>
+			<view class="_desc">The economic cycle designed by dBook can ensure that all parties can achieve a win-win
+				situation. <br />
+				The ghostwriter DBK is interspersed in the whole economic system to achieve an orderly internal cycle,
+				<br />
+				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both
+				parties.
+			</view>
+			<image src="/static/index/triangle.svg" class="_circle"></image>
+		</view>
+		<view class="content_4_bg">
+			<view class="_title">Copyright protection</view>
+			<view class="_desc">
+				DBoo adopts full homomorphic encryption to encrypt the data of works, <br />
+				and can transfer the power of data decryption to a new holder without decrypting the data. At present,
+				<br />
+				it can solve multiple scenes such as pictures, text, audio and video.
+			</view>
+			<view class="_content">
+				<view class="_left">
+					<view class="_item">
+						<view class="_mininfo" @click="openContent(1)">
+							<text>How to appeal if the work is infringed?</text>
+							<uni-icons type="plusempty" size="30"></uni-icons>
+						</view>
+						<view class="_mindesc" v-if="down1">
+							After seeing other people's works being stolen, relevant evidence should
+							be provided and reports should be made. A temporary alliance composed
+							of other random authors and readers should conduct preliminary review,
+							freeze the undistributed income of the account, and remove/suspend the
+							author's books, and determine how to compensate after repeated
+							arbitration by multiple parties.
+						</view>
+					</view>
+					<view class="_item">
+						<view class="_mininfo" @click="openContent(3)">
+							<text>How does the author guarantee his rights and interests?</text>
+							<uni-icons type="plusempty" size="30"></uni-icons>
+						</view>
+						<view class="_mindesc" v-if="down3">
+							After seeing other people's works being stolen, relevant evidence should
+							be provided and reports should be made. A temporary alliance composed
+							of other random authors and readers should conduct preliminary review,
+							freeze the undistributed income of the account, and remove/suspend the
+							author's books, and determine how to compensate after repeated
+							arbitration by multiple parties.
+						</view>
+					</view>
+					<view class="_item">
+						<view class="_mininfo" @click="openContent(5)">
+							<text>What if I see someone stealing someone else's work?</text>
+							<uni-icons type="plusempty" size="30"></uni-icons>
+						</view>
+						<view class="_mindesc" v-if="down5">
+							After seeing other people's works being stolen, relevant evidence should
+							be provided and reports should be made. A temporary alliance composed
+							of other random authors and readers should conduct preliminary review,
+							freeze the undistributed income of the account, and remove/suspend the
+							author's books, and determine how to compensate after repeated
+							arbitration by multiple parties.
+						</view>
+					</view>
+				</view>
+				<view class="_right">
+					<view class="_item">
+						<view class="_mininfo" @click="openContent(2)">
+							<text>How is the work protected?</text>
+							<uni-icons type="plusempty" size="30"></uni-icons>
+						</view>
+						<view class="_mindesc" v-if="down2">
+							After seeing other people's works being stolen, relevant evidence should
+							be provided and reports should be made. A temporary alliance composed
+							of other random authors and readers should conduct preliminary review,
+							freeze the undistributed income of the account, and remove/suspend the
+							author's books, and determine how to compensate after repeated
+							arbitration by multiple parties.
+						</view>
+					</view>
+					<view class="_item">
+						<view class="_mininfo" @click="openContent(4)">
+							<text>What should I pay attention to when publishing on dBook?</text>
+							<uni-icons type="plusempty" size="30"></uni-icons>
+						</view>
+						<view class="_mindesc" v-if="down4">
+							After seeing other people's works being stolen, relevant evidence should
+							be provided and reports should be made. A temporary alliance composed
+							of other random authors and readers should conduct preliminary review,
+							freeze the undistributed income of the account, and remove/suspend the
+							author's books, and determine how to compensate after repeated
+							arbitration by multiple parties.
+						</view>
+					</view>
+				</view>
+			</view>
+
+		</view>
+		<view class="content_5_bg">
+			<view class="_title">Developed communities</view>
+			<view class="_desc">
+				DBook is managed in the DAO mode.<br />
+				Users will release their own works after binding their social media accounts. Meanwhile, when it comes
+				to copyright disputes, <br />
+				the random committee mode will be adopted for adjudication, and the shelf/shelf removal/freeze status of
+				books/authors will be managed
+			</view>
+			<view class="_develop">
+				<view class="_item">
+					<image src="/static/index/1.svg" class="_img"></image>
+					<view class="_text">Universal creation</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/2.svg" class="_img"></image>
+					<view class="_text">Management books</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/3.svg" class="_img"></image>
+					<view class="_text">Chain on the comments</view>
+				</view>
+			</view>
+		</view>
+		<view class="content_6_bg">
+			<view class="_title">The roadmap</view>
+			<view class="_content">
+				<view class="_flex">
+					<view class="_item">
+						<image src="/static/index/map1.svg" class="_imgicon"></image>
+						<view class="_line"></view>
+						<view class="_dot"></view>
+					</view>
+					<view class="_text _text1">Discuss ebook versions</view>
+				</view>
+				<view class="_flex">
+					<view class="_item">
+						<image src="/static/index/map2.svg" class="_imgicon"></image>
+						<view class="_line"></view>
+						<view class="_dot"></view>
+					</view>
+					<view class="_text _text1">Protected DBOOK trading market DEMO release test net</view>
+
+				</view>
+				<view class="_flex">
+					<image src="/static/index/up.svg" class="_imgup"></image>
+					<view class="_item">
+						<image src="/static/index/map3.svg" class="_imgicon"></image>
+						<view class="_line"></view>
+						<view class="_dot"></view>
+					</view>
+					<view class="_text bgtext">A draft version of the DBOOK Token Economy whitepaper and the URL for the
+						new UI</view>
+				</view>
+				<view class="_flex _flex2">
+					<view class="_item">
+						<image src="/static/index/map4.svg" class="_imgicon"></image>
+					</view>
+					<view class="_text">Earn money while reading</view>
+				</view>
+				<view class="_flex _flex1">
+					<view class="kongge"></view>
+					<view class="disflex">
+						<view class="shuxian"></view>
+						<view class="_dot"></view>
+					</view>
+				</view>
+				<view class="_flex">
+					<view class="_item">
+						<image src="/static/index/map8.svg" class="_imgicon"></image>
+						<view class="_dot"></view>
+						<view class="_line"></view>
+					</view>
+					<view class="_text _text1">Make money writing as you read</view>
+
+				</view>
+				<view class="_flex">
+					<view class="_item">
+						<image src="/static/index/map7.svg" class="_imgicon"></image>
+						<view class="_dot"></view>
+						<view class="_line"></view>
+					</view>
+					<view class="_text _text1">Make money writing as you read</view>
+
+				</view>
+				<view class="_flex">
+					<view class="_item">
+						<image src="/static/index/map6.svg" class="_imgicon"></image>
+						<view class="_dot"></view>
+						<view class="_line"></view>
+					</view>
+					<view class="_text _text1">Make money writing as you read</view>
+
+				</view>
+				<view class="_flex _flex2">
+					<view class="_item">
+						<image src="/static/index/map5.svg" class="_imgicon"></image>
+					</view>
+					<view class="_lineheight"></view>
+					<view class="_text">Make money writing as you read</view>
+
+				</view>
+			</view>
+		</view>
+		<view class="content_7_bg">
+			<view class="_title">Team</view>
+			<view class="_team">
+				<view class="_item">
+					<image src="/static/index/person1.png" class="_img"></image>
+					<view class="_text" v-if="person1">
+						<text>Bill Joy</text>
+						<text class="_text1">Cofounder</text>
+					</view>
+					<view class="_info" v-if="!person1">
+						Bill Joy
+						Cofounder
+						The copyrighted NFT book
+						exchange
+						marketplace dBookMarkt
+						testnet is released
+					</view>
+				</view>
+
+				<view class="_item">
+					<image src="/static/index/person2.png" class="_img"></image>
+					<view class="_text">
+						<text>Eeping neo</text>
+						<text class="_text1">Cofounder</text>
+					</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/person3.png" class="_img"></image>
+					<view class="_text">
+						<text>Horry Bi</text>
+						<text class="_text1">Cofounder</text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<bottom></bottom>
+		<view class="loading" v-if="loading">
+			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+		</view>
 	</view>
-	
 </template>
 
 <script>
+	import bottom from '@/components/newbottom.vue';
+	import newNav from '@/components/newnav.vue';
+	import SVGA from "svgaplayerweb"
 	export default {
+		components: {
+			bottom,
+			newNav
+		},
 		data() {
 			return {
-
+				down1: true,
+				down2: true,
+				down3: true,
+				down4: true,
+				down5: true,
+				person1: false,
+				person2: false,
+				person3: false,
+				loading:true,
+				svgaInfo:'/static/index/loading.svga',
 			};
 		},
 		mounted() {
 			let that = this;
+			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function(){
+			  that.loading = false;
+			},3000);
 		},
 		methods: {
-			toUrl(type) {
-				if (type == 1) {
-					window.location.href = 'https://twitter.com/ddid_io'
-				} else if (type == 2) {
-					//window.location.href = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g'
-				} else if (type == 3) {
-					window.location.href = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g'
-				} else if (type == 4) {
-					window.location.href = 'https://medium.com/@ddid_io'
-				}
-
-			},
-			toMarket(){
-				uni.navigateTo({
-					url: '/pages/index/market'
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
 				})
 			},
-			toEmail() {
-				window.location.href =
-					'https://docs.google.com/forms/d/e/1FAIpQLSfZvNUMTzLVxIM7UZiE5Th31Tk6D8xI_qgQZVEs98MbJ8kTjQ/viewform?usp=sf_link'
+			/**
+			 * 
+			 * 打开
+			 * @param {Object} num
+			 */
+			openContent(num) {
+				let that = this;
+				if (num == 1) {
+					if (that.down1) {
+						that.down1 = false
+					} else {
+						that.down1 = true
+					}
+				}
+				if (num == 2) {
+					if (that.down2) {
+						that.down2 = false
+					} else {
+						that.down2 = true
+					}
+				}
+				if (num == 3) {
+					if (that.down3) {
+						that.down3 = false
+					} else {
+						that.down3 = true
+					}
+				}
+				if (num == 4) {
+					if (that.down4) {
+						that.down4 = false
+					} else {
+						that.down4 = true
+					}
+				}
+				if (num == 5) {
+					if (that.down5) {
+						//document.getElementById('closeDiv').style.height = 40+'px';
+						that.down5 = false;
+					} else {
+						that.down5 = true;
+						//document.getElementById('closeDiv').style.height = 'auto';
+					}
+				}
 			}
 		}
 	}
 </script>
 
-<style>
-	.indexapp {
-		width: 100%;
-		margin: 0 auto;
-		min-width: 1280px;
-		height: auto;
-		background-color: #FFFFFF;
-		background-image: url(../../static/img/bg.png);
-		background-repeat: no-repeat;
-		background-position: center top;
-		background-size: contain;
-	}
-
-	.nav .center a {
-		text-decoration: none;
-	}
-
-	.content_7_bg {
-		width: 100%;
-		margin: .7rem auto 0;
-		height: 5rem;
-		background-color: #FFFFFF;
-		background-image: url(../../static/img/bg3.png);
-		background-repeat: no-repeat;
-		background-position: center top;
-		background-size: cover;
-	}
-
-	.content_7 {
-		text-align: center;
-		overflow: hidden;
-		width: 60%;
-		padding: .75rem 0 0rem 0;
-		margin: 0rpx auto;
-	}
-
-	.content_7 .flexbottom {
-		display: flex;
-		justify-content: space-around;
-	}
-
-	.content_7 .flexbottom .fontitem {
-		text-align: left;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		color: #999999;
-	}
-
-	.content_7 .flexbottom .fontitem:last-child {
-		font-size: .15rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
+<style scoped lang="scss">
+	.bg {
+		background-color: #fff;
+		font-size: 30rpx;
 		color: #000000;
-	}
+		.yyzCanvas {
+		    position: fixed;
+		    width: 100%;
+		    height: 100%;
+		    top: 0;
+		    left: 0;
+		    z-index: 200000;
+		    background-color: #24180e;
+			opacity: 1;
+		}
+		.indexapp {
+			width: 100%;
+			margin: 0 auto;
+			height: 7.68rem;
+			background-image: url('/static/index/bg.png');
+			background-repeat: no-repeat;
+			background-position: center 0;
+			background-size: cover;
 
-	.content_7 .android,
-	.content_7 .apple {
-		width: 1.75rem;
-		height: .5rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+			.newbg {
+				width: 100%;
+				margin: 0 auto;
+			}
+		}
 
-	.content_7 .flexbottom .right .img1 {
-		vertical-align: middle;
-		width: .23rem;
-		height: .23rem;
-		margin-right: .10rem;
-	}
+		.content_1_bg {
+			width: 90%;
+			z-index: 10;
+			position: relative;
+			margin: -.3rem auto 0;
+			height: auto;
+			overflow: hidden;
+			border-radius: .05rem;
+			background-color: #FFE1B4;
 
-	.content_7 .item {
-		display: flex;
-		justify-content: flex-start;
-	}
+			._title {
+				width: 40%;
+				margin: 0.5rem auto;
+				font-size: 100rpx;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				color: #000000;
+				text-align: center;
+				line-height: .5rem;
+			}
 
-	.content_7 .item .img {
-		margin-right: .4rem;
-		cursor: pointer;
-	}
+			._desc {
+				margin: .3rem auto;
+				text-align: center;
+				line-height: .3rem;
+				font-family: PingFang SC;
+				font-weight: 400;
+				color: #000000;
+			}
+		}
 
-	.content_7 .item .img1 {
-		vertical-align: middle;
-		width: .31rem;
-		height: .31rem;
-	}
+		.content_2_bg,
+		.content_3_bg,
+		.content_4_bg,
+		.content_5_bg,
+		.content_7_bg {
+			width: 90%;
+			margin: .65rem auto 0;
+			height: 5.5rem;
+			overflow: hidden;
+			background-color: #fff;
 
-	.content_7 .item .img2 {
-		vertical-align: middle;
-		width: .27rem;
-		height: .31rem;
-	}
+			._title {
+				font-size: 100rpx;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				text-align: center;
+			}
 
-	.content_7 .item .img3 {
-		vertical-align: middle;
-		width: .34rem;
-		height: .34rem;
-	}
+			._desc {
+				line-height: .3rem;
+				font-family: PingFang SC;
+				font-weight: 400;
+				text-align: center;
+				margin-top: .2rem;
+			}
 
-	.content_7 .item .img4 {
-		vertical-align: middle;
-		width: .35rem;
-		height: .35rem;
-	}
+			._someone {
+				display: flex;
+				justify-content: space-between;
+				margin: .4rem .2rem 0 .2rem;
 
-	.content_7 .top {
-		width: 50%;
-	}
+				._jianju {
+					flex: .1;
+				}
 
-	.content_7 .left {
-		flex: 2;
-		text-align: left;
-	}
+				._item {
+					flex: 1;
+					height: 3.25rem;
+					background: #FFFFFF;
+					text-align: center;
+					box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 
-	.content_7 .font1 {
-		width: 1.21rem;
-		height: .4rem;
-		line-height: .4rem;
-		background: #FFFFFF;
-		font-size: .3rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 800;
-		color: #6783E9;
-		text-align: center;
-	}
+					._img {
+						margin-top: 0.4rem;
+						width: 1.26rem;
+						height: 1.26rem;
+					}
 
-	.content_7 .font2 {
-		width: 4.21rem;
-		line-height: .6rem;
-		font-size: .3rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 800;
-		color: #FFFFFF;
-		text-align: left;
-		margin: .5rem 0 .7rem 0;
-	}
+					._text {
+						margin-top: .25rem;
+						font-size: 100rpx;
+						font-family: Alibaba PuHuiTi;
+						font-weight: 800;
+					}
+				}
+			}
+		}
 
-	.content_7 .right {
-		flex: 1;
-		text-align: center;
-		display: flex;
-		justify-content: space-around;
-	}
+		.content_3_bg {
+			height: 6.5rem;
+			text-align: center;
 
-	.content_5_bg {
-		width: 100%;
-		margin: .8rem auto 0;
-		height: 6.5rem;
-		background-color: #FFFFFF;
-		background-image: url(../../static/img/bg2.png);
-		background-repeat: no-repeat;
-		background-position: center top;
-		background-size: cover;
-	}
+			._circle {
+				margin-top: .5rem;
+				width: 8rem;
+				height: 4.2rem;
+			}
+		}
 
-	.content_5 {
-		text-align: center;
-		overflow: hidden;
-		width: 60%;
-		padding: 1.6rem 0 0rem 0;
-		margin: 0rpx auto;
-	}
+		.content_4_bg {
+			height: auto;
+			text-align: center;
 
-	.content_5 .img1 {
-		vertical-align: middle;
-		width: 6.58rem;
-		height: 1.1rem;
-	}
+			._desc {
+				margin-bottom: .4rem;
+			}
 
-	.content_5 .item {
-		display: flex;
-		justify-content: space-around;
-		width: 80%;
-		margin: 0 auto;
-	}
+			._content {
+				margin: 0;
+				width: 100%;
+				float: left;
 
-	.content_5 .item .info {
-		flex: 1;
-		text-align: center;
-		margin: 1.3rem 0 1rem 0;
-		color: #FFFFFF;
-		border-right: 1px solid #FFFFFF;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		line-height: .25rem;
-		padding: 0rem .3rem;
-	}
+				._left {
+					float: left;
+					width: 47.2%;
+				}
 
-	.content_5 .item .info:last-child {
-		border-right: none;
-	}
+				._right {
+					float: right;
+					width: 47.2%;
+				}
 
-	.content_6_bg {
-		width: 100%;
-		position: relative;
-		height: 3.85rem;
-		background-color: #FFFFFF;
-	}
+				._item {
+					background: #FFFFFF;
+					text-align: left;
+					margin-top: .2rem;
 
-	.content_6 {
-		text-align: center;
-		overflow: hidden;
-		width: 60%;
-		padding: .7rem 0 0rem 0;
-		margin: 0rpx auto;
-	}
+					._mininfo {
+						display: flex;
+						justify-content: space-between;
+						font-size: 30rpx;
+						padding: 0 .2rem;
+						font-family: PingFang SC;
+						font-weight: 400;
+						line-height: .55rem;
+						border: 1px solid #000000;
+						cursor: pointer;
+					}
 
-	.content_6 .img1 {
-		vertical-align: middle;
-		width: 4.65rem;
-		height: .41rem;
-	}
+					._mindesc {
+						padding: .2rem;
+						line-height: .25rem;
+						background: #F4F4F4;
+					}
+				}
+			}
+		}
 
-	.content_6_bg .input-style {
-		background: #F7F7F7;
-		border-radius: .22rem;
-		width: 90%;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		height: .7rem;
-		line-height: .7rem;
-	}
+		.content_5_bg {
+			height: auto;
+			text-align: center;
 
-	.content_6_bg .emailinput {
-		height: .7rem;
-		border: none;
-		line-height: .7rem;
-		width: 85%;
-		text-align: left;
-		text-indent: .15rem;
-	}
+			._develop {
+				height: auto;
+				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				margin: .42rem .2rem .2rem .2rem;
 
-	.content_6_bg .submit {
-		width: 12%;
-		margin-top: .115rem;
-		vertical-align: middle;
-		text-align: center;
-		height: .47rem;
-		line-height: .47rem;
-		background: #6783E9;
-		border-radius: .24rem;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		color: #FFFFFF;
-	}
+				._item {
+					width: 30%;
+					height: auto;
+					background: #FFFFFF;
+					padding-bottom: .4rem;
+					box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 
-	.content_6_bg .font1,
-	.content_6_bg .font2 {
-		width: 70%;
-		text-align: center;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		color: #999999;
-		line-height: .3rem;
-		margin: .46rem auto;
-	}
+					._img {
+						margin-top: 0.4rem;
+						width: 2.5rem;
+						height: 2rem;
+					}
 
-	.content_6_bg .font2 {
-		text-align: left;
-		text-indent: .15rem;
-		width: 88%;
-		margin: .1rem auto;
-	}
+					._text {
+						margin-top: .5rem;
+						font-size: 52rpx;
+						font-family: PingFang SC;
+						font-weight: 400;
+					}
+				}
+			}
+		}
 
-	.content_1_bg {
-		width: 100%;
-		margin: .4rem auto 0;
-		height: 7.6rem;
-		background-image: url(../../static/img/bg1.png);
-		background-repeat: no-repeat;
-		background-position: center top;
-		background-size: cover;
-	}
+		.content_6_bg {
+			width: 100%;
+			margin: .65rem auto 0;
+			height: auto;
+			overflow: hidden;
+			background-color: #FFE1B4;
 
-	.content_1 {
-		text-align: center;
-		overflow: hidden;
-		width: 60%;
-		padding: 2.3rem 0 0rem 0;
-		margin: 0rpx auto;
-	}
+			._title {
+				font-size: 100rpx;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				text-align: center;
+				margin-top: .3rem;
+			}
 
-	.content_1 .img1 {
-		vertical-align: middle;
-		width: 4.77rem;
-		height: .86rem;
-	}
+			._content {
+				width: 86%;
+				margin: .5rem auto;
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				justify-content: center;
 
-	.content_1 .font1 {
-		font-size: .16rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 300;
-		color: #FFFFFF;
-		padding-top: .6rem;
-		line-height: .3rem;
-		width: 82%;
-		margin: 0 auto;
-	}
+				._flex {
+					width: 25%;
+					position: relative;
 
-	.content_2_bg {
-		width: 100%;
-		position: relative;
-		height: 3.5rem;
-		background-color: #FFFFFF;
-	}
+					._imgup {
+						width: 60rpx;
+						height: 32rpx;
+						position: absolute;
+						top: -50rpx;
+						left: 25%;
+					}
 
-	.content_2 {
-		width: 70%;
-		height: 3.5rem;
-		margin: 0 auto;
-		background: #FFFFFF;
-		box-shadow: -10px 5px 44px 7px rgba(43, 43, 43, 0.04);
-		border-radius: .2rem;
-		position: absolute;
-		top: -.8rem;
-		left: 15%;
-		z-index: 11;
-		display: flex;
-	}
+					._item {
+						display: flex;
+						align-items: center;
+						justify-content: center;
 
-	.content_2 .item {
-		flex: 1;
-		text-align: center;
-		margin: .5rem 0 .5rem 0;
-		border-right: 1px solid #DFDFDF;
-	}
+						._imgicon {
+							width: 1.25rem;
+							height: 1.25rem;
+							margin-right: .2rem;
+						}
 
-	.content_2 .item .icon1 {
-		vertical-align: middle;
-		width: .46rem;
-		height: .51rem;
-	}
+					}
 
-	.content_2 .item .font2 {
-		font-size: .18rem;
-		font-family: Alibaba PuHuiTi;
-		color: #000000;
-		margin-top: .3rem;
-		line-height: .35rem;
-	}
+					._line {
+						height: 3px;
+						width: 1.5rem;
+						background: #000000;
+					}
 
-	.content_2 .item .font3 {
-		width: 50%;
-		margin: .2rem auto 0;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		color: #999999;
-		line-height: .25rem;
-		margin-top: .2rem;
-	}
+					._dot {
+						width: 14rpx;
+						height: 14rpx;
+						border-radius: 50%;
+						background: #282828;
+					}
 
-	.content_2 .item:last-child {
-		border-right: none;
-	}
+					._text {
+						width: 1.25rem;
+						font-size: 30rpx;
+						font-family: PingFang SC;
+						font-weight: 400;
+						text-align: center;
+						margin-top: .15rem;
+						line-height: .26rem;
+					}
 
-	.content_3 .item:last-child,
-	.content_4 .item:last-child {
-		text-align: right;
-	}
+					.bgtext {
+						width: 2.5rem;
+						line-height: .26rem;
+						background: #7D5321;
+						border-radius: 20px;
+						color: #FFE1B4;
+						text-align: center;
+					}
 
-	.content_3_bg {
-		width: 100%;
-		height: 6.2rem;
-		margin: 0rem 0 .4rem 0;
-		background-color: #FFFFFF;
-	}
+					._text1 {
+						width: 2.2rem
+					}
+				}
 
-	.content_4_bg {
-		width: 100%;
-		height: 3rem;
-		margin: .8rem 0;
-		background-color: #FFFFFF;
-	}
+				._flex1 {
+					margin-bottom: .1rem;
+					width: 86%;
+					display: flex;
+					justify-content: flex-start;
 
-	.content_4 {}
+					.kongge {
+						width: 92%;
+					}
 
-	.content_4 .item {
-		width: 50%;
-	}
+					.disflex {
+						.shuxian {
+							width: 3px;
+							height: 1rem;
+							background: #000000;
+							margin-left: 1.5px;
+						}
+					}
+				}
 
-	.content_4 .item .img2 {
-		width: 6.42rem;
-		height: 2.97rem;
-		border-radius: .2rem;
-	}
+				._flex2 {
+					width: 1.45rem;
+				}
+			}
+		}
 
-	.content_3,
-	.content_4 {
-		width: 70%;
-		height: 6.2rem;
-		margin: 0 auto;
-		background: #FFFFFF;
-		display: flex;
-		justify-content: space-between;
-	}
+		.content_7_bg {
+			height: 4.78rem;
 
-	.content_3 .item {
-		width: 47%;
-	}
+			._team {
+				height: 3.68rem;
+				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				margin: .42rem .2rem .2rem .2rem;
 
-	.content_3 .item .font1,
-	.content_4 .item .font1 {
-		margin: .47rem 0;
-		background: #6783E9;
-		width: 1.3rem;
-		height: .25rem;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		color: #FFFFFF;
-		line-height: .25rem;
-		text-align: center;
-	}
+				._item {
+					width: 3.6rem;
+					height: 3.68rem;
+					background: #FFFFFF;
+					position: relative;
+					cursor: pointer;
 
-	.content_4 .item .font1 {
-		width: .55rem;
-		padding: .07rem;
-	}
+					._img {
+						width: 100%;
+						height: 100%;
+						z-index: 9;
+						position: absolute;
+						top: 0;
+						left: 0;
+					}
 
-	.content_3 .item .img0 {
-		vertical-align: middle;
-		width: 3.77rem;
-		height: 1.59rem;
-	}
+					@keyframes mymove {
+						from {
+							bottom: 0;
+						}
 
-	.list {
-		margin-top: .3rem;
-	}
+						to {
+							bottom: 50%;
+						}
+					}
 
-	.content_4 .list {
-		margin-top: .25rem;
-	}
+					._info {
+						background: #000000;
+						opacity: 0.7;
+						text-align: center;
+						padding: 2%;
 
-	.list .text1 {
-		text-align: left;
-		font-size: .13rem;
-		font-family: Alibaba PuHuiTi;
-		font-weight: 400;
-		color: #999999;
-		line-height: .25rem;
-	}
+						font-size: 40rpx;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						color: #FFFFFF;
+						animation: mymove 5s;
+						animation-timing-function: ease;
+						z-index: 100;
+					}
 
-	.content_4 .list .text1 {
-		text-align: right;
-	}
+					._text {
+						width: 98%;
+						z-index: 10;
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						color: #FFFFFF;
+						font-family: PingFang SC;
+						font-weight: 500;
+						line-height: .35rem;
+						background: #000000;
+						opacity: 0.7;
+						text-align: left;
+						font-size: 40rpx;
+						padding-left: 2%;
+						display: block;
+					}
 
-	.content_3 .item .img1,
-	.content_4 .item .img1 {
-		vertical-align: middle;
-		width: .15rem;
-		height: .14rem;
-		margin-right: .15rem;
-	}
+					._text1 {
+						line-height: .35rem;
+						display: block;
+						font-size: 30rpx;
+						font-weight: 400;
+						color: #999999;
+					}
+				}
+			}
+		}
 
-	.content_4 .item .img1 {
-		margin-right: 0rem;
-		margin-left: .15rem;
-	}
-
-	.content_3 .item .img2 {
-		vertical-align: middle;
-		width: 4.47rem;
-		height: 6.16rem;
 	}
 </style>
