@@ -1,0 +1,919 @@
+<template>
+	<view class="mobilebg">
+		<view class="indexapp">
+			<view class="newbg">
+				<mobile-nav></mobile-nav>
+			</view>
+		</view>
+		<view class="content_1_bg">
+			<view class="_title">DBook writer</view>
+			<image src="/static/index/writer.svg" class="_img"></image>
+			<view class="_desc">
+				<view class="p">DBook provides a completely autonomous and decentralized environment
+					for literary creators from all over the world. Creating on dBook allows you
+					to create freely without sharing revenue, signing exclusive agreements or
+					exclusivity agreements.</view>
+				<view class="p">
+					You can make your books into NFT by dBook and publish them on the
+					market. After readers buy them, you will directly get all the profits. At
+					the same time, when some readers resell your works, you can get a certain
+					percentage of royalties.</view>
+				<view class="p">At the same time, you can actually interact with readers through on-chain
+					reviews to get their feedback on your work.</view>
+			</view>
+		</view>
+		<view class="content_2_bg">
+			<view class="_title">dBook Writer's Earnings</view>
+			<view class="_desc">dBook is an open-ended gathering place for writers, where you
+				can not only create freely, but also get objective benefits.</view>
+			<view class="_someone">
+				<view class="_item">
+					<image src="/static/index/earn1.svg" class="_img"></image>
+					<view class="_text">100% share of income</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn2.svg" class="_img"></image>
+					<view class="_text">100% gift yield</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn3.svg" class="_img"></image>
+					<view class="_text">All rights reserved</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn4.svg" class="_img"></image>
+					<view class="_text">Author Subsidy Program</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn5.svg" class="_img"></image>
+					<view class="_text">100% share of income</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn6.svg" class="_img"></image>
+					<view class="_text">100% gift yield</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn7.svg" class="_img"></image>
+					<view class="_text">All rights reserved</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+				<view class="_item">
+					<image src="/static/index/earn8.svg" class="_img"></image>
+					<view class="_text">Author Subsidy Program</view>
+					<view class="_text1">I am a writer</view>
+				</view>
+			</view>
+		</view>
+		<view class="content_3_bg">
+			<view class="_title">How am I going to be a dBook writer</view>
+			<view class="_desc">dBook is an open-ended writer's gathering place, <br />
+				you can complete the writer's identification through the following steps, it takes about 2-3 minutes
+			</view>
+			<view class="_step">
+				<image src="/static/index/metamask.svg" class="_img"></image>
+				<view class="_center">
+					<text class="_text">STEP1</text>
+					<text class="_infoitem">Link your wallet-MetaMask</text>
+				</view>
+				<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
+					MetaMask <text class="_color">(go to the Google WebShop) </text>
+					or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
+					links to install or learn.</view>
+				<view class="_bottom" v-if="!address">
+					<button class="_btn" @click="toMetamask()">Link wallets</button>
+				</view>
+				<view class="_bottom" v-if="address">
+					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
+						{{address | strAddress}}
+						<image src="/static/index/up.svg" class="upicon"></image>
+					</button>
+					<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
+					<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+				</view>
+			</view>
+			<view class="_step">
+				<image src="/static/index/media.svg" class="_img"></image>
+				<view class="_center">
+					<text class="_text">STEP2</text>
+					<text class="_infoitem">Connect your social media</text>
+				</view>
+				<view class="_detail">Once you've completed the first step, connect your social media, Twitter,
+					and LinkedIn choose one of the two. Clicking on Link will ask you to send
+					the specified content in your social media account, in order to verify the
+					identity owner of that social media.</view>
+				<view class="_bottom" v-if="isAuthTweets == false">
+					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
+				</view>
+				<view class="_bottom" v-if="isAuthTweets == true">
+					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">AuthenticationOk
+						<image src="/static/index/up.svg" class="upicon"></image>
+					</button>
+					<button v-if="authBtn" class="_btn _btn2" @click="toRevalidate('twitter')">Revalidation</button>
+				</view>
+			</view>
+			<view class="_step">
+				<image src="/static/index/verify.svg" class="_img"></image>
+				<view class="_center">
+					<text class="_text">STEP3</text>
+					<text class="_infoitem">Verify social media and become an author</text>
+				</view>
+				<view class="_detail">After completing the second step, select your associated social media method,
+					click the corresponding verification button, and automatically activate the
+					author's publishing permission after detecting the identity consistency.</view>
+				<view class="_bottom" v-if="isLinkedIn == false">
+					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
+				</view>
+				<view class="_bottom" v-if="isLinkedIn == true">
+					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">AuthenticationOk
+						<image src="/static/index/up.svg" class="upicon"></image>
+					</button>
+					<button v-if="authLinkedBtn" class="_btn _btn2"
+						@click="toRevalidate('linkedin')">Revalidation</button>
+				</view>
+			</view>
+		</view>
+		<mobile-bottom></mobile-bottom>
+		<uni-popup ref="certifyPopup" type="center">
+			<view class="certify">
+				<view class="title">
+					Certification of twitter
+				</view>
+				<view class="con">
+					<view class="_text">
+						You are obtaining author authentication and need to send the following tweet to prove Twitter's
+						identity
+					</view>
+					<textarea maxlength="1500" v-model="tcontent" type="text" class="input-style _height"
+						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
+					<button class="btnSend" @click="toSend('twitter')">SEND</button>
+				</view>
+			</view>
+		</uni-popup>
+		<uni-popup ref="authPopup" type="center">
+			<view class="auth">
+				<view class="title">
+					Change your Twitter authentication
+				</view>
+				<view class="con">
+					<view class="_text">If you need to change the Twitter authentication of your current Ethereum
+						identity, the change will not
+						affect the writer publishing function</view>
+					<view class="btnview">
+						<button class="btnCancel" @click="toCancel('twitter')">CANCEL</button>
+						<button class="btnReplace" @click="toReplace('twitter')">REPLACE</button>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
+		<uni-popup ref="linkedPopup" type="center">
+			<view class="certify">
+				<view class="title">
+					Certification of LinkedIn
+				</view>
+				<view class="con">
+					<view class="_text">
+						You are obtaining author authentication and need to send the following tweet to prove LinkedIn's
+						identity
+					</view>
+					<textarea maxlength="1500" v-model="lcontent" type="text" class="input-style _height"
+						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
+					<button class="btnSend" @click="toSend('linkedin')">SEND</button>
+				</view>
+			</view>
+		</uni-popup>
+		<uni-popup ref="authLinkedPopup" type="center">
+			<view class="auth">
+				<view class="title">
+					Change your LinkedIn authentication
+				</view>
+				<view class="con">
+					<view class="_text">If you need to change the LinkedIn authentication of your current Ethereum
+						identity, the change will not
+						affect the writer publishing function</view>
+					<view class="btnview">
+						<button class="btnCancel" @click="toCancel('linkedin')">CANCEL</button>
+						<button class="btnReplace" @click="toReplace('linkedin')">REPLACE</button>
+					</view>
+				</view>
+			</view>
+		</uni-popup>
+
+	</view>
+</template>
+
+<script>
+	import {
+		auth,
+		share,
+		verify,
+		login,
+		postNonce,
+		logout
+	} from '@/common/api.js';
+	import common from '@/common/common.js';
+	import wallet from '@/common/wallet.js';
+	import mobileBottom from '@/components/mobilebottom.vue';
+	import mobileNav from '@/components/mobilenav.vue';
+	export default {
+		components: {
+			mobileBottom,
+			mobileNav
+		},
+		data() {
+			return {
+				address: '',
+				screenWidth:null,
+				isAuthTweets: false,
+				isLinkedIn: false,
+				walletsBtn: false,
+				authBtn: false,
+				authLinkedBtn: false,
+				tcontent: '',
+				lcontent: '',
+				type: '', //twitter或linkedin
+				isAuth: false, //是否授权
+				oauth_token: '', //验证twitter url 带过来的参数
+				oauth_verifier: '', //验证twitter url 带过来的参数
+				code: '', //验证linkedin url 带过来的参数
+				state: '', //验证linkedin url 带过来的参数
+			};
+		},
+		filters: {
+			strAddress: function(val) {
+				return common.getAddress(val, 12); //从0下标开始的8个字符
+			},
+		},
+		onLoad(option) {
+			let that = this;
+			that.type = common.getQueryString('type') || option.type;
+			that.oauth_token = common.getQueryString('oauth_token') || option.oauth_token;
+			that.oauth_verifier = common.getQueryString('oauth_verifier') || option.oauth_verifier;
+			that.isAuth = common.getQueryString('isAuth') || option.isAuth;
+			that.code = common.getQueryString('code') || option.code;
+			that.state = common.getQueryString('state') || option.state;
+		},
+		watch: {
+			//监听页面屏幕宽度
+			screenWidth: function(n, o) {
+				if (n >= 1024) {
+					uni.navigateTo({
+						url: '/pages/index/create'
+					})
+					console.log('屏幕宽度大于1024了')
+				} 
+			}
+		},
+		mounted() {
+			let that = this;
+			//网页可见区域宽
+			that.screenWidth = document.body.clientWidth;
+			//使用window.onresize方法获取屏幕尺寸；
+			window.onresize = () => {
+				return (() => {
+					that.screenWidth = document.body.clientWidth;
+				})()
+			}
+			if (common.getStorage("token") && common.getStorage('address')) {
+				that.address = common.getStorage('address');
+			}
+			that.verifyfun();
+		},
+		methods: {
+			/**
+			 * 验证状态
+			 */
+			verifyfun() {
+				let that = this;
+				common.showLoading();
+				verify().then(res => {
+					console.log(res);
+					if (res && res.statusCode === 200) {
+						that.isAuthTweets = res.data.twitter;
+						that.isLinkedIn = res.data.linkedin;
+						//如果已经完成验证则弹框 twitter modal
+						if (that.type == 'twitter' && that.isAuth && !that.isAuthTweets) {
+							that.$refs.certifyPopup.open();
+						} else if (that.type == 'linkedin' && that.isAuth && !that.isLinkedIn) {
+							//如果已经完成验证则弹框 linkedin modal
+							that.$refs.linkedPopup.open();
+						}
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 去授权登陆
+			 * @param {Object} type twitter或linkedin
+			 */
+			toAuthenticate(type) {
+				let that = this;
+				let token = common.getStorage('token');
+				if(!that.address || !token){
+					common.showModal('please connect wallet');
+					return;
+				}
+				common.showLoading();
+				let params = {
+					type: type
+				}
+				auth(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 201) {
+						let data = res.data;
+						//检测到http 则直接跳转url
+						if (data && data.auth_uri.indexOf('http') > -1) {
+							window.location.href = data.auth_uri;
+						}
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 发送
+			 * @param {Object} type twitter或linkedin
+			 */
+			toSend(type) {
+				let that = this;
+				let params = {}
+				//twitter调用接口的参数
+				if (type == 'twitter') {
+					if (!that.tcontent) {
+						common.showModal(
+							"You are obtaining author authentication and need to send the following tweet to prove Twitter's identity"
+						);
+						return false;
+					}
+					params = {
+						type: type,
+						oauth_token: that.oauth_token,
+						oauth_verifier: that.oauth_verifier,
+						content: that.tcontent
+					}
+				} else if (type == 'linkedin') {
+					//linkedin调用接口的参数
+					if (!that.lcontent) {
+						common.showModal(
+							"You are obtaining author authentication and need to send the following tweet to prove LinkedIn's identity"
+						);
+						return false;
+					}
+					params = {
+						type: type,
+						code: that.code,
+						state: that.state,
+						content: that.lcontent
+					}
+				}
+				common.showLoading();
+				share(params).then(res => {
+					console.log(res);
+					if (res && res.statusCode === 201) {
+						let data = res.data;
+						//验证成功了
+						if (data && data.status == 'success') {
+							uni.showToast({
+								title: 'verify succeeded',
+								duration: 3000,
+								icon: false
+							});
+							//更新状态
+							if (type == 'twitter') {
+								that.isAuthTweets = true;
+								that.$refs.certifyPopup.close();
+							} else if (type == 'linkedin') {
+								that.isLinkedIn = true;
+								that.$refs.linkedPopup.close();
+							}
+						}
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 重新验证
+			 * @param {Object} type twitter或linkedin
+			 */
+			toRevalidate(type) {
+				let that = this;
+				if (type == 'twitter') {
+					that.$refs.authPopup.open();
+				} else if (type == 'linkedin') {
+					that.$refs.authLinkedPopup.open();
+				}
+			},
+			/**
+			 * 切换路线
+			 */
+			toSwitch() {
+				//切换账户为重新选择连接钱包
+				let that = this;
+				that.address = '';
+			},
+			/**
+			 * 获取nonce
+			 */
+			postNonceFun(address) {
+				return new Promise((resolve, reject) => {
+					//获取nonce
+					postNonce({
+						address: address
+					}).then(res => {
+						console.log(res);
+						if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+							let nonce = res.data.nonce;
+							resolve(nonce);
+						} else {
+							common.showModal(res);
+							reject(res);
+						}
+					}).catch(data => {
+						reject(data);
+					}).finally(() => {
+						common.hideLoading(0);
+					})
+				});
+			},
+			/**
+			 * 连接钱包
+			 */
+			async toMetamask() {
+				let that = this;
+				common.showLoading();
+				let nonce = "";
+				let signature = "";
+				let provider = "";
+				//目标链ID Polygon 链不一致，就询问切换网络，没有就创建网络 然后连接
+				provider = await wallet.connectWeb3();
+
+				if (provider) {
+					let signer = await wallet.getSigner(provider);
+					if (signer) {
+						let address = await wallet.getAddress(signer);
+						if (address) {
+							//获取nonce
+							that.postNonceFun(address)
+								.then(async nonce => {
+									console.log("nonce", nonce);
+									//获取签名
+									signature = await wallet.getSignature(signer, nonce);
+									//地址和签名都不为空
+									if (typeof(address) === 'string' && typeof(signature) === 'string') {
+										let params = {
+											address: address,
+											signature: signature
+										}
+										//拿到address和signature去登录
+										login(params).then(res => {
+											console.log(res);
+											if (res && (res.statusCode === 200 || res.statusCode ===
+													201)) {
+												that.address = address;
+												//存储address
+												common.setStorage("address", address);
+												//存储token
+												common.setStorage("token", res.data.token);
+											} else {
+												common.showModal(res);
+											}
+										}).catch(error => {
+											common.showModal(error);
+										}).finally(() => {
+											common.hideLoading(0);
+										})
+									} else {
+										common.hideLoading(0);
+									}
+								})
+								.catch(errData => {
+									console.log('reject', errData);
+									common.hideLoading(0);
+									common.showModal(errData);
+								});
+						} else {
+							common.hideLoading(0);
+							common.showModal('the address is empty');
+						}
+					} else {
+						common.hideLoading(0);
+						common.showModal('the signer is empty');
+					}
+				} else {
+					common.hideLoading(0);
+					common.showModal('the provider is empty');
+				}
+			},
+			/**
+			 * 断开连接
+			 */
+			async toBreak() {
+				//清除存储缓存输入数据
+				let that = this;
+				common.showLoading();
+				await wallet.disconnect();
+				logout().then(res => {
+					console.log(res);
+					if (res && (res.statusCode === 200 || res.statusCode === 201)) {
+						uni.showToast({
+							title: 'disconnect succeeded',
+							duration: 3000,
+							icon: false
+						});
+						that.isConnect = false;
+						that.address = "";
+						common.removeStorage('address');
+						common.removeStorage('token');
+					} else {
+						common.showModal(res);
+					}
+				}).catch(error => {
+					common.showModal(error);
+				}).finally(() => {
+					common.hideLoading(0);
+				})
+			},
+
+			/**
+			 * 连接钱包弹出下拉框
+			 */
+			toMetamaskOk() {
+				let that = this;
+				if (that.walletsBtn) {
+					that.walletsBtn = false;
+				} else {
+					that.walletsBtn = true;
+				}
+			},
+			/**
+			 * 弹出下拉框是否重新验证
+			 * @param {Object} type twitter或linkedin
+			 */
+			toAuthOk(type) {
+				let that = this;
+				if (type == 'twitter') {
+					if (that.authBtn) {
+						that.authBtn = false;
+					} else {
+						that.authBtn = true;
+					}
+				} else if (type == 'linkedin') {
+					if (that.authLinkedBtn) {
+						that.authLinkedBtn = false;
+					} else {
+						that.authLinkedBtn = true;
+					}
+				}
+			},
+
+			/**
+			 * 取消重新验证
+			 * @param {Object} type twitter或linkedin
+			 */
+			toCancel(type) {
+				let that = this;
+				if (type == 'twitter') {
+					that.$refs.authPopup.close();
+				} else if (type == 'linkedin') {
+					that.$refs.authLinkedPopup.close();
+				}
+			},
+			/**
+			 * 重新验证
+			 */
+			toReplace(type) {
+				let that = this;
+				that.toAuthenticate(type);
+			},
+			/**
+			 * 关闭弹框
+			 * @param {Object} Popup
+			 */
+			closePopup(Popup) {
+				let that = this;
+				that.$refs[Popup].close();
+			},
+		}
+	}
+</script>
+
+<style scoped lang="scss">
+	.mobilebg {
+		background-color: #fff;
+		color: #000000;
+
+		._position {
+			position: relative;
+		}
+
+		.upicon {
+			position: absolute;
+			top: 50%;
+			right: 0.08rem;
+			margin-top: -4px;
+			width: 22rpx;
+			height: 18rpx;
+		}
+
+		.certify,
+		.auth {
+			width: 90%;
+			height: auto;
+			background: #FFFFFF;
+			border-radius: .15rem;
+			padding: .25rem .15rem .1rem;
+			position: relative;
+			text-align: center;
+			margin: 0 auto;
+			.title {
+				line-height: .25rem;
+				font-size: 16px;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				color: #000000;
+				margin-bottom: .4rem;
+			}
+
+			.con {
+				width: 90%;
+				margin: 20rpx auto;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 400;
+
+				.btnview {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin-bottom: .25rem;
+
+					.btnCancel {
+						width: 45%;
+						line-height: 114rpx;
+						height: 114rpx;
+						border: 1px solid #7D5321;
+						border-radius: .1rem;
+						background-color: #fff;
+						color: #7D5321;
+					}
+
+					.btnReplace {
+						width: 45%;
+						line-height: 114rpx;
+						height: 114rpx;
+						border: 1px solid #7D5321;
+						background: #7D5321;
+						color: #FFFFFF;
+						border-radius: .1rem;
+					}
+				}
+
+				._text {
+					font-size: 16px;
+					color: #000000;
+					font-weight: 400;
+					line-height: 45rpx;
+					margin-bottom: .3rem;
+				}
+
+				.input-style {
+					font-size: 16px;
+					background: #F8F8F8;
+					border-radius: .1rem;
+					text-align: left;
+					line-height: .5rem;
+					text-indent: .1rem;
+				}
+
+				._height {
+					height: .9rem;
+					line-height: .3rem;
+					overflow-y: scroll;
+					margin-bottom: .2rem;
+				}
+
+				.btnSend {
+					height: 114rpx;
+					line-height: 114rpx;
+					background: #7D5321;
+					border-radius: .1rem;
+					font-size: 16px;
+					font-family: Alibaba PuHuiTi;
+					font-weight: 400;
+					color: #FEFEFE;
+					margin-bottom: .3rem;
+				}
+			}
+		}
+
+		.indexapp {
+			width: 100%;
+			margin: 0 auto;
+			height: 35vh;
+			background-image: url('/static/index/mcreatebg.png');
+			background-repeat: no-repeat;
+			background-position: center 0;
+			background-size: cover;
+
+			.newbg {
+				width: 100%;
+				margin: 0 auto;
+			}
+		}
+
+		.content_1_bg {
+			width: 92%;
+			margin: .3rem auto 0;
+			overflow: hidden;
+			background-color: #fff;
+			text-align: center;
+
+			._title {
+				font-size: 24px;
+				line-height: .35rem;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				text-align: center;
+			}
+
+			._desc {
+				width: 92%;
+				margin: .2rem auto 0;
+				line-height: .25rem;
+				font-family: PingFang SC;
+				font-weight: 400;
+				text-align: center;
+				color: #000;
+
+				.p {
+					margin-top: .15rem;
+				}
+			}
+
+			._img {
+				width: 3rem;
+				height: 1.6rem;
+				margin-top: .2rem;
+				border-radius: 20px;
+			}
+		}
+
+		.content_2_bg,
+		.content_3_bg {
+			width: 90%;
+			margin: .3rem auto 0;
+			height: auto;
+			overflow: hidden;
+			background-color: #fff;
+
+			._title {
+				font-size: 24px;
+				line-height: .35rem;
+				font-family: Alibaba PuHuiTi;
+				font-weight: 800;
+				text-align: center;
+			}
+
+			._desc {
+				width: 92%;
+				margin: .2rem auto .3rem;
+				line-height: .25rem;
+				font-family: PingFang SC;
+				font-weight: 400;
+				text-align: center;
+				color: #747474;
+			}
+
+			._someone {
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				margin-top: .3rem;
+				font-family: PingFang SC;
+
+				._item {
+					width: 48%;
+					background: #FFF5E5;
+					text-align: center;
+					margin-bottom: .12rem;
+					padding-bottom: .2rem;
+
+					._img {
+						margin-top: 0.1rem;
+						width: 1rem;
+						height: 1rem;
+					}
+
+					._text {
+						margin-top: .1rem;
+						font-size: 16px;
+						font-weight: 500;
+					}
+
+					._text1 {
+						margin-top: .1rem;
+						font-size: 16px;
+						font-weight: 400;
+						color: #999999;
+					}
+				}
+			}
+		}
+
+		.content_3_bg {
+			._step {
+				width: 96%;
+				margin: .3rem auto;
+				background: #FFFFFF;
+				box-shadow: 0px 3px 20px 0px rgba(36, 41, 47, 0.1000);
+				border-radius: .1rem;
+				text-align: center;
+
+				._img {
+					margin-top: .2rem;
+					width: 1rem;
+					height: 1rem;
+				}
+
+				._center {
+					font-family: PingFang SC;
+					margin-top: .1rem;
+
+					._text {
+						padding: .02rem .1rem;
+						line-height: .23rem;
+						background: #4D9BEC;
+						border-radius: .05rem;
+						font-size: 16px;
+						font-weight: 500;
+						color: #FFFFFF;
+						text-align: center;
+					}
+
+					._infoitem {
+						margin-left: .15rem;
+						line-height: .23rem;
+						font-size: 14px;
+						font-weight: 500;
+						color: #000000;
+						text-align: left;
+					}
+				}
+
+				._detail {
+					width: 90%;
+					margin: 0 auto;
+					font-size: 14px;
+					font-weight: 400;
+					color: #787878;
+					line-height: .23rem;
+					margin-top: 0.2rem;
+
+					._color {
+						color: #4D74EB;
+					}
+				}
+
+				._bottom {
+					padding: .3rem 0;
+
+					._btn {
+						width: 90%;
+						height: .45rem;
+						background: #E2E2E2;
+						border-radius: .05rem;
+						border: none;
+						font-family: PingFang SC;
+						font-weight: 400;
+						color: #363636;
+						text-align: center;
+					}
+
+					._btn1 {
+						background: #C8A168;
+						border-radius: .05rem;
+						color: #FFFFFF;
+						margin-top: .2rem;
+					}
+				}
+			}
+		}
+	}
+</style>

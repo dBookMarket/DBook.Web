@@ -44,7 +44,7 @@ body {
 	cursor: pointer;
 }
 
-.navbg,
+.navbg,.newbg,
 .bootombg {
 	width: 100%;
 }
@@ -97,7 +97,15 @@ body {
 	width: 1.22rem;
 	height: .25rem;
 }
-
+.nav .newtext{
+	font-family: Alibaba PuHuiTi;
+	font-weight: 400;
+	color: #7D5321;
+	cursor: pointer;
+	text-decoration: none;
+	flex: 1;
+	font-size: 0.18rem;
+}
 .nav .text {
 	font-family: Alibaba PuHuiTi;
 	font-weight: 500;
@@ -112,9 +120,12 @@ body {
 	text-align: center;
 	font-size: 0.18rem;
 	color: #000000;
-	font-weight: bold;
 }
-
+.nav .newcenter{
+	flex: 3;
+	display: flex;
+	justify-content: space-between;
+}
 .nav .right {
 	flex: 1;
 	text-align: right;
@@ -143,10 +154,16 @@ body {
 	background: #6783E9;
 }
 
-:root .button {
+:root .button,:root .newbutton {
 	filter: none;
 }
-
+.newbutton{
+	width: 2rem;
+	font-weight: 400;
+	background: #7D5321;
+	border-radius: 0.1rem;
+	color: #FFE1B4;
+}
 
 uni-textarea {
 	width: 100%;

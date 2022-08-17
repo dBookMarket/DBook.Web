@@ -7,6 +7,12 @@
 			}
 		}
         ,{
+			"path": "pages/index/indexold",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		}
+        ,{
             "path" : "pages/index/market",
             "style" :                                                                                    
             {
@@ -57,6 +63,70 @@
         }
         ,{
             "path" : "pages/index/apply",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/create",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/gants",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/earn",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/mindex",
+            "style" :                                                                                    
+            {
+                "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/mcreate",
+            "style" :                                                                                    
+            {
+               "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/mearn",
+            "style" :                                                                                    
+            {
+                 "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/mexplore",
+            "style" :                                                                                    
+            {
+                 "navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/mgants",
             "style" :                                                                                    
             {
                 "navigationStyle": "custom"

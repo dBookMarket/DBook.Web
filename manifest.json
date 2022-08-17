@@ -80,7 +80,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/api" : {
-                    "target" : "http://test.ddid.info",
+                    "target" : "https://testnet.dbookmarket.com",
                     "changeOrigin" : true,
                     "secure" : false
                 }

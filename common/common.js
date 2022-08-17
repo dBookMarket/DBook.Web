@@ -20,6 +20,20 @@ export default {
 		});
 	},
 	/**
+	 * 跳转页面
+	 * @param {Object} url
+	 */
+	toUrl: function(url) {
+		//白皮书
+		if(url == 'whitepaper'){
+			window.location.href = 'https://ddid.gitbook.io/dbookmarket-bai-pi-shu/'
+		}else{
+			uni.navigateTo({
+				url: '/pages/index/'+url
+			})
+		}
+	},
+	/**
 	 * @校验手机
 	 * @param value
 	 * @returns {boolean}
@@ -45,11 +59,17 @@ export default {
 		}, time);
 	},
 	/**
+	 * 
 	 * @param {Object} val
+	 * @param {Object} num
+	 * 
 	 */
-	getAddress: function(val) {
+	getAddress: function(val,num) {
+		if(!num){
+			num = 8;
+		}
 		if (!val) return false;
-		return val.substr(0, 8) + "...";
+		return val.substr(0, num) + "...";
 	},
 	
 	/**
