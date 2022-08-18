@@ -28,16 +28,6 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import './css/index.css';
-	.yyzCanvas {
-		position: fixed;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		z-index: 200000;
-		background-color: #24180e;
-		opacity: 1;
-	}
 	uni-page-wrapper{
 		background-color: #ffffff;
 	}

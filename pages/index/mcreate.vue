@@ -620,7 +620,16 @@
 	.mobilebg {
 		background-color: #fff;
 		color: #000000;
-
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
+		}
 		._position {
 			position: relative;
 		}
