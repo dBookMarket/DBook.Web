@@ -396,10 +396,9 @@
 
 			._info {
 				display: flex;
-				justify-content: space-between;
-				width: 96%;
 				margin: .3rem auto;
-
+				justify-content: center;
+				align-items: center;
 				._center {
 					.earn {
 						width: 1.45rem;

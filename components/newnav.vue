@@ -56,7 +56,12 @@
 			 * @param {Object} url
 			 */
 			toUrl(url) {
-				common.toUrl(url);
+				let link = url;
+				//twitter or linkedin url's params
+				if(url == 'create'){
+					link = url + location.search;
+				}
+				common.toUrl(link);
 			},
 			/**
 			 * 下载弹框

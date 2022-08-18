@@ -8,7 +8,7 @@ const platformContractAddress = '0xa2EBc3CeF87654B20B8096C8e37C55515362c068';
 let connection;
 const web3Modal = new Web3Modal({
 	// network: 'mainnet',
-	network: 'Polygon Mainnet',
+	network: 'mumbai',
 	cacheProvider: true
 });
 let chainId = ""
@@ -569,26 +569,27 @@ export default {
 				await window.ethereum.request({
 					method: 'wallet_switchEthereumChain',
 					params: [{
-						chainId: "0x89" //web3.utils.numberToHex(137) // 目标链ID 主链 Polygon Mainnet： 0x89  测试链： 0x13881
+						chainId: "0x13881" //web3.utils.numberToHex(137) // 目标链ID 主链 Polygon Mainnet： 0x89  测试链： 0x13881
 					}]
 				});
 				return that.connect();
 			} catch (e) {
 				//是4902，说明请求的链没有被 MetaMask 添加，需要通过 请求添加wallet_addEthereumChain
 				// This error code indicates that the chain has not been added to MetaMask.
-				// 主链 Polygon Mainnet： 0x89  测试链： 0x13881
-				if (e.code === 4902) {
+				// 主链 Polygon Mainnet： 0x89  测试链： 0x13881 80001
+				if (e.code === 4902 || e.code === -32603) {
 					try {
 						await window.ethereum.request({
 							method: 'wallet_addEthereumChain',
 							params: [
 								{
-								  "chainId":'0x89',
-								  "chainName":'Polygon Mainnet',
-								  "rpcUrls":['https://rpc-mainnet.maticvigil.com']
-								 /* "chainId":'0x13881',
+								  // "chainId":'0x89',
+								  // "chainName":'Polygon Mainnet',
+								  // "rpcUrls":['https://rpc-mainnet.maticvigil.com']
+								  //https://matic-mumbai.chainstacklabs.com
+								  "chainId":'0x13881',
 								  "chainName":'Mumbai',
-								  "rpcUrls":['https://rpc-mumbai.matic.today'] */
+								  "rpcUrls":['https://rpc-mumbai.maticvigil.com']//https://rpc-mumbai.matic.today
 							}]
 						});
 					 return	that.connect();

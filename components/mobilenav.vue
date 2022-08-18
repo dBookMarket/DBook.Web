@@ -80,7 +80,12 @@
 			 * @param {Object} url
 			 */
 			toUrl(url){
-				common.toUrl(url);
+				let link = url;
+				//twitter or linkedin url's params
+				if(url == 'mcreate'){
+					link = url + location.search;
+				}
+				common.toUrl(link);
 			}
 		}
 	}
@@ -204,6 +209,8 @@
 			top: 0;
 			width: 100vw;
 			z-index: 49998;
+			overflow-x: hidden;
+			overflow-y: scroll;
 			transition: right .8s ease;
 		}
 
@@ -218,6 +225,9 @@
 			font-size: 30px;
 			font-weight: 700;
 			margin: .4rem 0;
+		}
+		.menu-mask .menu-item:last-child{
+			padding-bottom: 0.5rem;
 		}
 	}
 </style>

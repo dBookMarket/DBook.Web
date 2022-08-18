@@ -216,6 +216,9 @@
 				</view>
 			</view>
 		</uni-popup>
+		<view class="loading" v-show="loading">
+			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+		</view>
 	</view>
 </template>
 
@@ -232,6 +235,7 @@
 	import wallet from '@/common/wallet.js';
 	import bottom from '@/components/newbottom.vue';
 	import newNav from '@/components/newnav.vue';
+	import SVGA from "svgaplayerweb"
 	export default {
 		components: {
 			bottom,
@@ -245,7 +249,9 @@
 				walletsBtn: false,
 				authBtn: false,
 				authLinkedBtn: false,
+				loading: true,
 				screenWidth: null,
+				svgaInfo: '/static/index/loading.svga',
 				tcontent: '',
 				lcontent: '',
 				type: '', //twitter或linkedin
@@ -260,8 +266,9 @@
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n < 1024) {
+					console.log(location.search)
 					uni.navigateTo({
-						url: '/pages/index/mcreate'
+						url: '/pages/index/mcreate'+location.search
 					})
 					console.log('屏幕宽度小于1024了')
 				}
@@ -274,12 +281,13 @@
 		},
 		onLoad(option) {
 			let that = this;
-			that.type = common.getQueryString('type') || option.type;
-			that.oauth_token = common.getQueryString('oauth_token') || option.oauth_token;
-			that.oauth_verifier = common.getQueryString('oauth_verifier') || option.oauth_verifier;
-			that.isAuth = common.getQueryString('isAuth') || option.isAuth;
-			that.code = common.getQueryString('code') || option.code;
-			that.state = common.getQueryString('state') || option.state;
+			that.type = option.type || common.getQueryString('type');
+			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token') ;
+			that.oauth_verifier = option.oauth_verifier || common.getQueryString('oauth_verifier');
+			that.isAuth = option.isAuth || common.getQueryString('isAuth') ;
+			that.code = option.code || common.getQueryString('code');
+			that.state = option.state || common.getQueryString('state');
+			console.log(JSON.stringify(option))
 		},
 		mounted() {
 			let that = this;
@@ -294,6 +302,11 @@
 			if (common.getStorage("token") && common.getStorage('address')) {
 				that.address = common.getStorage('address');
 			}
+			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function() {
+				that.loading = false;
+			}, 3000);
 			//校验授权状态
 			that.verifyfun();
 		},
@@ -355,6 +368,26 @@
 					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 播放svga
+			 */
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
 				})
 			},
 			/**
@@ -506,6 +539,8 @@
 												common.setStorage("address", address);
 												//存储token
 												common.setStorage("token", res.data.token);
+												//再次校验授权状态
+												that.verifyfun();
 											} else {
 												common.showModal(res);
 											}
@@ -556,6 +591,8 @@
 						that.address = "";
 						common.removeStorage('address');
 						common.removeStorage('token');
+						//再次校验授权状态
+						that.verifyfun();
 					} else {
 						common.showModal(res);
 					}
@@ -752,7 +789,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 7.68rem;
+			height: 5rem;
 			background-image: url('/static/index/createbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -765,9 +802,10 @@
 		}
 
 		.content_1_bg {
-			width: 90%;
+			width: 100%;
+			max-width: 1150px;
 			margin: .65rem auto 0;
-			height: 3.5rem;
+			height: auto;
 			overflow: hidden;
 			background-color: #fff;
 			display: flex;
@@ -806,7 +844,8 @@
 
 		.content_2_bg,
 		.content_3_bg {
-			width: 90%;
+			width: 100%;
+			max-width: 1150px;
 			margin: .65rem auto 0;
 			height: auto;
 			overflow: hidden;

@@ -250,19 +250,20 @@
 		},
 		onLoad(option) {
 			let that = this;
-			that.type = common.getQueryString('type') || option.type;
-			that.oauth_token = common.getQueryString('oauth_token') || option.oauth_token;
-			that.oauth_verifier = common.getQueryString('oauth_verifier') || option.oauth_verifier;
-			that.isAuth = common.getQueryString('isAuth') || option.isAuth;
-			that.code = common.getQueryString('code') || option.code;
-			that.state = common.getQueryString('state') || option.state;
+			that.type = option.type || common.getQueryString('type');
+			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token') ;
+			that.oauth_verifier = option.oauth_verifier || common.getQueryString('oauth_verifier');
+			that.isAuth = option.isAuth || common.getQueryString('isAuth') ;
+			that.code = option.code || common.getQueryString('code');
+			that.state = option.state || common.getQueryString('state');
+			console.log(JSON.stringify(option))
 		},
 		watch: {
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n >= 1024) {
 					uni.navigateTo({
-						url: '/pages/index/create'
+						url: '/pages/index/create'+location.search
 					})
 					console.log('屏幕宽度大于1024了')
 				} 

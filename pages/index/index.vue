@@ -55,14 +55,34 @@
 				forms a unique Web3 + Web2 mode through its internal circulation and opening up some economic systems of
 				Web2.</view>
 			<view class="_someone">
-				<view class="_item">
-					<image src="/static/index/author.svg" class="_img"></image>
-					<view class="_text">I am a writer</view>
+				<view class="_container">
+					<view class="_item">
+						<view class="front">
+							<image src="/static/index/author.svg" class="_img"></image>
+							<view class="_text">I am a writer</view>
+						</view>
+						<view class="back" @click="toUrl('writer')">
+							<view class="_text">I am a writer</view>
+							<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
+								mode through its internal circulation and opening up some economic
+								systems of Web2.</view>
+						</view>
+					</view>
 				</view>
 				<view class="_jianju"></view>
-				<view class="_item">
-					<image src="/static/index/reader.svg" class="_img"></image>
-					<view class="_text">I am a reader</view>
+				<view class="_container">
+					<view class="_item">
+						<view class="front">
+							<image src="/static/index/reader.svg" class="_img"></image>
+							<view class="_text">I am a reader</view>
+						</view>
+						<view class="back" @click="toUrl('reader')">
+							<view class="_text">I am a reader</view>
+							<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
+								mode through its internal circulation and opening up some economic
+								systems of Web2.</view>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -320,11 +340,11 @@
 		},
 		data() {
 			return {
-				down1: true,
-				down2: true,
-				down3: true,
-				down4: true,
-				down5: true,
+				down1: false,
+				down2: false,
+				down3: false,
+				down4: false,
+				down5: false,
 				person1: false,
 				person2: false,
 				person3: false,
@@ -341,7 +361,7 @@
 						url: '/pages/index/mindex'
 					})
 					console.log('屏幕宽度小于1024了')
-				} 
+				}
 			}
 		},
 		mounted() {
@@ -376,6 +396,15 @@
 							alert("动画停止了！！！")
 						});
 					})
+				})
+			},
+			/**
+			 * 跳转页面
+			 * @param {Object} type
+			 */
+			toUrl(type) {
+				uni.navigateTo({
+					url: '/pages/index/earn?active=' + type
 				})
 			},
 			/**
@@ -447,7 +476,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 7.68rem;
+			height: 5rem;
 			background-image: url('/static/index/bg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -460,7 +489,8 @@
 		}
 
 		.content_1_bg {
-			width: 90%;
+			width: 100%;
+			max-width: 1150px;
 			z-index: 10;
 			position: relative;
 			margin: -.3rem auto 0;
@@ -495,9 +525,10 @@
 		.content_4_bg,
 		.content_5_bg,
 		.content_7_bg {
-			width: 90%;
+			width: 100%;
+			max-width: 1150px;
 			margin: .65rem auto 0;
-			height: 5.5rem;
+			height: auto;
 			overflow: hidden;
 			background-color: #fff;
 
@@ -520,17 +551,38 @@
 				display: flex;
 				justify-content: space-between;
 				margin: .4rem .2rem 0 .2rem;
+				padding-bottom: 0.4rem;
 
 				._jianju {
 					flex: .1;
 				}
 
+				._container {
+					perspective: 1000;
+					transform-style: preserve-3d;
+				}
+
+				._container,
+				.front,
+				.back {
+					width: 5rem;
+					height: 3.25rem;
+				}
+
+				._container:hover ._item {
+					transform: rotateY(180deg);
+				}
+
 				._item {
-					flex: 1;
+					width: 5rem;
 					height: 3.25rem;
 					background: #FFFFFF;
 					text-align: center;
+					cursor: pointer;
 					box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
+					position: relative;
+					transition: 0.6s;
+					transform-style: preserve-3d;
 
 					._img {
 						margin-top: 0.4rem;
@@ -544,12 +596,47 @@
 						font-family: Alibaba PuHuiTi;
 						font-weight: 800;
 					}
+
+					.front,
+					.back {
+						position: absolute;
+						top: 0px;
+						left: 0px;
+						backface-visibility: hidden;
+					}
+
+					.front {
+						z-index: 2;
+					}
+
+					.back {
+						transform: rotateY(-180deg);
+
+						._text {
+							margin-top: .3rem;
+							padding-left: .3rem;
+							text-align: left;
+							color: #7D5321;
+						}
+					}
+
+					._colortext {
+						width: 80%;
+						margin-top: .35rem;
+						padding-left: .3rem;
+						font-size: 15px;
+						font-family: PingFang SC;
+						font-weight: 400;
+						color: #000000;
+						text-align: left;
+						line-height: .35rem;
+					}
 				}
 			}
 		}
 
 		.content_3_bg {
-			height: 6.5rem;
+			height: auto;
 			text-align: center;
 
 			._circle {

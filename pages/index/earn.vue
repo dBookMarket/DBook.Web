@@ -274,12 +274,16 @@
 
 		</view>
 		<bottom></bottom>
+		<view class="loading" v-show="loading">
+			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+		</view>
 	</view>
 </template>
 
 <script>
 	import bottom from '@/components/newbottom.vue';
 	import newNav from '@/components/newnav.vue';
+	import SVGA from "svgaplayerweb"
 	export default {
 		components: {
 			bottom,
@@ -288,7 +292,9 @@
 		data() {
 			return {
 				isPublish: true,
-				screenWidth:null
+				screenWidth:null,
+				loading: true,
+				svgaInfo: '/static/index/loading.svga',
 			};
 		},
 		watch: {
@@ -302,6 +308,17 @@
 				} 
 			}
 		},
+		onLoad(option) {
+			let that = this;
+			if(option.active){
+				//当前选中的
+				if(option.active == 'writer'){
+					that.isPublish = true;
+				}else{
+					that.isPublish = false;
+				}
+			}
+		},
 		mounted() {
 			let that = this;
 			//网页可见区域宽
@@ -312,8 +329,30 @@
 					that.screenWidth = document.body.clientWidth;
 				})()
 			}
+			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function() {
+				that.loading = false;
+			}, 3000);
 		},
 		methods: {
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
+				})
+			},
 			/**
 			 * 选择方式
 			 * @param {Object} type
@@ -335,10 +374,20 @@
 		background-color: #fff;
 		font-size: 30rpx;
 		color: #000000;
-
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
+		}
 		.indexapp {
 			width: 100%;
-			margin: 0 auto;height: 7.68rem;
+			margin: 0 auto;
+			height: 5rem;
 			background-image: url('/static/index/earnbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -351,7 +400,8 @@
 		}
 
 		._navbtn {
-			width: 90%;
+			width: 100%;
+			max-width: 1150px;
 			margin: .65rem auto 0;
 			font-family: Alibaba PuHuiTi;
 			text-align: center;
@@ -379,7 +429,8 @@
 		}
 
 		.content_1_bg {
-			width: 80%;
+			width: 100%;
+			max-width: 1100px;
 			margin: .65rem auto 0;
 			height: auto;
 			overflow: hidden;
@@ -395,10 +446,10 @@
 
 			._info {
 				display: flex;
-				justify-content: space-between;
-				width: 80%;
-				margin: .6rem auto;
-
+				justify-content: center;
+				margin: 0.6rem auto;
+				align-items: center;
+				width: 92%;
 				._center {
 					.earn {
 						width: 4.5rem;

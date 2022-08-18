@@ -23,8 +23,8 @@
 			<text>Publisher & Author</text>
 		</view>
 		<view class="second">
-			<view class="text" :class="{'active':id==-3}" @click="toUrl(4)">Publisher/Author apply</view>
-			<view class="text" :class="{'active':id==-4}" @click="toUrl(4)">Copyright verification</view>
+			<view class="text" :class="{'active':id==-3}" @click="toPage('earn')">Publisher/Author apply</view>
+			<view class="text" :class="{'active':id==-4}" @click="toPage('create')">Copyright verification</view>
 			<view class="text" :class="{'active':id==-5}" @click="toSettled()">Publish DBook</view>
 		</view>
 		<view class="first">
@@ -82,7 +82,7 @@
 				}
 			},
 			/**
-			 * 跳转地址
+			 * 跳转外部地址
 			 * @param {Object} type
 			 */
 			toUrl(type) {
@@ -90,17 +90,22 @@
 				common.removeStorage('currentId');
 				if (type == 1) {
 					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
-					/*uni.navigateTo({
-						url: '/pages/index/openWeb?url='+encodeURIComponent(url)
-					}) */
 				} else if (type == 2) {
 					url = 'https://www.youtube.com/channel/UC8T2Hv_OhEozP52_MSpRu2g';
 				} else if (type == 3) {
 					url = 'https://medium.com/@ddid_io';
-				} else if (type == 4) {
-					url = 'https://docs.google.com/forms/d/e/1FAIpQLSdIWjyAFFCo2qNxoPOPUHeRN8w9zguD0_iEpt65FV5VqcdjuA/viewform?usp=sf_link';
 				}
 				window.location.href = url;
+			},
+			/**
+			 * 跳转页面
+			 * @param {Object} url
+			 */
+			toPage(url){
+				if(!url){return;}
+				uni.navigateTo({
+					url: '/pages/index/'+url
+				})
 			},
 			/**
 			 * 推荐页

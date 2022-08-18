@@ -254,11 +254,11 @@
 						text: "Horry Bi Cofounder"
 					}
 				],
-				down1: true,
-				down2: true,
-				down3: true,
-				down4: true,
-				down5: true,
+				down1: false,
+				down2: false,
+				down3: false,
+				down4: false,
+				down5: false,
 				person1: false,
 				person2: false,
 				person3: false,
@@ -376,7 +376,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 35vh;
+			height: 3.5rem;
 			background-image: url('/static/index/mbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -390,6 +390,7 @@
 
 		.content_1_bg {
 			width: 92%;
+			max-width: 750px;
 			z-index: 10;
 			position: relative;
 			margin: -.06rem auto 0;
@@ -452,6 +453,7 @@
 		.content_5_bg,
 		.content_7_bg {
 			width: 92%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			overflow: hidden;
 			background-color: #fff;
