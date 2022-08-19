@@ -202,7 +202,9 @@
 				</view>
 			</view>
 		</uni-popup>
-
+		<view class="loading" v-show="loading">
+			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+		</view>
 	</view>
 </template>
 
@@ -219,6 +221,7 @@
 	import wallet from '@/common/wallet.js';
 	import mobileBottom from '@/components/mobilebottom.vue';
 	import mobileNav from '@/components/mobilenav.vue';
+	import SVGA from "svgaplayerweb"
 	export default {
 		components: {
 			mobileBottom,
@@ -227,7 +230,9 @@
 		data() {
 			return {
 				address: '',
-				screenWidth:null,
+				loading: true,
+				screenWidth: null,
+				svgaInfo: '/static/index/loading.svga',
 				isAuthTweets: false,
 				isLinkedIn: false,
 				walletsBtn: false,
@@ -251,9 +256,9 @@
 		onLoad(option) {
 			let that = this;
 			that.type = option.type || common.getQueryString('type');
-			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token') ;
+			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token');
 			that.oauth_verifier = option.oauth_verifier || common.getQueryString('oauth_verifier');
-			that.isAuth = option.isAuth || common.getQueryString('isAuth') ;
+			that.isAuth = option.isAuth || common.getQueryString('isAuth');
 			that.code = option.code || common.getQueryString('code');
 			that.state = option.state || common.getQueryString('state');
 			console.log(JSON.stringify(option))
@@ -263,10 +268,10 @@
 			screenWidth: function(n, o) {
 				if (n >= 1024) {
 					uni.navigateTo({
-						url: '/pages/index/create'+location.search
+						url: '/pages/index/create' + location.search
 					})
 					console.log('屏幕宽度大于1024了')
-				} 
+				}
 			}
 		},
 		mounted() {
@@ -282,6 +287,11 @@
 			if (common.getStorage("token") && common.getStorage('address')) {
 				that.address = common.getStorage('address');
 			}
+			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function() {
+				that.loading = false;
+			}, 3000);
 			that.verifyfun();
 		},
 		methods: {
@@ -319,7 +329,7 @@
 			toAuthenticate(type) {
 				let that = this;
 				let token = common.getStorage('token');
-				if(!that.address || !token){
+				if (!that.address || !token) {
 					common.showModal('please connect wallet');
 					return;
 				}
@@ -612,6 +622,27 @@
 				let that = this;
 				that.$refs[Popup].close();
 			},
+			/**
+			 * 播放svga
+			 */
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
+				})
+			},
+
 		}
 	}
 </script>
@@ -653,6 +684,7 @@
 			position: relative;
 			text-align: center;
 			margin: 0 auto;
+
 			.title {
 				line-height: .25rem;
 				font-size: 16px;
@@ -736,7 +768,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 35vh;
+			height: 3.5rem;
 			background-image: url('/static/index/mcreatebg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -750,6 +782,7 @@
 
 		.content_1_bg {
 			width: 92%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			overflow: hidden;
 			background-color: #fff;
@@ -764,7 +797,7 @@
 			}
 
 			._desc {
-				width: 92%;
+				width: 90%;
 				margin: .2rem auto 0;
 				line-height: .25rem;
 				font-family: PingFang SC;
@@ -788,6 +821,7 @@
 		.content_2_bg,
 		.content_3_bg {
 			width: 90%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			height: auto;
 			overflow: hidden;

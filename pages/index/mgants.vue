@@ -91,7 +91,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 35vh;
+			height: 3.5rem;
 			background-image: url('/static/index/msupportbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -105,6 +105,7 @@
 
 		.content_1_bg {
 			width: 100%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			height: auto;
 			overflow: hidden;
@@ -129,7 +130,7 @@
 				font-weight: 400;
 				text-align: center;
 				margin: 0.2rem auto;
-				width: 94%;
+				width: 75%;
 			}
 		}
 	}

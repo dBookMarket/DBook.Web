@@ -339,7 +339,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 35vh;
+			height: 3.5rem;
 			background-image: url('/static/index/mearnbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -353,6 +353,7 @@
 
 		._navbtn {
 			width: 98%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			font-family: Alibaba PuHuiTi;
 			text-align: center;
@@ -381,6 +382,7 @@
 
 		.content_1_bg {
 			width: 100%;
+			max-width: 750px;
 			margin: .3rem auto 0;
 			height: auto;
 			overflow: hidden;

@@ -75,7 +75,8 @@
 
 		.content_1_bg {
 			width: 90%;
-			margin: .5rem auto 0;
+			max-width: 750px;
+			margin: .5rem auto .5rem;
 			height: auto;
 			overflow: hidden;
 			background-color: #fff;

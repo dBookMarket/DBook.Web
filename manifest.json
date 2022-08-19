@@ -71,8 +71,8 @@
     "vueVersion" : "2",
     "h5" : {
         "router" : {
-            "mode" : "hash",
-            "base" : "./"
+            "mode" : "history",
+            "base" : "/"
         },
         "title" : "dbook",
         "template" : "",
@@ -84,7 +84,8 @@
                     "changeOrigin" : true,
                     "secure" : false
                 }
-            }
+            },
+            "https" : false
         }
     }
 }

@@ -671,7 +671,7 @@
 		background-color: #fff;
 		font-size: 30rpx;
 		color: #000000;
-
+		
 		._position {
 			position: relative;
 		}
@@ -684,16 +684,7 @@
 			width: 22rpx;
 			height: 18rpx;
 		}
-		.yyzCanvas {
-			position: fixed;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			z-index: 200000;
-			background-color: #24180e;
-			opacity: 1;
-		}
+
 		.certify,
 		.auth {
 			width: 8rem;
@@ -1013,6 +1004,16 @@
 					}
 				}
 			}
+		}
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
 		}
 	}
 </style>
