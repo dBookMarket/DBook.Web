@@ -71,7 +71,7 @@
 		</view>
 		<view class="content_3_bg">
 			<view class="_title">How am I going to be a dBook writer</view>
-			<view class="_desc">dBook is an open-ended writer's gathering place, <br />
+			<view class="_desc">dBook is an open-ended writer's gathering place, 
 				you can complete the writer's identification through the following steps, it takes about 2-3 minutes
 			</view>
 			<view class="_step">
@@ -81,19 +81,21 @@
 					<text class="_infoitem">Link your wallet-MetaMask</text>
 				</view>
 				<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
-					MetaMask <text class="_color">(go to the Google WebShop) </text>
+					MetaMask <text class="_color" @click="toGoogle()">(go to the Google WebShop) </text>
 					or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
 					links to install or learn.</view>
 				<view class="_bottom" v-if="!address">
 					<button class="_btn" @click="toMetamask()">Link wallets</button>
 				</view>
-				<view class="_bottom" v-if="address">
+				<view class="_bottom _position" v-if="address">
 					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
 						{{address | strAddress}}
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
-					<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					<view class="_float">
+						<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
+						<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					</view>
 				</view>
 			</view>
 			<view class="_step">
@@ -109,11 +111,13 @@
 				<view class="_bottom" v-if="isAuthTweets == false">
 					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
 				</view>
-				<view class="_bottom" v-if="isAuthTweets == true">
+				<view class="_bottom _position" v-if="isAuthTweets == true">
 					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authBtn" class="_btn _btn2" @click="toRevalidate('twitter')">Revalidation</button>
+					<view class="_float">
+					   <button v-if="authBtn" class="_btn _btn2" @click="toRevalidate('twitter')">Revalidation</button>
+					</view>
 				</view>
 			</view>
 			<view class="_step">
@@ -128,12 +132,27 @@
 				<view class="_bottom" v-if="isLinkedIn == false">
 					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
 				</view>
-				<view class="_bottom" v-if="isLinkedIn == true">
+				<view class="_bottom _position" v-if="isLinkedIn == true">
 					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authLinkedBtn" class="_btn _btn2"
+					<view class="_float">
+						<button v-if="authLinkedBtn" class="_btn _btn2"
 						@click="toRevalidate('linkedin')">Revalidation</button>
+					</view>
+				</view>
+			</view>
+			<view class="_step">
+				<view class="_left">
+					<image src="/static/index/settled.svg" class="_img"></image>
+				</view>
+				<view class="_center">
+					<text class="_text">STEP4</text>
+					<text class="_infoitem">SETTLED</text>
+					<view class="_detail">SETTLED BOOK</view>
+				</view>
+				<view class="_bottom">
+					<button class="_btn _btn1" @click="toSettled()">SETTLED</button>
 				</view>
 			</view>
 		</view>
@@ -291,7 +310,7 @@
 			//3秒关闭页面loading动画
 			setTimeout(function() {
 				that.loading = false;
-			}, 3000);
+			}, 1500);
 			that.verifyfun();
 		},
 		methods: {
@@ -321,6 +340,12 @@
 				}).finally(() => {
 					common.hideLoading(0);
 				})
+			},
+			/**
+			 * go to the Google WebShop
+			 */
+			toGoogle(){
+				window.location.href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
 			},
 			/**
 			 * 去授权登陆
@@ -431,6 +456,14 @@
 				} else if (type == 'linkedin') {
 					that.$refs.authLinkedPopup.open();
 				}
+			},
+			/**
+			 * 发布书籍
+			 */
+			toSettled(){
+				uni.navigateTo({
+					url: '/pages/index/settled'
+				})
 			},
 			/**
 			 * 切换路线
@@ -664,19 +697,17 @@
 		._position {
 			position: relative;
 		}
-
 		.upicon {
 			position: absolute;
-			top: 50%;
+			top: 30%;
 			right: 0.08rem;
-			margin-top: -4px;
 			width: 22rpx;
 			height: 18rpx;
 		}
 
 		.certify,
 		.auth {
-			width: 90%;
+			width: 300px;
 			height: auto;
 			background: #FFFFFF;
 			border-radius: .15rem;
@@ -708,8 +739,8 @@
 
 					.btnCancel {
 						width: 45%;
-						line-height: 114rpx;
-						height: 114rpx;
+						line-height: 100rpx;
+						height: 100rpx;
 						border: 1px solid #7D5321;
 						border-radius: .1rem;
 						background-color: #fff;
@@ -718,8 +749,8 @@
 
 					.btnReplace {
 						width: 45%;
-						line-height: 114rpx;
-						height: 114rpx;
+						line-height: 100rpx;
+						height: 100rpx;
 						border: 1px solid #7D5321;
 						background: #7D5321;
 						color: #FFFFFF;
@@ -782,7 +813,7 @@
 
 		.content_1_bg {
 			width: 92%;
-			max-width: 750px;
+			max-width: 400px;
 			margin: .3rem auto 0;
 			overflow: hidden;
 			background-color: #fff;
@@ -797,9 +828,10 @@
 			}
 
 			._desc {
-				width: 90%;
+				width: 100%;
+				
 				margin: .2rem auto 0;
-				line-height: .25rem;
+				line-height: .26rem;
 				font-family: PingFang SC;
 				font-weight: 400;
 				text-align: center;
@@ -811,8 +843,9 @@
 			}
 
 			._img {
-				width: 3rem;
-				height: 1.6rem;
+				width: 100%;
+				
+				height: 200px;
 				margin-top: .2rem;
 				border-radius: 20px;
 			}
@@ -821,7 +854,7 @@
 		.content_2_bg,
 		.content_3_bg {
 			width: 90%;
-			max-width: 750px;
+			max-width: 400px;
 			margin: .3rem auto 0;
 			height: auto;
 			overflow: hidden;
@@ -884,7 +917,7 @@
 		.content_3_bg {
 			._step {
 				width: 96%;
-				margin: .3rem auto;
+				margin: .2rem auto;
 				background: #FFFFFF;
 				box-shadow: 0px 3px 20px 0px rgba(36, 41, 47, 0.1000);
 				border-radius: .1rem;
@@ -936,7 +969,7 @@
 				}
 
 				._bottom {
-					padding: .3rem 0;
+					padding: .1rem 0;
 
 					._btn {
 						width: 90%;
@@ -949,14 +982,36 @@
 						color: #363636;
 						text-align: center;
 					}
-
+					._float{
+						 position: absolute;
+						 top:.75rem;
+						 z-index: 100;
+						 width: 100%;
+					}
+					._btn2 {
+						background: #FFE9C9;
+						color: #A17D48;
+						border: none;
+						border-radius: 0rem;
+						margin-top: .05rem;
+					}
+					
+					._btn3 {
+						background: #EED8B8;
+						margin-top: 0rem;
+						border-radius: 0rem;
+					}
 					._btn1 {
 						background: #C8A168;
 						border-radius: .05rem;
 						color: #FFFFFF;
 						margin-top: .2rem;
 					}
+					
 				}
+			}
+			._step:last-child{
+				margin-bottom: .6rem
 			}
 		}
 	}

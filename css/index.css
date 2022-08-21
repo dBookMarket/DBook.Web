@@ -103,8 +103,11 @@ body {
 	color: #7D5321;
 	cursor: pointer;
 	text-decoration: none;
-	flex: 1;
+	text-align: center;
 	font-size: 0.18rem;
+}
+.nav ._last{
+	margin-right: .2rem;
 }
 .nav .text {
 	font-family: Alibaba PuHuiTi;

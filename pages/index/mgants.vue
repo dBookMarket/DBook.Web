@@ -8,9 +8,8 @@
 		<view class="content_1_bg">
 			<view class="_title">$100,000 grant</view>
 			<view class="_desc">
-				The economic cycle designed by dBook can ensure that all parties can achieve a win-win situation. <br />
+				The economic cycle designed by dBook can ensure that all parties can achieve a win-win situation.
 				The ghostwriter DBK is interspersed in the whole economic system to achieve an orderly internal cycle,
-				<br />
 				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both
 				parties.
 			</view>
@@ -92,7 +91,7 @@
 			width: 100%;
 			margin: 0 auto;
 			height: 3.5rem;
-			background-image: url('/static/index/msupportbg.png');
+			background-image: url('/static/index/mgrantsbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
 			background-size: cover;
@@ -114,7 +113,13 @@
 
 			._welcome {
 				margin: .1rem auto;
-				width: 3.3rem;
+				max-width: 670px;
+				max-height: 360px;
+				width: 80%;
+				.yyzCanvas {
+					position: static;
+					
+				}
 			}
 
 			._title {
@@ -130,7 +135,7 @@
 				font-weight: 400;
 				text-align: center;
 				margin: 0.2rem auto;
-				width: 75%;
+				width: 80%;
 			}
 		}
 	}

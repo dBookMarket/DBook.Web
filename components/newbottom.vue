@@ -5,28 +5,42 @@
 			<image src="/static/index/discord.svg" mode="" class="img"></image>
 			<image src="/static/index/youtube.svg" mode="" class="img"></image>
 			<image src="/static/index/GitHub.svg" mode="" class="img"></image>
-			<button id="airdrop" class="button dbutton">Download the APP</button>
+			<button id="airdrop" class="button dbutton" @click="downloadnow()">Download the APP</button>
 		</view>
 		<view class="_info">
 			<image src="/static/index/email.svg" mode="" class="_email"></image>
 			<text class="_text">Developers：dev@ddid.io</text>
-			<text>Author consultation：dev@ddid.io</text>
+			<text>Author consultation：authors@dbookmarket.com</text>
 		</view>
 		<view class="_info">
 			<text class="_text">Copyright DDID LTD.2022 - All Rights Reserved</text>
 			|
 			<text class="_text1">Powered by DDID Laboratories Limited</text>
 		</view>
+		<download ref="mydownload"></download>
 	</view>
 </template>
 
 <script>
+	import download from '@/components/download.vue';
 	export default {
+		components:{
+			download
+		},
 		name: "newbottom",
 		data() {
 			return {
 
 			};
+		},
+		methods:{
+			/**
+			 * 下载弹框
+			 */
+			downloadnow(){
+				let that =this;
+				that.$refs.mydownload.download();
+			},
 		}
 	}
 </script>
@@ -37,14 +51,15 @@
 		margin: .65rem auto 0;
 		height: 2.4rem;
 		overflow: hidden;
-		background-image: url(/static/index/bottombg.png);
+		background-image: url('/static/index/bottombg.png');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
 		background-origin: border-box;
 
 		._info {
-			width: 40%;
+			max-width: 1150px;
+			width: 100%;
 			margin: .33rem auto 0;
 			display: flex;
 			justify-content: center;
@@ -70,7 +85,8 @@
 		}
 
 		._item {
-			width: 40%;
+			width: 90%;
+			max-width: 1150px;
 			margin: .5rem auto 0;
 			display: flex;
 			justify-content: center;

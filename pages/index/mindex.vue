@@ -6,7 +6,7 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">NOW JOIN IN MARING YOUR BOOK</view>
+			<view class="_title">NOW JOIN IN <br />MARING YOUR BOOK</view>
 			<view class="_desc">DBook is an e-book marketplace with SOCiaIF attributes.You can publish/trade your
 				own books, read them for money, and review them with other readers.</view>
 			<view class="_info">
@@ -27,16 +27,36 @@
 		</view>
 		<view class="content_2_bg">
 			<view class="_title">How to make money</view>
-			<view class="_desc">DBook, with a complete token model, <br />
+			<view class="_desc">DBook, with a complete token model,
 				forms a unique Web3 + Web2 mode through its internal circulation and opening up some economic systems of
 				Web2.</view>
-			<view class="_item">
-				<image src="/static/index/author.svg" class="_img"></image>
-				<view class="_text">I am a writer</view>
-			</view>
-			<view class="_item">
-				<image src="/static/index/reader.svg" class="_img"></image>
-				<view class="_text">I am a reader</view>
+			<view class="_container">
+				<view class="_item">
+					<view class="front" :class="isTopWriter  ? 'contain-Before' : ''" @click="handleBefore('writer')">
+						<image src="/static/index/author.svg" class="_img"></image>
+						<view class="_text">I am a writer</view>
+					</view>
+					<view class="back" :class="isTopWriter  ? 'contain-After' : ''" @click="handleAfter('writer')">
+						<view class="_text">I am a writer</view>
+						<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
+							mode through its internal circulation and opening up some economic
+							systems of Web2.</view>
+					</view>
+				</view>
+
+				<view class="_item">
+					<view class="front" :class="isTopReader  ? 'contain-Before' : ''" @click="handleBefore('reader')">
+						<image src="/static/index/reader.svg" class="_img"></image>
+						<view class="_text">I am a reader</view>
+					</view>
+					<view class="back" :class="isTopReader  ? 'contain-After' : ''" @click="handleAfter('reader')">
+						<view class="_text">I am a reader</view>
+						<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
+							mode through its internal circulation and opening up some economic
+							systems of Web2.</view>
+					</view>
+					
+				</view>
 			</view>
 		</view>
 		<view class="content_3_bg">
@@ -132,9 +152,9 @@
 		<view class="content_5_bg">
 			<view class="_title">Developed communities</view>
 			<view class="_desc">
-				DBook is managed in the DAO mode.<br />
+				DBook is managed in the DAO mode.
 				Users will release their own works after binding their social media accounts. Meanwhile, when it comes
-				to copyright disputes, <br />
+				to copyright disputes,
 				the random committee mode will be adopted for adjudication, and the shelf/shelf removal/freeze status of
 				books/authors will be managed
 			</view>
@@ -204,8 +224,8 @@
 		</view>
 		<view class="content_7_bg">
 			<view class="_title">Team</view>
-			<view class="_develop">
-				<woo-swiper :list="teamlist"></woo-swiper>
+			<view class="_develop" style="margin-top: 0.25rem;">
+				<woo-swiper :list="teamlist" :isTeam="true"></woo-swiper>
 			</view>
 		</view>
 		<mobile-bottom></mobile-bottom>
@@ -243,17 +263,22 @@
 				],
 				teamlist: [{
 						src: '/static/index/person1.png',
-						text: "Bill Joy Cofounder"
+						text: "Bill Joy",
+						minText:'Cofounder'
 					},
 					{
 						src: '/static/index/person2.png',
-						text: "Eeping neo Cofounder"
+						text: "Eeping neo",
+						minText:'Cofounder'
 					},
 					{
 						src: '/static/index/person3.png',
-						text: "Horry Bi Cofounder"
+						text: "Horry Bi",
+						minText:'Cofounder'
 					}
 				],
+				isTopWriter: false,
+				isTopReader: false,
 				down1: false,
 				down2: false,
 				down3: false,
@@ -262,9 +287,9 @@
 				person1: false,
 				person2: false,
 				person3: false,
-				loading:true,
-				screenWidth:null,//屏幕宽度
-				svgaInfo:'/static/index/loading.svga',
+				loading: true,
+				screenWidth: null, //屏幕宽度
+				svgaInfo: '/static/index/loading.svga',
 			};
 		},
 		watch: {
@@ -290,9 +315,9 @@
 			}
 			that.playSvg();
 			//3秒关闭页面loading动画
-			setTimeout(function(){
-			  that.loading = false;
-			},3000);
+			setTimeout(function() {
+				that.loading = false;
+			}, 1500);
 		},
 		methods: {
 			playSvg() {
@@ -311,6 +336,43 @@
 						});
 					})
 				})
+			},
+			/**
+			 * 幻灯片
+			 */
+			change(current){
+				let that = this;
+				console.log('current',current)
+			},
+			/**
+			 * 翻转180度
+			 * @param {Object} type 
+			 */
+			handleBefore(type) {
+				if (type=='writer') {
+					if(!this.isTopWriter){
+						this.isTopWriter = true
+					}
+				}else if(type=='reader'){
+					if(!this.isTopReader){
+						this.isTopReader = true
+					}
+				}
+			},
+			/**
+			 * 翻转180度还原
+			* @param {Object} type
+			*/
+			handleAfter(type) {
+				if (type=='writer') {
+					if(this.isTopWriter){
+						this.isTopWriter = false
+					}
+				}else if(type=='reader'){
+					if(this.isTopReader){
+						this.isTopReader = false
+					}
+				}
 			},
 			/**
 			 * 
@@ -363,16 +425,18 @@
 	.mobilebg {
 		background-color: #fff;
 		color: #000000;
+
 		.yyzCanvas {
-		    position: fixed;
-		    width: 100%;
-		    height: 100%;
-		    top: 0;
-		    left: 0;
-		    z-index: 200000;
-		    background-color: #24180e;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
 			opacity: 1;
 		}
+
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
@@ -401,22 +465,23 @@
 			._title {
 				width: 92%;
 				margin: 0.2rem auto;
-				font-size: 24px;
-				
-				font-family: Alibaba PuHuiTi;
-				font-weight: 800;
+				font-size: 25px;
+				line-height: .4rem;
 				color: #000000;
+				font-family: Alibaba PuHuiTi;
+				font-weight: bold;
 				text-align: center;
 			}
 
 			._desc {
 				width: 92%;
+				max-width: 375px;
 				margin: 0 auto .3rem;
 				text-align: center;
-				line-height: .25rem;
+				line-height: .28rem;
 				font-family: PingFang SC;
 				font-weight: 400;
-				color: #000000;
+				color: #996415;
 			}
 
 			._info {
@@ -467,7 +532,7 @@
 			}
 
 			._desc {
-				width: 92%;
+				width: 94%;
 				margin: .2rem auto .3rem;
 				line-height: .25rem;
 				font-family: PingFang SC;
@@ -476,13 +541,66 @@
 				color: #747474;
 			}
 
+			._container {
+				.front {
+					width: 100%;
+					height: 180px;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-repeat: no-repeat;
+					background-position: center center;
+					backface-visibility: hidden;
+					transition: 1.5s;
+				}
+
+				.back {
+					width: 100%;
+					height: 180px;
+					position: absolute;
+					top: 0;
+					left: 0;
+					transform: rotateY(-180deg);
+					backface-visibility: hidden;
+					transition: 1.5s;
+					._text {
+						margin-top: .15rem;
+						padding-left: .3rem;
+						text-align: left;
+						color: #7D5321;
+					}
+				}
+				._colortext {
+					width: 86%;
+					margin-top: .15rem;
+					padding-left: .3rem;
+					font-size: 15px;
+					font-family: PingFang SC;
+					font-weight: 400;
+					color: #000000;
+					text-align: left;
+					line-height: .2rem;
+				}
+				.contain-Before {
+					transform: rotateY(180deg);
+				}
+
+				.contain-After {
+					transform: rotateY(0deg);
+				}
+			}
+
 			._item {
 				margin: .3rem auto;
-				width: 90%;
+				width: 94%;
+				height: 180px;
 				background: #FFFFFF;
 				text-align: center;
 				box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 				padding-bottom: .3rem;
+				position: relative;
+				box-sizing: border-box;
+				cursor: pointer;
 
 				._img {
 					margin-top: 0.25rem;
@@ -516,9 +634,10 @@
 			}
 
 			._content {
-				margin: 0;
-				width: 100%;
+				margin: 0 auto;
+				width: 96%;
 				background: #FFFFFF;
+				padding: 0rem 0.05rem;
 
 				._itemcon {
 					background: #FFFFFF;
@@ -540,7 +659,7 @@
 					}
 
 					._mindesc {
-						padding: .1rem 0.05rem;
+						padding: .1rem 0.07rem;
 						line-height: .25rem;
 						background: #F4F4F4;
 					}
@@ -559,6 +678,7 @@
 
 		.content_6_bg {
 			width: 92%;
+			max-width: 750px;
 			margin: .1rem auto 0;
 			overflow: hidden;
 			background-color: #FFE1B4;

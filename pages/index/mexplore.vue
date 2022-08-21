@@ -13,9 +13,7 @@
 			</view>
 
 		</view>
-		<view class="bottom">
-			<mobile-bottom></mobile-bottom>
-		</view>
+		<mobile-bottom></mobile-bottom>
 	</view>
 </template>
 
@@ -68,10 +66,7 @@
 			height: 0.8rem;
 		}
 
-		.bottom {
-			position: fixed;
-			bottom: 0;
-		}
+		
 
 		.content_1_bg {
 			width: 90%;
@@ -83,7 +78,7 @@
 			text-align: center;
 
 			.search {
-				margin-top: .5rem;
+				margin-top: .4rem;
 				width: 1.2rem;
 				height: .9rem;
 			}
@@ -96,12 +91,13 @@
 			}
 
 			._desc {
+				width: 100%;
+				max-width: 375px;
 				line-height: .3rem;
 				font-family: PingFang SC;
 				font-weight: 400;
 				text-align: center;
-				margin-top: .3rem;
-				margin-bottom: .5rem;
+				margin: .3rem auto .4rem;
 			}
 		}
 	}

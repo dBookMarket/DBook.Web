@@ -7,7 +7,7 @@
 			<image src="/static/index/GitHub.svg" mode="" class="img"></image>
 		</view>
 		<view class="_item">
-			<button id="airdrop" class="button dbutton">Download the APP</button>
+			<button id="airdrop" class="button dbutton" @click="downloadnow()">Download the APP</button>
 		</view>
 		<view class="_info">
 			<image src="/static/index/email.svg" mode="" class="_email"></image>
@@ -16,7 +16,7 @@
 			<text class="_text">Developers：dev@ddid.io</text>
 		</view>
 		<view class="_info">
-			<text class="_text">Author consultation：dev@ddid.io</text>
+			<text class="_text">Author consultation：authors@dbookmarket.com</text>
 		</view>
 		<view class="_info _info1">
 			<text class="_text">Powered by DDID Laboratories Limited</text>
@@ -24,17 +24,30 @@
 		<view class="_info _info2">
 			<text class="_text">Copyright DDID LTD.2022 - All Rights Reserved</text>
 		</view>
-		
+		<mdownload ref="mydownload"></mdownload>
 	</view>
 </template>
 
 <script>
+	import mdownload from '@/components/mdownload.vue';
 	export default {
+		components:{
+			mdownload
+		},
 		name:"mobilebottom",
 		data() {
 			return {
 				
 			};
+		},
+		methods: {
+			/**
+			 * 下载弹框
+			 */
+			downloadnow(){
+				let that =this;
+				that.$refs.mydownload.download();
+			},
 		}
 	}
 </script>
@@ -74,17 +87,27 @@
 			}
 		}
 		._info1{
-			width: 52%;
+			width: 100%;
+			max-width: 375px;
 			text-align: center;
 			margin-top: .25rem;
+			._text{
+				color: #222;
+				font-size: 12px;
+			}
 		}
 		._info2{
-			width: 52%;
+			width: 100%;
+			max-width: 375px;
 			text-align: center;
 			margin-bottom: .2rem;
+			._text{
+				color: #222;
+				font-size: 12px;
+			}
 		}
 		._item {
-			margin: .25rem auto 0;
+			margin: .2rem auto;
 			display: flex;
 			justify-content: center;
 			align-items: center;

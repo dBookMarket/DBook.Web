@@ -23,7 +23,7 @@
 			<text>Publisher & Author</text>
 		</view>
 		<view class="second">
-			<view class="text" :class="{'active':id==-3}" @click="toPage('earn')">Publisher/Author apply</view>
+			<view class="text" :class="{'active':id==-3}" @click="toPage('create')">Publisher/Author apply</view>
 			<view class="text" :class="{'active':id==-4}" @click="toPage('create')">Copyright verification</view>
 			<view class="text" :class="{'active':id==-5}" @click="toSettled()">Publish DBook</view>
 		</view>

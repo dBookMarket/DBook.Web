@@ -274,12 +274,16 @@
 		</view>
 		
 		<mobile-bottom></mobile-bottom>
+		<view class="loading" v-show="loading">
+			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+		</view>
 	</view>
 </template>
 
 <script>
 	import mobileBottom from '@/components/mobilebottom.vue';
 	import mobileNav from '@/components/mobilenav.vue';
+	import SVGA from "svgaplayerweb"
 	export default {
 		components: {
 			mobileBottom,
@@ -312,8 +316,30 @@
 					that.screenWidth = document.body.clientWidth;
 				})()
 			}
+			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function() {
+				that.loading = false;
+			}, 1500);
 		},
 		methods: {
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
+				})
+			},
 			/**
 			 * 选择方式
 			 * @param {Object} type
@@ -335,7 +361,16 @@
 		background-color: #fff;
 		font-size: 16px;
 		color: #000000;
-
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
+		}
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
@@ -401,15 +436,17 @@
 				margin: .3rem auto;
 				justify-content: center;
 				align-items: center;
+				width: 98%;
 				._center {
 					.earn {
-						width: 1.45rem;
-						height: 2.7rem;
+						width: 1.3rem;
+						height: 2.5rem;
 					}
 				}
 
 				._left,
 				._right {
+					height: 2.7rem;
 					._item {
 						display: flex;
 						justify-content: flex-end;

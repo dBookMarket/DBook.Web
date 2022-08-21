@@ -8,42 +8,22 @@
 			<text class="newtext" @click="toUrl('earn')">EARN</text>
 			<text class="newtext" @click="toUrl('whitepaper')">WHITEPAPER</text>
 			<text class="newtext" @click="toUrl('create')">CREATE</text>
-			<text class="newtext" @click="toUrl('gants')">GRANTS</text>
+			<text class="newtext _last" @click="toUrl('gants')">GRANTS</text>
 		</view>
 		<view class="right">
-			<button id="airdrop" class="button newbutton" @click="download()">DOWNLOAD NOW</button>
+			<button id="airdrop" class="button newbutton" @click="downloadnow()">DOWNLOAD NOW</button>
 		</view>
-		<uni-popup ref="downloadPopup" type="center" :mask-click="false">
-			<view class="download">
-				<image class="closeimg" @click="closePopup()" src="/static/index/close.svg"></image>
-				<image src="/static/index/download.png" class="_download"></image>
-				<view class="_butflex">
-					<view class="_butitem">
-						<image src="/static/index/apple.svg" class="_apple"></image>
-						<view>
-							<view class="_toptext">Download on the</view>
-							<view class="_bottomtext">App Store</view>
-						</view>
-					</view>
-					<view class="_butitem">
-						<image src="/static/index/google.svg" class="_google"></image>
-						<view>
-							<view class="_toptext">GET IT ON</view>
-							<view class="_bottomtext">Google Play</view>
-						</view>
-					</view>
-					<view class="_qrcode">
-						<image src="/static/index/qrcode.svg" class="_qrcodeimg"></image>
-					</view>
-				</view>
-			</view>
-		</uni-popup>
+		<download ref="mydownload"></download>
 	</view>
 </template>
 
 <script>
 	import common from '@/common/common.js';
+	import download from '@/components/download.vue';
 	export default {
+		components:{
+			download
+		},
 		name: "newnav",
 		data() {
 			return {
@@ -63,20 +43,14 @@
 				}
 				common.toUrl(link);
 			},
+			
 			/**
 			 * 下载弹框
 			 */
-			download(){
+			downloadnow(){
 				let that =this;
-				that.$refs.downloadPopup.open('center');
+				that.$refs.mydownload.download();
 			},
-			/**
-			 * 关闭弹框
-			 */
-			closePopup(){
-				let that =this;
-				that.$refs.downloadPopup.close();
-			}
 		}
 	}
 </script>
@@ -84,7 +58,7 @@
 <style scoped lang="scss">
 	.nav {
 		top: 0;
-		position: absolute;
+		position: relative;
 		z-index: 101;
 		margin-left: 3%;
 		.newlogo{
@@ -124,6 +98,7 @@
 				._butitem{
 					width: 2.7rem;
 					height: .9rem;
+					cursor: pointer;
 					background: #FFFFFF;
 					border-radius: .15rem;
 					font-family: Alibaba PuHuiTi;

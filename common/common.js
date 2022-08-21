@@ -95,10 +95,10 @@ export default {
 			showCancel = false;
 		}
 		uni.showModal({
-			title: 'tip',
+			title: 'TIP',
 			content: msg,
-			cancelText:'cancel',
-			confirmText:'confirm',
+			cancelText:'CANCEL',
+			confirmText:'CONFIRM',
 			showCancel: showCancel
 		})
 	},

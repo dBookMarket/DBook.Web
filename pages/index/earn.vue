@@ -333,7 +333,7 @@
 			//3秒关闭页面loading动画
 			setTimeout(function() {
 				that.loading = false;
-			}, 3000);
+			}, 1500);
 		},
 		methods: {
 			playSvg() {
@@ -452,13 +452,14 @@
 				width: 92%;
 				._center {
 					.earn {
-						width: 4.5rem;
-						height: 7.8rem;
+						width: 3.2rem;
+						height: 6rem;
 					}
 				}
 
 				._left,
 				._right {
+					height: 6rem;
 					._item {
 						display: flex;
 						justify-content: flex-end;

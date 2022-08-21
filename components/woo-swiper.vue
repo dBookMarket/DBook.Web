@@ -1,22 +1,25 @@
 <template>
-	<div class="woo-swiper">
-		<uni-icons type="back"  size="30"  color="white" class="btn tc" :style="{opacity: opacity(0)}" @click="showPre()"></uni-icons>
+	<view class="woo-swiper">
+		<image src="/static/index/left.svg" class="btn tc" @click="showPre()"></image>
 		<view class="tc">
-			<swiper class="swiper" circular :indicator-dots="false" :autoplay="false" :interval="500000" :style="{height:height+50 +'upx'}"
+			<swiper class="swiper" circular :indicator-dots="false" :autoplay="false" :interval="500000" :style="{height:height+50 +'rpx'}"
 			:duration="duration" :current="current" :easing-function="easing" @change="change">
 				<swiper-item v-for="(i,k) in list" :key="k">
-					<view class="tc">
-						<image :src="i.src" mode="aspectFit" :style="{height:height+'upx', width:width+'upx'}"> </image>
-						<view class="text">
+					<view class="tc" :class="{'_float':isTeam}">
+						<image :src="i.src" mode="aspectFit" :style="{height:height+'rpx', width:width+'rpx'}"> </image>
+						<view class="text" v-if="!isTeam">
 							 {{i.text}}
+						</view>
+						<view class="_text" v-if="isTeam">
+							<text>{{i.text}}</text>
+							<text class="_text1">{{i.minText}}</text>
 						</view>
 					</view>
 				</swiper-item>
 			</swiper>
 		</view>
-		
-		<uni-icons type="forward" color="white" size="30" class="btn tc" :style="{opacity: opacity(list.length - 1)}" @click="showNext()"></uni-icons>
-	</div>
+		<image src="/static/index/right.svg" class="btn tc" @click="showNext()"></image>
+	</view>
 </template>
 
 <script>
@@ -36,22 +39,23 @@
 				height:{
 					type:Number,
 					default:()=>{
-						return 300;
+						return 400;
 					}
 				},
 				width:{
 					type:Number,
 					default:()=>{
-						return 300;
+						return 400;
 					}
+				},
+				isTeam:{
+					type: Boolean,
+					default: false
 				},
 				list:{
 					type:Array,
 					defualt: () => {
-						return [
-							{src:'https://cdn.uviewui.com/uview/demo/transition/fadeUp.png', text:"取件码:3HDKF7B4SZ"},
-							{src:'https://cdn.uviewui.com/uview/demo/transition/zoom.png', text:"取件码:9KSDDF84BD"},
-						]
+						return []
 					}
 				}
 			},
@@ -78,13 +82,15 @@
 					this.$emit('change',this.current);
 				},
 				showPre(){
+					console.log('this.current',this.current)
 					if(this.current == 0 ) {
-						this.current  = this.list.length-1
+						this.current  = this.list.length
 					}
 					this.current--;
 				},
 				showNext(){
-					if(this.current >= this.list.length-1 ) {
+					console.log('this.current',this.current)
+					if(this.current > this.list.length-1 ) {
 						this.current = 0;
 					}
 					this.current++;
@@ -102,8 +108,8 @@
 		align-items: center;
 		.fwb{
 			font-weight: bold;
-			padding: 0 5upx;
-			font-size: 2em;
+			padding: 0 5rpx;
+			font-size: 14px;
 		}
 		.color-red{
 			color: #FF4347;
@@ -115,19 +121,39 @@
 			text-align: center;
 			width: 30px;
 			height: 30px;
-			border-radius: 25upx;
-			background: rgba(61,61,61,0.4000);	// border: 1px #333 solid;
-			border-radius: 30px;
 			line-height: 30px;
 		}
 		.tc{
 			text-align: center;
-			.text{
-				font-size: 30upx;
-				font-family: PingFang SC;
-				font-weight: 400;
-				color: #000000;
-			}
+		}
+		._float{
+			position: relative;
+		}
+		._text {
+			width: 190px;
+			z-index: 10;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -100px;
+			color: #FFFFFF;
+			font-family: PingFang SC;
+			font-weight: 500;
+			line-height: .25rem;
+			background: #000000;
+			opacity: 0.7;
+			text-align: left;
+			font-size: 20px;
+			padding-left:10px;
+			display: block;
+		}
+		
+		._text1 {
+			line-height: .25rem;
+			display: block;
+			font-size: 15px;
+			font-weight: 400;
+			color: #999999;
 		}
 	}
 </style>

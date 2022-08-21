@@ -4,6 +4,7 @@
 			<view class="nav">
 				<view class="left" @click="toIndex()">
 					<image src="/static/img/logodbook.png" mode="" class="logo"></image>
+					<image src="/static/index/micon.svg" mode="" class="micon"></image>
 				</view>
 				<view class="center cflex">
 					<view class="search">
@@ -50,6 +51,10 @@
 					</view>
 				</view>
 			</view>
+		</view>
+		<view class="warn">
+			<image class="img" src="/static/index/warn.svg"></image>
+			<text class="_text">应用页面重新建设中，您仍能体验初期DEMO</text>
 		</view>
 		<uni-popup ref="popup" type="center" :mask-click="false">
 			<view class="read">
@@ -345,6 +350,16 @@
 		font-size: 28rpx;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
+		.left{
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+		}
+		.micon{
+			width: 1.5rem;
+			margin-left: 0.1rem;
+			height: 0.27rem;
+		}
 		.search {
 			width: 6rem;
 			height: .4rem;
@@ -413,7 +428,26 @@
 			}
 		}
 	}
-
+	.warn{
+		width: 100%;
+		height: 50rpx;
+		line-height: 50rpx;
+		text-align: center;
+		background: #FFEDED;
+		.img{
+			width: 30rpx;
+			height: 38rpx;
+			margin-right: .05rem;
+			vertical-align: middle;
+		}
+		._text{
+			font-size: 26rpx;
+			font-family: Alibaba PuHuiTi;
+			font-weight: 500;
+			color: #D02323;
+			line-height: 22px;
+		}
+	}
 	.read {
 		width: 5rem;
 		height: 3.2rem;

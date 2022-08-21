@@ -90,7 +90,7 @@
 			width: 100%;
 			margin: 0 auto;
 			height: 5rem;
-			background-image: url('/static/index/supportbg.png');
+			background-image: url('/static/index/grantsbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
 			background-size: cover;
@@ -112,6 +112,7 @@
 				margin: 0.5rem auto;
 				width: 12.1rem;
 				height: 6.4rem;
+				max-width: 1150px;
 			}
 			._title {
 				font-size: 100rpx;

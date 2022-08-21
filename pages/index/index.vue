@@ -378,24 +378,22 @@
 			//3秒关闭页面loading动画
 			setTimeout(function() {
 				that.loading = false;
-			}, 3000);
+			}, 1500);
 		},
 		methods: {
 			playSvg() {
 				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
 				const that = this
-				that.$nextTick(() => {
-					const player = new SVGA.Player('#yyzCanvas')
-					const parser = new SVGA.Parser('#yyzCanvas')
-					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
-					parser.load(that.svgaInfo, function(videoItem) {
-						player.setVideoItem(videoItem);
-						player.startAnimation();
-						player.clearsAfterStop = true; //player有很多属性，根据需要设置
-						player.onFinished(function() {
-							alert("动画停止了！！！")
-						});
-					})
+				const player = new SVGA.Player('#yyzCanvas')
+				const parser = new SVGA.Parser('#yyzCanvas')
+				//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+				parser.load(that.svgaInfo, function(videoItem) {
+					player.setVideoItem(videoItem);
+					player.startAnimation();
+					player.clearsAfterStop = true; //player有很多属性，根据需要设置
+					player.onFinished(function() {
+						alert("动画停止了！！！")
+					});
 				})
 			},
 			/**
@@ -745,7 +743,8 @@
 			}
 
 			._content {
-				width: 86%;
+				width: 100%;
+				max-width: 1150px;
 				margin: .5rem auto;
 				display: flex;
 				align-items: center;
@@ -761,7 +760,8 @@
 						height: 32rpx;
 						position: absolute;
 						top: -50rpx;
-						left: 25%;
+						left: 50%;
+						margin-left: -90px;
 					}
 
 					._item {
@@ -770,9 +770,8 @@
 						justify-content: center;
 
 						._imgicon {
-							width: 1.25rem;
-							height: 1.25rem;
-							margin-right: .2rem;
+							width: 125px;
+							height: 125px;
 						}
 
 					}
@@ -791,18 +790,18 @@
 					}
 
 					._text {
-						width: 1.25rem;
+						width: 125px;
+						height: 100px;
 						font-size: 30rpx;
 						font-family: PingFang SC;
 						font-weight: 400;
 						text-align: center;
 						margin-top: .15rem;
-						line-height: .26rem;
 					}
 
 					.bgtext {
-						width: 2.5rem;
-						line-height: .26rem;
+						width: 200px;
+						height: 100px;
 						background: #7D5321;
 						border-radius: 20px;
 						color: #FFE1B4;
@@ -810,7 +809,7 @@
 					}
 
 					._text1 {
-						width: 2.2rem
+						
 					}
 				}
 
@@ -851,7 +850,7 @@
 				margin: .42rem .2rem .2rem .2rem;
 
 				._item {
-					width: 3.6rem;
+					width: 30%;
 					height: 3.68rem;
 					background: #FFFFFF;
 					position: relative;

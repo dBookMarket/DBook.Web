@@ -85,20 +85,22 @@
 					<text class="_text">STEP1</text>
 					<text class="_infoitem">Link your wallet-MetaMask</text>
 					<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
-						MetaMask <text class="_color">(go to the Google WebShop) </text>
+						MetaMask <text class="_color" @click="toGoogle()">(go to the Google WebShop) </text>
 						or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
 						links to install or learn.</view>
 				</view>
 				<view class="_right" v-if="!address">
 					<button class="_btn" @click="toMetamask()">Link wallets</button>
 				</view>
-				<view class="_right" v-if="address">
-					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
+				<view class="_right _position" v-if="address">
+					<button class="_btn _btn1 _position" @mouseover="toMetamaskOkOver()" @click="toMetamaskOkOut()">
 						{{address | strAddress}}
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
-					<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					<view class="_float">
+						<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
+						<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					</view>
 				</view>
 			</view>
 			<view class="_step">
@@ -116,11 +118,11 @@
 				<view class="_right" v-if="isAuthTweets == false">
 					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
 				</view>
-				<view class="_right" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">AuthenticationOk
+				<view class="_right _position" v-if="isAuthTweets == true">
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('twitter')" @click="toAuthOkOut('twitter')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authBtn" class="_btn _btn2" @click="toRevalidate('twitter')">Revalidation</button>
+					<button v-if="authBtn" class="_btn _btn2 _float" @click="toRevalidate('twitter')">Revalidation</button>
 				</view>
 			</view>
 			<view class="_step">
@@ -137,14 +139,26 @@
 				<view class="_right" v-if="isLinkedIn == false">
 					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
 				</view>
-				<view class="_right" v-if="isLinkedIn == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">AuthenticationOk
+				<view class="_right _position" v-if="isLinkedIn == true">
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('linkedin')" @click="toAuthOkOut('linkedin')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authLinkedBtn" class="_btn _btn2"
+					<button v-if="authLinkedBtn" class="_btn _btn2 _float"
 						@click="toRevalidate('linkedin')">Revalidation</button>
 				</view>
-
+			</view>
+			<view class="_step">
+				<view class="_left">
+					<image src="/static/index/settled.svg" class="_img"></image>
+				</view>
+				<view class="_center">
+					<text class="_text">STEP4</text>
+					<text class="_infoitem">SETTLED</text>
+					<view class="_detail">SETTLED BOOK</view>
+				</view>
+				<view class="_right">
+					<button class="_btn _btn1" @click="toSettled()">SETTLED</button>
+				</view>
 			</view>
 		</view>
 		<bottom></bottom>
@@ -306,7 +320,7 @@
 			//3秒关闭页面loading动画
 			setTimeout(function() {
 				that.loading = false;
-			}, 3000);
+			}, 1500);
 			//校验授权状态
 			that.verifyfun();
 		},
@@ -469,6 +483,14 @@
 				}
 			},
 			/**
+			 * 发布书籍
+			 */
+			toSettled(){
+				uni.navigateTo({
+					url: '/pages/index/settled'
+				})
+			},
+			/**
 			 * 切换路线
 			 */
 			toSwitch() {
@@ -602,39 +624,50 @@
 					common.hideLoading(0);
 				})
 			},
-
+			/**
+			 * go to the Google WebShop
+			 */
+			toGoogle(){
+				window.location.href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
+			},
 			/**
 			 * 连接钱包弹出下拉框
 			 */
-			toMetamaskOk() {
+			toMetamaskOkOver() {
 				let that = this;
-				if (that.walletsBtn) {
-					that.walletsBtn = false;
-				} else {
-					that.walletsBtn = true;
-				}
+				that.walletsBtn = true;
+			},
+			/**
+			 * 连接钱包关闭下拉框
+			 */
+			toMetamaskOkOut() {
+				let that = this;
+				that.walletsBtn = false;
 			},
 			/**
 			 * 弹出下拉框是否重新验证
 			 * @param {Object} type twitter或linkedin
 			 */
-			toAuthOk(type) {
+			toAuthOkOver(type) {
 				let that = this;
 				if (type == 'twitter') {
-					if (that.authBtn) {
-						that.authBtn = false;
-					} else {
-						that.authBtn = true;
-					}
+					that.authBtn = true;
 				} else if (type == 'linkedin') {
-					if (that.authLinkedBtn) {
-						that.authLinkedBtn = false;
-					} else {
-						that.authLinkedBtn = true;
-					}
+					that.authLinkedBtn = true;
 				}
 			},
-
+			/**
+			 * 关闭下拉框是否重新验证
+			 * @param {Object} type twitter或linkedin
+			 */
+			toAuthOkOut(type) {
+				let that = this;
+				if (type == 'twitter') {
+					that.authBtn = false;
+				} else if (type == 'linkedin') {
+					that.authLinkedBtn = false;
+				}
+			},
 			/**
 			 * 取消重新验证
 			 * @param {Object} type twitter或linkedin
@@ -675,7 +708,11 @@
 		._position {
 			position: relative;
 		}
-
+		._float{
+			 position: absolute;
+			 top:.65rem;
+			 z-index: 100;
+		}
 		.upicon {
 			position: absolute;
 			top: 50%;
@@ -687,7 +724,7 @@
 
 		.certify,
 		.auth {
-			width: 8rem;
+			width: 5.5rem;
 			height: auto;
 			background: #FFFFFF;
 			border-radius: .15rem;
@@ -926,7 +963,7 @@
 				._center {
 					flex: 4;
 					font-family: PingFang SC;
-
+					margin-right: 0.4rem;
 					._text {
 						padding: .02rem .1rem;
 						line-height: .3rem;
@@ -953,10 +990,10 @@
 						color: #787878;
 						line-height: .25rem;
 						margin-top: 0.2rem;
-						width: 55%;
 
 						._color {
 							color: #4D74EB;
+							cursor: pointer;
 						}
 					}
 				}
@@ -975,6 +1012,7 @@
 						line-height: .45rem;
 						color: #363636;
 						text-align: center;
+						cursor: pointer;
 					}
 
 					._btn1 {

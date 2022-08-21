@@ -2,8 +2,8 @@
 	export default {
 		onLaunch: function() {
 			// #ifdef H5  
-			console.log("screen",screen.width);
-			console.log('document.body.clientWidth',document.body.clientWidth)
+			console.log("screen", screen.width);
+			console.log('document.body.clientWidth', document.body.clientWidth)
 			//如果屏幕分辨率的宽度小1024 和网页可见区域宽 则是pc
 			/* if (screen.width > 1024 && document.body.clientWidth > 1024) {  
 			   uni.navigateTo({
@@ -28,13 +28,48 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import './css/index.css';
-	uni-page-wrapper{
+
+	uni-page-wrapper {
 		background-color: #ffffff;
 	}
+
+	uni-modal .uni-modal__hd {
+		padding: 0.15rem 0 0 0;
+		line-height: .25rem;
+		font-size: 16px;
+		font-family: Alibaba PuHuiTi;
+		font-weight: 800;
+		color: #000000;
+		margin-bottom: 0.3rem;
+	}
+
+	uni-modal .uni-modal__bd {
+		padding: 0;
+		margin: 10px auto;
+		font-family: Alibaba PuHuiTi;
+		font-weight: 400;
+		font-size: 16px;
+		color: #000000;
+		font-weight: 400;
+		line-height: 22px;
+		margin-bottom: 0.3rem;
+	}
+	uni-modal .uni-modal__ft{
+		width: 90%;
+		margin: 0 auto;
+	}
+	uni-modal .uni-modal__btn_primary {
+		color: #fff !important;
+		border: 1px solid #7D5321;
+		background: #7D5321;
+		border-radius: 0.1rem;
+		margin-bottom: 0.15rem;
+	}
+	
 	._info {
 		display: flex;
 		justify-content: space-around;
-		width: 75%;
+		width: 100%;
 		margin: .5rem auto;
 
 		._center {
@@ -85,7 +120,7 @@
 
 			._item {
 				display: flex;
-				justify-content: flex-start;
+				justify-content: space-around;
 				align-items: center;
 			}
 
