@@ -13,9 +13,7 @@
 				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both
 				parties.
 			</view>
-			<view class="_welcome">
-				<div id="welcome" class="welcome" loops="0"></div>
-			</view>
+			<div id="welcome" class="_welcome" loops="0"></div>
 		</view>
 		<mobile-bottom></mobile-bottom>
 		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
