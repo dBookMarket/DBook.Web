@@ -143,10 +143,6 @@
 				max-width: 670px;
 				max-height: 360px;
 				width: 80%;
-				.welcome {
-					position: static;
-					
-				}
 			}
 
 			._title {
