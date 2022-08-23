@@ -323,9 +323,7 @@
 			</view>
 		</view>
 		<bottom></bottom>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -569,6 +567,10 @@
 
 				._container:hover ._item {
 					transform: rotateY(180deg);
+					-ms-transform:rotateY(180deg); 	/* IE 9 */
+					-moz-transform:rotateY(180deg); 	/* Firefox */
+					-webkit-transform:rotateY(180deg); /* Safari 和 Chrome */
+					-o-transform:rotateY(180deg); 	/* Opera */
 				}
 
 				._item {
@@ -581,6 +583,7 @@
 					position: relative;
 					transition: 0.6s;
 					transform-style: preserve-3d;
+					-webkit-transform-style: preserve-3d;	/* Safari 和 Chrome */
 
 					._img {
 						margin-top: 0.4rem;
@@ -609,7 +612,10 @@
 
 					.back {
 						transform: rotateY(-180deg);
-
+						-ms-transform:rotateY(-180deg); 	/* IE 9 */
+						-moz-transform:rotateY(-180deg); 	/* Firefox */
+						-webkit-transform:rotateY(-180deg); /* Safari 和 Chrome */
+						-o-transform:rotateY(-180deg); 	/* Opera */
 						._text {
 							margin-top: .3rem;
 							padding-left: .3rem;
@@ -800,12 +806,14 @@
 					}
 
 					.bgtext {
-						width: 200px;
-						height: 100px;
+						width: 175px;
+						height: 90px;
 						background: #7D5321;
 						border-radius: 20px;
 						color: #FFE1B4;
 						text-align: center;
+						padding: 5px 7px;
+						margin-left: -20px;
 					}
 
 					._text1 {
@@ -847,11 +855,11 @@
 				text-align: center;
 				display: flex;
 				justify-content: space-between;
-				margin: .42rem .2rem .2rem .2rem;
+				margin: 0.42rem 0.2rem 0.2rem 0.2rem;
 
 				._item {
-					width: 30%;
-					height: 3.68rem;
+					width: 333px;
+					height: 338px;
 					background: #FFFFFF;
 					position: relative;
 					cursor: pointer;

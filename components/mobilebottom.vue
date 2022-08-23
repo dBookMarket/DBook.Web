@@ -1,10 +1,10 @@
 <template>
 	<view class="bottom">
 		<view class="_item">
-			<image src="/static/index/twitter.svg" mode="" class="img"></image>
-			<image src="/static/index/discord.svg" mode="" class="img"></image>
-			<image src="/static/index/youtube.svg" mode="" class="img"></image>
-			<image src="/static/index/GitHub.svg" mode="" class="img"></image>
+			<image @click="toWeb('twitter')" src="/static/index/twitter.svg" mode="" class="img"></image>
+			<image @click="toWeb('discord')" src="/static/index/discord.svg" mode="" class="img"></image>
+			<image @click="toWeb('youtube')" src="/static/index/youtube.svg" mode="" class="img"></image>
+			<image @click="toWeb('github')" src="/static/index/GitHub.svg" mode="" class="img"></image>
 		</view>
 		<view class="_item">
 			<button id="airdrop" class="button dbutton" @click="downloadnow()">Download the APP</button>
@@ -30,6 +30,7 @@
 
 <script>
 	import mdownload from '@/components/mdownload.vue';
+	import common from '@/common/common.js';
 	export default {
 		components:{
 			mdownload
@@ -48,6 +49,13 @@
 				let that =this;
 				that.$refs.mydownload.download();
 			},
+			/**
+			 * 跳转外部连接
+			 * @param {Object} name
+			 */
+			toWeb(name){
+				common.toWeb(name);
+			}
 		}
 	}
 </script>

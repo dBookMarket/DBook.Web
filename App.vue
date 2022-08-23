@@ -32,7 +32,9 @@
 	uni-page-wrapper {
 		background-color: #ffffff;
 	}
-
+	uni-button:after{
+		border: none;
+	}
 	uni-modal .uni-modal__hd {
 		padding: 0.15rem 0 0 0;
 		line-height: .25rem;

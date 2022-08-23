@@ -93,13 +93,13 @@
 					<button class="_btn" @click="toMetamask()">Link wallets</button>
 				</view>
 				<view class="_right _position" v-if="address">
-					<button class="_btn _btn1 _position" @mouseover="toMetamaskOkOver()" @click="toMetamaskOkOut()">
+					<button class="_btn _btn1 _position" @mouseover="toMetamaskOkOver()">
 						{{address | strAddress}}
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<view class="_float">
-						<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
-						<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					<view class="_float" v-if="walletsBtn">
+						<button class="_btn _btn2" @click="toSwitch()">Change the account</button>
+						<button class="_btn _btn3" @click="toBreak()">Exit</button>
 					</view>
 				</view>
 			</view>
@@ -119,10 +119,11 @@
 					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
 				</view>
 				<view class="_right _position" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('twitter')" @click="toAuthOkOut('twitter')">AuthenticationOk
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('twitter')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authBtn" class="_btn _btn2 _float" @click="toRevalidate('twitter')">Revalidation</button>
+					<button v-if="authBtn" class="_btn _btn2 _float _radius"
+						@click="toRevalidate('twitter')">Revalidation</button>
 				</view>
 			</view>
 			<view class="_step">
@@ -140,10 +141,10 @@
 					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
 				</view>
 				<view class="_right _position" v-if="isLinkedIn == true">
-					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('linkedin')" @click="toAuthOkOut('linkedin')">AuthenticationOk
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('linkedin')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<button v-if="authLinkedBtn" class="_btn _btn2 _float"
+					<button v-if="authLinkedBtn" class="_btn _btn2 _float _radius"
 						@click="toRevalidate('linkedin')">Revalidation</button>
 				</view>
 			</view>
@@ -162,7 +163,7 @@
 			</view>
 		</view>
 		<bottom></bottom>
-		<uni-popup ref="certifyPopup" type="center" :mask-click="false">
+		<uni-popup ref="certifyPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
 					Certification of twitter
@@ -179,7 +180,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="authPopup" type="center" :mask-click="false">
+		<uni-popup ref="authPopup" type="center" :is-mask-click="true">
 			<view class="auth">
 				<view class="title">
 					Change your Twitter authentication
@@ -196,7 +197,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="linkedPopup" type="center" :mask-click="false">
+		<uni-popup ref="linkedPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
 					Certification of LinkedIn
@@ -213,7 +214,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="authLinkedPopup" type="center" :mask-click="false">
+		<uni-popup ref="authLinkedPopup" type="center" :is-mask-click="true">
 			<view class="auth">
 				<view class="title">
 					Change your LinkedIn authentication
@@ -230,9 +231,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -282,7 +281,7 @@
 				if (n < 1024) {
 					console.log(location.search)
 					uni.navigateTo({
-						url: '/pages/index/mcreate'+location.search
+						url: '/pages/index/mcreate' + location.search
 					})
 					console.log('屏幕宽度小于1024了')
 				}
@@ -296,15 +295,17 @@
 		onLoad(option) {
 			let that = this;
 			that.type = option.type || common.getQueryString('type');
-			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token') ;
+			that.oauth_token = option.oauth_token || common.getQueryString('oauth_token');
 			that.oauth_verifier = option.oauth_verifier || common.getQueryString('oauth_verifier');
-			that.isAuth = option.isAuth || common.getQueryString('isAuth') ;
+			that.isAuth = option.isAuth || common.getQueryString('isAuth');
 			that.code = option.code || common.getQueryString('code');
 			that.state = option.state || common.getQueryString('state');
 			console.log(JSON.stringify(option))
 		},
 		mounted() {
 			let that = this;
+			//监听滚动
+			window.addEventListener('scroll', that.handleScroll);
 			//网页可见区域宽
 			that.screenWidth = document.body.clientWidth;
 			//使用window.onresize方法获取屏幕尺寸；
@@ -325,6 +326,21 @@
 			that.verifyfun();
 		},
 		methods: {
+			/**
+			 * 
+			 */
+			handleScroll() {
+				let that = this;
+				// 滚动条偏移量
+				let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body
+				.scrollTop;
+				console.log('scrollTop',scrollTop)
+				if(scrollTop>20){
+					that.authBtn = false;
+					that.authLinkedBtn = false;
+					that.walletsBtn = false;
+				}
+			},
 			/**
 			 * 验证状态
 			 */
@@ -416,7 +432,7 @@
 					if (!that.tcontent) {
 						common.showModal(
 							"You are obtaining author authentication and need to send the following tweet to prove Twitter's identity"
-							);
+						);
 						return false;
 					}
 					params = {
@@ -430,7 +446,7 @@
 					if (!that.lcontent) {
 						common.showModal(
 							"You are obtaining author authentication and need to send the following tweet to prove LinkedIn's identity"
-							);
+						);
 						return false;
 					}
 					params = {
@@ -485,7 +501,7 @@
 			/**
 			 * 发布书籍
 			 */
-			toSettled(){
+			toSettled() {
 				uni.navigateTo({
 					url: '/pages/index/settled'
 				})
@@ -611,6 +627,8 @@
 						});
 						that.isConnect = false;
 						that.address = "";
+						that.tcontent = '';
+						that.lcontent = '';
 						common.removeStorage('address');
 						common.removeStorage('token');
 						//再次校验授权状态
@@ -627,8 +645,8 @@
 			/**
 			 * go to the Google WebShop
 			 */
-			toGoogle(){
-				window.location.href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
+			toGoogle() {
+				common.toWeb('chrome');
 			},
 			/**
 			 * 连接钱包弹出下拉框
@@ -704,15 +722,17 @@
 		background-color: #fff;
 		font-size: 30rpx;
 		color: #000000;
-		
+
 		._position {
 			position: relative;
 		}
-		._float{
-			 position: absolute;
-			 top:.65rem;
-			 z-index: 100;
+
+		._float {
+			position: absolute;
+			top: .65rem;
+			z-index: 100;
 		}
+
 		.upicon {
 			position: absolute;
 			top: 50%;
@@ -964,6 +984,7 @@
 					flex: 4;
 					font-family: PingFang SC;
 					margin-right: 0.4rem;
+
 					._text {
 						padding: .02rem .1rem;
 						line-height: .3rem;
@@ -1026,14 +1047,18 @@
 						background: #FFE9C9;
 						color: #A17D48;
 						border: none;
-						border-radius: 0rem;
+						border-radius: .1rem .1rem 0rem 0rem;
 						margin-top: .05rem;
 					}
 
 					._btn3 {
 						background: #EED8B8;
 						margin-top: 0rem;
-						border-radius: 0rem;
+						border-radius: 0rem 0rem .1rem .1rem;
+					}
+
+					._radius {
+						border-radius: .1rem;
 					}
 
 					._btn2:after,
@@ -1043,6 +1068,7 @@
 				}
 			}
 		}
+
 		.yyzCanvas {
 			position: fixed;
 			width: 100%;

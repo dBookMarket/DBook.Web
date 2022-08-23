@@ -274,9 +274,7 @@
 		</view>
 		
 		<mobile-bottom></mobile-bottom>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -292,7 +290,9 @@
 		data() {
 			return {
 				isPublish: true,
-				screenWidth:null
+				screenWidth:null,
+				loading: true,
+				svgaInfo: '/static/index/loading.svga',
 			};
 		},
 		watch: {

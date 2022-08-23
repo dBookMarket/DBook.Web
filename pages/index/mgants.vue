@@ -14,10 +14,11 @@
 				parties.
 			</view>
 			<view class="_welcome">
-				<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
+				<div id="welcome" class="welcome" loops="0"></div>
 			</view>
 		</view>
 		<mobile-bottom></mobile-bottom>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -32,8 +33,10 @@
 		},
 		data() {
 			return {
-				svgaInfo: '/static/index/mwelcome.svga',
-				screenWidth: null,
+				svgaInfo:'/static/index/welcome.svga',
+				svgaLoad:'/static/index/loading.svga',
+				screenWidth:null,
+				loading:true
 			};
 		},
 		watch: {
@@ -58,20 +61,35 @@
 				})()
 			}
 			that.playSvg();
+			//3秒关闭页面loading动画
+			setTimeout(function() {
+				that.loading = false;
+			}, 1500);
 		},
 		methods: {
 			playSvg() {
 				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
 				const that = this
 				that.$nextTick(() => {
-					const player = new SVGA.Player('#yyzCanvas')
-					const parser = new SVGA.Parser('#yyzCanvas')
+					const player = new SVGA.Player('#welcome')
+					const parser = new SVGA.Parser('#welcome')
 					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
 					parser.load(that.svgaInfo, function(videoItem) {
 						player.setVideoItem(videoItem);
 						player.startAnimation();
 						player.clearsAfterStop = true; //player有很多属性，根据需要设置
 						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
+					const lPlayer = new SVGA.Player('#yyzCanvas')
+					const lParser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					lParser.load(that.svgaLoad, function(videoItem) {
+						lPlayer.setVideoItem(videoItem);
+						lPlayer.startAnimation();
+						lPlayer.clearsAfterStop = true; //lPlayer有很多属性，根据需要设置
+						lPlayer.onFinished(function() {
 							alert("动画停止了！！！")
 						});
 					})
@@ -86,7 +104,16 @@
 		background-color: #fff;
 		font-size: 16px;
 		color: #000000;
-
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
+		}
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
@@ -116,7 +143,7 @@
 				max-width: 670px;
 				max-height: 360px;
 				width: 80%;
-				.yyzCanvas {
+				.welcome {
 					position: static;
 					
 				}

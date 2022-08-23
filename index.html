@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 	<head>
-		<meta charset="utf-8">
+		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>
 			<%= htmlWebpackPlugin.options.title %>
 		</title>
-		<!-- Open Graph data -->
-		<!-- <meta property="og:title" content="Title Here" /> -->
-		<!-- <meta property="og:url" content="http://www.example.com/" /> -->
-		<!-- <meta property="og:image" content="http://example.com/image.jpg" /> -->
-		<!-- <meta property="og:description" content="Description Here" /> -->
 		<link rel="shortcut icon" href="/static/logo.png"/>
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="<%= BASE_URL %>static/index.<%= VUE_APP_INDEX_CSS_HASH %>.css" />
-		/*当设备宽度小于800px的时候切换成移动端的布局*/
-		<link rel="stylesheet" type="text/css" media="screen and (max-width:750px)" href="css/mobile.css">
-		<link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="css/pc.css">
 	</head>
 	<body>
 		<noscript>

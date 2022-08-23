@@ -274,9 +274,7 @@
 
 		</view>
 		<bottom></bottom>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 

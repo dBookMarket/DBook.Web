@@ -34,6 +34,26 @@ export default {
 		}
 	},
 	/**
+	 * 跳转外部连接
+	 * @param {Object} name
+	 */
+	toWeb(name){
+		let url = "";
+		if(name =='twitter'){
+			url = 'https://twitter.com/ddid_io';
+		}else if(name == 'youtube'){
+			url = 'https://www.youtube.com/watch?v=IL5l2r7GaYk';
+		}else if(name == 'github'){
+			url = 'https://github.com/dBookMarket';
+		}else if(name == 'google'){
+			url = 'https://play.google.com/store/apps/details?id=com.ddid.dbook_testnet';
+		}else if(name == 'chrome'){
+			url = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
+		}
+		if(url)
+		window.location.href = url
+	},
+	/**
 	 * @校验手机
 	 * @param value
 	 * @returns {boolean}

@@ -12,7 +12,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="_butflex">
+				<view class="_butflex" @click="toDownload('google')">
 					<view class="_butitem">
 						<image src="/static/index/google.svg" class="_google"></image>
 						<view>
@@ -46,7 +46,7 @@
 			 * @param {Object} type
 			 */
 			toDownload(type){
-				window.location.href = 'https://play.google.com/store/apps/details?id=com.ddid.dbook_testnet'
+				common.toWeb(type);
 			},
 			/**
 			 * 下载弹框

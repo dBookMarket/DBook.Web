@@ -116,7 +116,7 @@
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float">
-					   <button v-if="authBtn" class="_btn _btn2" @click="toRevalidate('twitter')">Revalidation</button>
+					   <button v-if="authBtn" class="_btn _btn2 _radius" @click="toRevalidate('twitter')">Revalidation</button>
 					</view>
 				</view>
 			</view>
@@ -137,7 +137,7 @@
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float">
-						<button v-if="authLinkedBtn" class="_btn _btn2"
+						<button v-if="authLinkedBtn" class="_btn _btn2 _radius"
 						@click="toRevalidate('linkedin')">Revalidation</button>
 					</view>
 				</view>
@@ -221,9 +221,7 @@
 				</view>
 			</view>
 		</uni-popup>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -295,6 +293,8 @@
 		},
 		mounted() {
 			let that = this;
+			//监听滚动
+			window.addEventListener('scroll', that.handleScroll);
 			//网页可见区域宽
 			that.screenWidth = document.body.clientWidth;
 			//使用window.onresize方法获取屏幕尺寸；
@@ -314,6 +314,21 @@
 			that.verifyfun();
 		},
 		methods: {
+			/**
+			 * 
+			 */
+			handleScroll() {
+				let that = this;
+				// 滚动条偏移量
+				let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body
+				.scrollTop;
+				console.log('scrollTop',scrollTop)
+				if(scrollTop>20){
+					that.authBtn = false;
+					that.authLinkedBtn = false;
+					that.walletsBtn = false;
+				}
+			},
 			/**
 			 * 验证状态
 			 */
@@ -344,8 +359,8 @@
 			/**
 			 * go to the Google WebShop
 			 */
-			toGoogle(){
-				window.location.href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
+			toGoogle() {
+				common.toWeb('chrome');
 			},
 			/**
 			 * 去授权登陆
@@ -584,8 +599,12 @@
 						});
 						that.isConnect = false;
 						that.address = "";
+						that.tcontent = '';
+						that.lcontent= '';
 						common.removeStorage('address');
 						common.removeStorage('token');
+						//再次校验授权状态
+						that.verifyfun();
 					} else {
 						common.showModal(res);
 					}
@@ -699,10 +718,11 @@
 		}
 		.upicon {
 			position: absolute;
-			top: 30%;
 			right: 0.08rem;
 			width: 22rpx;
 			height: 18rpx;
+			top: 50%;
+			margin-top: -9rpx;
 		}
 
 		.certify,
@@ -975,7 +995,7 @@
 						width: 90%;
 						height: .45rem;
 						background: #E2E2E2;
-						border-radius: .05rem;
+						border-radius: .06rem;
 						border: none;
 						font-family: PingFang SC;
 						font-weight: 400;
@@ -992,14 +1012,14 @@
 						background: #FFE9C9;
 						color: #A17D48;
 						border: none;
-						border-radius: 0rem;
+						border-radius: 0.06rem 0.06rem 0rem 0rem;
 						margin-top: .05rem;
 					}
 					
 					._btn3 {
 						background: #EED8B8;
 						margin-top: 0rem;
-						border-radius: 0rem;
+						border-radius: 0rem 0rem 0.06rem 0.06rem;
 					}
 					._btn1 {
 						background: #C8A168;
@@ -1007,7 +1027,9 @@
 						color: #FFFFFF;
 						margin-top: .2rem;
 					}
-					
+					._radius{
+						border-radius:.06rem;
+					}
 				}
 			}
 			._step:last-child{

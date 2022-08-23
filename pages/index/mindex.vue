@@ -229,9 +229,7 @@
 			</view>
 		</view>
 		<mobile-bottom></mobile-bottom>
-		<view class="loading" v-show="loading">
-			<div id="yyzCanvas" class="yyzCanvas" loops="0"></div>
-		</view>
+		<div id="yyzCanvas" class="yyzCanvas" loops="0" v-if="loading"></div>
 	</view>
 </template>
 
@@ -323,7 +321,7 @@
 			playSvg() {
 				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
 				const that = this;
-				that.$nextTick(() => {
+				this.$nextTick(() => {
 					const player = new SVGA.Player('#yyzCanvas')
 					const parser = new SVGA.Parser('#yyzCanvas')
 					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
@@ -519,7 +517,7 @@
 		.content_7_bg {
 			width: 92%;
 			max-width: 750px;
-			margin: .3rem auto 0;
+			margin: .4rem auto 0;
 			overflow: hidden;
 			background-color: #fff;
 
@@ -619,7 +617,7 @@
 
 		.content_3_bg {
 			text-align: center;
-
+			margin-top: .3rem;
 			._circle {
 				width: 3.35rem;
 				height: 1.92rem;
@@ -628,7 +626,7 @@
 
 		.content_4_bg {
 			text-align: center;
-
+			margin-top: .45rem;
 			._desc {
 				margin-bottom: .3rem;
 			}
@@ -668,6 +666,7 @@
 		}
 
 		.content_5_bg {
+			margin-top: .45rem;
 			._develop {
 				box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 				padding: 0.2rem 0.05rem;

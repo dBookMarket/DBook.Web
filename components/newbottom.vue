@@ -1,10 +1,10 @@
 <template>
 	<view class="bottom">
 		<view class="_item">
-			<image src="/static/index/twitter.svg" mode="" class="img"></image>
-			<image src="/static/index/discord.svg" mode="" class="img"></image>
-			<image src="/static/index/youtube.svg" mode="" class="img"></image>
-			<image src="/static/index/GitHub.svg" mode="" class="img"></image>
+			<image @click="toWeb('twitter')" src="/static/index/twitter.svg" mode="" class="img"></image>
+			<image @click="toWeb('discord')" src="/static/index/discord.svg" mode="" class="img"></image>
+			<image @click="toWeb('youtube')" src="/static/index/youtube.svg" mode="" class="img"></image>
+			<image @click="toWeb('github')" src="/static/index/GitHub.svg" mode="" class="img"></image>
 			<button id="airdrop" class="button dbutton" @click="downloadnow()">Download the APP</button>
 		</view>
 		<view class="_info">
@@ -23,6 +23,7 @@
 
 <script>
 	import download from '@/components/download.vue';
+	import common from '@/common/common.js';
 	export default {
 		components:{
 			download
@@ -41,6 +42,13 @@
 				let that =this;
 				that.$refs.mydownload.download();
 			},
+			/**
+			 * 跳转外部连接
+			 * @param {Object} name
+			 */
+			toWeb(name){
+				common.toWeb(name);
+			}
 		}
 	}
 </script>
@@ -86,7 +94,7 @@
 
 		._item {
 			width: 90%;
-			max-width: 1150px;
+			max-width: 700px;
 			margin: .5rem auto 0;
 			display: flex;
 			justify-content: center;
