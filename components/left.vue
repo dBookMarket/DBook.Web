@@ -104,7 +104,7 @@
 			toPage(url){
 				if(!url){return;}
 				uni.navigateTo({
-					url: '/pages/index/'+url
+					url: '/'+url
 				})
 			},
 			/**
@@ -113,7 +113,7 @@
 			toRecommend() {
 				common.setStorage("currentId", -2);
 				uni.navigateTo({
-					url: '/pages/index/market'
+					url: '/market'
 				})
 			},
 			/**

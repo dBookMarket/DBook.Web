@@ -75,7 +75,7 @@
             "base" : "/"
         },
         "title" : "dbook",
-        "template" : "index.html",
+        "template" : "template.html",
         "devServer" : {
             "disableHostCheck" : true,
             "proxy" : {

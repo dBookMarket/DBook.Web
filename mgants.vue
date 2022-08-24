@@ -40,11 +40,11 @@
 		watch: {
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
-				if (n >= 1024) {
+				if (n >= 1150) {
 					uni.navigateTo({
-						url: '/pages/index/gants'
+						url: '/gants'
 					})
-					console.log('屏幕宽度大于1024了')
+					console.log('屏幕宽度大于1150了')
 				}
 			}
 		},

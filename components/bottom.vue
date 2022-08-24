@@ -29,7 +29,7 @@
 		methods:{
 			toIndex(){
 				uni.navigateTo({
-					url: '/pages/index/index'
+					url: '/home'
 				})
 			},
 			toDDID(){

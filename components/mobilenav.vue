@@ -111,7 +111,6 @@
 			display: flex;
 			flex-direction: column;
 			height: 100vh;
-			right: 100%;
 			opacity: .9;
 			padding: .5rem 0;
 			position: fixed;
@@ -121,6 +120,7 @@
 			overflow-x: hidden;
 			overflow-y: scroll;
 			transition: right .8s ease;
+			right: 100%;
 		}
 
 		.menu-mask__slide {

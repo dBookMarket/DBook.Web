@@ -1,30 +1,33 @@
 <template>
-	<view class="mobilebg">
+	<view class="bg">
 		<view class="indexapp">
 			<view class="newbg">
-				<mobile-nav></mobile-nav>
+				<new-nav></new-nav>
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">DBook writer</view>
-			<image src="/static/index/writer.svg" class="_img"></image>
-			<view class="_desc">
-				<view class="p">DBook provides a completely autonomous and decentralized environment
+			<view class="_item" style="margin-left: .3rem;">
+				<view class="_title">DBook writer</view>
+				<view class="_desc">DBook provides a completely autonomous and decentralized environment
 					for literary creators from all over the world. Creating on dBook allows you
 					to create freely without sharing revenue, signing exclusive agreements or
-					exclusivity agreements.</view>
-				<view class="p">
+					exclusivity agreements.<br />
 					You can make your books into NFT by dBook and publish them on the
 					market. After readers buy them, you will directly get all the profits. At
 					the same time, when some readers resell your works, you can get a certain
-					percentage of royalties.</view>
-				<view class="p">At the same time, you can actually interact with readers through on-chain
-					reviews to get their feedback on your work.</view>
+					percentage of royalties.<br />
+					At the same time, you can actually interact with readers through on-chain
+					reviews to get their feedback on your work.
+				</view>
+			</view>
+			<view class="_middle"></view>
+			<view class="_item" style="margin-right: .3rem;">
+				<image src="/static/index/writer.svg" class="_img"></image>
 			</view>
 		</view>
 		<view class="content_2_bg">
 			<view class="_title">dBook Writer's Earnings</view>
-			<view class="_desc">dBook is an open-ended gathering place for writers, where you
+			<view class="_desc">dBook is an open-ended gathering place for writers, where you<br />
 				can not only create freely, but also get objective benefits.</view>
 			<view class="_someone">
 				<view class="_item">
@@ -71,75 +74,78 @@
 		</view>
 		<view class="content_3_bg">
 			<view class="_title">How am I going to be a dBook writer</view>
-			<view class="_desc">dBook is an open-ended writer's gathering place, 
+			<view class="_desc">dBook is an open-ended writer's gathering place, <br />
 				you can complete the writer's identification through the following steps, it takes about 2-3 minutes
 			</view>
 			<view class="_step">
-				<image src="/static/index/metamask.svg" class="_img"></image>
+				<view class="_left">
+					<image src="/static/index/metamask.svg" class="_img"></image>
+				</view>
 				<view class="_center">
 					<text class="_text">STEP1</text>
 					<text class="_infoitem">Link your wallet-MetaMask</text>
+					<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
+						MetaMask <text class="_color" @click="toGoogle()">(go to the Google WebShop) </text>
+						or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
+						links to install or learn.</view>
 				</view>
-				<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
-					MetaMask <text class="_color" @click="toGoogle()">(go to the Google WebShop) </text>
-					or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
-					links to install or learn.</view>
-				<view class="_bottom" v-if="!address">
+				<view class="_right" v-if="!address">
 					<button class="_btn" @click="toMetamask()">Link wallets</button>
 				</view>
-				<view class="_bottom _position" v-if="address">
-					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
+				<view class="_right _position" v-if="address">
+					<button class="_btn _btn1 _position" @mouseover="toMetamaskOkOver()">
 						{{address | strAddress}}
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<view class="_float">
-						<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
-						<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+					<view class="_float" v-if="walletsBtn">
+						<button class="_btn _btn2" @click="toSwitch()">Change the account</button>
+						<button class="_btn _btn3" @click="toBreak()">Exit</button>
 					</view>
 				</view>
 			</view>
 			<view class="_step">
-				<image src="/static/index/media.svg" class="_img"></image>
+				<view class="_left">
+					<image src="/static/index/media.svg" class="_img"></image>
+				</view>
 				<view class="_center">
 					<text class="_text">STEP2</text>
 					<text class="_infoitem">Connect your social media</text>
+					<view class="_detail">Once you've completed the first step, connect your social media, Twitter,
+						and LinkedIn choose one of the two. Clicking on Link will ask you to send
+						the specified content in your social media account, in order to verify the
+						identity owner of that social media.</view>
 				</view>
-				<view class="_detail">Once you've completed the first step, connect your social media, Twitter,
-					and LinkedIn choose one of the two. Clicking on Link will ask you to send
-					the specified content in your social media account, in order to verify the
-					identity owner of that social media.</view>
-				<view class="_bottom" v-if="isAuthTweets == false">
+				<view class="_right" v-if="isAuthTweets == false">
 					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
 				</view>
-				<view class="_bottom _position" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">AuthenticationOk
+				<view class="_right _position" v-if="isAuthTweets == true">
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('twitter')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<view class="_float">
-					   <button v-if="authBtn" class="_btn _btn2 _radius" @click="toRevalidate('twitter')">Revalidation</button>
-					</view>
+					<button v-if="authBtn" class="_btn _btn2 _float _radius"
+						@click="toRevalidate('twitter')">Revalidation</button>
 				</view>
 			</view>
 			<view class="_step">
-				<image src="/static/index/verify.svg" class="_img"></image>
+				<view class="_left">
+					<image src="/static/index/verify.svg" class="_img"></image>
+				</view>
 				<view class="_center">
 					<text class="_text">STEP3</text>
 					<text class="_infoitem">Verify social media and become an author</text>
+					<view class="_detail">After completing the second step, select your associated social media method,
+						click the corresponding verification button, and automatically activate the
+						author's publishing permission after detecting the identity consistency.</view>
 				</view>
-				<view class="_detail">After completing the second step, select your associated social media method,
-					click the corresponding verification button, and automatically activate the
-					author's publishing permission after detecting the identity consistency.</view>
-				<view class="_bottom" v-if="isLinkedIn == false">
+				<view class="_right" v-if="isLinkedIn == false">
 					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
 				</view>
-				<view class="_bottom _position" v-if="isLinkedIn == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">AuthenticationOk
+				<view class="_right _position" v-if="isLinkedIn == true">
+					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('linkedin')">AuthenticationOk
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
-					<view class="_float">
-						<button v-if="authLinkedBtn" class="_btn _btn2 _radius"
+					<button v-if="authLinkedBtn" class="_btn _btn2 _float _radius"
 						@click="toRevalidate('linkedin')">Revalidation</button>
-					</view>
 				</view>
 			</view>
 			<view class="_step">
@@ -151,17 +157,18 @@
 					<text class="_infoitem">SETTLED</text>
 					<view class="_detail">SETTLED BOOK</view>
 				</view>
-				<view class="_bottom">
+				<view class="_right">
 					<button class="_btn _btn1" @click="toSettled()">SETTLED</button>
 				</view>
 			</view>
 		</view>
-		<mobile-bottom></mobile-bottom>
-		<uni-popup ref="certifyPopup" type="center">
+		<bottom></bottom>
+		<uni-popup ref="certifyPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
 					Certification of twitter
 				</view>
+				<image class="closeimg" @click="closePopup('certifyPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">
 						You are obtaining author authentication and need to send the following tweet to prove Twitter's
@@ -173,11 +180,12 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="authPopup" type="center">
+		<uni-popup ref="authPopup" type="center" :is-mask-click="true">
 			<view class="auth">
 				<view class="title">
 					Change your Twitter authentication
 				</view>
+				<image class="closeimg" @click="closePopup('authPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">If you need to change the Twitter authentication of your current Ethereum
 						identity, the change will not
@@ -189,11 +197,12 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="linkedPopup" type="center">
+		<uni-popup ref="linkedPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
 					Certification of LinkedIn
 				</view>
+				<image class="closeimg" @click="closePopup('linkedPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">
 						You are obtaining author authentication and need to send the following tweet to prove LinkedIn's
@@ -205,11 +214,12 @@
 				</view>
 			</view>
 		</uni-popup>
-		<uni-popup ref="authLinkedPopup" type="center">
+		<uni-popup ref="authLinkedPopup" type="center" :is-mask-click="true">
 			<view class="auth">
 				<view class="title">
 					Change your LinkedIn authentication
 				</view>
+				<image class="closeimg" @click="closePopup('authLinkedPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">If you need to change the LinkedIn authentication of your current Ethereum
 						identity, the change will not
@@ -236,25 +246,25 @@
 	} from '@/common/api.js';
 	import common from '@/common/common.js';
 	import wallet from '@/common/wallet.js';
-	import mobileBottom from '@/components/mobilebottom.vue';
-	import mobileNav from '@/components/mobilenav.vue';
+	import bottom from '@/components/newbottom.vue';
+	import newNav from '@/components/newnav.vue';
 	import SVGA from "svgaplayerweb"
 	export default {
 		components: {
-			mobileBottom,
-			mobileNav
+			bottom,
+			newNav
 		},
 		data() {
 			return {
 				address: '',
-				loading: true,
-				screenWidth: null,
-				svgaInfo: '/static/index/loading.svga',
 				isAuthTweets: false,
 				isLinkedIn: false,
 				walletsBtn: false,
 				authBtn: false,
 				authLinkedBtn: false,
+				loading: true,
+				screenWidth: null,
+				svgaInfo: '/static/index/loading.svga',
 				tcontent: '',
 				lcontent: '',
 				type: '', //twitter或linkedin
@@ -264,6 +274,18 @@
 				code: '', //验证linkedin url 带过来的参数
 				state: '', //验证linkedin url 带过来的参数
 			};
+		},
+		watch: {
+			//监听页面屏幕宽度
+			screenWidth: function(n, o) {
+				if (n < 1150) {
+					console.log(location.search)
+					uni.navigateTo({
+						url: '/mcreate' + location.search
+					})
+					console.log('屏幕宽度小于1150了')
+				}
+			}
 		},
 		filters: {
 			strAddress: function(val) {
@@ -279,17 +301,6 @@
 			that.code = option.code || common.getQueryString('code');
 			that.state = option.state || common.getQueryString('state');
 			console.log(JSON.stringify(option))
-		},
-		watch: {
-			//监听页面屏幕宽度
-			screenWidth: function(n, o) {
-				if (n >= 1024) {
-					uni.navigateTo({
-						url: '/pages/index/create' + location.search
-					})
-					console.log('屏幕宽度大于1024了')
-				}
-			}
 		},
 		mounted() {
 			let that = this;
@@ -311,6 +322,7 @@
 			setTimeout(function() {
 				that.loading = false;
 			}, 1500);
+			//校验授权状态
 			that.verifyfun();
 		},
 		methods: {
@@ -334,7 +346,7 @@
 			 */
 			verifyfun() {
 				let that = this;
-				common.showLoading();
+				//common.showLoading();
 				verify().then(res => {
 					console.log(res);
 					if (res && res.statusCode === 200) {
@@ -353,14 +365,8 @@
 				}).catch(error => {
 					common.showModal(error);
 				}).finally(() => {
-					common.hideLoading(0);
+					//common.hideLoading(0);
 				})
-			},
-			/**
-			 * go to the Google WebShop
-			 */
-			toGoogle() {
-				common.toWeb('chrome');
 			},
 			/**
 			 * 去授权登陆
@@ -392,6 +398,26 @@
 					common.showModal(error);
 				}).finally(() => {
 					common.hideLoading(0);
+				})
+			},
+			/**
+			 * 播放svga
+			 */
+			playSvg() {
+				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
+				const that = this
+				that.$nextTick(() => {
+					const player = new SVGA.Player('#yyzCanvas')
+					const parser = new SVGA.Parser('#yyzCanvas')
+					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
+					parser.load(that.svgaInfo, function(videoItem) {
+						player.setVideoItem(videoItem);
+						player.startAnimation();
+						player.clearsAfterStop = true; //player有很多属性，根据需要设置
+						player.onFinished(function() {
+							alert("动画停止了！！！")
+						});
+					})
 				})
 			},
 			/**
@@ -475,7 +501,7 @@
 			/**
 			 * 发布书籍
 			 */
-			toSettled(){
+			toSettled() {
 				uni.navigateTo({
 					url: '/pages/index/settled'
 				})
@@ -551,6 +577,8 @@
 												common.setStorage("address", address);
 												//存储token
 												common.setStorage("token", res.data.token);
+												//再次校验授权状态
+												that.verifyfun();
 											} else {
 												common.showModal(res);
 											}
@@ -600,7 +628,7 @@
 						that.isConnect = false;
 						that.address = "";
 						that.tcontent = '';
-						that.lcontent= '';
+						that.lcontent = '';
 						common.removeStorage('address');
 						common.removeStorage('token');
 						//再次校验授权状态
@@ -614,39 +642,50 @@
 					common.hideLoading(0);
 				})
 			},
-
+			/**
+			 * go to the Google WebShop
+			 */
+			toGoogle() {
+				common.toWeb('chrome');
+			},
 			/**
 			 * 连接钱包弹出下拉框
 			 */
-			toMetamaskOk() {
+			toMetamaskOkOver() {
 				let that = this;
-				if (that.walletsBtn) {
-					that.walletsBtn = false;
-				} else {
-					that.walletsBtn = true;
-				}
+				that.walletsBtn = true;
+			},
+			/**
+			 * 连接钱包关闭下拉框
+			 */
+			toMetamaskOkOut() {
+				let that = this;
+				that.walletsBtn = false;
 			},
 			/**
 			 * 弹出下拉框是否重新验证
 			 * @param {Object} type twitter或linkedin
 			 */
-			toAuthOk(type) {
+			toAuthOkOver(type) {
 				let that = this;
 				if (type == 'twitter') {
-					if (that.authBtn) {
-						that.authBtn = false;
-					} else {
-						that.authBtn = true;
-					}
+					that.authBtn = true;
 				} else if (type == 'linkedin') {
-					if (that.authLinkedBtn) {
-						that.authLinkedBtn = false;
-					} else {
-						that.authLinkedBtn = true;
-					}
+					that.authLinkedBtn = true;
 				}
 			},
-
+			/**
+			 * 关闭下拉框是否重新验证
+			 * @param {Object} type twitter或linkedin
+			 */
+			toAuthOkOut(type) {
+				let that = this;
+				if (type == 'twitter') {
+					that.authBtn = false;
+				} else if (type == 'linkedin') {
+					that.authLinkedBtn = false;
+				}
+			},
 			/**
 			 * 取消重新验证
 			 * @param {Object} type twitter或linkedin
@@ -674,75 +713,62 @@
 				let that = this;
 				that.$refs[Popup].close();
 			},
-			/**
-			 * 播放svga
-			 */
-			playSvg() {
-				//一定要使用$nextTick，等到页面加载完成再处理数据，否则会找不到页面元素，报Undefind的错误
-				const that = this
-				that.$nextTick(() => {
-					const player = new SVGA.Player('#yyzCanvas')
-					const parser = new SVGA.Parser('#yyzCanvas')
-					//这里使用动态加载的方式，加载tableData返回的svga源（例如：http://a.svga)
-					parser.load(that.svgaInfo, function(videoItem) {
-						player.setVideoItem(videoItem);
-						player.startAnimation();
-						player.clearsAfterStop = true; //player有很多属性，根据需要设置
-						player.onFinished(function() {
-							alert("动画停止了！！！")
-						});
-					})
-				})
-			},
-
 		}
 	}
 </script>
 
 <style scoped lang="scss">
-	.mobilebg {
+	.bg {
 		background-color: #fff;
+		font-size: 30rpx;
 		color: #000000;
-		.yyzCanvas {
-			position: fixed;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			z-index: 200000;
-			background-color: #24180e;
-			opacity: 1;
-		}
+
 		._position {
 			position: relative;
 		}
+
+		._float {
+			position: absolute;
+			top: .65rem;
+			z-index: 100;
+		}
+
 		.upicon {
 			position: absolute;
-			right: 0.08rem;
-			width: 22px;
-			height: 18px;
 			top: 50%;
-			margin-top: -9px;
+			right: 0.08rem;
+			margin-top: -4px;
+			width: 22rpx;
+			height: 18rpx;
 		}
 
 		.certify,
 		.auth {
-			width: 300px;
+			width: 5.5rem;
 			height: auto;
 			background: #FFFFFF;
 			border-radius: .15rem;
 			padding: .25rem .15rem .1rem;
 			position: relative;
 			text-align: center;
-			margin: 0 auto;
 
 			.title {
-				line-height: .25rem;
-				font-size: 16px;
+				line-height: .24rem;
+				font-size: 52rpx;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				color: #000000;
 				margin-bottom: .4rem;
+			}
+
+			.closeimg {
+				position: absolute;
+				width: .25rem;
+				top: .2rem;
+				right: 1.8%;
+				z-index: 10;
+				height: .25rem;
+				cursor: pointer;
 			}
 
 			.con {
@@ -759,8 +785,8 @@
 
 					.btnCancel {
 						width: 45%;
-						line-height: 100rpx;
-						height: 100rpx;
+						line-height: 114rpx;
+						height: 114rpx;
 						border: 1px solid #7D5321;
 						border-radius: .1rem;
 						background-color: #fff;
@@ -769,8 +795,8 @@
 
 					.btnReplace {
 						width: 45%;
-						line-height: 100rpx;
-						height: 100rpx;
+						line-height: 114rpx;
+						height: 114rpx;
 						border: 1px solid #7D5321;
 						background: #7D5321;
 						color: #FFFFFF;
@@ -779,7 +805,7 @@
 				}
 
 				._text {
-					font-size: 16px;
+					font-size: 32rpx;
 					color: #000000;
 					font-weight: 400;
 					line-height: 45rpx;
@@ -787,9 +813,10 @@
 				}
 
 				.input-style {
-					font-size: 16px;
+					font-size: 30rpx;
 					background: #F8F8F8;
 					border-radius: .1rem;
+					height: .5rem;
 					text-align: left;
 					line-height: .5rem;
 					text-indent: .1rem;
@@ -807,7 +834,7 @@
 					line-height: 114rpx;
 					background: #7D5321;
 					border-radius: .1rem;
-					font-size: 16px;
+					font-size: 32rpx;
 					font-family: Alibaba PuHuiTi;
 					font-weight: 400;
 					color: #FEFEFE;
@@ -819,7 +846,7 @@
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
-			height: 3.5rem;
+			height: 5rem;
 			background-image: url('/static/index/createbg.png');
 			background-repeat: no-repeat;
 			background-position: center 0;
@@ -832,99 +859,98 @@
 		}
 
 		.content_1_bg {
-			width: 92%;
-			max-width: 750px;
-			margin: .3rem auto 0;
+			width: 100%;
+			max-width: 1150px;
+			margin: .65rem auto 0;
+			height: auto;
 			overflow: hidden;
 			background-color: #fff;
-			text-align: center;
+			display: flex;
+			justify-content: space-between;
 
-			._title {
-				font-size: 24px;
-				line-height: .35rem;
-				font-family: Alibaba PuHuiTi;
-				font-weight: 800;
-				text-align: center;
+			._middle {
+				flex: .1;
 			}
 
-			._desc {
-				width: 90%;
-				margin: .2rem auto 0;
-				line-height: .26rem;
-				font-family: PingFang SC;
-				font-weight: 400;
-				text-align: center;
-				color: #000;
-
-				.p {
-					margin-top: .15rem;
+			._item {
+				flex: 1;
+				text-align: right;
+				._title {
+					font-size: 100rpx;
+					font-family: Alibaba PuHuiTi;
+					font-weight: 800;
+					text-align: left;
 				}
-			}
 
-			._img {
-				width: 100%;
-				height: 200px;
-				margin-top: .2rem;
-				border-radius: 20px;
+				._desc {
+					line-height: .3rem;
+					font-family: PingFang SC;
+					font-weight: 400;
+					text-align: left;
+					margin-top: .2rem;
+				}
+
+				._img {
+					width: 5.75rem;
+					height: 4rem;
+					border-radius: 20px;
+				}
 			}
 		}
 
 		.content_2_bg,
 		.content_3_bg {
-			width: 90%;
-			max-width: 750px;
-			margin: .3rem auto 0;
+			width: 100%;
+			max-width: 1150px;
+			margin: .65rem auto 0;
 			height: auto;
 			overflow: hidden;
 			background-color: #fff;
 
 			._title {
-				font-size: 24px;
-				line-height: .35rem;
+				font-size: 100rpx;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				text-align: center;
 			}
 
 			._desc {
-				width: 92%;
-				margin: .2rem auto .3rem;
-				line-height: .25rem;
+				line-height: .3rem;
 				font-family: PingFang SC;
 				font-weight: 400;
 				text-align: center;
-				color: #747474;
+				margin-top: .2rem;
 			}
 
 			._someone {
 				display: flex;
 				justify-content: space-between;
 				flex-wrap: wrap;
-				margin-top: .3rem;
+				margin: .3rem;
 				font-family: PingFang SC;
 
 				._item {
-					width: 48%;
+					width: 24%;
+					height: 3rem;
 					background: #FFF5E5;
 					text-align: center;
-					margin-bottom: .12rem;
-					padding-bottom: .2rem;
+					margin-bottom: 1.2%;
 
 					._img {
-						margin-top: 0.1rem;
-						width: 1rem;
-						height: 1rem;
+						margin-top: 0.4rem;
+						width: 1.22rem;
+						height: 1.47rem;
 					}
 
 					._text {
-						margin-top: .1rem;
-						font-size: 16px;
-						font-weight: 500;
+						margin-top: .2rem;
+						font-size: 40rpx;
+						font-weight: 800;
 					}
 
 					._text1 {
 						margin-top: .1rem;
-						font-size: 16px;
+						font-size: 30rpx;
 						font-weight: 400;
 						color: #999999;
 					}
@@ -934,29 +960,36 @@
 
 		.content_3_bg {
 			._step {
-				width: 96%;
-				margin: .2rem auto;
+				padding: 0 .4rem;
+				margin: .5rem .3rem .5rem .3rem;
+				height: 2.3rem;
 				background: #FFFFFF;
-				box-shadow: 0px 3px 20px 0px rgba(36, 41, 47, 0.1000);
+				box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 				border-radius: .1rem;
-				text-align: center;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
 
-				._img {
-					margin-top: .2rem;
-					width: 1rem;
-					height: 1rem;
+				._left {
+					flex: 1;
+
+					._img {
+						width: 1.45rem;
+						height: 1.45rem;
+					}
 				}
 
 				._center {
+					flex: 4;
 					font-family: PingFang SC;
-					margin-top: .1rem;
+					margin-right: 0.4rem;
 
 					._text {
 						padding: .02rem .1rem;
-						line-height: .23rem;
+						line-height: .3rem;
 						background: #4D9BEC;
 						border-radius: .05rem;
-						font-size: 16px;
+						font-size: 40rpx;
 						font-weight: 500;
 						color: #FFFFFF;
 						text-align: center;
@@ -964,75 +997,86 @@
 
 					._infoitem {
 						margin-left: .15rem;
-						line-height: .23rem;
-						font-size: 14px;
+						line-height: .3rem;
+						font-size: 50rpx;
 						font-weight: 500;
 						color: #000000;
 						text-align: left;
 					}
-				}
 
-				._detail {
-					width: 90%;
-					margin: 0 auto;
-					font-size: 14px;
-					font-weight: 400;
-					color: #787878;
-					line-height: .23rem;
-					margin-top: 0.2rem;
+					._detail {
+						font-size: 30rpx;
+						font-weight: 400;
+						color: #787878;
+						line-height: .25rem;
+						margin-top: 0.2rem;
 
-					._color {
-						color: #4D74EB;
+						._color {
+							color: #4D74EB;
+							cursor: pointer;
+						}
 					}
 				}
 
-				._bottom {
-					padding: .1rem 0;
+				._right {
+					flex: 1;
 
 					._btn {
-						width: 90%;
+						width: 2rem;
 						height: .45rem;
 						background: #E2E2E2;
-						border-radius: .06rem;
-						border: none;
+						border-radius: .1rem;
 						font-family: PingFang SC;
 						font-weight: 400;
+						font-size: 30rpx;
+						line-height: .45rem;
 						color: #363636;
 						text-align: center;
+						cursor: pointer;
 					}
-					._float{
-						 position: absolute;
-						 top:.75rem;
-						 z-index: 100;
-						 width: 100%;
+
+					._btn1 {
+						background: #C8A168;
+						border-radius: .1rem;
+						color: #FFFFFF;
+						margin-top: .2rem;
 					}
+
 					._btn2 {
 						background: #FFE9C9;
 						color: #A17D48;
 						border: none;
-						border-radius: 0.06rem 0.06rem 0rem 0rem;
+						border-radius: .1rem .1rem 0rem 0rem;
 						margin-top: .05rem;
 					}
-					
+
 					._btn3 {
 						background: #EED8B8;
 						margin-top: 0rem;
-						border-radius: 0rem 0rem 0.06rem 0.06rem;
+						border-radius: 0rem 0rem .1rem .1rem;
 					}
-					._btn1 {
-						background: #C8A168;
-						border-radius: .05rem;
-						color: #FFFFFF;
-						margin-top: .2rem;
+
+					._radius {
+						border-radius: .1rem;
 					}
-					._radius{
-						border-radius:.06rem;
+
+					._btn2:after,
+					._btn3:after {
+						border: none;
 					}
 				}
 			}
-			._step:last-child{
-				margin-bottom: .6rem
-			}
+		}
+
+		.yyzCanvas {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			z-index: 200000;
+			background-color: #24180e;
+			opacity: 1;
 		}
 	}
 </style>

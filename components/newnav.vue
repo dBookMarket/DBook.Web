@@ -1,7 +1,7 @@
 <template>
 	<view class="newnav">
 		<view class="nav">
-			<view class="left" @click="toUrl('index')">
+			<view class="left" @click="toUrl('home')">
 				<image src="/static/index/logo.svg" mode="" class="newlogo"></image>
 			</view>
 			<view class="newcenter">

@@ -65,7 +65,7 @@
 		width: 100%;
 		margin: .3rem auto 0;
 		overflow: hidden;
-		background-image: url(/static/index/mbottombg.png);
+		background-image: url('/static/index/mbobg.png');
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;

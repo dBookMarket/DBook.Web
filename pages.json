@@ -1,139 +1,110 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-		    "path" : "pages/index/market",
-		    "style" :                                                                                    
-		    {
-		        "navigationStyle": "custom"
-		    }
-		    
-		}
-		,{
-			"path": "pages/index/index",
+			"path": "home",
 			"style": {
 				"navigationStyle": "custom"
 			}
-		}
-        ,{
+		}, {
+			"path": "create",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "gants",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "earn",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "mindex",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "mcreate",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "mearn",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "mexplore",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "mgants",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		},
+		{
+			"path": "market",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
 			"path": "pages/index/indexold",
 			"style": {
 				"navigationStyle": "custom"
 			}
+		}, {
+			"path": "pages/index/detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/index/list",
+			"style": {
+				"navigationStyle": "custom"
+
+			}
+
+		}, {
+			"path": "pages/index/mine",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/index/settled",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/index/openWeb",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
+		}, {
+			"path": "pages/index/apply",
+			"style": {
+				"navigationStyle": "custom"
+			}
+
 		}
-        ,{
-            "path" : "pages/index/detail",
-            "style" :                                                                                    
-            {
-               "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/list",
-            "style" :                                                                                    
-            {
-                 "navigationStyle": "custom"
-				 
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mine",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/settled",
-            "style" :                                                                                    
-            {
-                 "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/openWeb",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/apply",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/create",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/gants",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/earn",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mindex",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mcreate",
-            "style" :                                                                                    
-            {
-               "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mearn",
-            "style" :                                                                                    
-            {
-                 "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mexplore",
-            "style" :                                                                                    
-            {
-                 "navigationStyle": "custom"
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/mgants",
-            "style" :                                                                                    
-            {
-                "navigationStyle": "custom"
-            }
-            
-        }
-    ],
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "dbook",

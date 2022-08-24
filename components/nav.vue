@@ -271,7 +271,7 @@
 			 */
 			toIndex() {
 				uni.navigateTo({
-					url: '/pages/index/index'
+					url: '/home'
 				})
 			},
 			/**
@@ -356,9 +356,9 @@
 			justify-content: flex-start;
 		}
 		.micon{
-			width: 1.5rem;
+			width: 1.9rem;
 			margin-left: 0.1rem;
-			height: 0.27rem;
+			height: 0.3rem;
 		}
 		.search {
 			width: 6rem;

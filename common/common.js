@@ -29,7 +29,7 @@ export default {
 			window.location.href = 'https://ddid.gitbook.io/dbookmarket-bai-pi-shu/'
 		}else{
 			uni.navigateTo({
-				url: '/pages/index/'+url
+				url: '/'+url
 			})
 		}
 	},
