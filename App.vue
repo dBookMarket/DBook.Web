@@ -28,7 +28,9 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import './css/index.css';
-
+	.mobilebg .content_1_bg uni-image>img{
+		height: 380px;
+	}
 	uni-page-wrapper {
 		background-color: #ffffff;
 	}

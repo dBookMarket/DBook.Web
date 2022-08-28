@@ -6,166 +6,141 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">NOW JOIN IN <br />MARING YOUR BOOK</view>
-			<view class="_desc">DBook is an e-book marketplace with SOCiaIF attributes.You can publish/trade your
-				own books, read them for money, and review them with other readers.</view>
+			<view class="_title">THE FUTURE OF READING AND WRITING</view>
+			<view class="_desc">DBOOK IS A WEB3 NFT BOOK MARKETPLACE. OUR MISSION IS TO PROMOTE THE BENEFITS OF READING
+				BY INCENTIVIZING YOU TO READ WHILE MAXIMIZING THE EARNINGS OF AUTHORS.
+				ALL THESE ARE POSSIBLE USING NFTS.</view>
 			<view class="_info">
 				<view class="_left">
-					<view class="_font">NFT Collection</view>
-					<view class="_font">On-chain traceability</view>
-					<view class="_font">Resaleable</view>
+					<view class="_font">NFT</view>
+					<view class="_font">RESALE AND ROYALTIES</view>
+					<view class="_font">READ TO EARN</view>
 				</view>
 				<view class="_center">
 					<image src="/static/index/book.svg" mode="" class="book"></image>
 				</view>
 				<view class="_right">
-					<view class="_font">Web3</view>
-					<view class="_font">No platform sharing</view>
-					<view class="_font">Data encryption</view>
+					<view class="_font">DATA ENCRYPTION</view>
+					<view class="_font">ADVERTISING REVENUE</view>
+					<view class="_font">WRITE TO EARN</view>
 				</view>
 			</view>
 		</view>
 		<view class="content_2_bg">
-			<view class="_title">How to make money</view>
-			<view class="_desc">DBook, with a complete token model,
-				forms a unique Web3 + Web2 mode through its internal circulation and opening up some economic systems of
-				Web2.</view>
+			<view class="_title">EARN</view>
+			<view class="_desc">WRITE, PUBLISH & MAXIMIZE YOUR EARNINGS;GET REWARDED FOR READING;EARN BY WATCHING ADS
+				YOU WANT TO WATCH.</view>
 			<view class="_container">
 				<view class="_item">
 					<view class="front" :class="isTopWriter  ? 'contain-Before' : ''" @click="handleBefore('writer')">
 						<image src="/static/index/author.svg" class="_img"></image>
-						<view class="_text">I am a writer</view>
+						<view class="_text">I'M A WRITER</view>
 					</view>
 					<view class="back" :class="isTopWriter  ? 'contain-After' : ''" @click="handleAfter('writer')">
-						<view class="_text">I am a writer</view>
-						<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
-							mode through its internal circulation and opening up some economic
-							systems of Web2.</view>
+						<view class="_text">I'M A WRITER</view>
+						<view class="_colortext">I PUBLISH THE BOOKS I HAVE WRITTEN AND SELL THEM BY SETTING THE
+								PRICE AND ROYALTIES;
+								I CAN ALSO SELL BY CHAPTER TO REDUCE THE COST AND CYCLE OF MY CREATION AND COLLECT
+								READERS' OPINIONS TO CONTINUE TO COMPLETE THE SUBSEQUENT CHAPTERS.</view>
 					</view>
 				</view>
 
 				<view class="_item">
 					<view class="front" :class="isTopReader  ? 'contain-Before' : ''" @click="handleBefore('reader')">
 						<image src="/static/index/reader.svg" class="_img"></image>
-						<view class="_text">I am a reader</view>
+						<view class="_text">I'M A READER</view>
 					</view>
 					<view class="back" :class="isTopReader  ? 'contain-After' : ''" @click="handleAfter('reader')">
-						<view class="_text">I am a reader</view>
-						<view class="_colortext">DBook, with a complete token model, forms a unique Web3 + Web2
-							mode through its internal circulation and opening up some economic
-							systems of Web2.</view>
+						<view class="_text">I'M A READER</view>
+						<view class="_colortext">I CAN SET THE TYPE OF ADS I LIKE AND GET REVENUE FROM WATCHING THE
+								INSERTED ADS DURING MY READING.</view>
 					</view>
 					
 				</view>
 			</view>
 		</view>
 		<view class="content_3_bg">
-			<view class="_title">Through the economic</view>
-			<view class="_desc">The economic cycle designed by dBook can ensure that all parties can achieve a win-win
-				situation.The ghostwriter DBK is interspersed in the whole economic system to achieve an orderly
-				internal cycle,
-				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both
-				parties.</view>
+			<view class="_title">WORKING PRINCIPLE</view>
+			<view class="_desc">DBOOK ECOSYSTEM HAS A STABLE ECONOMIC CIRCULATION SYSTEM,
+				IN WHICH ADVERTISERS ARE ADDED AS INFLOW FUNDS PROVIDERS,
+				SO THAT DIFFERENT ROLES CAN MAKE PROFITS IN THE ECOSYSTEM.</view>
 			<image src="/static/index/mtriangle.png" class="_circle"></image>
 		</view>
 		<view class="content_4_bg">
-			<view class="_title">Copyright protection</view>
+			<view class="_title">FAQ</view>
 			<view class="_desc">
-				DBoo adopts full homomorphic encryption to encrypt the data of works,
-				and can transfer the power of data decryption to a new holder without decrypting the data. At present,
-				it can solve multiple scenes such as pictures, text, audio and video.
+				YOU'LL FIND ANSWERS TO THE QUESTIONS YOU NEED TO KNOW, AND IF YOURS ISN'T INCLUDED, PLEASE EMAIL US, OR
+				TWEET US.
 			</view>
 			<view class="_content">
 				<view class="_itemcon">
 					<view class="_mininfo" @click="openContent(1)">
-						<text>How to appeal if the work is infringed?</text>
+						<text>HOW DO I PUBLISH MY BOOK?</text>
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down1">
-						After seeing other people's works being stolen, relevant evidence should
-						be provided and reports should be made. A temporary alliance composed
-						of other random authors and readers should conduct preliminary review,
-						freeze the undistributed income of the account, and remove/suspend the
-						author's books, and determine how to compensate after repeated
-						arbitration by multiple parties.
+						YOU CAN AUTHENTICATE THE AUTHOR THROUGH THE CREATE PAGE. STEP 1, 2, AND 3 ARE USED TO OBTAIN
+						PUBLISHING PERMISSIONS. STEP 4 TAKES YOU TO THE PUBLISHING PAGE.
 					</view>
 				</view>
 				<view class="_itemcon">
 					<view class="_mininfo" @click="openContent(3)">
-						<text>How does the author guarantee his rights and interests?</text>
+						<text>HOW CAN WRITERS AND READERS PROTECT THEIR RIGHTS AND INTERESTS?</text>
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down3">
-						After seeing other people's works being stolen, relevant evidence should
-						be provided and reports should be made. A temporary alliance composed
-						of other random authors and readers should conduct preliminary review,
-						freeze the undistributed income of the account, and remove/suspend the
-						author's books, and determine how to compensate after repeated
-						arbitration by multiple parties.
+						WRITERS ARE REQUIRED TO LINK THEIR TWITTER AND LINKEDIN ACCOUNTS BEFORE BEING GRANTED
+						PERMISSION TO PUBLISH, WHICH ENSURES THE AUTHENTICITY OF THEIR IDENTITY. READERS CAN CHECK
+						AN AUTHOR'S TWITTER AND LINKEDIN WHEN THEY BUY WORK.
 					</view>
 				</view>
 				<view class="_itemcon">
 					<view class="_mininfo" @click="openContent(5)">
-						<text>What if I see someone stealing someone else's work?</text>
+						<text>WHAT IF I SEE FAKE AUTHORS POSTING PIRATED BOOKS?</text>
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down5">
-						After seeing other people's works being stolen, relevant evidence should
-						be provided and reports should be made. A temporary alliance composed
-						of other random authors and readers should conduct preliminary review,
-						freeze the undistributed income of the account, and remove/suspend the
-						author's books, and determine how to compensate after repeated
-						arbitration by multiple parties.
+						IF YOU SEE A PIRATED COPY OF THE BOOK, PLEASE DO NOT BUY IT, IT MAY BE TAKEN DOWN AT ANY
+						TIME, YOU CAN CONTACT US BY EMAIL AND URGE OTHER READERS IN THE DBOOK COMMUNITY TO BE AWARE
+						OF THE SCAM.
 					</view>
 				</view>
 				<view class="_itemcon">
 					<view class="_mininfo" @click="openContent(2)">
-						<text>How is the work protected?</text>
+						<text>WHERE ARE THE BOOKS STORED?</text>
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down2">
-						After seeing other people's works being stolen, relevant evidence should
-						be provided and reports should be made. A temporary alliance composed
-						of other random authors and readers should conduct preliminary review,
-						freeze the undistributed income of the account, and remove/suspend the
-						author's books, and determine how to compensate after repeated
-						arbitration by multiple parties.
+						WE WILL HOMOMORPHICALLY ENCRYPT YOUR UPLOADED BOOKS, THEN UPLOAD THEM TO IPFS AND BACK THEM
+						UP TO FILECOIN.
 					</view>
 				</view>
 				<view class="_itemcon">
 					<view class="_mininfo" @click="openContent(4)">
-						<text>What should I pay attention to when publishing on dBook?</text>
+						<text>HOW DO I EARN ON DBOOK?</text>
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down4">
-						After seeing other people's works being stolen, relevant evidence should
-						be provided and reports should be made. A temporary alliance composed
-						of other random authors and readers should conduct preliminary review,
-						freeze the undistributed income of the account, and remove/suspend the
-						author's books, and determine how to compensate after repeated
-						arbitration by multiple parties.
+						YOU CAN SELL BOOKS OR YOU CAN READ TO EARN. IF YOU'RE A WRITER YOU CAN COLLECT ROYALTIES.
 					</view>
 				</view>
 			</view>
 
 		</view>
 		<view class="content_5_bg">
-			<view class="_title">Developed communities</view>
+			<view class="_title">COMMUNITY</view>
 			<view class="_desc">
-				DBook is managed in the DAO mode.
-				Users will release their own works after binding their social media accounts. Meanwhile, when it comes
-				to copyright disputes,
-				the random committee mode will be adopted for adjudication, and the shelf/shelf removal/freeze status of
-				books/authors will be managed
+				HERE, YOU CAN BE BOTH THE WRITER AND THE READER. YOU CAN PARTICIPATE IN EVERY PART OF THE ECOLOGY:
+				WRITING BOOKS, READING TO EARN, GOVERNING, COMMENTING ON INTERACTIONS.
 			</view>
 			<view class="_develop">
 				<woo-swiper :list="devlist"></woo-swiper>
 			</view>
 		</view>
 		<view class="content_6_bg">
-			<view class="_title">The roadmap</view>
+			<view class="_title">ROADMAP</view>
 			<view class="_content">
-				<view class="_text _text1">On the issue of copyright protection of e-books</view>
+				<view class="_text _text1">ENVISION THE FUTURE OF E-BOOKS</view>
 				<view class="_flex">
 					<image src="/static/index/map1.svg" class="_imgicon"></image>
 				</view>
@@ -176,11 +151,11 @@
 				<view class="_flex">
 					<image src="/static/index/map2.svg" class="_imgicon"></image>
 				</view>
-				<view class="_text _text2">The copyrighted NFT book exchange marketplace dBookMarkt testnet is released
+				<view class="_text _text2">DBOOKMARKET DEMO RELEASED TO MUBAI TESTNET
 				</view>
 			</view>
 			<view class="_content">
-				<view class="_text _text1">New UI interface and DAO</view>
+				<view class="_text _text1">DBOOKMARKET WHITEPAPER DRAFT RELEASED</view>
 				<view class="_flex">
 					<image src="/static/index/map3.svg" class="_imgicon"></image>
 				</view>
@@ -191,10 +166,10 @@
 				<view class="_flex">
 					<image src="/static/index/map4.svg" class="_imgicon"></image>
 				</view>
-				<view class="_text _text2" style="top: .18rem;">Earn money while reading</view>
+				<view class="_text _text2" style="top: .18rem;">DBOOKMARKET MOBILE DEMO RELEASED TO MUBAI TESTNET</view>
 			</view>
 			<view class="_content">
-				<view class="_text _text1">New UI interface and DAO</view>
+				<view class="_text _text1">WRITE TO EARN & READ TO EARN</view>
 				<view class="_flex">
 					<image src="/static/index/map5.svg" class="_imgicon"></image>
 				</view>
@@ -205,10 +180,10 @@
 				<view class="_flex">
 					<image src="/static/index/map6.svg" class="_imgicon"></image>
 				</view>
-				<view class="_text _text2" style="top: .18rem;">Earn money while reading</view>
+				<view class="_text _text2" style="top: .18rem;">SOCIALFI & COMMENT INTERACTION</view>
 			</view>
 			<view class="_content">
-				<view class="_text _text1">New UI interface and DAO</view>
+				<view class="_text _text1">LISTEN TO EARN</view>
 				<view class="_flex">
 					<image src="/static/index/map7.svg" class="_imgicon"></image>
 				</view>
@@ -218,7 +193,7 @@
 				<view class="_flex">
 					<image src="/static/index/map8.svg" class="_imgicon"></image>
 				</view>
-				<view class="_text _text2" style="top: .18rem;">Earn money while reading</view>
+				<view class="_text _text2" style="top: .18rem;">BOOK RENTAL FI</view>
 			</view>
 
 		</view>
@@ -248,15 +223,15 @@
 			return {
 				devlist: [{
 						src: '/static/index/1.svg',
-						text: "Universal creation"
+						text: "WRITING AT ANY TIME"
 					},
 					{
 						src: '/static/index/2.svg',
-						text: "Management books"
+						text: "GOVERNING BOOKS"
 					},
 					{
 						src: '/static/index/3.svg',
-						text: "Chain on the comments"
+						text: "SOCIALIZING"
 					},
 				],
 				teamlist: [{
@@ -647,7 +622,7 @@
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-						font-size: 16px;
+						font-size: 14px;
 						padding: 0 .1rem;
 						font-family: PingFang SC;
 						font-weight: 400;

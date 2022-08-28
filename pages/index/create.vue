@@ -98,8 +98,7 @@
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float" v-if="walletsBtn">
-						<button class="_btn _btn2" @click="toSwitch()">Change the account</button>
-						<button class="_btn _btn3" @click="toBreak()">Exit</button>
+						<button class="_btn _btn3" @click="toBreak()">LOGOUT</button>
 					</view>
 				</view>
 			</view>

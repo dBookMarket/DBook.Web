@@ -20,7 +20,7 @@
 						</view>
 					</view>
 					<view class="_qrcode">
-						<image src="/static/index/qrcode.svg" class="_qrcodeimg"></image>
+						<image src="/static/index/qrcode.png" class="_qrcodeimg"></image>
 					</view>
 				</view>
 			</view>

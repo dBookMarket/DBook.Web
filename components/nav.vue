@@ -3,7 +3,6 @@
 		<view class="navbg">
 			<view class="nav">
 				<view class="left" @click="toIndex()">
-					<image src="/static/img/logodbook.png" mode="" class="logo"></image>
 					<image src="/static/index/micon.svg" mode="" class="micon"></image>
 				</view>
 				<view class="center cflex">
@@ -356,9 +355,9 @@
 			justify-content: flex-start;
 		}
 		.micon{
-			width: 1.9rem;
+			width: 3.8rem;
 			margin-left: 0.1rem;
-			height: 0.3rem;
+			height: 0.42rem;
 		}
 		.search {
 			width: 6rem;

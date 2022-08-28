@@ -70,22 +70,22 @@
 			</view>
 		</view>
 		<view class="content_3_bg">
-			<view class="_title">How am I going to be a dBook writer</view>
-			<view class="_desc">dBook is an open-ended writer's gathering place, 
-				you can complete the writer's identification through the following steps, it takes about 2-3 minutes
+			<view class="_title">TO APPLY FOR THE WRITER</view>
+			<view class="_desc">DBOOK IS AN OPEN WRITER'S GATHERING PLACE. YOU CAN APPLY FOR A WRITER BY FOLLOWING THESE STEPS, 
+			WHICH SHOULD TAKE ABOUT TWO TO THREE MINUTES.
 			</view>
 			<view class="_step">
 				<image src="/static/index/metamask.svg" class="_img"></image>
 				<view class="_center">
 					<text class="_text">STEP1</text>
-					<text class="_infoitem">Link your wallet-MetaMask</text>
+					<text class="_infoitem">CONNECT METAMASK</text>
 				</view>
-				<view class="_detail">You need to link to MetaMask to log in first. If you have not installed
-					MetaMask <text class="_color" @click="toGoogle()">(go to the Google WebShop) </text>
-					or have never used MetaMask<text class="_color">(how-to guide)</text>,please follow the relevant
-					links to install or learn.</view>
+				<view class="_detail">YOU NEED TO LINK TO METAMASK TO LOG IN FIRST. IF YOU HAVE NOT INSTALLED
+					METAMASK<text class="_color" @click="toGoogle()">(GO TO THE GOOGLE WEBSHOP)</text>
+					OR HAVE NEVER USED METAMASK<text class="_color">(HOW-TO GUIDE)</text>,PLEASE FOLLOW THE RELEVANT
+					LINKS TO INSTALL OR LEARN.</view>
 				<view class="_bottom" v-if="!address">
-					<button class="_btn" @click="toMetamask()">Link wallets</button>
+					<button class="_btn" @click="toMetamask()">CONNECT</button>
 				</view>
 				<view class="_bottom _position" v-if="address">
 					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
@@ -93,8 +93,7 @@
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float">
-						<button v-if="walletsBtn" class="_btn _btn2" @click="toSwitch()">Change the account</button>
-						<button v-if="walletsBtn" class="_btn _btn3" @click="toBreak()">Exit</button>
+						<button v-if="walletsBtn" class="_btn _btn2 _radius" @click="toBreak()">LOGOUT</button>
 					</view>
 				</view>
 			</view>
@@ -102,21 +101,18 @@
 				<image src="/static/index/media.svg" class="_img"></image>
 				<view class="_center">
 					<text class="_text">STEP2</text>
-					<text class="_infoitem">Connect your social media</text>
+					<text class="_infoitem">CONNECT TWITTER</text>
 				</view>
-				<view class="_detail">Once you've completed the first step, connect your social media, Twitter,
-					and LinkedIn choose one of the two. Clicking on Link will ask you to send
-					the specified content in your social media account, in order to verify the
-					identity owner of that social media.</view>
+				<view class="_detail">CLICK THE BUTTON TO VERIFY YOUR TWITTER, WHICH REQUIRES YOU TO SEND A TWEET FROM YOUR TWITTER ACCOUNT.</view>
 				<view class="_bottom" v-if="isAuthTweets == false">
-					<button class="_btn" @click="toAuthenticate('twitter')">Link Tweets</button>
+					<button class="_btn" @click="toAuthenticate('twitter')">CONNECT</button>
 				</view>
 				<view class="_bottom _position" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">AuthenticationOk
+					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">VALIDATION
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float">
-					   <button v-if="authBtn" class="_btn _btn2 _radius" @click="toRevalidate('twitter')">Revalidation</button>
+					   <button v-if="authBtn" class="_btn _btn2 _radius" @click="toRevalidate('twitter')">REVALIDATION</button>
 					</view>
 				</view>
 			</view>
@@ -124,21 +120,19 @@
 				<image src="/static/index/verify.svg" class="_img"></image>
 				<view class="_center">
 					<text class="_text">STEP3</text>
-					<text class="_infoitem">Verify social media and become an author</text>
+					<text class="_infoitem">CONNECT LINKEDIN</text>
 				</view>
-				<view class="_detail">After completing the second step, select your associated social media method,
-					click the corresponding verification button, and automatically activate the
-					author's publishing permission after detecting the identity consistency.</view>
+				<view class="_detail">CLICK THE BUTTON TO VERIFY YOUR LINKEDIN, WHICH REQUIRES YOU TO SEND A FEED FROM YOUR LINKEDIN ACCOUNT.</view>
 				<view class="_bottom" v-if="isLinkedIn == false">
-					<button class="_btn" @click="toAuthenticate('linkedin')">Link LinkedIn</button>
+					<button class="_btn" @click="toAuthenticate('linkedin')">CONNECT</button>
 				</view>
 				<view class="_bottom _position" v-if="isLinkedIn == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">AuthenticationOk
+					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">VALIDATION
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<view class="_float">
 						<button v-if="authLinkedBtn" class="_btn _btn2 _radius"
-						@click="toRevalidate('linkedin')">Revalidation</button>
+						@click="toRevalidate('linkedin')">REVALIDATION</button>
 					</view>
 				</view>
 			</view>
@@ -148,11 +142,11 @@
 				</view>
 				<view class="_center">
 					<text class="_text">STEP4</text>
-					<text class="_infoitem">SETTLED</text>
-					<view class="_detail">SETTLED BOOK</view>
+					<text class="_infoitem">PUBLISHING BOOKS</text>
+					<view class="_detail">COMPLETE THE ABOVE THREE STEPS AND YOU HAVE SUCCESSFULLY APPLIED. NOW GO TO DBOOKMARKET AND PUBLISH A BOOK!</view>
 				</view>
 				<view class="_bottom">
-					<button class="_btn _btn1" @click="toSettled()">SETTLED</button>
+					<button class="_btn _btn1" @click="toSettled()">GO NOW</button>
 				</view>
 			</view>
 		</view>
@@ -862,9 +856,10 @@
 
 			._img {
 				width: 100%;
-				height: 200px;
+				
 				margin-top: .2rem;
 				border-radius: 20px;
+				
 			}
 		}
 
@@ -1033,5 +1028,20 @@
 				margin-bottom: .6rem
 			}
 		}
+	}
+</style>
+<style>
+	/* 在小于或等于 1100 像素的屏幕上，将背景色设置为蓝色 */
+	@media screen and (max-width: 1100px) {
+	  .content_1_bg ._img{
+	    height: 380px;
+	  }
+	}
+	 
+	/* 在 400 像素或更小的屏幕上，将背景色设置为橄榄色 */
+	@media screen and (max-width: 400px) {
+	  .content_1_bg ._img{
+	    height: 200px;
+	  }
 	}
 </style>

@@ -10,13 +10,11 @@
 			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">Reading for Money</view>
 		</view>
 		<view class="content_1_bg" v-if="isPublish">
-			<view class="_title">1、Apply to be an author</view>
+			<view class="_title">1、PERMISSION TO PUBLISH</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">To maintain copyright interest<br />
-							and credibility you need to <br />
-							engage your social media</view>
+						<view class="_font">VERIFY YOUR TWEETS FOR THE BENEFIT OF YOU AND YOUR READERS.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -28,17 +26,12 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Welcome to the World of Web3,
-							you need to create a wallet to
-							receive money</view>
+						<view class="_font">YOU NEED TO FIRST CONNECT TO THE METAMASK WALLET, WHICH ACTS AS A UNIQUE DBOOK IDENTITY.</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">After verifying that you own the
-							social media, you are now an
-							author and can publish your
-							work on dBook</view>
+						<view class="_font">VERIFY YOUR LINKEDIN PROFILE TO PROTECT YOU AND YOUR READERS.</view>
 					</view>
 				</view>
 			</view>

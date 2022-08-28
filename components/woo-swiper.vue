@@ -39,13 +39,13 @@
 				height:{
 					type:Number,
 					default:()=>{
-						return 400;
+						return 350;
 					}
 				},
 				width:{
 					type:Number,
 					default:()=>{
-						return 400;
+						return 350;
 					}
 				},
 				isTeam:{
@@ -130,12 +130,12 @@
 			position: relative;
 		}
 		._text {
-			width: 190px;
+			width: 330rpx;
 			z-index: 10;
 			position: absolute;
 			bottom: 0;
 			left: 50%;
-			margin-left: -100px;
+			margin-left: -175rpx;
 			color: #FFFFFF;
 			font-family: PingFang SC;
 			font-weight: 500;
@@ -154,6 +154,9 @@
 			font-size: 15px;
 			font-weight: 400;
 			color: #999999;
+		}
+		.text{
+			font-size: 16px;
 		}
 	}
 </style>

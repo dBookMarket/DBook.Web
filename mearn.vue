@@ -10,7 +10,7 @@
 			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">Reading for Money</view>
 		</view>
 		<view class="content_1_bg" v-if="isPublish">
-			<view class="_title">1、Apply to be an author</view>
+			<view class="_title">1、PERMISSION TO PUBLISH</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
