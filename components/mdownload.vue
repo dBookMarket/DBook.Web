@@ -22,8 +22,11 @@
 					</view>
 				</view>
 				<view class="_butflex">
-					<view class="_qrcode">
+					<view class="_qrcode" @click="isqrcode=true">
 						<image src="/static/index/qrcode.png" class="_qrcodeimg"></image>
+						<view class="_bigqrcode" :class="{'isqrcode':isqrcode}">
+							<image src="/static/index/qrcode.png" class="_qrcodepng"></image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -37,7 +40,7 @@
 		name: "mdoanload",
 		data() {
 			return {
-
+				isqrcode:false
 			};
 		},
 		methods: {
@@ -127,10 +130,29 @@
 				background: #FFFFFF;
 				border-radius: .15rem;
 				margin-top: 0.15rem;
+				position: relative;
 				._qrcodeimg{
 					width: .32rem;
 					height: .32rem;
 					vertical-align: middle;
+				}
+				._bigqrcode{
+					position: absolute;
+					display: none;
+					top: .82rem;
+					left: 50%;
+					margin-left: -.85rem;
+					z-index: 10000;
+					._qrcodepng{
+						border-radius: .1rem;
+						width: 1.5rem;
+						height: 1.5rem;
+						padding: .1rem;
+						background-color: #FFFFFF;
+					}
+				}
+				.isqrcode{
+					display: block;
 				}
 			}
 		}

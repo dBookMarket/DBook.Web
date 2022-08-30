@@ -6,11 +6,11 @@
 			</view>
 		</view>
 		<view class="_navbtn">
-			<view class="_btn" :class="{'_active':isPublish}" @click="chooseMoney(1)">Publishing money</view>
-			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">Reading for Money</view>
+			<view class="_btn" :class="{'_active':isPublish}" @click="chooseMoney(1)">WRITERS</view>
+			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">READERS</view>
 		</view>
 		<view class="content_1_bg" v-if="isPublish">
-			<view class="_title">1、PERMISSION TO PUBLISH</view>
+			<view class="_title">1、WRITER SIGN-UP</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">

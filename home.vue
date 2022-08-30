@@ -6,24 +6,24 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">THE FUTURE OF READING AND WRITING</view>
-			<view class="_desc">DBOOK IS A WEB3 NFT BOOK MARKETPLACE. OUR MISSION IS TO PROMOTE THE BENEFITS OF READING
-				BY INCENTIVIZING YOU TO READ WHILE MAXIMIZING THE EARNINGS OF AUTHORS.
-				ALL THESE ARE POSSIBLE USING NFTS.</view>
+			<view class="_title">THE FUTURE OF DIGITAL BOOKS</view>
+			<view class="_desc">DBOOK is a web3 nft book marketplace where authors can publish and sell their works as
+				nfts directly to readers and book collectors.
+				Authors are guaranteed of royalty earnings for their works forever.</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">NFT</view>
+						<view class="_font">Publish NFT books</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
 					<view class="_item">
-						<view class="_font">RESALE AND ROYALTIES</view>
+						<view class="_font">Protect your copyright</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
 					<view class="_item">
-						<view class="_font">READ TO EARN</view>
+						<view class="_font">Earn royalties forever</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -35,25 +35,24 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">DATA ENCRYPTION</view>
+						<view class="_font">Read & Earn</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">ADVERTISING REVENUE</view>
+						<view class="_font">Buy & Own</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">WRITE TO EARN</view>
+						<view class="_font">Trade your collectiblesDATA ENCRYPTION</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="content_2_bg">
-			<view class="_title">EARN</view>
-			<view class="_desc">WRITE, PUBLISH & MAXIMIZE YOUR EARNINGS;GET REWARDED FOR READING;EARN BY WATCHING ADS
-				YOU WANT TO WATCH.</view>
+			<view class="_title">JOIN THE DBOOK COMMUNITY NOW!</view>
+			<view class="_desc">Click the role below to see how to use the application.</view>
 			<view class="_someone">
 				<view class="_container">
 					<view class="_item">
@@ -65,8 +64,7 @@
 							<view class="_text">I'M A WRITER</view>
 							<view class="_colortext">I PUBLISH THE BOOKS I HAVE WRITTEN AND SELL THEM BY SETTING THE
 								PRICE AND ROYALTIES;
-								I CAN ALSO SELL BY CHAPTER TO REDUCE THE COST AND CYCLE OF MY CREATION AND COLLECT
-								READERS' OPINIONS TO CONTINUE TO COMPLETE THE SUBSEQUENT CHAPTERS.</view>
+								I CAN ALSO SELL BY CHAPTER TO REDUCE THE COST.</view>
 						</view>
 					</view>
 				</view>
@@ -87,18 +85,19 @@
 			</view>
 		</view>
 		<view class="content_3_bg">
-			<view class="_title">WORKING PRINCIPLE</view>
-			<view class="_desc">DBOOK ECOSYSTEM HAS A STABLE ECONOMIC CIRCULATION SYSTEM,
-				IN WHICH ADVERTISERS ARE ADDED AS INFLOW FUNDS PROVIDERS,
-				SO THAT DIFFERENT ROLES CAN MAKE PROFITS IN THE ECOSYSTEM.
+			<view class="_title">Ecosystem</view>
+			<view class="_desc">Dbook ecosystem has a stable economic circulation system, in which advertisers are added
+				as inflow funds providers, so that different roles can make profits in the ecosystem.
 			</view>
 			<image src="/static/index/triangle.svg" class="_circle"></image>
 		</view>
 		<view class="content_4_bg">
-			<view class="_title">FAQ</view>
+			<view class="_title">HOW TO WORKS</view>
 			<view class="_desc">
-				YOU'LL FIND ANSWERS TO THE QUESTIONS YOU NEED TO KNOW, AND IF YOURS ISN'T INCLUDED, PLEASE EMAIL US, OR
-				TWEET US.
+				DBOOK uses homomorphic encryption and NFT to ensure that digital books’ copyright are protected and
+				royalty payments are perpetual and executed automatically. Only the rightful owner of the NFT can
+				decrypt and access the digital book for reading. It also allows the transfer of ownership, i.e. you can
+				now trade (sell) your digital book.To find out more, read our FAQ.
 			</view>
 			<view class="_content">
 				<view class="_left">
@@ -108,8 +107,7 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down1">
-							YOU CAN AUTHENTICATE THE AUTHOR THROUGH THE CREATE PAGE. STEP 1, 2, AND 3 ARE USED TO OBTAIN
-							PUBLISHING PERMISSIONS. STEP 4 TAKES YOU TO THE PUBLISHING PAGE.
+							You can authenticate the author through the create page. Step 1, 2, and 3 are used to obtain publishing permissions. Step 4 takes you to the publishing page.
 						</view>
 					</view>
 					<view class="_item">
@@ -118,9 +116,7 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down3">
-							WRITERS ARE REQUIRED TO LINK THEIR TWITTER AND LINKEDIN ACCOUNTS BEFORE BEING GRANTED
-							PERMISSION TO PUBLISH, WHICH ENSURES THE AUTHENTICITY OF THEIR IDENTITY. READERS CAN CHECK
-							AN AUTHOR'S TWITTER AND LINKEDIN WHEN THEY BUY WORK.
+							Writers are required to link their twitter and linkedin accounts before being granted permission to publish, which ensures the authenticity of their identity. Readers can check an author's twitter and linkedin when they buy work.
 						</view>
 					</view>
 					<view class="_item">
@@ -129,9 +125,7 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down5">
-							IF YOU SEE A PIRATED COPY OF THE BOOK, PLEASE DO NOT BUY IT, IT MAY BE TAKEN DOWN AT ANY
-							TIME, YOU CAN CONTACT US BY EMAIL AND URGE OTHER READERS IN THE DBOOK COMMUNITY TO BE AWARE
-							OF THE SCAM.
+							If you see a pirated copy of the book, please do not buy it, it may be taken down at any time, you can contact us by email and urge other readers in the dbook community to be aware of the scam.
 						</view>
 					</view>
 				</view>
@@ -142,8 +136,7 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down2">
-							WE WILL HOMOMORPHICALLY ENCRYPT YOUR UPLOADED BOOKS, THEN UPLOAD THEM TO IPFS AND BACK THEM
-							UP TO FILECOIN.
+							We will homomorphically encrypt your uploaded books, then upload them to ipfs and back them up to filecoin.
 						</view>
 					</view>
 					<view class="_item">
@@ -152,7 +145,7 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down4">
-							YOU CAN SELL BOOKS OR YOU CAN READ TO EARN. IF YOU'RE A WRITER YOU CAN COLLECT ROYALTIES.
+							You can sell books or you can read to earn. If you're a writer you can collect royalties.
 						</view>
 					</view>
 				</view>
@@ -160,23 +153,22 @@
 
 		</view>
 		<view class="content_5_bg">
-			<view class="_title">COMMUNITY</view>
+			<view class="_title">X2Earn</view>
 			<view class="_desc">
-				HERE, YOU CAN BE BOTH THE WRITER AND THE READER. YOU CAN PARTICIPATE IN EVERY PART OF THE ECOLOGY:
-				WRITING BOOKS, READING TO EARN, GOVERNING, COMMENTING ON INTERACTIONS.
+				Here, you can be both the writer and the reader. You can participate in every part of the ecology: writing books, reading to earn, governing, commenting on interactions.
 			</view>
 			<view class="_develop">
 				<view class="_item">
 					<image src="/static/index/1.svg" class="_img"></image>
-					<view class="_text">WRITING AT ANY TIME</view>
+					<view class="_text">Write2Earn</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/2.svg" class="_img"></image>
-					<view class="_text">GOVERNING BOOKS</view>
+					<view class="_text">Read2Earn</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/3.svg" class="_img"></image>
-					<view class="_text">SOCIALIZING</view>
+					<view class="_text">SocialFi</view>
 				</view>
 			</view>
 		</view>
@@ -270,7 +262,7 @@
 					</view>
 					<view class="_pinfo" :class="{'menu-mask__slide':person1}" @mouseleave="leave('person1')">
 						<view class="_textinfo">Former QBAO Wallet Product Director
-						Former Filwallet Product Head</view>
+							Former Filwallet Product Head</view>
 					</view>
 				</view>
 
@@ -372,16 +364,16 @@
 			 * 鼠标悬浮
 			 * @param {Object} num
 			 */
-			enter(num){
-			 this[num] = true;
-		    },
+			enter(num) {
+				this[num] = true;
+			},
 			/**
 			 * 鼠标离开
 			 * @param {Object} num
 			 */
-		    leave(num) {
-			 this[num] = false;
-		    },
+			leave(num) {
+				this[num] = false;
+			},
 			/**
 			 * 跳转页面
 			 * @param {Object} type
@@ -719,6 +711,7 @@
 					padding-bottom: .4rem;
 					box-shadow: 0px 3px 49px 0px rgba(36, 41, 47, 0.1000);
 					cursor: pointer;
+
 					._img {
 						margin-top: 0.4rem;
 						width: 2.5rem;
@@ -732,15 +725,16 @@
 						font-weight: 400;
 					}
 				}
-				._item:hover{
-				    transform:scale(1.1);
-					-ms-transform:scale(1.1);
+
+				._item:hover {
+					transform: scale(1.1);
+					-ms-transform: scale(1.1);
 					/* IE 9 */
-					-moz-transform:scale(1.1);
+					-moz-transform: scale(1.1);
 					/* Firefox */
-					-webkit-transform:scale(1.1);
+					-webkit-transform: scale(1.1);
 					/* Safari 和 Chrome */
-					-o-transform:scale(1.1);
+					-o-transform: scale(1.1);
 				}
 			}
 		}
@@ -818,14 +812,14 @@
 					}
 
 					.bgtext {
-						width: 175px;
-						height: 70px;
+						width: 136px;
+						height: 60px;
 						background: #7D5321;
 						border-radius: 20px;
 						color: #FFE1B4;
 						text-align: center;
-						padding: 15px 7px;
-						margin-left: -20px;
+						padding: 20px;
+						margin-left: -23px;
 					}
 
 					._text1 {}
@@ -882,7 +876,7 @@
 						top: 0;
 						left: 0;
 					}
-					
+
 					._pinfo {
 						font-size: 40rpx;
 						position: absolute;
@@ -893,16 +887,19 @@
 						width: 333px;
 						height: 338px;
 						display: none;
-						._textinfo{
-							width: 333px;
-							height: 338px;
+
+						._textinfo {
+							width: 313px;
+							height: 318px;
 							line-height: .4rem;
-							text-align: center;
+							text-align: left;
 							display: flex;
-							justify-content: center;
-							align-items: center;
+							justify-content: flex-start;
+							align-items: flex-start;
+							padding: 20px 0 0 20px;
 						}
 					}
+
 					.menu-mask__slide {
 						top: 0;
 						left: 0;
@@ -912,6 +909,7 @@
 						z-index: 49998;
 						display: block;
 					}
+
 					._text {
 						width: 98%;
 						z-index: 10;

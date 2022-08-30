@@ -19,8 +19,11 @@
 							<view class="_bottomtext">Google Play</view>
 						</view>
 					</view>
-					<view class="_qrcode">
-						<image src="/static/index/qrcode.png" class="_qrcodeimg"></image>
+					<view class="_qrcode" @mouseover="isqrcode=true" @mouseout="isqrcode=false">
+						<image src="/static/index/qrcode.svg" class="_qrcodeimg"></image>
+						<view class="_bigqrcode" :class="{'isqrcode':isqrcode}">
+							<image src="/static/index/qrcode.png" class="_qrcodepng"></image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -34,7 +37,7 @@
 		name: "downloadapp",
 		data() {
 			return {
-
+				isqrcode:false
 			};
 		},
 		methods: {
@@ -133,10 +136,30 @@
 					display: flex;
 					justify-content: center;
 					align-items: center;
+					cursor: pointer;
+					position: relative;
 					._qrcodeimg{
 						width: .65rem;
 						height: .65rem;
 						vertical-align: middle;
+					}
+					._bigqrcode{
+						position: absolute;
+						display: none;
+						top: .82rem;
+						left: 50%;
+						margin-left: -.85rem;
+						z-index: 10000;
+						._qrcodepng{
+							border-radius: .1rem;
+							width: 1.5rem;
+							height: 1.5rem;
+							padding: .1rem;
+							background-color: #FFFFFF;
+						}
+					}
+					.isqrcode{
+						display: block;
 					}
 				}
 			}

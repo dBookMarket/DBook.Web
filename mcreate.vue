@@ -30,42 +30,34 @@
 				<view class="_item">
 					<image src="/static/index/earn1.svg" class="_img"></image>
 					<view class="_text">100% share of income</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn2.svg" class="_img"></image>
 					<view class="_text">100% gift yield</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn3.svg" class="_img"></image>
 					<view class="_text">All rights reserved</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn4.svg" class="_img"></image>
 					<view class="_text">Author Subsidy Program</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn5.svg" class="_img"></image>
 					<view class="_text">100% share of income</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn6.svg" class="_img"></image>
 					<view class="_text">100% gift yield</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn7.svg" class="_img"></image>
 					<view class="_text">All rights reserved</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn8.svg" class="_img"></image>
 					<view class="_text">Author Subsidy Program</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 			</view>
 		</view>
@@ -905,7 +897,7 @@
 					padding-bottom: .2rem;
 
 					._img {
-						margin-top: 0.1rem;
+						margin-top: 0.15rem;
 						width: 1rem;
 						height: 1rem;
 					}

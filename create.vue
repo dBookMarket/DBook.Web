@@ -33,42 +33,34 @@
 				<view class="_item">
 					<image src="/static/index/earn1.svg" class="_img"></image>
 					<view class="_text">100% share of income</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn2.svg" class="_img"></image>
 					<view class="_text">100% gift yield</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn3.svg" class="_img"></image>
 					<view class="_text">All rights reserved</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn4.svg" class="_img"></image>
 					<view class="_text">Author Subsidy Program</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn5.svg" class="_img"></image>
 					<view class="_text">100% share of income</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn6.svg" class="_img"></image>
 					<view class="_text">100% gift yield</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn7.svg" class="_img"></image>
 					<view class="_text">All rights reserved</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn8.svg" class="_img"></image>
 					<view class="_text">Author Subsidy Program</view>
-					<view class="_text1">I am a writer</view>
 				</view>
 			</view>
 		</view>
@@ -159,13 +151,12 @@
 		<uni-popup ref="certifyPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
-					Certification of twitter
+					VERIFY TWITTER
 				</view>
 				<image class="closeimg" @click="closePopup('certifyPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">
-						You are obtaining author authentication and need to send the following tweet to prove Twitter's
-						identity
+						You need to send this tweet to verify your tweet.
 					</view>
 					<textarea maxlength="1500" v-model="tcontent" type="text" class="input-style _height"
 						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
@@ -193,13 +184,12 @@
 		<uni-popup ref="linkedPopup" type="center" :is-mask-click="true">
 			<view class="certify">
 				<view class="title">
-					Certification of LinkedIn
+					VERIFY LINKEDIN
 				</view>
 				<image class="closeimg" @click="closePopup('linkedPopup')" src="/static/index/close.svg"></image>
 				<view class="con">
 					<view class="_text">
-						You are obtaining author authentication and need to send the following tweet to prove LinkedIn's
-						identity
+						You need to send this feed to verify your linkedin.
 					</view>
 					<textarea maxlength="1500" v-model="lcontent" type="text" class="input-style _height"
 						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
@@ -258,8 +248,8 @@
 				loading: true,
 				screenWidth: null,
 				svgaInfo: '/static/index/loading.svga',
-				tcontent: '',
-				lcontent: '',
+				tcontent: '@ddid_io I applied to be a writer on dbookMarket, come write/Read to earn with me! #Web3 #WritingCommunity',
+				lcontent: '#Web3 #WritingCommunity I applied to be a writer on dbookMarket, come write/ Read to earn with me!',
 				type: '', //twitter或linkedin
 				isAuth: false, //是否授权
 				oauth_token: '', //验证twitter url 带过来的参数
@@ -924,13 +914,13 @@
 
 				._item {
 					width: 24%;
-					height: 3rem;
+					height: 2.8rem;
 					background: #FFF5E5;
 					text-align: center;
 					margin-bottom: 1.2%;
 
 					._img {
-						margin-top: 0.4rem;
+						margin-top: 0.35rem;
 						width: 1.22rem;
 						height: 1.47rem;
 					}

@@ -3,7 +3,7 @@
 		<view class="navbg">
 			<view class="nav">
 				<view class="left" @click="toIndex()">
-					<image src="/static/index/micon.svg" mode="" class="micon"></image>
+					<image src="/static/index/micon1.svg" mode="" class="micon"></image>
 				</view>
 				<view class="center cflex">
 					<view class="search">
@@ -53,7 +53,7 @@
 		</view>
 		<view class="warn">
 			<image class="img" src="/static/index/warn.svg"></image>
-			<text class="_text">应用页面重新建设中，您仍能体验初期DEMO</text>
+			<text class="_text">The application page is being rebuilt so you can still play the Demo.</text>
 		</view>
 		<uni-popup ref="popup" type="center" :mask-click="false">
 			<view class="read">
@@ -357,7 +357,7 @@
 		.micon{
 			width: 3.8rem;
 			margin-left: 0.1rem;
-			height: 0.42rem;
+			height: 0.7rem;
 		}
 		.search {
 			width: 6rem;
