@@ -6,30 +6,29 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">THE FUTURE OF READING AND WRITING</view>
-			<view class="_desc">DBOOK IS A WEB3 NFT BOOK MARKETPLACE. OUR MISSION IS TO PROMOTE THE BENEFITS OF READING
-				BY INCENTIVIZING YOU TO READ WHILE MAXIMIZING THE EARNINGS OF AUTHORS.
-				ALL THESE ARE POSSIBLE USING NFTS.</view>
+			<view class="_title">THE FUTURE OF DIGITAL BOOKS</view>
+			<view class="_desc">DBOOK is a web3 nft book marketplace where authors can publish and sell their works as
+				nfts directly to readers and book collectors.
+				Authors are guaranteed of royalty earnings for their works forever.</view>
 			<view class="_info">
 				<view class="_left">
-					<view class="_font">NFT</view>
-					<view class="_font">RESALE AND ROYALTIES</view>
-					<view class="_font">READ TO EARN</view>
+					<view class="_font">Publish NFT books</view>
+					<view class="_font">Protect your copyright</view>
+					<view class="_font">Earn royalties forever</view>
 				</view>
 				<view class="_center">
 					<image src="/static/index/book.svg" mode="" class="book"></image>
 				</view>
 				<view class="_right">
-					<view class="_font">DATA ENCRYPTION</view>
-					<view class="_font">ADVERTISING REVENUE</view>
-					<view class="_font">WRITE TO EARN</view>
+					<view class="_font">Read & Earn</view>
+					<view class="_font">Buy & Own</view>
+					<view class="_font">Trade your collectiblesDATA ENCRYPTION</view>
 				</view>
 			</view>
 		</view>
 		<view class="content_2_bg">
-			<view class="_title">EARN</view>
-			<view class="_desc">WRITE, PUBLISH & MAXIMIZE YOUR EARNINGS;GET REWARDED FOR READING;EARN BY WATCHING ADS
-				YOU WANT TO WATCH.</view>
+			<view class="_title">JOIN THE DBOOK COMMUNITY NOW!</view>
+			<view class="_desc">Click the role below to see how to use the application.</view>
 			<view class="_container">
 				<view class="_item">
 					<view class="front" :class="isTopWriter  ? 'contain-Before' : ''" @click="handleBefore('writer')">
@@ -40,8 +39,7 @@
 						<view class="_text">I'M A WRITER</view>
 						<view class="_colortext">I PUBLISH THE BOOKS I HAVE WRITTEN AND SELL THEM BY SETTING THE
 								PRICE AND ROYALTIES;
-								I CAN ALSO SELL BY CHAPTER TO REDUCE THE COST AND CYCLE OF MY CREATION AND COLLECT
-								READERS' OPINIONS TO CONTINUE TO COMPLETE THE SUBSEQUENT CHAPTERS.</view>
+								I CAN ALSO SELL BY CHAPTER TO REDUCE THE COST.</view>
 					</view>
 				</view>
 
@@ -60,17 +58,19 @@
 			</view>
 		</view>
 		<view class="content_3_bg">
-			<view class="_title">WORKING PRINCIPLE</view>
-			<view class="_desc">DBOOK ECOSYSTEM HAS A STABLE ECONOMIC CIRCULATION SYSTEM,
-				IN WHICH ADVERTISERS ARE ADDED AS INFLOW FUNDS PROVIDERS,
-				SO THAT DIFFERENT ROLES CAN MAKE PROFITS IN THE ECOSYSTEM.</view>
+			<view class="_title">Ecosystem</view>
+			<view class="_desc">Dbook ecosystem has a stable economic circulation system, in which advertisers are added
+				as inflow funds providers, so that different roles can make profits in the ecosystem.
+			</view>
 			<image src="/static/index/mtriangle.png" class="_circle"></image>
 		</view>
 		<view class="content_4_bg">
-			<view class="_title">FAQ</view>
+			<view class="_title">HOW TO WORKS</view>
 			<view class="_desc">
-				YOU'LL FIND ANSWERS TO THE QUESTIONS YOU NEED TO KNOW, AND IF YOURS ISN'T INCLUDED, PLEASE EMAIL US, OR
-				TWEET US.
+				DBOOK uses homomorphic encryption and NFT to ensure that digital books’ copyright are protected and
+				royalty payments are perpetual and executed automatically. Only the rightful owner of the NFT can
+				decrypt and access the digital book for reading. It also allows the transfer of ownership, i.e. you can
+				now trade (sell) your digital book.To find out more, read our FAQ.
 			</view>
 			<view class="_content">
 				<view class="_itemcon">
@@ -79,8 +79,7 @@
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down1">
-						YOU CAN AUTHENTICATE THE AUTHOR THROUGH THE CREATE PAGE. STEP 1, 2, AND 3 ARE USED TO OBTAIN
-						PUBLISHING PERMISSIONS. STEP 4 TAKES YOU TO THE PUBLISHING PAGE.
+						You can authenticate the author through the create page. Step 1, 2, and 3 are used to obtain publishing permissions. Step 4 takes you to the publishing page.
 					</view>
 				</view>
 				<view class="_itemcon">
@@ -89,9 +88,9 @@
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down3">
-						WRITERS ARE REQUIRED TO LINK THEIR TWITTER AND LINKEDIN ACCOUNTS BEFORE BEING GRANTED
-						PERMISSION TO PUBLISH, WHICH ENSURES THE AUTHENTICITY OF THEIR IDENTITY. READERS CAN CHECK
-						AN AUTHOR'S TWITTER AND LINKEDIN WHEN THEY BUY WORK.
+						Writers are required to link their twitter and linkedin accounts before being granted
+						permission to publish, which ensures the authenticity of their identity. Readers can check
+						an author's twitter and linkedin when they buy work.
 					</view>
 				</view>
 				<view class="_itemcon">
@@ -100,9 +99,9 @@
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down5">
-						IF YOU SEE A PIRATED COPY OF THE BOOK, PLEASE DO NOT BUY IT, IT MAY BE TAKEN DOWN AT ANY
-						TIME, YOU CAN CONTACT US BY EMAIL AND URGE OTHER READERS IN THE DBOOK COMMUNITY TO BE AWARE
-						OF THE SCAM.
+						If you see a pirated copy of the book, please do not buy it, it may be taken down at any
+						time, you can contact us by email and urge other readers in the dbook community to be aware
+						of the scam.
 					</view>
 				</view>
 				<view class="_itemcon">
@@ -111,8 +110,8 @@
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down2">
-						WE WILL HOMOMORPHICALLY ENCRYPT YOUR UPLOADED BOOKS, THEN UPLOAD THEM TO IPFS AND BACK THEM
-						UP TO FILECOIN.
+						We will homomorphically encrypt your uploaded books, then upload them to ipfs and back them
+						up to filecoin.
 					</view>
 				</view>
 				<view class="_itemcon">
@@ -121,17 +120,17 @@
 						<uni-icons type="plusempty" size="30"></uni-icons>
 					</view>
 					<view class="_mindesc" v-if="down4">
-						YOU CAN SELL BOOKS OR YOU CAN READ TO EARN. IF YOU'RE A WRITER YOU CAN COLLECT ROYALTIES.
+						You can sell books or you can read to earn. If you're a writer you can collect royalties.
 					</view>
 				</view>
 			</view>
 
 		</view>
 		<view class="content_5_bg">
-			<view class="_title">COMMUNITY</view>
+			<view class="_title">X2Earn</view>
 			<view class="_desc">
-				HERE, YOU CAN BE BOTH THE WRITER AND THE READER. YOU CAN PARTICIPATE IN EVERY PART OF THE ECOLOGY:
-				WRITING BOOKS, READING TO EARN, GOVERNING, COMMENTING ON INTERACTIONS.
+				Here, you can be both the writer and the reader. You can participate in every part of the ecology:
+				writing books, reading to earn, governing, commenting on interactions.
 			</view>
 			<view class="_develop">
 				<woo-swiper :list="devlist"></woo-swiper>
@@ -155,7 +154,7 @@
 				</view>
 			</view>
 			<view class="_content">
-				<view class="_text _text1">DBOOKMARKET WHITEPAPER DRAFT RELEASED</view>
+				<view class="_text bgtext">DBOOKMARKET WHITEPAPER DRAFT RELEASED</view>
 				<view class="_flex">
 					<image src="/static/index/map3.svg" class="_imgicon"></image>
 				</view>
@@ -223,31 +222,31 @@
 			return {
 				devlist: [{
 						src: '/static/index/1.svg',
-						text: "WRITING AT ANY TIME"
+						text: "Write2Earn"
 					},
 					{
 						src: '/static/index/2.svg',
-						text: "GOVERNING BOOKS"
+						text: "Read2Earn"
 					},
 					{
 						src: '/static/index/3.svg',
-						text: "SOCIALIZING"
+						text: "SocialFi"
 					},
 				],
 				teamlist: [{
 						src: '/static/index/person1.png',
-						text: "Bill Joy",
-						minText:'Cofounder'
+						text: "Bill Zhou",
+						minText:'CEO & CO-FOUNDER'
 					},
 					{
 						src: '/static/index/person2.png',
-						text: "Eeping neo",
-						minText:'Cofounder'
+						text: "Eeping Neo",
+						minText:'CO-FOUNDER'
 					},
 					{
 						src: '/static/index/person3.png',
 						text: "Horry Bi",
-						minText:'Cofounder'
+						minText:'CO-FOUNDER'
 					}
 				],
 				isTopWriter: false,
@@ -448,7 +447,7 @@
 
 			._desc {
 				width: 92%;
-				max-width: 375px;
+				max-width: 700px;
 				margin: 0 auto .3rem;
 				text-align: center;
 				line-height: .28rem;
@@ -466,20 +465,21 @@
 					padding-right: 0.1rem;
 
 					._font {
-						font-size: 14px;
+						font-size: 13px;
 					}
 				}
 
 				._right {
 					._font {
-						font-size: 14px;
+						padding-left: 0.1rem;
+						font-size: 13px;
 					}
 				}
 
 				._center {
 					.book {
-						width: 1.5rem;
-						height: 1.6rem;
+						width: 1.2rem;
+						height: 1.4rem;
 					}
 				}
 			}
@@ -671,7 +671,7 @@
 				position: relative;
 
 				._text {
-					font-size: 16px;
+					font-size: 14px;
 					font-family: PingFang SC;
 					font-weight: 400;
 					position: absolute;
@@ -690,7 +690,14 @@
 					top: 0;
 					width: 40%;
 				}
-
+				.bgtext {
+					font-size: 13px;
+					background: #7D5321;
+					border-radius: 10px;
+					color: #FFE1B4;
+					text-align: center;
+					padding: 10px 7px;
+				}
 				._line {
 					width: 1rem;
 					height: 0.85rem;

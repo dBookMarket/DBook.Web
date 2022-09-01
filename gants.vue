@@ -6,11 +6,11 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">$100,000 grant</view>
+			<view class="_title">$100,000 GRANTS</view>
 			<view class="_desc">
-				The economic cycle designed by dBook can ensure that all parties can achieve a win-win situation. <br/>
-				The ghostwriter DBK is interspersed in the whole economic system to achieve an orderly internal cycle, <br/>
-				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both parties.
+				The DBOOK team will raise $100,000 to support these creators, hoping to help them overcome the financial
+				pressures of their early literary endeavors, and we'd love to help you create more resources if you have
+				a great book.
 			</view>
 			<view class="_welcome">
 				<div id="welcome" class="welcome" loops="0"></div>
@@ -32,10 +32,10 @@
 		},
 		data() {
 			return {
-				svgaInfo:'/static/index/welcome.svga',
-				svgaLoad:'/static/index/loading.svga',
-				screenWidth:null,
-				loading:true
+				svgaInfo: '/static/index/welcome.svga',
+				svgaLoad: '/static/index/loading.svga',
+				screenWidth: null,
+				loading: true
 			};
 		},
 		watch: {
@@ -45,7 +45,7 @@
 					uni.navigateTo({
 						url: '/mgants'
 					})
-				} 
+				}
 			}
 		},
 		mounted() {
@@ -102,6 +102,7 @@
 		background-color: #fff;
 		font-size: 30rpx;
 		color: #000000;
+
 		.yyzCanvas {
 			position: fixed;
 			width: 100%;
@@ -112,6 +113,7 @@
 			background-color: #24180e;
 			opacity: 1;
 		}
+
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
@@ -120,13 +122,14 @@
 			background-repeat: no-repeat;
 			background-position: center 0;
 			background-size: cover;
-			
-			.newbg{
+
+			.newbg {
 				width: 100%;
 				margin: 0 auto;
 			}
 		}
-		.content_1_bg{
+
+		.content_1_bg {
 			width: 100%;
 			max-width: 1150px;
 			margin: .65rem auto 0;
@@ -134,19 +137,21 @@
 			overflow: hidden;
 			background-color: #fff;
 			text-align: center;
+
 			._welcome {
 				margin: 0.5rem auto;
 				width: 12.1rem;
 				height: 6.4rem;
 				max-width: 1150px;
 			}
+
 			._title {
 				font-size: 100rpx;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				text-align: center;
 			}
-			
+
 			._desc {
 				line-height: .3rem;
 				font-family: PingFang SC;

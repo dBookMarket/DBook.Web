@@ -6,12 +6,11 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">$100,000 grant</view>
+			<view class="_title">$100,000 GRANTS</view>
 			<view class="_desc">
-				The economic cycle designed by dBook can ensure that all parties can achieve a win-win situation.
-				The ghostwriter DBK is interspersed in the whole economic system to achieve an orderly internal cycle,
-				and the exchange ratio between DBK and US dollar is balanced through the dynamic capital pool of both
-				parties.
+				The DBOOK team will raise $100,000 to support these creators, hoping to help them overcome the financial
+				pressures of their early literary endeavors, and we'd love to help you create more resources if you have
+				a great book.
 			</view>
 			<div id="welcome" class="_welcome" loops="0"></div>
 		</view>
@@ -159,5 +158,20 @@
 				width: 80%;
 			}
 		}
+	}
+</style>
+<style>
+	/* 在小于或等于 1100 */
+	@media screen and (max-width: 1100px) {
+	  .mobilebg .content_1_bg ._welcome{
+	    max-height: 360px;
+	  }
+	}
+	 
+	/* 在 400 像素或更小的屏幕上 */
+	@media screen and (max-width: 400px) {
+	  .mobilebg .content_1_bg ._welcome{
+	    max-height: 208px;
+	  }
 	}
 </style>

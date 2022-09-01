@@ -107,7 +107,8 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down1">
-							You can authenticate the author through the create page. Step 1, 2, and 3 are used to obtain publishing permissions. Step 4 takes you to the publishing page.
+							You can authenticate the author through the create page. Step 1, 2, and 3 are used to obtain
+							publishing permissions. Step 4 takes you to the publishing page.
 						</view>
 					</view>
 					<view class="_item">
@@ -116,7 +117,9 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down3">
-							Writers are required to link their twitter and linkedin accounts before being granted permission to publish, which ensures the authenticity of their identity. Readers can check an author's twitter and linkedin when they buy work.
+							Writers are required to link their twitter and linkedin accounts before being granted
+							permission to publish, which ensures the authenticity of their identity. Readers can check
+							an author's twitter and linkedin when they buy work.
 						</view>
 					</view>
 					<view class="_item">
@@ -125,7 +128,9 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down5">
-							If you see a pirated copy of the book, please do not buy it, it may be taken down at any time, you can contact us by email and urge other readers in the dbook community to be aware of the scam.
+							If you see a pirated copy of the book, please do not buy it, it may be taken down at any
+							time, you can contact us by email and urge other readers in the dbook community to be aware
+							of the scam.
 						</view>
 					</view>
 				</view>
@@ -136,7 +141,8 @@
 							<uni-icons type="plusempty" size="30"></uni-icons>
 						</view>
 						<view class="_mindesc" v-if="down2">
-							We will homomorphically encrypt your uploaded books, then upload them to ipfs and back them up to filecoin.
+							We will homomorphically encrypt your uploaded books, then upload them to ipfs and back them
+							up to filecoin.
 						</view>
 					</view>
 					<view class="_item">
@@ -155,7 +161,8 @@
 		<view class="content_5_bg">
 			<view class="_title">X2Earn</view>
 			<view class="_desc">
-				Here, you can be both the writer and the reader. You can participate in every part of the ecology: writing books, reading to earn, governing, commenting on interactions.
+				Here, you can be both the writer and the reader. You can participate in every part of the ecology:
+				writing books, reading to earn, governing, commenting on interactions.
 			</view>
 			<view class="_develop">
 				<view class="_item">
@@ -380,7 +387,7 @@
 			 */
 			toUrl(type) {
 				uni.navigateTo({
-					url: '/pages/index/earn?active=' + type
+					url: '/how-to-use?active=' + type
 				})
 			},
 			/**
@@ -487,6 +494,7 @@
 			}
 
 			._desc {
+				width: 70%;
 				margin: .3rem auto;
 				text-align: center;
 				line-height: .3rem;

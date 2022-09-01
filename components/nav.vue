@@ -55,22 +55,31 @@
 			<image class="img" src="/static/index/warn.svg"></image>
 			<text class="_text">The application page is being rebuilt so you can still play the Demo.</text>
 		</view>
-		<uni-popup ref="popup" type="center" :mask-click="false">
-			<view class="read">
-				<view class="title">
-					App Download
-				</view>
-				<image class="closeimg" @click="close()" src="/static/book/close.svg"></image>
-				<view class="con">
-					<view class="text1">Coming Soon</view>
-					<!-- <view class="qcode">
-						<image class="qcodeimg" src="/static/book/qcode.png"></image>
-						<view class="text">ios</view>
+		<uni-popup ref="popup" type="center" :is-mask-click="true">
+			<view class="download">
+				<image class="closeimg" @click="closePopup()" src="/static/index/close.svg"></image>
+				<view class="_download">App Download</view>
+				<view class="_butflex">
+					<view class="_butitem">
+						<image src="/static/index/apple.svg" class="_apple"></image>
+						<view>
+							<view class="_toptext">Download on the</view>
+							<view class="_bottomtext">App Store</view>
+						</view>
 					</view>
-					<view class="qcode">
-						<image class="qcodeimg" src="/static/book/qcode.png"></image>
-						<view class="text">android</view>
-					</view> -->
+					<view class="_butitem" @click="toDownload('google')">
+						<image src="/static/index/google.svg" class="_google"></image>
+						<view>
+							<view class="_toptext">GET IT ON</view>
+							<view class="_bottomtext">Google Play</view>
+						</view>
+					</view>
+					<view class="_qrcode" @mouseover="isqrcode=true" @mouseout="isqrcode=false">
+						<image src="/static/index/qrcode.svg" class="_qrcodeimg"></image>
+						<view class="_bigqrcode" :class="{'isqrcode':isqrcode}">
+							<image src="/static/index/qrcode.png" class="_qrcodepng"></image>
+						</view>
+					</view>
 				</view>
 			</view>
 		</uni-popup>
@@ -89,6 +98,7 @@
 		name: "navBar",
 		data() {
 			return {
+				isqrcode:false,
 				isMetaMask: false,
 				isConnect: false,
 				bookname: "",
@@ -146,9 +156,16 @@
 				that.$refs.popup.open();
 			},
 			//关闭弹框
-			close(){
+			closePopup(){
 				let that = this;
 				that.$refs.popup.close()
+			},
+			/**
+			 * download app
+			 * @param {Object} type
+			 */
+			toDownload(type){
+				common.toWeb(type);
 			},
 			/**
 			 * 搜索
@@ -357,7 +374,7 @@
 		.micon{
 			width: 3.8rem;
 			margin-left: 0.1rem;
-			height: 0.7rem;
+			height: 0.45rem;
 		}
 		.search {
 			width: 6rem;
@@ -447,56 +464,100 @@
 			line-height: 22px;
 		}
 	}
-	.read {
-		width: 5rem;
-		height: 3.2rem;
-		background: #FFFFFF;
-		border-radius: .15rem;
-		padding: .2rem .15rem;
-		position: relative;
+	.download{
+		width: 7.5rem;
+		height: 2.8rem;
+		background-color: #FFFFFF;
+		border-radius: .2rem;
 		text-align: center;
-
-		.title {
-			line-height: .3rem;
-			font-size: 36rpx;
-			font-family: Alibaba PuHuiTi;
-			color: #000000;
-		}
-
+		position: relative;
 		.closeimg {
 			position: absolute;
-			width: .25rem;
-			top: .2rem;
-			right: 2%;
+			width: .33rem;
+			height: .33rem;
+			top: .15rem;
+			right: 1.8%;
 			z-index: 10;
-			height: .25rem;
 			cursor: pointer;
 		}
-
-		.con {
+		._download{
 			display: flex;
-			justify-content: space-around;
+			justify-content: center;
 			align-items: center;
-			margin: .3rem 0;
-			flex-direction:column;
-			.text1{
-				width: 2rem;
-				height: 2rem;
-				color: #999;
-				margin-top: 1rem;
-				font-size: 32rpx;
-			}
-			.qcodeimg {
-				vertical-align: middle;
-				width: 2rem;
-				height: 2rem;
+			font-size: 30px;
+			font-weight: 500;
+			height: .6rem;
+			padding-top: .4rem;
+		}
+		._butflex{
+			margin-top: .3rem;
+			display: flex;
+			justify-content: space-evenly;
+			._butitem{
+				width: 2.7rem;
+				height: .9rem;
 				cursor: pointer;
+				background: #FFFFFF;
+				border-radius: .15rem;
+				font-family: Alibaba PuHuiTi;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				text-align: left;
+				._apple{
+					width: .43rem;
+					height: .47rem;
+				}
+				._google{
+					width: .4rem;
+					height: .45rem;
+				}
+				._toptext{
+					font-size: 15px;
+					font-weight: 300;
+					color: #000000;
+					line-height: .25rem;
+				}
+				._bottomtext{
+					font-size: 26px;
+					font-weight: 500;
+					color: #000000;
+					line-height: .3rem;
+				}
 			}
-
-			.text {
-				margin-top: .1rem;
-				color: #000000;
-				font-size: 32rpx;
+			._qrcode{
+				width: .9rem;
+				height: .9rem;
+				background: #FFFFFF;
+				border-radius: .15rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				position: relative;
+				._qrcodeimg{
+					width: .65rem;
+					height: .65rem;
+					vertical-align: middle;
+				}
+				._bigqrcode{
+					position: absolute;
+					display: none;
+					top: .82rem;
+					left: 50%;
+					margin-left: -.85rem;
+					z-index: 10000;
+					._qrcodepng{
+						border-radius: .1rem;
+						width: 1.5rem;
+						height: 1.5rem;
+						padding: .1rem;
+						background-color: #FFFFFF;
+					}
+				}
+				.isqrcode{
+					display: block;
+				}
 			}
 		}
 	}

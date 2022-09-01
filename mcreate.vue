@@ -6,65 +6,59 @@
 			</view>
 		</view>
 		<view class="content_1_bg">
-			<view class="_title">DBook writer</view>
+			<view class="_title">DBOOK WRITER</view>
 			<image src="/static/index/writer.svg" class="_img"></image>
 			<view class="_desc">
-				<view class="p">DBook provides a completely autonomous and decentralized environment
-					for literary creators from all over the world. Creating on dBook allows you
-					to create freely without sharing revenue, signing exclusive agreements or
-					exclusivity agreements.</view>
+				<view class="p">Dbook provides a completely autonomous and decentralized environment for literary creators from all over the world. 
+				You can create freely on dbook without sharing revenue with others, or signing exclusive or exclusive agreements.</view>
 				<view class="p">
-					You can make your books into NFT by dBook and publish them on the
-					market. After readers buy them, you will directly get all the profits. At
-					the same time, when some readers resell your works, you can get a certain
-					percentage of royalties.</view>
-				<view class="p">At the same time, you can actually interact with readers through on-chain
-					reviews to get their feedback on your work.</view>
+					you can make your book into an nft by dbook and publish it on the market. After the readers buy it,
+					you will get all the profits directly, and when the readers re-sell your work, you can get a certain percentage of royalties.</view>
+				<view class="p">at the same time, you have a real interaction with readers through the comments on the chain, 
+				and understand the readers' feedback on the work.</view>
 			</view>
 		</view>
 		<view class="content_2_bg">
-			<view class="_title">dBook Writer's Earnings</view>
-			<view class="_desc">dBook is an open-ended gathering place for writers, where you
-				can not only create freely, but also get objective benefits.</view>
+			<view class="_title">WRITERS EARN</view>
+			<view class="_desc">Dbook is an open writer's gathering place, where you can not only freely create, but also obtain objective income.</view>
 			<view class="_someone">
 				<view class="_item">
 					<image src="/static/index/earn1.svg" class="_img"></image>
-					<view class="_text">100% share of income</view>
+					<view class="_text">SELLING</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn2.svg" class="_img"></image>
-					<view class="_text">100% gift yield</view>
+					<view class="_text">REWARD</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn3.svg" class="_img"></image>
-					<view class="_text">All rights reserved</view>
+					<view class="_text">COPYRIGHT</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn4.svg" class="_img"></image>
-					<view class="_text">Author Subsidy Program</view>
+					<view class="_text">SUBSIDIES</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn5.svg" class="_img"></image>
-					<view class="_text">100% share of income</view>
+					<view class="_text">ADVERTISING</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn6.svg" class="_img"></image>
-					<view class="_text">100% gift yield</view>
+					<view class="_text">ROYALTIES</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn7.svg" class="_img"></image>
-					<view class="_text">All rights reserved</view>
+					<view class="_text">BOOKS TO PROMOTE</view>
 				</view>
 				<view class="_item">
 					<image src="/static/index/earn8.svg" class="_img"></image>
-					<view class="_text">Author Subsidy Program</view>
+					<view class="_text">ACTIVITIES TO MEET</view>
 				</view>
 			</view>
 		</view>
 		<view class="content_3_bg">
 			<view class="_title">TO APPLY FOR THE WRITER</view>
-			<view class="_desc">DBOOK IS AN OPEN WRITER'S GATHERING PLACE. YOU CAN APPLY FOR A WRITER BY FOLLOWING THESE STEPS, 
-			WHICH SHOULD TAKE ABOUT TWO TO THREE MINUTES.
+			<view class="_desc">Dbook is an open writer's gathering place. You can apply for a writer by following these steps, which should take about two to three minutes.
 			</view>
 			<view class="_step">
 				<image src="/static/index/metamask.svg" class="_img"></image>
@@ -72,10 +66,11 @@
 					<text class="_text">STEP1</text>
 					<text class="_infoitem">CONNECT METAMASK</text>
 				</view>
-				<view class="_detail">YOU NEED TO LINK TO METAMASK TO LOG IN FIRST. IF YOU HAVE NOT INSTALLED
-					METAMASK<text class="_color" @click="toGoogle()">(GO TO THE GOOGLE WEBSHOP)</text>
-					OR HAVE NEVER USED METAMASK<text class="_color">(HOW-TO GUIDE)</text>,PLEASE FOLLOW THE RELEVANT
-					LINKS TO INSTALL OR LEARN.</view>
+				<view class="_detail">
+					you need to link to metamask to log in first. if you have not installed metamask
+					<text class="_color" @click="toGoogle()">(go to the google webshop)</text>
+					or have never used metamask<text class="_color">(how-to guide)</text>,please follow the relevant links to install or learn.
+				</view>
 				<view class="_bottom" v-if="!address">
 					<button class="_btn" @click="toMetamask()">CONNECT</button>
 				</view>
@@ -95,7 +90,7 @@
 					<text class="_text">STEP2</text>
 					<text class="_infoitem">CONNECT TWITTER</text>
 				</view>
-				<view class="_detail">CLICK THE BUTTON TO VERIFY YOUR TWITTER, WHICH REQUIRES YOU TO SEND A TWEET FROM YOUR TWITTER ACCOUNT.</view>
+				<view class="_detail">Click the button to verify your twitter, which requires you to send a tweet from your twitter account.</view>
 				<view class="_bottom" v-if="isAuthTweets == false">
 					<button class="_btn" @click="toAuthenticate('twitter')">CONNECT</button>
 				</view>
@@ -114,7 +109,7 @@
 					<text class="_text">STEP3</text>
 					<text class="_infoitem">CONNECT LINKEDIN</text>
 				</view>
-				<view class="_detail">CLICK THE BUTTON TO VERIFY YOUR LINKEDIN, WHICH REQUIRES YOU TO SEND A FEED FROM YOUR LINKEDIN ACCOUNT.</view>
+				<view class="_detail">Click the button to verify your linkedin, which requires you to send a feed from your linkedin account.</view>
 				<view class="_bottom" v-if="isLinkedIn == false">
 					<button class="_btn" @click="toAuthenticate('linkedin')">CONNECT</button>
 				</view>
@@ -135,7 +130,7 @@
 				<view class="_center">
 					<text class="_text">STEP4</text>
 					<text class="_infoitem">PUBLISHING BOOKS</text>
-					<view class="_detail">COMPLETE THE ABOVE THREE STEPS AND YOU HAVE SUCCESSFULLY APPLIED. NOW GO TO DBOOKMARKET AND PUBLISH A BOOK!</view>
+					<view class="_detail">Complete the above three steps and you have successfully applied. Now go to dbookmarket and publish a book!</view>
 				</view>
 				<view class="_bottom">
 					<button class="_btn _btn1" @click="toSettled()">GO NOW</button>
@@ -146,15 +141,14 @@
 		<uni-popup ref="certifyPopup" type="center">
 			<view class="certify">
 				<view class="title">
-					Certification of twitter
+					VERIFY TWITTER
 				</view>
 				<view class="con">
 					<view class="_text">
-						You are obtaining author authentication and need to send the following tweet to prove Twitter's
-						identity
+						You need to send this tweet to verify your tweet.
 					</view>
 					<textarea maxlength="1500" v-model="tcontent" type="text" class="input-style _height"
-						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
+						placeholder="@ddid_io I applied to be a writer on dbookMarket, come write/Read to earn with me! #Web3 #WritingCommunity"></textarea>
 					<button class="btnSend" @click="toSend('twitter')">SEND</button>
 				</view>
 			</view>
@@ -162,15 +156,13 @@
 		<uni-popup ref="authPopup" type="center">
 			<view class="auth">
 				<view class="title">
-					Change your Twitter authentication
+					REVALIDATION
 				</view>
 				<view class="con">
-					<view class="_text">If you need to change the Twitter authentication of your current Ethereum
-						identity, the change will not
-						affect the writer publishing function</view>
+					<view class="_text">If you need to change your verified twitter or linkedin, click continue.</view>
 					<view class="btnview">
 						<button class="btnCancel" @click="toCancel('twitter')">CANCEL</button>
-						<button class="btnReplace" @click="toReplace('twitter')">REPLACE</button>
+						<button class="btnReplace" @click="toReplace('twitter')">CONTINUE</button>
 					</view>
 				</view>
 			</view>
@@ -178,15 +170,14 @@
 		<uni-popup ref="linkedPopup" type="center">
 			<view class="certify">
 				<view class="title">
-					Certification of LinkedIn
+					VERIFY LINKEDIN
 				</view>
 				<view class="con">
 					<view class="_text">
-						You are obtaining author authentication and need to send the following tweet to prove LinkedIn's
-						identity
+						You need to send this feed to verify your linkedin.
 					</view>
 					<textarea maxlength="1500" v-model="lcontent" type="text" class="input-style _height"
-						placeholder="@ddid_io Dbook is in hot progress, 10W $subsidy waiting for you to take"></textarea>
+						placeholder="#Web3 #WritingCommunity I applied to be a writer on dbookMarket, come write/ Read to earn with me! "></textarea>
 					<button class="btnSend" @click="toSend('linkedin')">SEND</button>
 				</view>
 			</view>
@@ -194,15 +185,13 @@
 		<uni-popup ref="authLinkedPopup" type="center">
 			<view class="auth">
 				<view class="title">
-					Change your LinkedIn authentication
+					REVALIDATION
 				</view>
 				<view class="con">
-					<view class="_text">If you need to change the LinkedIn authentication of your current Ethereum
-						identity, the change will not
-						affect the writer publishing function</view>
+					<view class="_text">If you need to change your verified twitter or linkedin, click continue.</view>
 					<view class="btnview">
 						<button class="btnCancel" @click="toCancel('linkedin')">CANCEL</button>
-						<button class="btnReplace" @click="toReplace('linkedin')">REPLACE</button>
+						<button class="btnReplace" @click="toReplace('linkedin')">CONTINUE</button>
 					</view>
 				</view>
 			</view>
@@ -241,8 +230,8 @@
 				walletsBtn: false,
 				authBtn: false,
 				authLinkedBtn: false,
-				tcontent: '',
-				lcontent: '',
+				tcontent: '@ddid_io I applied to be a writer on dbookMarket, come write/Read to earn with me! #Web3 #WritingCommunity',
+				lcontent: '#Web3 #WritingCommunity I applied to be a writer on dbookMarket, come write/ Read to earn with me!',
 				type: '', //twitter或linkedin
 				isAuth: false, //是否授权
 				oauth_token: '', //验证twitter url 带过来的参数
@@ -1023,14 +1012,14 @@
 	}
 </style>
 <style>
-	/* 在小于或等于 1100 像素的屏幕上，将背景色设置为蓝色 */
+	/* 在小于或等于 1100 */
 	@media screen and (max-width: 1100px) {
 	  .content_1_bg ._img{
 	    height: 380px;
 	  }
 	}
 	 
-	/* 在 400 像素或更小的屏幕上，将背景色设置为橄榄色 */
+	/* 在 400 像素或更小的屏幕上 */
 	@media screen and (max-width: 400px) {
 	  .content_1_bg ._img{
 	    height: 200px;

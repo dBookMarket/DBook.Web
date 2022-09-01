@@ -6,17 +6,18 @@
 			</view>
 		</view>
 		<view class="_navbtn">
-			<view class="_btn" :class="{'_active':isPublish}" @click="chooseMoney(1)">Publishing money</view>
-			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">Reading for Money</view>
+			<view class="_btn" :class="{'_active':isPublish}" @click="chooseMoney(1)">WRITERS</view>
+			<view class="_btn" :class="{'_active':!isPublish}" @click="chooseMoney(2)">READERS</view>
 		</view>
 		<view class="content_1_bg" v-if="isPublish">
-			<view class="_title">1、Apply to be an author</view>
+			<view class="_title">1、WRITER SIGN-UP</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">To maintain copyright interest<br />
-							and credibility you need to <br />
-							engage your social media</view>
+						<view class="_font">Step 2,3: As you are registering as an author, DBOOK will need to verify
+							your identity with two of your social media accounts. You will need to connect DBOOK to your
+							LinkedIn and Twitter account.
+						</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -28,32 +29,28 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Welcome to the World of Web3,
-							you need to create a wallet to
-							receive money</view>
+						<view class="_font">Step 1:To sign up with DBOOK, you will need to first create a METAMASK
+							wallet which will be used to authenticate and connect you to DBOOK. </view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">After verifying that you own the
-							social media, you are now an
-							author and can publish your
-							work on dBook</view>
+						<view class="_font">Step 4: Congratulations on your successful registration! Go get your first
+							book published!</view>
 					</view>
 				</view>
 			</view>
-			<view class="_title">2、Creation</view>
+			<view class="_title">2、WRITING BOOKS</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">You can create your work by
-							chapter</view>
+						<view class="_font">Start writing on DBOOK.You can write and edit your story chapter by chapter
+							here</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
 					<view class="_item">
-						<view class="_font">Write anytime, anywhere,
-							without any restrictions</view>
+						<view class="_font">Edit on the go. Write anywhere, anytime</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -65,24 +62,21 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">One-click save draft, let creation
-							everywhere</view>
+						<view class="_font">Click to save here. Your drafts can be easily saved for future edits</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">One-click release of works, data
-							encryption, the creation of NFT,
-							listed trading market in one go</view>
+						<view class="_font">Click to publish direct with DBOOK.</view>
 					</view>
 				</view>
 			</view>
-			<view class="_title">3、Work management</view>
+			<view class="_title">3、MANAGEMENT BOOKS</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">You can see how much money
-							each game makes</view>
+						<view class="_font">Manage your works Here you can see an overview of all your works, including
+							unpublished ones.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -96,18 +90,16 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">You can see how much money
-							each game makes</view>
+						<view class="_font">View the earnings for each of your works</view>
 					</view>
 				</view>
 			</view>
-			<view class="_title">4、Trading market</view>
+			<view class="_title">4、DBOOKMARKET</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item"></view>
 					<view class="_item">
-						<view class="_font">You can still get royalties from
-							a second hand transaction</view>
+						<view class="_font">The more books readers buy, the more you earn.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -119,18 +111,16 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">The more readers buy, the more
-							revenue you make</view>
+						<view class="_font">You can still earn royalties when readers resell your books.</view>
 					</view>
 					<view class="_item"></view>
 				</view>
 			</view>
-			<view class="_title">5、Advertising is divided into</view>
+			<view class="_title">5、ADVERTISE TO EARN</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">Fans can still provide you with
-							extra tips</view>
+						<view class="_font">You get 10% of ad revenue when readers are on read to earn.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -142,28 +132,24 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">The more readers you have, the
-							more advertising revenue you can get</view>
+						<view class="_font">Readers can provide you with rewards to support your writing.</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Comment interaction, so that
-							fans understand the latest trends,
-							follow more reading</view>
+						<view class="_font">Readers comment on your book, and you can interact with them.</view>
 					</view>
 				</view>
 			</view>
 
 		</view>
 		<view class="content_1_bg" v-if="!isPublish">
-			<view class="_title">1、Buy books</view>
+			<view class="_title">1、BUY BOOKS</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item"></view>
 					<view class="_item">
-						<view class="_font">You can still get royalties from
-							a second hand transaction</view>
+						<view class="_font">Buy any book to start read to earn.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -175,22 +161,19 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Welcome to the web3 world,
-							you need to create a wallet to
-							receive money</view>
+						<view class="_font">When you choose your favorite book, you can click on the "reading test" to
+							see the content.</view>
 					</view>
 					<view class="_item"></view>
 				</view>
 			</view>
-			<view class="_title">2、Reading to earn</view>
+			<view class="_title">2、READ TO EARN</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item"></view>
 					<view class="_item">
-						<view class="_font">Please set your advertising
-							preference before reading. If
-							you do not set it, it will be
-							configured by default
+						<view class="_font">Ad earning is read to earn's core earn approach. See the whitepaper for more
+							details.
 						</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
@@ -203,10 +186,8 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Please set your advertising
-							preference before reading. If
-							you do not set it, it will be
-							configured by default
+						<view class="_font">Set your ad preferences before reading so you can see the ads you like as
+							you read.
 						</view>
 					</view>
 					<view class="_item"></view>
@@ -215,11 +196,8 @@
 			<view class="_info">
 				<view class="_left">
 					<view class="_item">
-						<view class="_font">Set the advertising interval and
-							calculate the revenue. If you
-							don't like it, you can close it at
-							any time. After closing, you
-							won't get DBK incentive</view>
+						<view class="_font">Set the interval between reading ads, it will affect your earning
+							efficiency.</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
 					</view>
@@ -231,26 +209,24 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">According to personal preferences,
-							set preference advertising</view>
+						<view class="_font">Set up preference ads based on your preferences.</view>
 					</view>
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Repeat reading still pays, but at
-							a much lower rate</view>
+						<view class="_font">After setting up the above steps you will see the earnings generated by
+							reading the book.</view>
 					</view>
 				</view>
 			</view>
 
-			<view class="_title">4、Trading market</view>
+			<view class="_title">3、DBOOKMARKET</view>
 			<view class="_info">
 				<view class="_left">
 					<view class="_item"></view>
 					<view class="_item">
-						<view class="_font">If the content is good and the
-							audience is large, you can raise
-							the price
+						<view class="_font">After you finish reading the book you can choose to collect it or sell it on
+							dbookmarket.
 						</view>
 						<view class="_dot"></view>
 						<view class="_line"></view>
@@ -263,9 +239,8 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">It can still be sold on the market
-							after reading it. In return for
-							benefits
+						<view class="_font">You can set the selling price of the book according to the current market
+							price.
 						</view>
 					</view>
 					<view class="_item"></view>
@@ -290,7 +265,7 @@
 		data() {
 			return {
 				isPublish: true,
-				screenWidth:null,
+				screenWidth: null,
 				loading: true,
 				svgaInfo: '/static/index/loading.svga',
 			};
@@ -298,21 +273,21 @@
 		watch: {
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
-				if (n < 1024) {
+				if (n < 1150) {
 					uni.navigateTo({
-						url: '/pages/index/mearn'
+						url: '/mhow-to-use'
 					})
-					console.log('屏幕宽度小于1024了')
-				} 
+					console.log('屏幕宽度小于1150了')
+				}
 			}
 		},
 		onLoad(option) {
 			let that = this;
-			if(option.active){
+			if (option.active) {
 				//当前选中的
-				if(option.active == 'writer'){
+				if (option.active == 'writer') {
 					that.isPublish = true;
-				}else{
+				} else {
 					that.isPublish = false;
 				}
 			}
@@ -372,6 +347,7 @@
 		background-color: #fff;
 		font-size: 30rpx;
 		color: #000000;
+
 		.yyzCanvas {
 			position: fixed;
 			width: 100%;
@@ -382,6 +358,7 @@
 			background-color: #24180e;
 			opacity: 1;
 		}
+
 		.indexapp {
 			width: 100%;
 			margin: 0 auto;
@@ -390,8 +367,8 @@
 			background-repeat: no-repeat;
 			background-position: center 0;
 			background-size: cover;
-			
-			.newbg{
+
+			.newbg {
 				width: 100%;
 				margin: 0 auto;
 			}
@@ -448,6 +425,7 @@
 				margin: 0.6rem auto;
 				align-items: center;
 				width: 92%;
+
 				._center {
 					.earn {
 						width: 3.2rem;
@@ -458,12 +436,14 @@
 				._left,
 				._right {
 					height: 6rem;
+
 					._item {
 						display: flex;
 						justify-content: flex-end;
 						align-items: center;
 						text-align: left;
-						._font{
+
+						._font {
 							width: 2rem;
 						}
 					}

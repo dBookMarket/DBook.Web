@@ -18,7 +18,7 @@
 			}
 
 		}, {
-			"path": "earn",
+			"path": "how-to-use",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -36,7 +36,7 @@
 			}
 
 		}, {
-			"path": "mearn",
+			"path": "mhow-to-use",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -55,7 +55,7 @@
 
 		},
 		{
-			"path": "market",
+			"path": "marketplace",
 			"style": {
 				"navigationStyle": "custom"
 			}

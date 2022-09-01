@@ -9,7 +9,7 @@
 		<div class="menu-mask" :class="{'menu-mask__slide':more}">
 			<image src="/static/index/close.svg" mode="" @click="closeMore" class="newlogo"></image>
 			<text class="menu-item" @click="toUrl('mindex')">HOME</text>
-			<text class="menu-item" @click="toUrl('mearn')">HOW TO USE</text>
+			<text class="menu-item" @click="toUrl('mhow-to-use')">HOW TO USE</text>
 			<text class="menu-item" @click="toUrl('mcreate')">CREATE</text>
 			<text class="menu-item" @click="toUrl('mexplore')">MARKETPLACE</text>
 			<text class="menu-item" @click="toUrl('mgants')">GRANTS</text>
