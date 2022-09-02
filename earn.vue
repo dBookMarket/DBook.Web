@@ -292,7 +292,7 @@
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n < 1150) {
-					uni.navigateTo({
+					uni.reLaunch({
 						url: '/mearn'
 					})
 					console.log('屏幕宽度小于1150了')

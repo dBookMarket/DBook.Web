@@ -262,7 +262,7 @@
 			screenWidth: function(n, o) {
 				if (n < 1150) {
 					console.log(location.search)
-					uni.navigateTo({
+					uni.reLaunch({
 						url: '/mcreate' + location.search
 					})
 					console.log('屏幕宽度小于1150了')

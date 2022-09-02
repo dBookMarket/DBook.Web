@@ -1,3 +1,3 @@
 export default {
-	host: "http://testnet.dbookmarket.com:56789"//testnet.dbookmarket.com/api/v1/
+	host: "http://testnet.dbookmarket.com"//testnet.dbookmarket.com/api/v1/
 }

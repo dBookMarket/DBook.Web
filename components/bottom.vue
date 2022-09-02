@@ -28,7 +28,7 @@
 		},
 		methods:{
 			toIndex(){
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/home'
 				})
 			},

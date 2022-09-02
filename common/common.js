@@ -27,10 +27,10 @@ export default {
 		//白皮书
 		if(url == 'whitepaper'){
 			window.location.href = 'https://ddid.gitbook.io/dbookmarket-bai-pi-shu/'
-		}else if(url == 'home'){
+		}else if(url == 'index'){
 			window.location.href = window.location.protocol+'//'+window.location.host;
 		}else{
-			uni.navigateTo({
+			uni.reLaunch({
 				url: './'+url
 			})
 		}

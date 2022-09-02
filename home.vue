@@ -45,7 +45,7 @@
 					<view class="_item">
 						<view class="_line"></view>
 						<view class="_dot"></view>
-						<view class="_font">Trade your collectiblesDATA ENCRYPTION</view>
+						<view class="_font">Trade your collectibles</view>
 					</view>
 				</view>
 			</view>
@@ -328,8 +328,8 @@
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n < 1150) {
-					uni.navigateTo({
-						url: './mindex'
+					uni.reLaunch({
+						url: '/mindex'
 					})
 					console.log('屏幕宽度小于1150了')
 				}
@@ -386,7 +386,7 @@
 			 * @param {Object} type
 			 */
 			toUrl(type) {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/how-to-use?active=' + type
 				})
 			},

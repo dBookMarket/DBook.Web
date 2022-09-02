@@ -22,7 +22,7 @@
 				<view class="_right">
 					<view class="_font">Read & Earn</view>
 					<view class="_font">Buy & Own</view>
-					<view class="_font">Trade your collectiblesDATA ENCRYPTION</view>
+					<view class="_font">Trade your collectibles</view>
 				</view>
 			</view>
 		</view>
@@ -269,7 +269,9 @@
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n > 1150) {
-					common.toUrl('home');
+					uni.reLaunch({
+						url: '/home'
+					})
 					console.log('屏幕宽度大于1150了')
 				}
 			}

@@ -112,8 +112,8 @@
 			 */
 			toRecommend() {
 				common.setStorage("currentId", -2);
-				uni.navigateTo({
-					url: '/market'
+				uni.reLaunch({
+					url: '/marketplace'
 				})
 			},
 			/**

@@ -292,7 +292,7 @@
 			 * 卖出
 			 */
 			selled() {
-				uni.navigateTo({
+				uni.reLaunch({
 					url: '/pages/index/mine'
 				})
 			},
