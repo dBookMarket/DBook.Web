@@ -8,9 +8,14 @@
 		<view class="content_1_bg">
 			<view class="_item" style="margin-left: .3rem;">
 				<view class="_title">DBOOK WRITER</view>
-				<view class="_desc">Dbook provides a completely autonomous and decentralized environment for literary creators from all over the world. You can create freely on dbook without sharing revenue with others, or signing exclusive or exclusive agreements.
-you can make your book into an nft by dbook and publish it on the market. After the readers buy it, you will get all the profits directly, and when the readers re-sell your work, you can get a certain percentage of royalties.
-at the same time, you have a real interaction with readers through the comments on the chain, and understand the readers' feedback on the work.
+				<view class="_desc">Dbook provides a completely autonomous and decentralized environment for literary
+					creators from all over the world. You can create freely on dbook without sharing revenue with
+					others, or signing exclusive or exclusive agreements.
+					you can make your book into an nft by dbook and publish it on the market. After the readers buy it,
+					you will get all the profits directly, and when the readers re-sell your work, you can get a certain
+					percentage of royalties.
+					at the same time, you have a real interaction with readers through the comments on the chain, and
+					understand the readers' feedback on the work.
 				</view>
 			</view>
 			<view class="_middle"></view>
@@ -20,7 +25,8 @@ at the same time, you have a real interaction with readers through the comments 
 		</view>
 		<view class="content_2_bg">
 			<view class="_title">WRITERS EARN</view>
-			<view class="_desc">Dbook is an open writer's gathering place, where you can not only freely create, but also obtain objective income.</view>
+			<view class="_desc">Dbook is an open writer's gathering place, where you can not only freely create, but
+				also obtain objective income.</view>
 			<view class="_someone">
 				<view class="_item">
 					<image src="/static/index/earn1.svg" class="_img"></image>
@@ -58,7 +64,8 @@ at the same time, you have a real interaction with readers through the comments 
 		</view>
 		<view class="content_3_bg">
 			<view class="_title">TO APPLY FOR THE WRITER</view>
-			<view class="_desc">Dbook is an open writer's gathering place. You can apply for a writer by following these steps, which should take about two to three minutes.
+			<view class="_desc">Dbook is an open writer's gathering place. You can apply for a writer by following these
+				steps, which should take about two to three minutes.
 			</view>
 			<view class="_step">
 				<view class="_left">
@@ -70,7 +77,8 @@ at the same time, you have a real interaction with readers through the comments 
 					<view class="_detail">
 						you need to link to metamask to log in first. if you have not installed metamask
 						<text class="_color" @click="toGoogle()">(go to the google webshop)</text>
-						or have never used metamask<text class="_color">(how-to guide)</text>,please follow the relevant links to install or learn.
+						or have never used metamask<text class="_color">(how-to guide)</text>,please follow the relevant
+						links to install or learn.
 					</view>
 				</view>
 				<view class="_right" v-if="!address">
@@ -82,7 +90,7 @@ at the same time, you have a real interaction with readers through the comments 
 						<image src="/static/index/up.svg" class="upicon"></image>
 					</button>
 					<button v-if="walletsBtn" class="_btn _btn2 _float _radius" @click="toBreak()">LOGOUT</button>
-				
+
 				</view>
 			</view>
 			<view class="_step">
@@ -92,7 +100,8 @@ at the same time, you have a real interaction with readers through the comments 
 				<view class="_center">
 					<text class="_text">STEP2</text>
 					<text class="_infoitem">CONNECT TWITTER</text>
-					<view class="_detail">Click the button to verify your twitter, which requires you to send a tweet from your twitter account.</view>
+					<view class="_detail">Click the button to verify your twitter, which requires you to send a tweet
+						from your twitter account.</view>
 				</view>
 				<view class="_right" v-if="isAuthTweets == false">
 					<button class="_btn" @click="toAuthenticate('twitter')">CONNECT</button>
@@ -112,7 +121,8 @@ at the same time, you have a real interaction with readers through the comments 
 				<view class="_center">
 					<text class="_text">STEP3</text>
 					<text class="_infoitem">CONNECT LINKEDIN</text>
-					<view class="_detail">Click the button to verify your linkedin, which requires you to send a feed from your linkedin account.</view>
+					<view class="_detail">Click the button to verify your linkedin, which requires you to send a feed
+						from your linkedin account.</view>
 				</view>
 				<view class="_right" v-if="isLinkedIn == false">
 					<button class="_btn" @click="toAuthenticate('linkedin')">CONNECT</button>
@@ -132,7 +142,8 @@ at the same time, you have a real interaction with readers through the comments 
 				<view class="_center">
 					<text class="_text">STEP4</text>
 					<text class="_infoitem">PUBLISHING BOOKS</text>
-					<view class="_detail">Complete the above three steps and you have successfully applied. Now go to dbookmarket and publish a book!</view>
+					<view class="_detail">Complete the above three steps and you have successfully applied. Now go to
+						dbookmarket and publish a book!</view>
 				</view>
 				<view class="_right">
 					<button class="_btn _btn1" @click="toSettled()">GO NOW</button>
@@ -304,9 +315,9 @@ at the same time, you have a real interaction with readers through the comments 
 				let that = this;
 				// 滚动条偏移量
 				let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body
-				.scrollTop;
-				console.log('scrollTop',scrollTop)
-				if(scrollTop>20){
+					.scrollTop;
+				console.log('scrollTop', scrollTop)
+				if (scrollTop > 20) {
 					that.authBtn = false;
 					that.authLinkedBtn = false;
 					that.walletsBtn = false;
@@ -691,7 +702,7 @@ at the same time, you have a real interaction with readers through the comments 
 <style scoped lang="scss">
 	.bg {
 		background-color: #fff;
-		font-size: 30rpx;
+		font-size: 15px;
 		color: #000000;
 
 		._position {
@@ -709,8 +720,8 @@ at the same time, you have a real interaction with readers through the comments 
 			top: 50%;
 			right: 0.08rem;
 			margin-top: -4px;
-			width: 22rpx;
-			height: 18rpx;
+			width: 11px;
+			height: 9px;
 		}
 
 		.certify,
@@ -725,7 +736,7 @@ at the same time, you have a real interaction with readers through the comments 
 
 			.title {
 				line-height: .24rem;
-				font-size: 52rpx;
+				font-size: 26px;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				color: #000000;
@@ -756,8 +767,8 @@ at the same time, you have a real interaction with readers through the comments 
 
 					.btnCancel {
 						width: 45%;
-						line-height: 114rpx;
-						height: 114rpx;
+						line-height: 57px;
+						height: 57px;
 						border: 1px solid #7D5321;
 						border-radius: .1rem;
 						background-color: #fff;
@@ -766,8 +777,8 @@ at the same time, you have a real interaction with readers through the comments 
 
 					.btnReplace {
 						width: 45%;
-						line-height: 114rpx;
-						height: 114rpx;
+						line-height: 57px;
+						height: 57px;
 						border: 1px solid #7D5321;
 						background: #7D5321;
 						color: #FFFFFF;
@@ -784,7 +795,7 @@ at the same time, you have a real interaction with readers through the comments 
 				}
 
 				.input-style {
-					font-size: 30rpx;
+					font-size: 15px;
 					background: #F8F8F8;
 					border-radius: .1rem;
 					height: .5rem;
@@ -801,8 +812,8 @@ at the same time, you have a real interaction with readers through the comments 
 				}
 
 				.btnSend {
-					height: 114rpx;
-					line-height: 114rpx;
+					height: 57px;
+					line-height: 57px;
 					background: #7D5321;
 					border-radius: .1rem;
 					font-size: 32rpx;
@@ -846,6 +857,7 @@ at the same time, you have a real interaction with readers through the comments 
 			._item {
 				flex: 1;
 				text-align: right;
+
 				._title {
 					font-size: 100rpx;
 					font-family: Alibaba PuHuiTi;
@@ -907,6 +919,7 @@ at the same time, you have a real interaction with readers through the comments 
 					text-align: center;
 					margin-bottom: 2%;
 					cursor: pointer;
+
 					._img {
 						margin-top: 0.35rem;
 						width: 1.22rem;
@@ -915,17 +928,18 @@ at the same time, you have a real interaction with readers through the comments 
 
 					._text {
 						margin-top: .2rem;
-						font-size: 40rpx;
+						font-size: 20px;
 						font-weight: 800;
 					}
 
 					._text1 {
 						margin-top: .1rem;
-						font-size: 30rpx;
+						font-size: 15px;
 						font-weight: 400;
 						color: #999999;
 					}
 				}
+
 				._item:hover {
 					transform: scale(1.1);
 					-ms-transform: scale(1.1);
@@ -970,7 +984,7 @@ at the same time, you have a real interaction with readers through the comments 
 						line-height: .3rem;
 						background: #4D9BEC;
 						border-radius: .05rem;
-						font-size: 40rpx;
+						font-size: 20px;
 						font-weight: 500;
 						color: #FFFFFF;
 						text-align: center;
@@ -986,7 +1000,7 @@ at the same time, you have a real interaction with readers through the comments 
 					}
 
 					._detail {
-						font-size: 30rpx;
+						font-size: 15px;
 						font-weight: 400;
 						color: #787878;
 						line-height: .25rem;
@@ -1009,7 +1023,7 @@ at the same time, you have a real interaction with readers through the comments 
 						border-radius: .1rem;
 						font-family: PingFang SC;
 						font-weight: 400;
-						font-size: 30rpx;
+						font-size: 15px;
 						line-height: .45rem;
 						color: #363636;
 						text-align: center;

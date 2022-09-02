@@ -345,7 +345,7 @@
 <style scoped lang="scss">
 	.bg {
 		background-color: #fff;
-		font-size: 30rpx;
+		font-size: 15px;
 		color: #000000;
 
 		.yyzCanvas {
@@ -390,7 +390,7 @@
 				height: 1rem;
 				background: #FAFAFA;
 				border: 3px solid #999999;
-				font-size: 60rpx;
+				font-size: 30px;
 				font-weight: 800;
 				color: #999999;
 				line-height: 1rem;
@@ -413,7 +413,7 @@
 			text-align: center;
 
 			._title {
-				font-size: 100rpx;
+				font-size: 50px;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				text-align: center;

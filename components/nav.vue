@@ -286,9 +286,7 @@
 			 * 跳转首页
 			 */
 			toIndex() {
-				uni.navigateTo({
-					url: '/home'
-				})
+				common.toUrl('home');
 			},
 			/**
 			 * 卖出
@@ -363,7 +361,7 @@
 	.navbg {
 		background-color: #FFFFFF;
 		width: 100%;
-		font-size: 28rpx;
+		font-size: 14px;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
 		.left{
@@ -391,7 +389,7 @@
 				border: none;
 				width: 90%;
 				text-align: left;
-				text-indent: 25rpx;
+				text-indent: 13px;
 				height: .4rem;
 				line-height: .4rem;
 			}
@@ -446,18 +444,18 @@
 	}
 	.warn{
 		width: 100%;
-		height: 50rpx;
-		line-height: 50rpx;
+		height: 25px;
+		line-height: 25px;
 		text-align: center;
 		background: #FFEDED;
 		.img{
-			width: 30rpx;
-			height: 38rpx;
+			width: 15px;
+			height: 19px;
 			margin-right: .05rem;
 			vertical-align: middle;
 		}
 		._text{
-			font-size: 26rpx;
+			font-size: 13px;
 			font-family: Alibaba PuHuiTi;
 			font-weight: 500;
 			color: #D02323;
@@ -569,7 +567,7 @@
 		z-index: 10;
 		top: .9rem;
 		right: 3%;
-		font-size: 30rpx;
+		font-size: 15px;
 		background-color: #6783E9;
 		border-radius: .1rem;
 		color: #FEFEFE;
@@ -600,7 +598,7 @@
 		z-index: 10;
 		top: .9rem;
 		right: 1.5%;
-		font-size: 30rpx;
+		font-size: 15px;
 		background-color: #FFFFFF;
 		border-radius: .1rem;
 		color: #000000;

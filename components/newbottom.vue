@@ -72,7 +72,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			font-size: 30rpx;
+			font-size: 15px;
 			font-family: ExtraLight;
 			font-weight: 400;
 
@@ -113,7 +113,7 @@
 			.dbutton {
 				margin: 0;
 				width: auto;
-				font-size: 30rpx;
+				font-size: 15px;
 				font-family: PingFang SC;
 				font-weight: 400;
 				background: #42392B;

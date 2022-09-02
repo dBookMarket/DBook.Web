@@ -97,7 +97,7 @@
 				align-items: center;
 
 				._font {
-					font-size: 30rpx;
+					font-size: 15px;
 					font-family: PingFang SC;
 					font-weight: 400;
 					color: #000000;
@@ -105,15 +105,15 @@
 				}
 
 				._dot {
-					width: 14rpx;
-					height: 14rpx;
+					width: 7px;
+					height: 7px;
 					border-radius: 50%;
 					background: #282828;
 				}
 
 				._line {
 					background: #282828;
-					height: 4rpx;
+					height: 2px;
 					width: 1rem;
 				}
 			}

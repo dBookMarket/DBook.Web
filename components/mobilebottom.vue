@@ -76,7 +76,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			font-size: 30rpx;
+			font-size: 15px;
 			font-family: ExtraLight;
 			font-weight: 400;
 

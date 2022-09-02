@@ -329,7 +329,7 @@
 			screenWidth: function(n, o) {
 				if (n < 1150) {
 					uni.navigateTo({
-						url: '/mindex'
+						url: './mindex'
 					})
 					console.log('屏幕宽度小于1150了')
 				}
@@ -442,7 +442,7 @@
 <style scoped lang="scss">
 	.bg {
 		background-color: #fff;
-		font-size: 30rpx;
+		font-size: 15px;
 		color: #000000;
 
 		.yyzCanvas {
@@ -485,7 +485,7 @@
 			._title {
 				width: 58%;
 				margin: 0.5rem auto;
-				font-size: 100rpx;
+				font-size: 50px;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				color: #000000;
@@ -517,7 +517,7 @@
 			background-color: #fff;
 
 			._title {
-				font-size: 100rpx;
+				font-size: 50px;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				text-align: center;
@@ -588,7 +588,7 @@
 
 					._text {
 						margin-top: .25rem;
-						font-size: 100rpx;
+						font-size: 50px;
 						font-family: Alibaba PuHuiTi;
 						font-weight: 800;
 					}
@@ -681,7 +681,7 @@
 					._mininfo {
 						display: flex;
 						justify-content: space-between;
-						font-size: 30rpx;
+						font-size: 15px;
 						padding: 0 .2rem;
 						font-family: PingFang SC;
 						font-weight: 400;
@@ -728,7 +728,7 @@
 
 					._text {
 						margin-top: .5rem;
-						font-size: 52rpx;
+						font-size: 26px;
 						font-family: PingFang SC;
 						font-weight: 400;
 					}
@@ -755,7 +755,7 @@
 			background-color: #FFE1B4;
 
 			._title {
-				font-size: 100rpx;
+				font-size: 50px;
 				font-family: Alibaba PuHuiTi;
 				font-weight: 800;
 				text-align: center;
@@ -776,10 +776,10 @@
 					position: relative;
 
 					._imgup {
-						width: 60rpx;
-						height: 32rpx;
+						width: 30px;
+						height: 16px;
 						position: absolute;
-						top: -50rpx;
+						top: -25px;
 						left: 50%;
 						margin-left: -90px;
 					}
@@ -803,8 +803,8 @@
 					}
 
 					._dot {
-						width: 14rpx;
-						height: 14rpx;
+						width: 7px;
+						height: 7px;
 						border-radius: 50%;
 						background: #282828;
 					}
@@ -812,7 +812,7 @@
 					._text {
 						width: 125px;
 						height: 100px;
-						font-size: 30rpx;
+						font-size: 15px;
 						font-family: PingFang SC;
 						font-weight: 400;
 						text-align: center;
@@ -886,7 +886,7 @@
 					}
 
 					._pinfo {
-						font-size: 40rpx;
+						font-size: 20px;
 						position: absolute;
 						transition: right .8s ease;
 						bottom: 0;
@@ -931,7 +931,7 @@
 						background: #000000;
 						opacity: 0.7;
 						text-align: left;
-						font-size: 40rpx;
+						font-size: 20px;
 						padding-left: 2%;
 						display: block;
 					}
@@ -939,7 +939,7 @@
 					._text1 {
 						line-height: .35rem;
 						display: block;
-						font-size: 30rpx;
+						font-size: 15px;
 						font-weight: 400;
 						color: #999999;
 					}

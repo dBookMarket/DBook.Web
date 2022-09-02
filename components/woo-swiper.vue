@@ -2,11 +2,11 @@
 	<view class="woo-swiper">
 		<image src="/static/index/left.svg" class="btn tc" @click="showPre()"></image>
 		<view class="tc">
-			<swiper class="swiper" circular :indicator-dots="false" :autoplay="false" :interval="500000" :style="{height:height+50 +'rpx'}"
+			<swiper class="swiper" circular :indicator-dots="false" :autoplay="false" :interval="500000" :style="{height:height+25 +'px'}"
 			:duration="duration" :current="current" :easing-function="easing" @change="change">
 				<swiper-item v-for="(i,k) in list" :key="k">
 					<view class="tc" :class="{'_float':isTeam}">
-						<image :src="i.src" mode="aspectFit" :style="{height:height+'rpx', width:width+'rpx'}"> </image>
+						<image :src="i.src" mode="aspectFit" :style="{height:height+'px', width:width+'px'}"> </image>
 						<view class="text" v-if="!isTeam">
 							 {{i.text}}
 						</view>
@@ -39,13 +39,13 @@
 				height:{
 					type:Number,
 					default:()=>{
-						return 350;
+						return 175;
 					}
 				},
 				width:{
 					type:Number,
 					default:()=>{
-						return 350;
+						return 175;
 					}
 				},
 				isTeam:{
@@ -108,7 +108,7 @@
 		align-items: center;
 		.fwb{
 			font-weight: bold;
-			padding: 0 5rpx;
+			padding: 0 3px;
 			font-size: 14px;
 		}
 		.color-red{
@@ -130,12 +130,12 @@
 			position: relative;
 		}
 		._text {
-			width: 330rpx;
+			width: 165px;
 			z-index: 10;
 			position: absolute;
 			bottom: 0;
 			left: 50%;
-			margin-left: -175rpx;
+			margin-left: -90.25px;
 			color: #FFFFFF;
 			font-family: PingFang SC;
 			font-weight: 500;

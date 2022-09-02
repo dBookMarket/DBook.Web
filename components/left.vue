@@ -210,7 +210,7 @@
 		background: #FFFFFF;
 		border-radius: .12rem;
 		padding-top: .2rem;
-		font-size: 30rpx;
+		font-size: 15px;
 		font-family: Alibaba PuHuiTi;
 		margin-bottom: 0.36rem;
 		overflow-y: scroll;

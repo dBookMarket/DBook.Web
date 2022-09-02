@@ -100,7 +100,7 @@
 <style scoped lang="scss">
 	.bg {
 		background-color: #fff;
-		font-size: 30rpx;
+		font-size: 15px;
 		color: #000000;
 
 		.yyzCanvas {

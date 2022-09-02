@@ -208,6 +208,7 @@
 </template>
 
 <script>
+	import common from '@/common/common.js';
 	import mobileBottom from '@/components/mobilebottom.vue';
 	import mobileNav from '@/components/mobilenav.vue';
 	import wooSwiper from "@/components/woo-swiper.vue";
@@ -268,9 +269,7 @@
 			//监听页面屏幕宽度
 			screenWidth: function(n, o) {
 				if (n > 1150) {
-					uni.navigateTo({
-						url: '/'
-					})
+					common.toUrl('home');
 					console.log('屏幕宽度大于1150了')
 				}
 			}
