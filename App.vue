@@ -49,7 +49,7 @@
 
 	uni-modal .uni-modal__bd {
 		padding: 0;
-		margin: 10px auto;
+		margin: 10px 10px;
 		font-family: Alibaba PuHuiTi;
 		font-weight: 400;
 		font-size: 16px;
