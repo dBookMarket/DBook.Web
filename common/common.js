@@ -29,6 +29,8 @@ export default {
 			window.location.href = 'https://ddid.gitbook.io/dbookmarket-bai-pi-shu/'
 		}else if(url == 'index'){
 			window.location.href = window.location.protocol+'//'+window.location.host;
+		}else if(url == 'marketplace'){
+			window.location.href = 'https://www.dbookmarket.com:56789/';
 		}else{
 			uni.reLaunch({
 				url: './'+url
@@ -48,9 +50,11 @@ export default {
 		}else if(name == 'github'){
 			url = 'https://github.com/dBookMarket';
 		}else if(name == 'google'){
-			url = 'https://play.google.com/store/apps/details?id=com.ddid.dbook_testnet';
+			url = 'https://play.google.com/store/apps/details?id=com.ddid.dbook_market_testnet';
 		}else if(name == 'chrome'){
-			url = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
+			url = 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn';
+		}else if(name == 'apple'){
+			url = 'https://testflight.apple.com/join/xiF3eFhn';
 		}
 		if(url)
 		window.location.href = url

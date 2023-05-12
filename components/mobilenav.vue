@@ -11,7 +11,7 @@
 			<text class="menu-item" @click="toUrl('mindex')">HOME</text>
 			<text class="menu-item" @click="toUrl('mhow-to-use')">HOW TO USE</text>
 			<text class="menu-item" @click="toUrl('mcreate')">CREATE</text>
-			<text class="menu-item" @click="toUrl('mexplore')">MARKETPLACE</text>
+			<text class="menu-item" @click="toUrl('marketplace')">MARKETPLACE</text>
 			<text class="menu-item" @click="toUrl('mgants')">GRANTS</text>
 			<text class="menu-item" @click="toUrl('whitepaper')">WHITEPAPER</text>
 		</div>

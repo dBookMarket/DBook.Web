@@ -5,7 +5,7 @@
 				<image class="closeimg" @click="closePopup()" src="/static/index/close.svg"></image>
 				<image src="/static/index/download.png" class="_download"></image>
 				<view class="_butflex">
-					<view class="_butitem">
+					<view class="_butitem" @click="toDownload('apple')">
 						<image src="/static/index/apple.svg" class="_apple"></image>
 						<view>
 							<view class="_toptext">Download on the</view>

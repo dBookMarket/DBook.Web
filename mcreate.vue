@@ -71,18 +71,7 @@
 					<text class="_color" @click="toGoogle()">(go to the google webshop)</text>
 					or have never used metamask<text class="_color">(how-to guide)</text>,please follow the relevant links to install or learn.
 				</view>
-				<view class="_bottom" v-if="!address">
-					<button class="_btn" @click="toMetamask()">CONNECT</button>
-				</view>
-				<view class="_bottom _position" v-if="address">
-					<button class="_btn _btn1 _position" @click="toMetamaskOk()">
-						{{address | strAddress}}
-						<image src="/static/index/up.svg" class="upicon"></image>
-					</button>
-					<view class="_float">
-						<button v-if="walletsBtn" class="_btn _btn2 _radius" @click="toBreak()">LOGOUT</button>
-					</view>
-				</view>
+				
 			</view>
 			<view class="_step">
 				<image src="/static/index/media.svg" class="_img"></image>
@@ -91,49 +80,17 @@
 					<text class="_infoitem">CONNECT TWITTER</text>
 				</view>
 				<view class="_detail">Click the button to verify your twitter, which requires you to send a tweet from your twitter account.</view>
-				<view class="_bottom" v-if="isAuthTweets == false">
-					<button class="_btn" @click="toAuthenticate('twitter')">CONNECT</button>
-				</view>
-				<view class="_bottom _position" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('twitter')">VALIDATION
-						<image src="/static/index/up.svg" class="upicon"></image>
-					</button>
-					<view class="_float">
-					   <button v-if="authBtn" class="_btn _btn2 _radius" @click="toRevalidate('twitter')">REVALIDATION</button>
-					</view>
-				</view>
+				
 			</view>
-			<view class="_step">
-				<image src="/static/index/verify.svg" class="_img"></image>
-				<view class="_center">
-					<text class="_text">STEP3</text>
-					<text class="_infoitem">CONNECT LINKEDIN</text>
-				</view>
-				<view class="_detail">Click the button to verify your linkedin, which requires you to send a feed from your linkedin account.</view>
-				<view class="_bottom" v-if="isLinkedIn == false">
-					<button class="_btn" @click="toAuthenticate('linkedin')">CONNECT</button>
-				</view>
-				<view class="_bottom _position" v-if="isLinkedIn == true">
-					<button class="_btn _btn1 _position" @click="toAuthOk('linkedin')">VALIDATION
-						<image src="/static/index/up.svg" class="upicon"></image>
-					</button>
-					<view class="_float">
-						<button v-if="authLinkedBtn" class="_btn _btn2 _radius"
-						@click="toRevalidate('linkedin')">REVALIDATION</button>
-					</view>
-				</view>
-			</view>
+			
 			<view class="_step">
 				<view class="_left">
 					<image src="/static/index/settled.svg" class="_img"></image>
 				</view>
 				<view class="_center">
-					<text class="_text">STEP4</text>
+					<text class="_text">STEP3</text>
 					<text class="_infoitem">PUBLISHING BOOKS</text>
 					<view class="_detail">Complete the above three steps and you have successfully applied. Now go to dbookmarket and publish a book!</view>
-				</view>
-				<view class="_bottom">
-					<button class="_btn _btn1" @click="toSettled()">GO NOW</button>
 				</view>
 			</view>
 		</view>
@@ -285,7 +242,7 @@
 			setTimeout(function() {
 				that.loading = false;
 			}, 1500);
-			that.verifyfun();
+			//that.verifyfun();
 		},
 		methods: {
 			/**
@@ -955,7 +912,7 @@
 					color: #787878;
 					line-height: .23rem;
 					margin-top: 0.2rem;
-
+					padding-bottom: 0.1rem;
 					._color {
 						color: #4D74EB;
 					}

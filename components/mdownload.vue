@@ -3,7 +3,7 @@
 		<uni-popup ref="downloadPopup" type="center" :is-mask-click="true">
 			<view class="download">
 				<image src="/static/index/download.png" class="_download"></image>
-				<view class="_butflex">
+				<view class="_butflex" @click="toDownload('apple')">
 					<view class="_butitem">
 						<image src="/static/index/apple.svg" class="_apple"></image>
 						<view>

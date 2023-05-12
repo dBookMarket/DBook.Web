@@ -81,17 +81,7 @@
 						links to install or learn.
 					</view>
 				</view>
-				<view class="_right" v-if="!address">
-					<button class="_btn" @click="toMetamask()">CONNECT</button>
-				</view>
-				<view class="_right _position" v-if="address">
-					<button class="_btn _btn1 _position" @mouseover="toMetamaskOkOver()">
-						{{address | strAddress}}
-						<image src="/static/index/up.svg" class="upicon"></image>
-					</button>
-					<button v-if="walletsBtn" class="_btn _btn2 _float _radius" @click="toBreak()">LOGOUT</button>
-
-				</view>
+				
 			</view>
 			<view class="_step">
 				<view class="_left">
@@ -103,18 +93,9 @@
 					<view class="_detail">Click the button to verify your twitter, which requires you to send a tweet
 						from your twitter account.</view>
 				</view>
-				<view class="_right" v-if="isAuthTweets == false">
-					<button class="_btn" @click="toAuthenticate('twitter')">CONNECT</button>
-				</view>
-				<view class="_right _position" v-if="isAuthTweets == true">
-					<button class="_btn _btn1 _position" @mouseover="toAuthOkOver('twitter')">VALIDATION
-						<image src="/static/index/up.svg" class="upicon"></image>
-					</button>
-					<button v-if="authBtn" class="_btn _btn2 _float _radius"
-						@click="toRevalidate('twitter')">REVALIDATION</button>
-				</view>
+				
 			</view>
-			<view class="_step">
+			<view class="_step" v-if="1===2">
 				<view class="_left">
 					<image src="/static/index/verify.svg" class="_img"></image>
 				</view>
@@ -140,13 +121,10 @@
 					<image src="/static/index/settled.svg" class="_img"></image>
 				</view>
 				<view class="_center">
-					<text class="_text">STEP4</text>
+					<text class="_text">STEP3</text>
 					<text class="_infoitem">PUBLISHING BOOKS</text>
 					<view class="_detail">Complete the above three steps and you have successfully applied. Now go to
 						dbookmarket and publish a book!</view>
-				</view>
-				<view class="_right">
-					<button class="_btn _btn1" @click="toSettled()">GO NOW</button>
 				</view>
 			</view>
 		</view>
@@ -305,7 +283,7 @@
 				that.loading = false;
 			}, 1500);
 			//校验授权状态
-			that.verifyfun();
+			//that.verifyfun();
 		},
 		methods: {
 			/**
