@@ -10,44 +10,11 @@
 			<view class="_desc">DBOOK is a web3 nft book marketplace where authors can publish and sell their works as
 				nfts directly to readers and book collectors.
 				Authors are guaranteed of royalty earnings for their works forever.</view>
+				
 			<view class="_info">
-				<view class="_left">
-					<view class="_item">
-						<view class="_font">Publish NFT books</view>
-						<view class="_dot"></view>
-						<view class="_line"></view>
-					</view>
-					<view class="_item">
-						<view class="_font">Protect your copyright</view>
-						<view class="_dot"></view>
-						<view class="_line"></view>
-					</view>
-					<view class="_item">
-						<view class="_font">Earn royalties forever</view>
-						<view class="_dot"></view>
-						<view class="_line"></view>
-					</view>
-				</view>
-				<view class="_center">
-					<image src="/static/index/book.svg" mode="" class="book"></image>
-				</view>
-				<view class="_right">
-					<view class="_item">
-						<view class="_line"></view>
-						<view class="_dot"></view>
-						<view class="_font">Read & Earn</view>
-					</view>
-					<view class="_item">
-						<view class="_line"></view>
-						<view class="_dot"></view>
-						<view class="_font">Buy & Own</view>
-					</view>
-					<view class="_item">
-						<view class="_line"></view>
-						<view class="_dot"></view>
-						<view class="_font">Trade your collectibles</view>
-					</view>
-				</view>
+				<video style="width: 100%;z-index: 0;" object-fit="fill" id="myVideo" ref="myVideo" :show-center-play-btn="true" 
+					@pause='handlePause' @play='handlePlay' @ended='handleVideoEnd' :src='videoSrc' autoplay="false" @error="videoErrorCallback" playerid="txv1">
+				</video>
 			</view>
 		</view>
 		<view class="content_2_bg">
@@ -321,6 +288,8 @@
 				person3: false,
 				loading: true,
 				screenWidth: null,
+				txvContext: null,
+				videoSrc:'/static/dbook.mp4',
 				svgaInfo: '/static/index/loading.svga',
 			};
 		},
@@ -337,6 +306,7 @@
 		},
 		mounted() {
 			let that = this;
+			that.txvContext = uni.createVideoContext('myVideo');
 			//网页可见区域宽
 			that.screenWidth = document.body.clientWidth;
 			//使用window.onresize方法获取屏幕尺寸；
@@ -366,6 +336,25 @@
 						alert("动画停止了！！！")
 					});
 				})
+			},
+			handlePlay() {
+				let that = this;
+			},
+			//视频暂停
+			handlePause() {
+				let that = this;
+				console.log(that.txvContext);
+				that.txvContext.pause();
+				console.log('100000000000---handlePause');
+			},
+			//视频播放完
+			handleVideoEnd(e) {
+				let that = this;
+				console.log('100000000000---handleVideoEnd',e)
+			},
+			//播放报错
+			videoErrorCallback: function(e) {
+				console.log(e.target.errMsg)
 			},
 			/**
 			 * 鼠标悬浮
@@ -481,7 +470,13 @@
 			overflow: hidden;
 			border-radius: .05rem;
 			background-color: #FFE1B4;
-
+			._info{
+				margin-bottom: .2rem;
+			}
+			#myVideo{
+				max-width: 1150px;
+				height: 550px;
+			}
 			._title {
 				width: 58%;
 				margin: 0.5rem auto;
