@@ -470,10 +470,11 @@
 			}
 			#myVideo{
 				max-width: 750px;
-				height: 280px;
+				height: 260px;
+				border-radius: .1rem;
 			}
 			._info {
-				width: 100%;
+				width: 94%;
 				margin: .3rem auto .2rem;
 
 				._left {

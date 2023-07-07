@@ -471,11 +471,12 @@
 			border-radius: .05rem;
 			background-color: #FFE1B4;
 			._info{
-				margin-bottom: .2rem;
+                width: 88%;
 			}
 			#myVideo{
 				max-width: 1150px;
 				height: 550px;
+				border-radius: .1rem;
 			}
 			._title {
 				width: 58%;
